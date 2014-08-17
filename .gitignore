@@ -1,2 +1,6 @@
 changuito/Library
 changuito/Temp
+*.csproj
+*.sln
+*.userprefs
+
