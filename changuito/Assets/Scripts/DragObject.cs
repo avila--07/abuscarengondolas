@@ -22,6 +22,8 @@ public class DragObject : MonoBehaviour
 
 		Vector3 oldPosition = transform.position;
 		transform.position = currentPosition + _positionOffset;
+
+		// if after moving the object is outside the dragable area, we recover the old position
 		if (!ColliderUtils.IsFullyInside (DragableArea.collider, gameObject.collider)) {
 			transform.position = oldPosition;
 		}
