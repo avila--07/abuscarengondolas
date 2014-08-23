@@ -1,0 +1,9 @@
+C:\Users\Cheppak\abuscarengondolas\changuito\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+C:\Users\Cheppak\abuscarengondolas\changuito\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+C:\Users\Cheppak\abuscarengondolas\changuito\Temp\UnityVS_bin\Debug\UnityEditor.dll
+C:\Users\Cheppak\abuscarengondolas\changuito\Temp\UnityVS_bin\Debug\UnityEngine.dll
+C:\Users\Cheppak\abuscarengondolas\changuito\Temp\UnityVS_bin\Debug\UnityEngine.xml
+C:\Users\Cheppak\abuscarengondolas\changuito\Temp\UnityVS_bin\Debug\UnityEditor.xml
+C:\Users\Cheppak\abuscarengondolas\changuito\obj\Debug\UnityVS.changuito.CSharp.csprojResolveAssemblyReference.cache
+C:\Users\Cheppak\abuscarengondolas\changuito\obj\Debug\Assembly-CSharp.dll
+C:\Users\Cheppak\abuscarengondolas\changuito\obj\Debug\Assembly-CSharp.pdb
