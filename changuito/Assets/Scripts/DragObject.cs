@@ -2,38 +2,36 @@
 using System.Collections;
 
 public class DragObject : MonoBehaviour
-{ 
-		public GameObject DragableArea = null; // Es el plano donde se puede mover el objeto
+{
+	// Es el plano donde se puede mover el objeto
+	public GameObject DragableArea = null;
+	private Plane _plane;
+	private Vector3 _positionOffset;
 
-		private Plane _plane;
-		private Vector3 _positionOffset;
+	//Accion que se produce cuando suelto el mouse.
+	void OnMouseDown ()
+	{
+		_plane.SetNormalAndPosition (Camera.main.transform.forward, transform.position);
+		_positionOffset = transform.position - GetCursorCurrentPosition ();
+	}
 
-		//Accion que se produce cuando suelto el mouse.
-		void OnMouseDown ()
-		{
-				_plane.SetNormalAndPosition (Camera.main.transform.forward, transform.position);
-				_positionOffset = transform.position - GetCurrentPosition ();        
-		}
+	//En movimiento ...
+	void OnMouseDrag ()
+	{
+		Vector3 currentPosition = GetCursorCurrentPosition ();
 
-		//En movimiento ...
-		void OnMouseDrag ()
-		{
-				Vector3 currentPosition = GetCurrentPosition ();
-				if (isInsideDragrableArea (currentPosition)) {
-						transform.position = currentPosition + _positionOffset;    
-				}
+		Vector3 oldPosition = transform.position;
+		transform.position = currentPosition + _positionOffset;
+		if (!ColliderUtils.IsFullyInside (DragableArea.collider, gameObject.collider)) {
+			transform.position = oldPosition;
 		}
-		
-		private bool isInsideDragrableArea (Vector3 currentPosition)
-		{
-				return DragableArea.collider.bounds.Contains (currentPosition);
-		}
+	}
 
-		private Vector3 GetCurrentPosition ()
-		{
-				float position;
-				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-				_plane.Raycast (ray, out position);
-				return ray.GetPoint (position);
-		}
+	private Vector3 GetCursorCurrentPosition ()
+	{
+		float position;
+		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		_plane.Raycast (ray, out position);
+		return ray.GetPoint (position);
+	}
 }
