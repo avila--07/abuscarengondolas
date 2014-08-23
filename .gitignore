@@ -1,6 +1,16 @@
 changuito/Library
+
 changuito/Temp
+
 *.csproj
+
 *.sln
+
 *.userprefs
 
+
+*.suo
+*.DotSettings*
+
+
+changuito/*.exe
