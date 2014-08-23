@@ -7,7 +7,7 @@ public class GoToConfig : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
-		int intentos = 0;
+		this.intentos = 0;
 	}
 
 	void OnMouseDown(){
