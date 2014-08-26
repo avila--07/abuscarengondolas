@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BackToHome : MonoBehaviour {
+public class BackToPantallaInicial : MonoBehaviour
+{
 
 
 	void OnMouseDown(){
