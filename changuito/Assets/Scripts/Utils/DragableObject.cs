@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DragObject : MonoBehaviour
+public class DragableObject : MonoBehaviour
 {
 	// Es el plano donde se puede mover el objeto
 	public GameObject DragableArea = null;
