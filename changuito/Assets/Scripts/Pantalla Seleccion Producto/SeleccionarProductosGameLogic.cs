@@ -28,18 +28,16 @@ public class SeleccionarProductosGameLogic : MonoBehaviour
 
         if ( Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Click, hit?");
+            Debug.Log("Click! hit?");
             RaycastHit hit ;
             Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
             // Productos - Layout 13. 
             if (Physics.Raycast(ray, out hit, 13))
             {
-                Debug.Log("Yes, hit!");
-                Debug.Log(hit.collider.gameObject.name);
-                // TODO: Eliminar espantoso hardcodeado del nombre del producto a seleccionar !
+                Debug.Log("Yes ¡hit! In:" + hit.collider.gameObject.name);
                 if (hit.collider.gameObject.name.Equals("Lechuga"))
                 {
-                    Debug.Log("Exelente pibe!");
+                    Debug.Log("Exelente pibe! Ahora volvemos a la pantalla de seleccion de gondolas.");
                     // TODO DEMO 2: Actualizar la lista
                     // TODO DEMO 1: Mostrar texto feliz y dejar un sleep (o algo asi) para volver a la pantalla de seleccion de gondolas.
                     // TODO DEMO 1: Suavizar los cambios de escena (sobretodo si tiene una escena ejecutandose en otro layout.
@@ -51,7 +49,7 @@ public class SeleccionarProductosGameLogic : MonoBehaviour
                 else
                 {
                     // TODO DEMO 1: Mostrar texto para que lo vuelva a intentar.
-                    Debug.Log("Volve a intentar! tenes que elegir la lechuga. Acordate que sos una Tortuga por ahora");
+                    Debug.Log("Volve a intentar! tenes que elegir la lechuga.");
                 }
             }
         }
