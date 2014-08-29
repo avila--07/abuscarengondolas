@@ -14,7 +14,7 @@ public static class ColliderUtils
 
 	public static bool AreCollisioning (Collider collider, Collider anotherCollider)
 	{
-		return AreCollisioning(collider.bounds, anotherCollider.bounds);
+		return AreCollisioning (collider.bounds, anotherCollider.bounds);
 	}
 
 	public static bool AreCollisioning (Bounds bounds, Bounds anotherBounds)
@@ -28,13 +28,22 @@ public static class ColliderUtils
 			return false;
 		return true;
 	}
-	
+
 	public static bool IsFullyInside (Collider containerCollider, Collider objectCollider)
 	{
+		return IsFullyInside (objectCollider.bounds, objectCollider.bounds);
+	}
+
+	public static bool IsFullyInside (Bounds bounds, Bounds anotherBounds)
+	{
+		// So the have the same z value and are sited in the same plane
+		bounds.center = new Vector3(bounds.center.x, bounds.center.y, 0);
+		anotherBounds.center = new Vector3(anotherBounds.center.x, anotherBounds.center.y, 0);
+
 		//TODO: ver si se puede hacer mas performante (sin crear 4 vectores nuevos)
-		return containerCollider.bounds.Contains (objectCollider.bounds.center + new Vector3 (0, objectCollider.bounds.extents.y)) && 
-			containerCollider.bounds.Contains (objectCollider.bounds.center - new Vector3 (0, objectCollider.bounds.extents.y)) && 
-			containerCollider.bounds.Contains (objectCollider.bounds.center + new Vector3 (objectCollider.bounds.extents.x, 0)) && 
-			containerCollider.bounds.Contains (objectCollider.bounds.center - new Vector3 (objectCollider.bounds.extents.x, 0));
+		return bounds.Contains (bounds.center + new Vector3 (0, bounds.extents.y)) && 
+			bounds.Contains (bounds.center - new Vector3 (0, bounds.extents.y)) && 
+			bounds.Contains (anotherBounds.center + new Vector3 (anotherBounds.extents.x, 0)) && 
+			bounds.Contains (anotherBounds.center - new Vector3 (anotherBounds.extents.x, 0));
 	}
 }
