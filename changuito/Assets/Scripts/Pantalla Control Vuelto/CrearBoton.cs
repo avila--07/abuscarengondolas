@@ -41,6 +41,9 @@ public class CrearBoton : MonoBehaviour
 
     void OnGUI()
     {
+        // Al presionar cada botón se muestra por pantalla un mensaje, sobre si fue correcta la elección o no
+        // dcamardella.-
+
         vuelto1 = vueltoCorrecto - 10;
         vuelto2 = vueltoCorrecto + 15;
         vuelto3 = vueltoCorrecto + 30;
