@@ -4,40 +4,43 @@ using System.Collections.Generic;
 
 public class SuperMarket : MonoBehaviour
 {
-	public GameObject Gondola;
-	public GameObject Changuito;
 	public int GondolaQtyPerRow;
 	public int GondolaQtyPerColumn;
-	public float HallWidth;
-	private GameObject _changuito;
-	private List<GameObject> _gondolas = new List<GameObject> (10);
+	private const float CHANGUITO_SIZE = 1f;
+	public Camera camera;
 
 	private void Start ()
 	{
-		GameObject background = Factory.CreatePlane2D (0f, 0f, 10f, 10f);
-		ContainerUtils.FillContainer (background, new ContainerUtils.Padding (.75f, .75f, .75f, .75f), GondolaQtyPerRow, GondolaQtyPerColumn, delegate(float x, float y, float width, float height) {
-
-			_gondolas.Add (Factory.InstantiatePrefab (Gondola, x, y, width, height));
+		float screenExtend  = camera.orthographicSize;
+		float screenSize = screenExtend * 2;
+		GameObject background = Factory.CreatePlane2D (screenExtend, -screenExtend, screenSize, screenSize);
+		
+		// create gondolas sprite
+		List<GameObject> gondolas = new List<GameObject> (GondolaQtyPerRow * GondolaQtyPerColumn);
+		ContainerUtils.FillContainer (background, new ContainerUtils.Padding (0, CHANGUITO_SIZE, 0, CHANGUITO_SIZE), GondolaQtyPerRow, GondolaQtyPerColumn, delegate(float top, float left, float width, float height) {
+			
+			gondolas.Add (Factory.CreateSprite (SpritesLocator.GONDOLA_SPRITE, top, left, width, height));
 		});
-	
-		float changuitoTop = background.collider.bounds.center.x;
-		float changuitoLeft = background.collider.bounds.center.y - background.collider.bounds.extents.y;
 
-		_changuito = Factory.InstantiatePrefab (Changuito, changuitoTop, changuitoLeft, 1f, 1f);
-		_changuito.transform.position = new Vector3 (_changuito.transform.position.x, _changuito.transform.position.y, 0);
-		DragableObject dragableObject = _changuito.GetComponent<DragableObject> ();
+		// create changuito sprite
+		float changuitoTop = background.collider.bounds.center.y - background.collider.bounds.extents.y + CHANGUITO_SIZE;
+		float changuitoLeft = background.collider.bounds.center.x - (CHANGUITO_SIZE / 2);
+		GameObject changuito = Factory.CreateSprite (SpritesLocator.CHANGUITO_SPRITE, changuitoTop, changuitoLeft, CHANGUITO_SIZE, CHANGUITO_SIZE);
+		ColliderUtils.PutInFrontOf(changuito, gondolas[0]);
+
+		// set dragable options		
+		changuito.AddComponent<BoxCollider> ();
+		DragableObject dragableObject = changuito.AddComponent<DragableObject> ();
 		dragableObject.DragableArea = background;
-		dragableObject.OnDragging = OnDraggingChanguito;
-	}
-
-	private void OnDraggingChanguito ()
-	{
-		int i = 0;
-		foreach (GameObject gondola in _gondolas) {
-			if (ColliderUtils.AreCollisioning (gondola.renderer.bounds, _changuito.collider.bounds)) {
-				Debug.LogError ("Collisioning with gondola [" + i + "]");
+		dragableObject.OnDragging = delegate () {
+			int i = 0;
+			foreach (GameObject gondola in gondolas) {
+				if (ColliderUtils.IsFullyInside (gondola.renderer.bounds, changuito.collider.bounds)) {
+					Debug.LogError ("Collisioning with gondola [" + i + "]");
+					break;
+				}
+				i++;
 			}
-			i++;
-		}
+		};
 	}
 }
