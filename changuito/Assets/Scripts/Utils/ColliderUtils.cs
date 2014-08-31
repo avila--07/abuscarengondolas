@@ -37,13 +37,19 @@ public static class ColliderUtils
 	public static bool IsFullyInside (Bounds bounds, Bounds anotherBounds)
 	{
 		// So the have the same z value and are sited in the same plane
-		bounds.center = new Vector3(bounds.center.x, bounds.center.y, 0);
-		anotherBounds.center = new Vector3(anotherBounds.center.x, anotherBounds.center.y, 0);
+		bounds.center = new Vector3 (bounds.center.x, bounds.center.y, 0);
+		anotherBounds.center = new Vector3 (anotherBounds.center.x, anotherBounds.center.y, 0);
 
-		//TODO: ver si se puede hacer mas performante (sin crear 4 vectores nuevos)
-		return bounds.Contains (bounds.center + new Vector3 (0, bounds.extents.y)) && 
-			bounds.Contains (bounds.center - new Vector3 (0, bounds.extents.y)) && 
+		//TODO: ver si se puede hacer mas performante (sin crear +4 vectores nuevos)
+		return bounds.Contains (anotherBounds.center + new Vector3 (0, anotherBounds.extents.y)) && 
+			bounds.Contains (anotherBounds.center - new Vector3 (0, anotherBounds.extents.y)) && 
 			bounds.Contains (anotherBounds.center + new Vector3 (anotherBounds.extents.x, 0)) && 
 			bounds.Contains (anotherBounds.center - new Vector3 (anotherBounds.extents.x, 0));
+	}
+
+	public static void PutInFrontOf (GameObject changuito, GameObject gameObject)
+	{
+		var position = changuito.transform.position;
+		changuito.transform.position = new Vector3 (position.x, position.y, gameObject.transform.position.z - 0.1f);
 	}
 }
