@@ -47,9 +47,17 @@ public static class ColliderUtils
 			bounds.Contains (anotherBounds.center - new Vector3 (anotherBounds.extents.x, 0));
 	}
 
-	public static void PutInFrontOf (GameObject changuito, GameObject gameObject)
+	public static void PutInFrontOf (GameObject frontGameObject, GameObject backGameObject)
 	{
-		var position = changuito.transform.position;
-		changuito.transform.position = new Vector3 (position.x, position.y, gameObject.transform.position.z - 0.1f);
+		var position = frontGameObject.transform.position;
+		frontGameObject.transform.position = new Vector3 (position.x, position.y, backGameObject.transform.position.z - 0.1f);
+	}
+		
+	public static Vector3 GetCursorCurrentPosition (Plane plane)
+	{
+		float position;
+		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		plane.Raycast (ray, out position);
+		return ray.GetPoint (position);
 	}
 }

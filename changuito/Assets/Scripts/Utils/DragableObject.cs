@@ -14,13 +14,13 @@ public class DragableObject : MonoBehaviour
 	void OnMouseDown ()
 	{
 		_plane.SetNormalAndPosition (Camera.main.transform.forward, transform.position);
-		_positionOffset = transform.position - GetCursorCurrentPosition ();
+		_positionOffset = transform.position - ColliderUtils.GetCursorCurrentPosition (_plane);
 	}
 
 	//En movimiento ...
 	void OnMouseDrag ()
 	{
-		Vector3 currentPosition = GetCursorCurrentPosition ();
+		Vector3 currentPosition = ColliderUtils.GetCursorCurrentPosition (_plane);
 
 		Vector3 oldPosition = transform.position;
 		transform.position = currentPosition + _positionOffset;
@@ -33,13 +33,5 @@ public class DragableObject : MonoBehaviour
 		if (OnDragging != null) {
 			OnDragging ();
 		}
-	}
-
-	private Vector3 GetCursorCurrentPosition ()
-	{
-		float position;
-		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-		_plane.Raycast (ray, out position);
-		return ray.GetPoint (position);
 	}
 }
