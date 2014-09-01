@@ -21,6 +21,8 @@ public class SuperMarket : MonoBehaviour
 		products.Add (new Product ("Azucar", SpritesLocator.GetPath ("Productos", "Azucar", "jpg")));
 		products.Add (new Product ("Zapallo", SpritesLocator.GetPath ("Productos", "Zapallo", "jpg")));
 		products.Add (new Product ("Leche", SpritesLocator.GetPath ("Productos", "Leche", "jpg")));
+		for(int i = 0; i < ITEMS_TO_SHOW; i++)
+			products.Add(new Product("NoProduct", SpritesLocator.GetPath("Productos", "NoProduct", "jpg")));
 		return products;
 	}
 
@@ -67,7 +69,8 @@ public class SuperMarket : MonoBehaviour
 
 	private void OnProductClick (Product product, Vector3 clickPosition)
 	{
-		Debug.Log("FER");
+		if(_productsToPurchase.Count == ITEMS_TO_SHOW)
+			return;
 
 		foreach(GameObject productSprite in _productsSprites)
 			Destroy(productSprite);
