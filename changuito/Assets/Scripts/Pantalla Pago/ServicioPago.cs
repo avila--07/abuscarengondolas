@@ -16,28 +16,15 @@ public class ServicioPago : MonoBehaviour {
 
         this.calculateAndLoadMoney();
         this.initializeScreen();
-        this.initializeMontoOnScreen();
         this.InitializePizarra();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
     void InitializePizarra()
     {
-        GameObject minuendo = GameObject.Find("Minuendo");
-        
-        GameObject resto = GameObject.Find("Resto");
-
-        minuendo.GetComponent<UILabel>().text = total.ToString();
-        resto.GetComponent<UILabel>().text = total.ToString();
-
+        NGUISomosUtils.showTextInScreen("Minuendo", total.ToString());
+        NGUISomosUtils.showTextInScreen("Resto",total.ToString());
+        NGUISomosUtils.showTextInScreen("MontoTotal",total.ToString() + " Pesos");
     }
-
-
-
 
     //REVIEW: La cantidad de plata por pantalla viene definida por el monto? es dinamico?
     //En tal caso ,tiene que ir a una fabrica o helper.
@@ -59,7 +46,7 @@ public class ServicioPago : MonoBehaviour {
         GameObject gridInferior = GameObject.Find("PagoBilletesGridInferior");
         
         this.initializeGrid(gridSuperior, moneyInSuperiorScene);
-        this.initializeGrid(gridInferior, moneyInInferiorScene);
+        this.initializeGrid(gridInferior, moneyInInferiorScene);    
     }
     
     private void initializeGrid(GameObject grid,ArrayList money)
@@ -69,17 +56,8 @@ public class ServicioPago : MonoBehaviour {
             GameObject loadedPrefab = Resources.Load<GameObject>(product);
             NGUITools.AddChild(grid, loadedPrefab);
         }
+        
         grid.GetComponent<UIGrid>().Reposition();
-
     }
-
-
-    private void initializeMontoOnScreen()
-    {
-        GameObject text = GameObject.Find("MontoTotal");
-        text.GetComponent<UILabel>().text = total.ToString() + " Pesos";
-
-    }
-
 
 }
