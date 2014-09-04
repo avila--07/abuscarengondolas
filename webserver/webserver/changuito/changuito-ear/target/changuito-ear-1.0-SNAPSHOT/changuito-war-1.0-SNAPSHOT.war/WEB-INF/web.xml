@@ -9,7 +9,6 @@
         <servlet-name>home</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
-	
 
 	<servlet>
         <servlet-name>configuration</servlet-name>
@@ -18,6 +17,15 @@
     <servlet-mapping>
         <servlet-name>configuration</servlet-name>
         <url-pattern>/configuration</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>statics</servlet-name>
+        <servlet-class>StaticsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>statics</servlet-name>
+        <url-pattern>/statics</url-pattern>
     </servlet-mapping>
 	
 	<welcome-file-list>
