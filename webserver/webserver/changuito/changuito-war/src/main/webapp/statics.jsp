@@ -31,7 +31,7 @@
 		    <li><a href="#tabs-1">Selección de góndola</a></li>
 		    <li><a href="#tabs-2">Selección de producto</a></li>
 		    <li><a href="#tabs-3">Pago</a></li>
-		    <li><a href="#tabs-3">Control de vuelto</a></li>
+		    <li><a href="#tabs-4">Control de vuelto</a></li>
 		  </ul>
 		  <div id="tabs-1">
 			<br>
