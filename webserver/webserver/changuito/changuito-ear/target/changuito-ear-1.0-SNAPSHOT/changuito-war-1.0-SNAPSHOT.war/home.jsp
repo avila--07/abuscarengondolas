@@ -45,6 +45,8 @@ h3 {
 
 <div style="float: right; width: 45%;">
 	<img src="/static/mystery-man.jpg"  width="160" height="160" alt="usuario desconocido">
+	<br>
+	<img src="/static/somos.jpg" height="46" width="90">
 </div>
 
 </body>
