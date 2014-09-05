@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿t using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -109,8 +109,8 @@ public class SuperMarket : MonoBehaviour
 				}
 				i++;
 			}
-			ContainerUtils.SetPositionTopLeft (changuito, initialChanguitoTop, initialChanguitoLeft - CHANGUITO_SIZE);
-			ColliderUtils.PutInFrontOf (changuito, gondolas [0]);
+			//ContainerUtils.SetPositionTopLeft (changuito, initialChanguitoTop, initialChanguitoLeft - CHANGUITO_SIZE);
+			//ColliderUtils.PutInFrontOf (changuito, gondolas [0]);
 			Debug.LogError ("Gondola equivocada!");
 		};
 	}
