@@ -14,6 +14,12 @@ public class PartidasServlet extends HttpServlet {
 
 	try {
 		resp.setCharacterEncoding("UTF-8");
+		String gameSelected = req.getParameter("id");
+		
+		if( gameSelected != null){
+			
+		}
+		
 		req.getRequestDispatcher("/partidas.jsp").forward(req, resp);
 	
 	} catch (ServletException e) {

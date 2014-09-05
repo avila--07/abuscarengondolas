@@ -1,4 +1,3 @@
-;
 (function($) { /*******************************************************************************************/
 	// jquery.pajinate.js - version 0.4
 	// A jQuery plugin for paginating through any number of DOM elements
