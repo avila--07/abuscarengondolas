@@ -17,7 +17,7 @@ public class PartidasServlet extends HttpServlet {
 		String gameSelected = req.getParameter("id");
 		
 		if( gameSelected != null){
-			
+				
 		}
 		
 		req.getRequestDispatcher("/partidas.jsp").forward(req, resp);
