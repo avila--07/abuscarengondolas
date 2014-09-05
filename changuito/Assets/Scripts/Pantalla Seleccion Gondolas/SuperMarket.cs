@@ -8,8 +8,6 @@ public class SuperMarket : MonoBehaviour
 	private const int ITEMS_TO_SHOW = 3;
 	public int GondolaQtyPerRow;
 	public int GondolaQtyPerColumn;
-	public GameObject Gondola; //BORRAR
-	public GameObject Changuito; //BORRAR
 	private List<Product> _productsToPurchase;
 	private List<GameObject> _productsSprites = new List<GameObject> (ITEMS_TO_SHOW);
 	private GameObject _productList;
@@ -19,11 +17,11 @@ public class SuperMarket : MonoBehaviour
 	{
 		List<Product> products = new List<Product> (4);
 		products.Add (new Product ("Lechuga"));
-		products.Add (new Product ("Azucar", SpritesLocator.GetPath ("Productos", "Azucar", "jpg")));
-		products.Add (new Product ("Zapallo", SpritesLocator.GetPath ("Productos", "Zapallo", "jpg")));
-		products.Add (new Product ("Leche", SpritesLocator.GetPath ("Productos", "Leche", "jpg")));
+		products.Add (new Product ("Azucar", SpritesLocator.GetPath ("Productos", "Azucar")));
+		products.Add (new Product ("Zapallo", SpritesLocator.GetPath ("Productos", "Zapallo")));
+		products.Add (new Product ("Leche", SpritesLocator.GetPath ("Productos", "Leche")));
 		for (int i = 0; i < ITEMS_TO_SHOW; i++)
-			products.Add (new Product ("NoProduct", SpritesLocator.GetPath ("Productos", "NoProduct", "jpg")));
+			products.Add (new Product ("NoProduct", SpritesLocator.GetPath ("Productos", "NoProduct")));
 		return products;
 	}
 
@@ -88,15 +86,13 @@ public class SuperMarket : MonoBehaviour
 		List<GameObject> gondolas = new List<GameObject> (GondolaQtyPerRow * GondolaQtyPerColumn);
 		ContainerUtils.FillContainer (background, new ContainerUtils.Padding (0, CHANGUITO_SIZE, 0, CHANGUITO_SIZE), GondolaQtyPerRow, GondolaQtyPerColumn, delegate(float top, float left, float width, float height) {
 			
-			//gondolas.Add (Factory.CreateSprite (SpritesLocator.GONDOLA_SPRITE, top, left, width, height));
-			gondolas.Add (Factory.InstantiatePrefab (Gondola, top, left, width, height));
+			gondolas.Add (Factory.CreateSprite (SpritesLocator.GONDOLA_SPRITE, top, left, width, height));
 		});
 
 		// create changuito sprite
 		float initialChanguitoTop = background.collider.bounds.center.y - background.collider.bounds.extents.y + CHANGUITO_SIZE;
 		float initialChanguitoLeft = background.collider.bounds.center.x - (CHANGUITO_SIZE / 2);
-		//GameObject changuito = Factory.CreateSprite (SpritesLocator.CHANGUITO_SPRITE, initialChanguitoTop, initialChanguitoLeft, CHANGUITO_SIZE, CHANGUITO_SIZE);
-		GameObject changuito = Factory.InstantiatePrefab (Changuito, initialChanguitoTop, initialChanguitoLeft, CHANGUITO_SIZE, CHANGUITO_SIZE);
+		GameObject changuito = Factory.CreateSprite (SpritesLocator.CHANGUITO_SPRITE, initialChanguitoTop, initialChanguitoLeft, CHANGUITO_SIZE, CHANGUITO_SIZE);
 		ColliderUtils.PutInFrontOf (changuito, gondolas [0]);
 		
 		// set dragable options		

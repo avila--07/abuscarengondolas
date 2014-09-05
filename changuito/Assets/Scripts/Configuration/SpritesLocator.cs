@@ -8,21 +8,16 @@ public static class SpritesLocator
 
 	public static string GetPath (string name)
 	{
-		return GetPath (null, name, "png");
+		return GetPath (null, name);
 	}
 
 	public static string GetPath (string folder, string name)
 	{
-		return GetPath (folder, name, "png");
-	}
-
-	public static string GetPath (string folder, string name, string extension)
-	{
 		if(folder != null)
-			folder += '\\';
+			folder += '/';
 		else 
 			folder = "";
 
-		return @"file://.\Assets\Sprites\" + folder  + name + "." + extension;
+		return @"Sprites/" + folder + name;
 	}
 }

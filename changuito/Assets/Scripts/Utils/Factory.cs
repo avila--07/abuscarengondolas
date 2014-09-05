@@ -21,7 +21,7 @@ public static class Factory
 	
 	public static GameObject CreateSprite (string texturePath, float top, float left, float width, float height)
 	{				
-		Texture2D texture = GetTexture (texturePath);
+        Texture2D texture = Resources.Load<Texture2D> (texturePath);
 
 		GameObject gameObject = new GameObject ("Sprite");
 		SpriteRenderer renderer = gameObject.AddComponent<SpriteRenderer> ();
