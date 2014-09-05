@@ -1,4 +1,4 @@
-﻿t using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,6 +8,8 @@ public class SuperMarket : MonoBehaviour
 	private const int ITEMS_TO_SHOW = 3;
 	public int GondolaQtyPerRow;
 	public int GondolaQtyPerColumn;
+	public GameObject Gondola; //BORRAR
+	public GameObject Changuito; //BORRAR
 	private List<Product> _productsToPurchase;
 	private List<GameObject> _productsSprites = new List<GameObject> (ITEMS_TO_SHOW);
 	private GameObject _productList;
@@ -86,13 +88,15 @@ public class SuperMarket : MonoBehaviour
 		List<GameObject> gondolas = new List<GameObject> (GondolaQtyPerRow * GondolaQtyPerColumn);
 		ContainerUtils.FillContainer (background, new ContainerUtils.Padding (0, CHANGUITO_SIZE, 0, CHANGUITO_SIZE), GondolaQtyPerRow, GondolaQtyPerColumn, delegate(float top, float left, float width, float height) {
 			
-			gondolas.Add (Factory.CreateSprite (SpritesLocator.GONDOLA_SPRITE, top, left, width, height));
+			//gondolas.Add (Factory.CreateSprite (SpritesLocator.GONDOLA_SPRITE, top, left, width, height));
+			gondolas.Add (Factory.InstantiatePrefab (Gondola, top, left, width, height));
 		});
 
 		// create changuito sprite
 		float initialChanguitoTop = background.collider.bounds.center.y - background.collider.bounds.extents.y + CHANGUITO_SIZE;
 		float initialChanguitoLeft = background.collider.bounds.center.x - (CHANGUITO_SIZE / 2);
-		GameObject changuito = Factory.CreateSprite (SpritesLocator.CHANGUITO_SPRITE, initialChanguitoTop, initialChanguitoLeft, CHANGUITO_SIZE, CHANGUITO_SIZE);
+		//GameObject changuito = Factory.CreateSprite (SpritesLocator.CHANGUITO_SPRITE, initialChanguitoTop, initialChanguitoLeft, CHANGUITO_SIZE, CHANGUITO_SIZE);
+		GameObject changuito = Factory.InstantiatePrefab (Changuito, initialChanguitoTop, initialChanguitoLeft, CHANGUITO_SIZE, CHANGUITO_SIZE);
 		ColliderUtils.PutInFrontOf (changuito, gondolas [0]);
 		
 		// set dragable options		

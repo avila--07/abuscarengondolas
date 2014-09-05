@@ -9,5 +9,4 @@ public class PagoStatus : MonoBehaviour
 
     public static int monto;
     public static int pago;
-    
 }
