@@ -110,10 +110,9 @@ public class SuperMarket : MonoBehaviour
 				i++;
 			}
 
-			//ContainerUtils.SetPositionTopLeft (changuito, initialChanguitoTop, initialChanguitoLeft - CHANGUITO_SIZE);
+            //ContainerUtils.SetPositionTopLeft (changuito, initialChanguitoTop, initialChanguitoLeft - CHANGUITO_SIZE);
 			//ColliderUtils.PutInFrontOf (changuito, gondolas [0]);
-
-            Debug.LogError ("Gondola equivocada!");
+			Debug.LogError ("Gondola equivocada!");
 		};
 	}
 }
