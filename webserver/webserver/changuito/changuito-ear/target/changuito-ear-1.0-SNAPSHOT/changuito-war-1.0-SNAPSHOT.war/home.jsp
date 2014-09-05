@@ -1,48 +1,51 @@
-<%-- //[START all]--%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.google.appengine.api.users.User" %>
-<%@ page import="com.google.appengine.api.users.UserService" %>
-<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
-<%@ page import="java.util.List" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <html>
-<head>
-    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css"/>
-</head>
+<head><title>Home</title></head>
+<style>
+h1 {
+    text-align: center;
+}
 
+h3 {
+    text-align: center;
+}
+
+</style>
 <body>
+        <h3><font size="10"><%="Panel de control" %></font> </h3>
+        <br>
 
-<%
-    String guestbookName = request.getParameter("guestbookName");
-    if (guestbookName == null) {
-        guestbookName = "default";
-    }
-    pageContext.setAttribute("guestbookName", guestbookName);
-    UserService userService = UserServiceFactory.getUserService();
-    User user = userService.getCurrentUser();
-    if (user != null) {
-        pageContext.setAttribute("user", user);
-%>
+        <h1><font size="15"><%="A buscar en góndolas" %></font></h1>
+        <br>
+<div style="float: left; width: 45%;">
+	<table style="width:100%">
+		  
+		  <tr>
+		    <td>
+				<button type="button"  onClick="location.href='/configuration'" >Configuración del juego</button> 
+			</td>
+		  </tr>
+		  <tr>
+		    <td>
+				<button type="button"  onClick="location.href='/partidas'" >Visualización partidas</button> 
+			</td>
+		  </tr>
+		  <tr>
+		    <td>
+				<button type="button"  onClick="location.href='/statics'" >Vizualizar estadísticas</button>
+			</td>
+		  </tr>
+		  <tr>
+		    <td>
+				<button type="button"  onClick="location.href='/'" >Vizualizar online</button> 
+			</td>
+		  </tr>
+		 
+	</table>
+</div>
 
-<p>Hello, ${fn:escapeXml(user.nickname)}! (You can
-    <a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
-<%
-} else {
-%>
-<p>Hello!
-    <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a>
-    to include your name with greetings you post.</p>
-<%
-    }
-%>
-
-
-<form action="/guestbook.jsp" method="get">
-    <div><input type="text" name="guestbookName" value="${fn:escapeXml(guestbookName)}"/></div>
-    <div><input type="submit" value="Switch Guestbook"/></div>
-</form>
+<div style="float: right; width: 45%;">
+	<img src="/static/mystery-man.jpg"  width="160" height="160" alt="usuario desconocido">
+</div>
 
 </body>
 </html>
-<%-- //[END all]--%>
