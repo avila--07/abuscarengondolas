@@ -7,8 +7,10 @@ public class DragableObject : MonoBehaviour
 	// Es el plano donde se puede mover el objeto
 	public GameObject DragableArea = null;
 	public Action OnDragging;
+	public Action OnDrop;
 	private Plane _plane;
 	private Vector3 _positionOffset;
+	private bool _isDragging;
 
 	//Accion que se produce cuando suelto el mouse.
 	void OnMouseDown ()
@@ -16,10 +18,19 @@ public class DragableObject : MonoBehaviour
 		_plane.SetNormalAndPosition (Camera.main.transform.forward, transform.position);
 		_positionOffset = transform.position - ColliderUtils.GetCursorCurrentPosition (_plane);
 	}
+	
+	void OnMouseUp()
+	{
+		if (OnDrop != null) {
+			OnDrop ();
+		}
+		_isDragging = false;
+	}
 
 	//En movimiento ...
 	void OnMouseDrag ()
 	{
+		_isDragging = true;
 		Vector3 currentPosition = ColliderUtils.GetCursorCurrentPosition (_plane);
 
 		Vector3 oldPosition = transform.position;

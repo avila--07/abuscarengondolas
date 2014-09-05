@@ -4,14 +4,13 @@ using System.Collections.Generic;
 
 public class SuperMarket : MonoBehaviour
 {
-	public int GondolaQtyPerRow;
-	public int GondolaQtyPerColumn;
 	private const float CHANGUITO_SIZE = 1f;
 	private const int ITEMS_TO_SHOW = 3;
+	public int GondolaQtyPerRow;
+	public int GondolaQtyPerColumn;
 	private List<Product> _productsToPurchase;
-	private List<GameObject> _productsSprites = new List<GameObject>(ITEMS_TO_SHOW);
+	private List<GameObject> _productsSprites = new List<GameObject> (ITEMS_TO_SHOW);
 	private GameObject _productList;
-	public Camera camera;
 
 	// TODO: esto va a venir de otro lado despues, pero por ahora lo dejamos aca
 	private List<Product> GetProductsToPurchase ()
@@ -21,15 +20,15 @@ public class SuperMarket : MonoBehaviour
 		products.Add (new Product ("Azucar", SpritesLocator.GetPath ("Productos", "Azucar", "jpg")));
 		products.Add (new Product ("Zapallo", SpritesLocator.GetPath ("Productos", "Zapallo", "jpg")));
 		products.Add (new Product ("Leche", SpritesLocator.GetPath ("Productos", "Leche", "jpg")));
-		for(int i = 0; i < ITEMS_TO_SHOW; i++)
-			products.Add(new Product("NoProduct", SpritesLocator.GetPath("Productos", "NoProduct", "jpg")));
+		for (int i = 0; i < ITEMS_TO_SHOW; i++)
+			products.Add (new Product ("NoProduct", SpritesLocator.GetPath ("Productos", "NoProduct", "jpg")));
 		return products;
 	}
 
 	private void Start ()
 	{
 		_productsToPurchase = GetProductsToPurchase ();
-		float screenExtend = camera.orthographicSize;
+		float screenExtend = Camera.main.orthographicSize;
 		float screenSize = screenExtend * 2;
 		Debug.Log ("screenExtend " + screenExtend);
 
@@ -62,23 +61,23 @@ public class SuperMarket : MonoBehaviour
 			productSprite.AddComponent<ClickableObject> ().OnMouseClick = delegate(Vector3 clickPosition) {
 				OnProductClick (product, clickPosition);
 			};
-			_productsSprites.Add(productSprite);
+			_productsSprites.Add (productSprite);
 			ColliderUtils.PutInFrontOf (productSprite, productList);
 		});
 	}
 
 	private void OnProductClick (Product product, Vector3 clickPosition)
 	{
-		if(_productsToPurchase.Count == ITEMS_TO_SHOW)
+		if (_productsToPurchase.Count == ITEMS_TO_SHOW)
 			return;
 
-		foreach(GameObject productSprite in _productsSprites)
-			Destroy(productSprite);
-		_productsSprites.Clear();
+		foreach (GameObject productSprite in _productsSprites)
+			Destroy (productSprite);
+		_productsSprites.Clear ();
 
 		_productsToPurchase.Remove (product);
 
-		FillProductList(_productList);
+		FillProductList (_productList);
 	}
 
 	private void CreateChanguitoAndGondolas (GameObject background)
@@ -91,24 +90,28 @@ public class SuperMarket : MonoBehaviour
 		});
 
 		// create changuito sprite
-		float changuitoTop = background.collider.bounds.center.y - background.collider.bounds.extents.y + CHANGUITO_SIZE;
-		float changuitoLeft = background.collider.bounds.center.x - (CHANGUITO_SIZE / 2);
-		GameObject changuito = Factory.CreateSprite (SpritesLocator.CHANGUITO_SPRITE, changuitoTop, changuitoLeft, CHANGUITO_SIZE, CHANGUITO_SIZE);
+		float initialChanguitoTop = background.collider.bounds.center.y - background.collider.bounds.extents.y + CHANGUITO_SIZE;
+		float initialChanguitoLeft = background.collider.bounds.center.x - (CHANGUITO_SIZE / 2);
+		GameObject changuito = Factory.CreateSprite (SpritesLocator.CHANGUITO_SPRITE, initialChanguitoTop, initialChanguitoLeft, CHANGUITO_SIZE, CHANGUITO_SIZE);
 		ColliderUtils.PutInFrontOf (changuito, gondolas [0]);
 		
 		// set dragable options		
 		changuito.AddComponent<BoxCollider> ();
 		DragableObject dragableObject = changuito.AddComponent<DragableObject> ();
 		dragableObject.DragableArea = background;
-		dragableObject.OnDragging = delegate () {
+		dragableObject.OnDrop = delegate () {
 			int i = 0;
 			foreach (GameObject gondola in gondolas) {
-				if (ColliderUtils.IsFullyInside (gondola.renderer.bounds, changuito.collider.bounds)) {
-					Debug.LogError ("Collisioning with gondola [" + i + "]");
-					break;
+				if (i == 0 && ColliderUtils.IsFullyInside (gondola.renderer.bounds, changuito.collider.bounds)) {
+					
+					Application.LoadLevel ("PantallaSeleccionProductos");
+					return;
 				}
 				i++;
 			}
+			ContainerUtils.SetPositionTopLeft (changuito, initialChanguitoTop, initialChanguitoLeft - CHANGUITO_SIZE);
+			ColliderUtils.PutInFrontOf (changuito, gondolas [0]);
+			Debug.LogError ("Gondola equivocada!");
 		};
 	}
 }
