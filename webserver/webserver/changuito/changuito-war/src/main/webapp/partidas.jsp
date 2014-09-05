@@ -1,28 +1,16 @@
 <html>
 <head>
-	<title>Página de configuración</title>
+	<title>Partidas históricas</title>
 </head>
   <body>
-        <font size="10"><%="Página de configuración!" %></font>
-    <form action="/home" method="get">
+        <font size="10"><%="Selecciona una partida para verla" %></font>
+    <form action="/partidas" method="get">
 		<div id="page_container">
-			<div class="page_navigation"></div>		
-
-			<ul class="content">
-				<li> <p>One</p> </li>
-				<li> <p>Two</p> </li>
-				<li> <p>Three</p> </li>
-				<li> <p>Four</p> </li>
-				<li> <p>Five</p> </li>
-				<li> <p>Six</p> </li>
-				<li> <p>Seven</p> </li>
-				<li> <p>Eight</p> </li>
-			</ul>
-				
-		</div>	    
-    </form>	
+			<a href="/partidas?id=1">Partida fecha 04/09/2014 - 21:59</a> <br> 
+			<a href="/partidas?id=2">Partida fecha 04/09/2014 - 22:40</a> <br>
+		</div>    
+	</form>	
 
 	<script src="/static/jquery-1.11.1.min.js"></script>
-  	<script src="/static/pajinate.js"></script>
   </body>
 </html>
