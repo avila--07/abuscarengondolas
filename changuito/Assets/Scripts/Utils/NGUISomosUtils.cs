@@ -12,4 +12,19 @@ public static class NGUISomosUtils
         objectInScreen.GetComponent<UILabel>().text = text.ToString();
     }
 
+    /// <summary>
+    /// De un label de pantalla obtengo su valor
+    /// Util par obtener status de un tablero de anotaciones por ejemplo.
+    /// </summary>
+    /// <param name="objectLabel"></param>
+    /// <returns>int</returns>
+    public static int getIntFromGameObject(string objectText)
+    {
+        GameObject objectLabel = GameObject.Find(objectText);
+        return  int.Parse(objectLabel.GetComponent<UILabel>().text);
+    }
+  
+
+
 }
+

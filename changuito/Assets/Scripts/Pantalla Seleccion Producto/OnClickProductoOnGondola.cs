@@ -18,8 +18,8 @@ public class OnClickProductoOnGondola : MonoBehaviour {
         if (isTarget)
         {
             targetMessage.GetComponent<UILabel>().text = this.keepMessage;
-            new WaitForSeconds(2);
-            Application.LoadLevel("PantallaSeleccionGondolas");
+            System.Threading.Thread.Sleep(250);
+            Application.LoadLevel("PantallaPago");
             Destroy(this.gameObject);
         }
         else

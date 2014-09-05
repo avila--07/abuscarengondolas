@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class ServicioPago : MonoBehaviour {
+public class ServicioPago : MonoBehaviour 
+{
 
     int total = 75;
     List<GameObject> moneyObjects = new List<GameObject>(6);
@@ -14,6 +15,7 @@ public class ServicioPago : MonoBehaviour {
     // Use this for initialization
 	void Start () {
 
+        PagoStatus.monto = this.total;
         this.calculateAndLoadMoney();
         this.initializeScreen();
         this.InitializePizarra();
