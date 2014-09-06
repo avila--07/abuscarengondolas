@@ -10,7 +10,6 @@ public class DragableObject : MonoBehaviour
 	public Action OnDrop;
 	private Plane _plane;
 	private Vector3 _positionOffset;
-	private bool _isDragging;
 
 	//Accion que se produce cuando suelto el mouse.
 	void OnMouseDown ()
@@ -24,13 +23,11 @@ public class DragableObject : MonoBehaviour
 		if (OnDrop != null) {
 			OnDrop ();
 		}
-		_isDragging = false;
 	}
 
 	//En movimiento ...
 	void OnMouseDrag ()
 	{
-		_isDragging = true;
 		Vector3 currentPosition = ColliderUtils.GetCursorCurrentPosition (_plane);
 
 		Vector3 oldPosition = transform.position;

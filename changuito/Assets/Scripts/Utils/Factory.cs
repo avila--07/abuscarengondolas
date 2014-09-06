@@ -21,13 +21,13 @@ public static class Factory
 	
 	public static GameObject CreateSprite (string texturePath, float top, float left, float width, float height)
 	{				
-        Texture2D texture = Resources.Load<Texture2D> (texturePath);
+		Texture2D texture = GetTexture (texturePath);
 
 		GameObject gameObject = new GameObject ("Sprite");
 		SpriteRenderer renderer = gameObject.AddComponent<SpriteRenderer> ();
 		renderer.sprite = Sprite.Create (texture, new Rect (0, 0, texture.width, texture.height), new Vector2 (0, 0));
 		ContainerUtils.SetWidthAndHeight (gameObject, width, height);
-		gameObject.transform.position = new Vector3(left, top - height); // position in this case is in left-bottom format
+		gameObject.transform.position = new Vector3 (left, top - height); // position in this case is in left-bottom format
 		return gameObject;
 	}
 	
@@ -43,11 +43,20 @@ public static class Factory
 
 	public static Texture2D GetTexture (string texturePath)
 	{
+		Texture2D texture = Resources.Load<Texture2D> (texturePath);
+		if (texture == null) 
+		{
+			throw new Exception ("SOMOS: no existe la imagen [" + texturePath + "] en la carpeta Resources");
+		}
+		return texture;
+	}
+
+	public static Texture2D GetTextureFromWWW (string texturePath)
+	{
 		IEnumerator<WWW> enumerator = GetWWW (texturePath);
 		enumerator.MoveNext ();
 		//TODO: mejorar esta cagada (el while) usar una courutine
-		while (!enumerator.Current.isDone)
-		{
+		while (!enumerator.Current.isDone) {
 			// Wait
 		}
 		return enumerator.Current.texture;

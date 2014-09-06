@@ -9,7 +9,6 @@ using System.Collections.Generic;
 public class SeleccionarProductosGameLogic : MonoBehaviour
 {
 
-    List<GameObject> productos = new List<GameObject>(4);
     //harcodeo los productos de la gondola de verduras con sus cuatro valores por default.
     // TODO Esta lista podria crearse mediante un factory de gondolas o algo asi.
     ArrayList productsFromGondolaX = new ArrayList() { "Lechuga", "Pera", "Banana", "Manzana" };

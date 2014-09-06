@@ -3,7 +3,6 @@ using System.Collections;
 
 public class ServicioControlVuelto : MonoBehaviour {
     
-    private Random random = new Random();
     public int monto;
     public int pago;
 	public int vueltoCorrecto; 

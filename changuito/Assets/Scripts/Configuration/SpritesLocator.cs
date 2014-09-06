@@ -3,7 +3,7 @@ using System.Collections;
 
 public static class SpritesLocator
 {
-	public static string CHANGUITO_SPRITE = GetPath ("Player");
+	public static string CHANGUITO_SPRITE = GetPath ("Supermercado", "changuito");
 	public static string GONDOLA_SPRITE = GetPath ("Gondola");
 
 	public static string GetPath (string name)

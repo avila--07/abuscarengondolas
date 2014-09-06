@@ -33,6 +33,7 @@ public class SuperMarket : MonoBehaviour
 		Debug.Log ("screenExtend " + screenExtend);
 
 		GameObject background = Factory.CreatePlane2D (-screenExtend, screenExtend, screenSize, screenSize);
+		background.renderer.material.mainTexture = Factory.GetTexture(SpritesLocator.GetPath("Supermercado", "suelo"));
 
 		_productList = CreateProductList (background, screenSize);
 		FillProductList (_productList);

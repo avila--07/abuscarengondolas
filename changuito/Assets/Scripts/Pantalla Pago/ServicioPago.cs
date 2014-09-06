@@ -7,7 +7,6 @@ public class ServicioPago : MonoBehaviour
 {
 
     int total = 75;
-    List<GameObject> moneyObjects = new List<GameObject>(6);
     //REVIEW: Esta lista debe generarse en posiciones distintas?
     // Asumimos que por ahora quedan fijas.
     ArrayList moneyInSuperiorScene = new ArrayList(3);
