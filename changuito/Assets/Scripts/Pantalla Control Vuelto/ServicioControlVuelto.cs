@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ServicioControlVuelto : MonoBehaviour {
     
+    private Random random = new Random();
     public int monto;
     public int pago;
 	public int vueltoCorrecto; 
@@ -83,7 +84,7 @@ public class ServicioControlVuelto : MonoBehaviour {
     }
 
     private void setVueltoCorrecto(){
-        this.vueltoCorrecto = this.monto - this.pago;
+        this.vueltoCorrecto = (this.monto - this.pago)*-1;
     }
 
     private void initializeVueltos()
