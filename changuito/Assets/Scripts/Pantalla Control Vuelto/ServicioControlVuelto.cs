@@ -3,7 +3,6 @@ using System.Collections;
 
 public class ServicioControlVuelto : MonoBehaviour {
     
-    private Random random = new Random();
     public int monto;
     public int pago;
 	public int vueltoCorrecto; 
@@ -11,6 +10,7 @@ public class ServicioControlVuelto : MonoBehaviour {
     private ArrayList vueltosDesordenados = new ArrayList(4);
     private ArrayList botonesVueltos = new ArrayList() { "BotonVueltoAmarillo", "BotonVueltoNaranja", "BotonVueltoAzul", "BotonVueltoVerde" };
     private ArrayList botonesDesordenados = new ArrayList(4);
+    private static int MAX_VUELTOS = 4;
 
     void Start () {
         this.inicitializeVariablesOfPantallaPago();
@@ -36,7 +36,7 @@ public class ServicioControlVuelto : MonoBehaviour {
     private void initializeBotones()
     {
         GameObject grid = GameObject.Find("CVBotonesGrid");
-        botonesDesordenados = this.desordenarLista(botonesVueltos, 0, 4);
+        botonesDesordenados = ArrayListSomosUtils.desordenarLista(botonesVueltos, 0, MAX_VUELTOS);
         int posicionVueltos=0;
 
         foreach (string boton in this.botonesDesordenados)
@@ -60,29 +60,6 @@ public class ServicioControlVuelto : MonoBehaviour {
     }
 
 
-    //TODO: pasar a una clase Helper
-    /// <summary>
-    /// Nos ayuda a mostrar aleatoreamente elementos que vienen previamente ordenados.
-    /// </summary>
-    /// <param name="list"></param>
-    /// <param name="minRange"></param>
-    /// <param name="maxRange"></param>
-    /// <returns></returns>
-    private ArrayList desordenarLista(ArrayList list, int minRange,int maxRange)
-    {
-        ArrayList listaDesordenada = new ArrayList(maxRange);
-        int value = 0;
-        
-        for (int i = 0; maxRange != listaDesordenada.Count; i++)
-        {
-            value = Random.Range(minRange, maxRange);
-            if (!listaDesordenada.Contains(list[value]))
-                listaDesordenada.Add(list[value]);
-         }
-
-        return listaDesordenada;
-    }
-
     private void setVueltoCorrecto(){
         this.vueltoCorrecto = (this.monto - this.pago)*-1;
     }
@@ -95,15 +72,13 @@ public class ServicioControlVuelto : MonoBehaviour {
 
         for (int i = 1; vueltos.Count != 4; i++)
         {
+            //Generamos un numero aleatorio dentro de una cota 
             value = CommonsSomosUtils.generateValue(i, this.vueltoCorrecto);
-            //Evitamos repetidos
             if (!vueltos.Contains(value))
                 vueltos.Add(value);
         }
 
-       vueltosDesordenados =  this.desordenarLista(vueltos,0,4); 
+        vueltosDesordenados = ArrayListSomosUtils.desordenarLista(vueltos, 0, MAX_VUELTOS); 
     }
-
- 
 
 }
