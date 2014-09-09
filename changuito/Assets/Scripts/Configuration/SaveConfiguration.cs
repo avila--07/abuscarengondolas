@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 
@@ -15,18 +15,18 @@ public class SaveConfiguration : MonoBehaviour {
     private void saveModuloPago()
     {
         GameObject check = GameObject.Find("ModuloPagoCheckbox");
-        ChanguitoConfiguration.moduloPago = check.GetComponent<UIToggle>().value;
+        ChanguitoConfiguration.ModuloPago = check.GetComponent<UIToggle>().value;
     }
 
     private void saveModuloControlVuelto()
     {
         GameObject check = GameObject.Find("ModuloControlVueltoCheckbox");
-        ChanguitoConfiguration.moduloControlVuelto = check.GetComponent<UIToggle>().value;
+        ChanguitoConfiguration.ModuloControlVuelto = check.GetComponent<UIToggle>().value;
     }
 
     private void saveCantidadProductos()
     {
         GameObject popup = GameObject.Find("CantidadProductosPopupList");
-        ChanguitoConfiguration.cantidadGondolas = Int32.Parse(popup.GetComponent<UIPopupList>().value);
+        ChanguitoConfiguration.CantidadGondolas = Int32.Parse(popup.GetComponent<UIPopupList>().value);
     }
 }
