@@ -28,7 +28,7 @@ public class Billete : MonoBehaviour
             NGUISomosUtils.showTextInScreen("Resto", "0");
             NGUISomosUtils.showTextInScreen("GameMessageLabel", "¡Muy bien! ¡Has pagado tus productos!");
             System.Threading.Thread.Sleep(250);
-            if (ChanguitoConfiguration.moduloControlVuelto)
+            if (ChanguitoConfiguration.ModuloControlVuelto)
                 Application.LoadLevel("PantallaControlVuelto");
             else Application.LoadLevel("PantallaFinal");
         }
