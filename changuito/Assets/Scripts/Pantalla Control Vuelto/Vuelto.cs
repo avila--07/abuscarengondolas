@@ -11,6 +11,7 @@ public class Vuelto : MonoBehaviour {
         if (soyElCorrecto)
         {
             NGUISomosUtils.showTextInScreen("CVMessageStatus","¡Muy Bien! es el vuelto Correcto!");
+            Application.LoadLevel("PantallaFinal");
         }
         else
         {
