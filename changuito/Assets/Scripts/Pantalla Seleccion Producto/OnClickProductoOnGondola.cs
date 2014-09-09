@@ -19,7 +19,10 @@ public class OnClickProductoOnGondola : MonoBehaviour {
         {
             targetMessage.GetComponent<UILabel>().text = this.keepMessage;
             System.Threading.Thread.Sleep(250);
-            Application.LoadLevel("PantallaPago");
+            if (ChanguitoConfiguration.ModuloPago)
+                Application.LoadLevel("PantallaPago");
+            else 
+                Application.LoadLevel("PantallaFinal");
             Destroy(this.gameObject);
         }
         else
