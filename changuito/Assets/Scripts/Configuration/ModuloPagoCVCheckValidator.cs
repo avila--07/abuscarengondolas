@@ -6,13 +6,13 @@ public class ModuloPagoCVCheckValidator : MonoBehaviour
 
     void OnClick()
     {
+        //Si destilda el Pago, se obliga a destildar el Control de vuelto
         GameObject checkVuelto = GameObject.Find("ModuloControlVueltoCheckbox");
         GameObject checkPago = GameObject.Find("ModuloPagoCheckbox");
 
         if (!checkPago.GetComponent<UIToggle>().value)
         {
-            if (checkVuelto.GetComponent<UIToggle>().value)
-                checkPago.GetComponent<UIToggle>().value = true;
+            checkVuelto.GetComponent<UIToggle>().value = false;
         }
 
     }
