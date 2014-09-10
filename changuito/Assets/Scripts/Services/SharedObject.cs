@@ -5,21 +5,28 @@ using System.Collections.Generic;
 
 public class SharedObject
 {
-	private Dictionary<string, string> _data;
+	private Dictionary<string, object> _data;
 	
-	private SharedObject ()
+	public SharedObject ()
 	{
-		_data = new Dictionary<string, string> (20);
+		_data = new Dictionary<string, object> (20);
 	}
 
-	private SharedObject (Dictionary<string, string> data)
+	private SharedObject (Dictionary<string, object> data)
 	{
 		_data = data;
 	}
-
-	public string GetString (string key)
+	
+	public T GetSharedObject<T> (string key)
+		where T: SharedObject
 	{
-		return _data [key];
+		return _data [key] as T;
+	}
+
+	public T Get<T> (string key)
+		where T : class
+	{
+		return _data [key] as T;
 	}
 
 	public void Set (string key, SharedObject value)
@@ -48,6 +55,6 @@ public class SharedObject
 
 	public static SharedObject Deserialize (byte[] bytes)
 	{
-		return new SharedObject ((Dictionary<string,string>)MiniJSON.Json.Deserialize (Encoding.UTF8.GetString (bytes)));
+		return new SharedObject ((Dictionary<string,object>)MiniJSON.Json.Deserialize (Encoding.UTF8.GetString (bytes)));
 	}
 }

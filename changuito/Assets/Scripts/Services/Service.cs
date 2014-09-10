@@ -4,15 +4,17 @@ using System;
 
 public class Service : MonoBehaviour
 {
+	private const int MAX_DEFAULT_RETRIES = 3;
 	private string _URL;
 	//private int _timeout;
-	private int _retries;
+	private int _retryIntent;
+	private int _maxRetries = MAX_DEFAULT_RETRIES;
 	private SharedObject _inputData;
 	private WWW _WWW;
 
 	internal Service ()
 	{
-		// nothing to do
+		DontDestroyOnLoad (this);
 	}
 
 	internal Service WithURL (string URL)
@@ -27,9 +29,9 @@ public class Service : MonoBehaviour
 		return this;
 	}
 	
-	public Service WithRetries (int retries)
+	public Service WithMaxRetries (int maxRetries)
 	{
-		_retries = retries;
+		_maxRetries = maxRetries;
 		return this;
 	}
 
@@ -39,9 +41,17 @@ public class Service : MonoBehaviour
 		return this;
 	}
 
-	public IEnumerable Call (Action<SharedObject, Exception> action)
+	public void Call (Action<SharedObject, Exception> action)
 	{
-		_WWW = new WWW (_URL, _inputData.Serialize ());
+		StartCoroutine ("CallImpl", action);
+	}
+
+	private IEnumerator CallImpl (Action<SharedObject, Exception> action)
+	{
+		if (_inputData == null)
+			_WWW = new WWW (_URL);
+		else
+			_WWW = new WWW (_URL, _inputData.Serialize ());
 		yield return _WWW;
 
 		bool remove = true;
@@ -62,7 +72,8 @@ public class Service : MonoBehaviour
 
 	private bool ThreatError (string message, Action<SharedObject, Exception> action)
 	{
-		if (_retries-- > 0) {
+		if (_maxRetries > _retryIntent++) {
+			Debug.LogWarning ("Retrying service with URL [" + _URL + "]. Intent [" + _retryIntent + "] of [" + _maxRetries + "]");
 			Call (action);
 			return false;
 		} else {
