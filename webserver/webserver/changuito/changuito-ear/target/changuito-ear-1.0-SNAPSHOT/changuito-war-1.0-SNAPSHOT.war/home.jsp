@@ -31,12 +31,12 @@ h3 {
 		  </tr>
 		  <tr>
 		    <td>
-				<button type="button"  onClick="location.href='/statics'" >Vizualizar estadísticas</button>
+				<button type="button"  onClick="location.href='/statics'" >Visualizar estadísticas</button>
 			</td>
 		  </tr>
 		  <tr>
 		    <td>
-				<button type="button"  onClick="location.href='/'" >Vizualizar online</button> 
+				<button type="button"  onClick="location.href='/'" >Visualizar online</button> 
 			</td>
 		  </tr>
 		 

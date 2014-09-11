@@ -26,4 +26,5 @@
     <module>changuito-war</module>
     <module>changuito-ear</module>
   </modules>
+ 
 </project>

@@ -4,13 +4,6 @@
   <meta charset="utf-8">
   <title>jQuery UI Tabs - Default functionality</title>
   <link rel="stylesheet" href="/stylesheets/themes/smoothness/jquery-ui.css">
-  <script src="/static/jquery-1.11.1.min.js"></script>
-  <script src="/static/jquery-ui.min.js"></script>
-  <script>
-  $(function() {
-    $( "#tabs" ).tabs();
-  });
-  </script>
 </head>
 
   <body>
@@ -20,9 +13,9 @@
 
 	    	<label>Estadísticas de usuario: </label>  
 	    <br>
-	    	<label>Tiempo total jugado: </label>  <span>80min</span>
+	    	<label>Tiempo total jugado: </label>  <span id="tiempoJugado">80min</span>
 	    <br>
-	    	<label>Partidas total jugadas: </label>  <span>6</span>
+	    	<label>Partidas total jugadas: </label>  <span id="partidasJugadas">6min</span>
 	    <br>
 
 		<div id="tabs">
@@ -98,5 +91,9 @@
 	     	
     </form>	
 
+	  <script src="/static/jquery-1.11.1.min.js"></script>
+	  <script src="/static/jquery-ui.min.js"></script>
+	  <script src="/static/d3/d3.js"></script>
+	  <script src="/static/statics.js"></script>
   </body>
 </html>
