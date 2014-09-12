@@ -28,12 +28,13 @@ public class GondolaFactory{
 
    public static  IDictionary<int, ArrayList> gondolas = new Dictionary<int, ArrayList>()
     {
+        //REVIEW! OJO QUE NO ESTAN TODOSSS!
         {VERDURAS, new ArrayList() { "Lechuga", "Cebolla", "Tomate", "Zapallo" }},
         {FRUTAS, new ArrayList() { "Manzana", "Banana", "Pera", "Naranja"}},
         {BEBIDAS, new ArrayList() { "Agua", "Jugo", "Gaseosa", "Soda" }},
         {GOLOSINAS, new ArrayList() { "Chicle", "Alfajor", "Chupetin", "Caramelo" }},
         {ALMACEN, new ArrayList() { "Fideos", "Aceite", "Pan", "Galletitas" }},
-        {FRESCOS, new ArrayList() { "Huevos", "Postrecitos", "Salchichas", "Jamón" }},
+        {FRESCOS, new ArrayList() { "Huevos", "Flan", "Salchichas", "Jamón" }},
         {LACTEOS, new ArrayList() { "Leche", "Queso", "Yogurt", "Manteca"}},  
         {PERFUMERIA, new ArrayList() { "Shampoo", "Jabón", "Desodorante", "Dentífrico" }}
     };

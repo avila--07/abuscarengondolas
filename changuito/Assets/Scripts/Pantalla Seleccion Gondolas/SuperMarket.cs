@@ -7,7 +7,7 @@ public class SuperMarket : MonoBehaviour
 	private const float CHANGUITO_SIZE = 1f;
 	private const float LEFT_PERCENTAGE = 1.2f;
 	public int GondolaQtyPerRow;
-	public int GondolaQtyPerColumn;
+	public int GondolaTotalQty;
 
 	private void Start ()
 	{
@@ -24,8 +24,8 @@ public class SuperMarket : MonoBehaviour
 	private void CreateChanguitoAndGondolas (GameObject background)
 	{		
 		// create gondolas sprites
-		List<GameObject> gondolas = new List<GameObject> (GondolaQtyPerRow * GondolaQtyPerColumn);
-		ContainerUtils.FillContainer (background, new ContainerUtils.Padding (0, CHANGUITO_SIZE, 0, CHANGUITO_SIZE), GondolaQtyPerRow, GondolaQtyPerColumn, delegate(float top, float left, float width, float height) {
+		List<GameObject> gondolas = new List<GameObject> (GondolaTotalQty);
+		ContainerUtils.FillContainer (background, new ContainerUtils.Padding (0, CHANGUITO_SIZE, 0, CHANGUITO_SIZE), GondolaQtyPerRow, GondolaTotalQty, delegate(float top, float left, float width, float height) {
 			
 			gondolas.Add (Factory.CreateSprite (SpritesLocator.GONDOLA_SPRITE, top, left, width, height));
 		});

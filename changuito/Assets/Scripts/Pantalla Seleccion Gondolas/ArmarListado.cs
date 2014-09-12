@@ -15,6 +15,7 @@ public class ArmarListado : MonoBehaviour {
     void Start () {
         initializeGondolas();
         initializeListado();
+        showListado();
     }
 
     private void initializeGondolas() 
@@ -38,4 +39,15 @@ public class ArmarListado : MonoBehaviour {
         }
     }
 
+    private void showListado()
+    {
+        GameObject grid = GameObject.Find("SGListadoGrid");
+        foreach (string producto in listado)
+        {
+            GameObject productObject = (GameObject)Resources.Load(producto);
+            NGUITools.AddChild(grid, productObject);
+        }
+        grid.GetComponent<UIGrid>().Reposition();
+
+    }
 }
