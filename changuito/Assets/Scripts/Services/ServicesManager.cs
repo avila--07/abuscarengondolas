@@ -15,7 +15,7 @@ public class ServiceLocator /*: MonoBehaviour*/
 	{
 		Service service = _services.AddComponent<Service> ();
 		service.transform.parent = _services.transform;
-		service.name = RandomUtils.RandomAlphaNumericString (5) + "_" + serviceId;
+		service.name = service.RequestId + "_" + serviceId;
 		return service.WithURL (ChanguitoConfiguration.ServerURL + '/' + serviceId);
 	}	
 }

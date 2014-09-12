@@ -15,7 +15,7 @@ public static class Factory
 		GameObject plane2D = GameObject.CreatePrimitive (PrimitiveType.Plane);
 		plane2D.transform.rotation = Quaternion.Euler (90, 180, 0);
 		plane2D.transform.localScale = new Vector3 (ContainerUtils.GetScaleForWidth (plane2D, width), 1, ContainerUtils.GetScaleForHeight (plane2D, height));
-		ContainerUtils.SetPositionTopLeft (plane2D, left, top);
+		ContainerUtils.SetPositionTopLeft (plane2D, top, left);
 		return plane2D;
 	}
 	

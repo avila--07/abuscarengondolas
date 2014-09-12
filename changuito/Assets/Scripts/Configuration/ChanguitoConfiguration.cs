@@ -8,5 +8,5 @@ public class ChanguitoConfiguration : MonoBehaviour
     public static bool ModuloControlVuelto;
     public static int CantidadGondolas;
 	//public static string ServerURL = "http://acomprarconchanguito.appspot.com";
-	public static string ServerURL = "http://echo.jsontest.com/key/value/one/jajajaj";
+	public static string ServerURL = "http://echo.jsontest.com/key/value/one/jajajaj/";
 }

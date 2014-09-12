@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class SuperMarket : MonoBehaviour
 {
 	private const float CHANGUITO_SIZE = 1f;
+	private const float LEFT_PERCENTAGE = 1.2f;
 	public int GondolaQtyPerRow;
 	public int GondolaQtyPerColumn;
 
@@ -14,7 +15,7 @@ public class SuperMarket : MonoBehaviour
 		float screenSize = screenExtend * 2;
 		Debug.Log ("screenExtend " + screenExtend);
 
-		GameObject background = Factory.CreatePlane2D (-screenExtend, screenExtend, screenSize, screenSize);
+		GameObject background = Factory.CreatePlane2D (screenExtend, -screenExtend * LEFT_PERCENTAGE, screenSize, screenSize);
 		background.renderer.material.mainTexture = Factory.GetTexture(SpritesLocator.GetPath("Supermercado", "suelo"));
 
 		CreateChanguitoAndGondolas (background);

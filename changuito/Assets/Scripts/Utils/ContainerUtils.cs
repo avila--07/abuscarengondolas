@@ -6,10 +6,12 @@ public static class ContainerUtils
 	public delegate void PutItemDelegate(float top, float left, float width, float height);
 	public class Padding { public float left;  public float right; public float top; public float bottom;  public Padding(float left, float right, float top, float bottom) { this.left = left; this.right = right; this.top = top; this.bottom = bottom; } }
 
-	public static void FillContainer(GameObject container, Padding padding, int itemsPerRow, int itemsPerColumn, PutItemDelegate putItemDelegate)
+	public static void FillContainer(GameObject container, Padding padding, int itemsPerRow, int totalItemsQuantity, PutItemDelegate putItemDelegate)
 	{
 		float containerTop = GetTop(container);
 		float containerLeft = GetLeft(container);
+
+		int itemsPerColumn = (int) Mathf.Ceil( (float)totalItemsQuantity / (float)itemsPerRow);
 
 		float itemWidth = (GetWidth(container) - ((padding.left + padding.right) * itemsPerRow)) / itemsPerRow;
 		float itemHeight = (GetHeight(container) -((padding.top + padding.bottom) * itemsPerColumn)) / itemsPerColumn;
@@ -19,16 +21,18 @@ public static class ContainerUtils
 		if(itemHeight < 0)
 			throw new UnityException("It looks like you have \"y padding\" too big, and there is no room for even one item!");
 
+		int itemsQuantity = 0;
 		float itemTop = containerTop;
-		for (int column = 0; column < itemsPerColumn; column++) {
+		while (itemsQuantity < totalItemsQuantity) {
 			itemTop -=  padding.top;
 
 			float itemLeft = containerLeft;
-			for (int row = 0; row < itemsPerRow; row++) {
+			for (int row = 0; row < itemsPerRow && itemsQuantity < totalItemsQuantity; row++) {
 			
 				itemLeft += padding.left;
 				putItemDelegate(itemTop, itemLeft, itemWidth, itemHeight);
 				itemLeft += itemWidth + padding.right;
+				itemsQuantity++;
 			}
 			
 			itemTop = itemTop - (itemHeight + padding.bottom);

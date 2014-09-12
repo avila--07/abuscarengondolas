@@ -19,7 +19,7 @@ public class TestServices : MonoBehaviour
 
 	void TestServiceInvalidCall ()
 	{
-		ServiceLocator.Instance.NewService ("").WithURL("Aasdadsasd//").Call (ServiceResult);
+		ServiceLocator.Instance.NewService ("").WithURL ("Aasdadsasd//").Call (ServiceResult);
 	}
 
 	void ServiceResult (SharedObject result, Exception exception)

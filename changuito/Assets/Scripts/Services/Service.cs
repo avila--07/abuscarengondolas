@@ -5,15 +5,24 @@ using System;
 public class Service : MonoBehaviour
 {
 	private const int MAX_DEFAULT_RETRIES = 3;
+	private const int DEFAULT_TIMEOUT_SECONDS = 10;
 	private string _URL;
-	//private int _timeout;
+	private string _requestId;
+	private int _secondsTimeout = DEFAULT_TIMEOUT_SECONDS;
 	private int _retryIntent;
 	private int _maxRetries = MAX_DEFAULT_RETRIES;
+	private Action<SharedObject, Exception> _action;
 	private SharedObject _inputData;
 	private WWW _WWW;
+	private long _startTime;
+
+	public string RequestId {
+		get { return _requestId; }
+	}
 
 	internal Service ()
 	{
+		_requestId = RandomUtils.RandomAlphaNumericString (5);
 		DontDestroyOnLoad (this);
 	}
 
@@ -23,9 +32,9 @@ public class Service : MonoBehaviour
 		return this;
 	}
 
-	public Service WithTimeout (int timeout)
+	public Service WithSecondsTimeout (int secondsTimeout)
 	{
-		//_timeout = timeout;
+		_secondsTimeout = secondsTimeout;
 		return this;
 	}
 	
@@ -43,10 +52,25 @@ public class Service : MonoBehaviour
 
 	public void Call (Action<SharedObject, Exception> action)
 	{
-		StartCoroutine ("CallImpl", action);
+		_startTime = TimeUtils.NowTicks;
+		_action = action;
+		StartCoroutine ("CallImpl");
 	}
 
-	private IEnumerator CallImpl (Action<SharedObject, Exception> action)
+	// For timeout!
+	private void Update ()
+	{
+		if (_startTime > 0) {
+			if (TimeUtils.TimePassed (_startTime).Seconds >= _secondsTimeout) {
+				_WWW.Dispose ();
+				_WWW = null;
+				_startTime = 0;
+				ThreatError ("Service with URL [" + _URL + "] failed with reason timeouted ([" + _secondsTimeout + "] seconds)");
+			}
+		}
+	}
+
+	private IEnumerator CallImpl ()
 	{
 		if (_inputData == null)
 			_WWW = new WWW (_URL);
@@ -54,13 +78,15 @@ public class Service : MonoBehaviour
 			_WWW = new WWW (_URL, _inputData.Serialize ());
 		yield return _WWW;
 
-		bool remove = true;
+		if (_WWW == null || !_WWW.isDone) {
+			yield break;
+		}
+
+		bool remove = true; 	
 		if (_WWW.error != null) {
-			remove = ThreatError ("Service with URL [" + _URL + "] failed with reason [" + _WWW.error + "]", action);
-		} else if (!_WWW.isDone) {
-			remove = ThreatError ("Service with URL [" + _URL + "] failed with unknown reason", action);
+			remove = !ThreatError ("Service with URL [" + _URL + "] failed with reason [" + _WWW.error + "]");
 		} else {
-			action (SharedObject.Deserialize (_WWW.bytes), null);
+			_action (SharedObject.Deserialize (_WWW.bytes), null);
 		}
 
 		if (remove) {
@@ -70,15 +96,16 @@ public class Service : MonoBehaviour
 		}
 	}
 
-	private bool ThreatError (string message, Action<SharedObject, Exception> action)
+	private bool ThreatError (string message)
 	{
+		Debug.LogWarning (message);
 		if (_maxRetries > _retryIntent++) {
 			Debug.LogWarning ("Retrying service with URL [" + _URL + "]. Intent [" + _retryIntent + "] of [" + _maxRetries + "]");
-			Call (action);
-			return false;
-		} else {
-			action (null, new Exception (message));
+			Call (_action);
 			return true;
-		}
+		} 
+
+		_action (null, new Exception (message));
+		return false;
 	}
 }
