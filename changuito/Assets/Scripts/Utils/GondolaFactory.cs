@@ -26,6 +26,17 @@ public class GondolaFactory{
     public static int LACTEOS = 6;
     public static int PERFUMERIA = 7;
 
+    private static IDictionary<int, string> tipoGondolas = new Dictionary<int, string>(){
+        {VERDURAS,"Verduras"},
+        {FRUTAS,"Frutas"},
+        {BEBIDAS,"Bebidas"},
+        {GOLOSINAS,"Golosinas"},
+        {ALMACEN,"Almacen"},
+        {FRESCOS,"Frescos"},
+        {LACTEOS,"Lacteos"},
+        {PERFUMERIA,"Perfumeria"}
+    };
+
    public static  IDictionary<int, ArrayList> gondolas = new Dictionary<int, ArrayList>()
     {
         //REVIEW! OJO QUE NO ESTAN TODOSSS!
@@ -47,6 +58,12 @@ public class GondolaFactory{
         return value;    
     }
 
-
+    public static string getTipoGondola(int tipo)
+    {
+        string label;
+        tipoGondolas.TryGetValue(tipo, out label);
+        
+        return label;
+    }
 
 }
