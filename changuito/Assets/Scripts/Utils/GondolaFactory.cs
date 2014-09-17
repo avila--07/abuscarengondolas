@@ -17,6 +17,8 @@ using System.Collections.Generic;
 /// 
 public class GondolaFactory{
 
+    public static int MAX_PRODUCTOS_X_TIPO = 4;
+
     public static int VERDURAS = 0;
     public static int FRUTAS = 1;
     public static int BEBIDAS = 2;
@@ -26,7 +28,7 @@ public class GondolaFactory{
     public static int LACTEOS = 6;
     public static int PERFUMERIA = 7;
 
-    private static IDictionary<int, string> tipoGondolas = new Dictionary<int, string>(){
+    private static IDictionary<int, string> tipoGondolasDictionary = new Dictionary<int, string>(){
         {VERDURAS,"Verduras"},
         {FRUTAS,"Frutas"},
         {BEBIDAS,"Bebidas"},
@@ -37,9 +39,8 @@ public class GondolaFactory{
         {PERFUMERIA,"Perfumeria"}
     };
 
-   public static  IDictionary<int, ArrayList> gondolas = new Dictionary<int, ArrayList>()
+   public static  IDictionary<int, ArrayList> gondolasDictionary = new Dictionary<int, ArrayList>()
     {
-        //REVIEW! OJO QUE NO ESTAN TODOSSS!
         {VERDURAS, new ArrayList() { "Lechuga", "Cebolla", "Tomate", "Zapallo" }},
         {FRUTAS, new ArrayList() { "Manzana", "Banana", "Pera", "Naranja"}},
         {BEBIDAS, new ArrayList() { "Agua", "Jugo", "Gaseosa", "Soda" }},
@@ -50,18 +51,29 @@ public class GondolaFactory{
         {PERFUMERIA, new ArrayList() { "Shampoo", "Jabón", "Desodorante", "Dentífrico" }}
     };
 
+    /// <summary>
+    /// Devuelve todos sus productos de un tipo en particular.
+    /// </summary>
+    /// <param name="tipo"></param>
+    /// <returns></returns>
     public static ArrayList getGondola(int tipo){
      
         ArrayList value = new ArrayList(4);
-        gondolas.TryGetValue(tipo,out value);
+        gondolasDictionary.TryGetValue(tipo,out value);
         
         return value;    
     }
 
+
+    /// <summary>
+    /// Matcheo Tipo (int) -> Tipo (String)
+    /// </summary>
+    /// <param name="tipo"></param>
+    /// <returns></returns>
     public static string getTipoGondola(int tipo)
     {
         string label;
-        tipoGondolas.TryGetValue(tipo, out label);
+        tipoGondolasDictionary.TryGetValue(tipo, out label);
         
         return label;
     }

@@ -10,6 +10,23 @@ public class DragableObject : MonoBehaviour
 	public Action OnDrop;
 	private Plane _plane;
 	private Vector3 _positionOffset;
+    public GameObject gondola;
+
+    void Start()
+    {
+        gondola = GameObject.Find("Gondola");
+    }
+
+
+    void OnDrag()
+    {
+
+        if (ColliderUtils.IsFullyInside(gameObject.collider.bounds, gondola.renderer.bounds))
+        { 
+            Debug.Log("esta dragueando");
+            Application.LoadLevel("PantallaInicial");
+        }
+   }
 
 	//Accion que se produce cuando suelto el mouse.
 	void OnMouseDown ()

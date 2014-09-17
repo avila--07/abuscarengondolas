@@ -9,20 +9,17 @@ public class OnClickProductoOnGondola : MonoBehaviour {
 
     void OnClick()
     {
-        Debug.Log("Click on Product!");
+       Debug.Log("Click on Product!");
         //Obtengo el mensaje de la pantalla a mostrar
-        GameObject targetMessage = GameObject.Find("GameMessage");
+       GameObject targetMessage = GameObject.Find("GameMessage");
        Boolean isTarget = gameObject.GetComponent<ProductProperties>().isTarget(); 
         
-
-        if (isTarget)
-        {
+       if (isTarget)
+       {
             targetMessage.GetComponent<UILabel>().text = this.keepMessage;
             System.Threading.Thread.Sleep(250);
-            if (ChanguitoConfiguration.ModuloPago)
-                Application.LoadLevel("PantallaPago");
-            else 
-                Application.LoadLevel("PantallaFinal");
+            ListadoSingleton.PosicionActual++;
+            Application.LoadLevel("PantallaSeleccionGondolas");
             Destroy(this.gameObject);
         }
         else
