@@ -77,7 +77,6 @@ public class ListadoSingleton
                 ListadoProductos.Add(productObject);
                 NGUITools.AddChild(grid, productObject);
             }
-
         }
         else
         {

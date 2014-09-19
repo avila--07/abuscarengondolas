@@ -11,7 +11,7 @@ public class SuperMarket : MonoBehaviour
         if (!seleccionFinalizada())
         {
             ListadoSingleton.Instance.initializeListado();
-            CreateChanguitoAndGondolas();
+            createGondolas();
             setTargetOfChanguito();
             setProductTarget();
         }
@@ -49,20 +49,24 @@ public class SuperMarket : MonoBehaviour
        changuito.GetComponent<ChanguitoTarget>().Gondola = ListadoSingleton.Instance.getTargetType();
     }
 
-	private void CreateChanguitoAndGondolas ()
+	private void createGondolas ()
 	{		
         GameObject gondolasOnScene = GameObject.Find("SGGondolasTable");
         
         int gondolaPosition;
-
+        ArrayList gondolasOrdenadas = new ArrayList(ChanguitoConfiguration.CantidadGondolas);
         for (gondolaPosition = 0; gondolaPosition < ChanguitoConfiguration.CantidadGondolas; gondolaPosition++)
         {
             GameObject gondola = (GameObject)Resources.Load("Gondola");
-            gondola.GetComponent<UILabel>().text = ListadoSingleton.Instance.getLabelOfGondolaType(gondolaPosition);
+            String name = ListadoSingleton.Instance.getLabelOfGondolaType(gondolaPosition);
+            gondola.GetComponent<UILabel>().text = name;
+            gondola.name = name; 
             gondola.GetComponent<GondolaProperties>().ProductType = (int)ListadoSingleton.Instance.getGondolasSeleccionadas()[gondolaPosition];
+            
             NGUITools.AddChild(gondolasOnScene, gondola);
-        }
-            gondolasOnScene.GetComponent<UITable>().Reposition();
+         }
+
+        gondolasOnScene.GetComponent<UITable>().Reposition();
     }
 
  }
