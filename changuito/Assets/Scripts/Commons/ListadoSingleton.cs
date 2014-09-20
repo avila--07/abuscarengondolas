@@ -92,7 +92,9 @@ public class ListadoSingleton
 
     private void showTarget()
     {
-       NGUITools.AddChild(GameObject.Find("SGSeleccionGrid"),(GameObject)this.ListadoProductos[PosicionActual]);
+       GameObject target = (GameObject)this.ListadoProductos[PosicionActual];
+       NGUITools.AddChild(GameObject.Find("SGSeleccionGrid"),target );
+       NGUISomosUtils.showTextInScreen("SGSeleccionLabel", target.name);
     }
 
     /// <summary>
