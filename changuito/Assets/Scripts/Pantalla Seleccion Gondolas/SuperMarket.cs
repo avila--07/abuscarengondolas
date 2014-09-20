@@ -52,7 +52,6 @@ public class SuperMarket : MonoBehaviour
 		GameObject gondolasOnScene = GameObject.Find ("SGGondolasTable");
         
 		int gondolaPosition;
-		ArrayList gondolasOrdenadas = new ArrayList (ChanguitoConfiguration.CantidadGondolas);
 		for (gondolaPosition = 0; gondolaPosition < ChanguitoConfiguration.CantidadGondolas; gondolaPosition++) {
 			GameObject gondola = (GameObject)Resources.Load ("Gondola");
 			String name = ListadoSingleton.Instance.getLabelOfGondolaType (gondolaPosition);
