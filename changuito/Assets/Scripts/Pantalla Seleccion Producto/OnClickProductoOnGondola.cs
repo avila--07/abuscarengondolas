@@ -16,11 +16,13 @@ public class OnClickProductoOnGondola : MonoBehaviour {
         
        if (isTarget)
        {
-            targetMessage.GetComponent<UILabel>().text = this.keepMessage;
-            System.Threading.Thread.Sleep(250);
-            ListadoSingleton.PosicionActual++;
-            Application.LoadLevel("PantallaSeleccionGondolas");
-            Destroy(this.gameObject);
+           targetMessage.GetComponent<UILabel>().text = this.okMessage;
+           System.Threading.Thread.Sleep(250);
+           //.
+           NGUISomosUtils.setTildeProductoSeleccionado(ListadoSingleton.Instance.getTarget(),true);
+           ListadoSingleton.PosicionActual++;
+           Application.LoadLevel("PantallaSeleccionGondolas");
+           Destroy(this.gameObject);
         }
         else
         {
