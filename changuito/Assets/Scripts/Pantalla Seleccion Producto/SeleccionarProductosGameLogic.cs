@@ -38,6 +38,7 @@ public class SeleccionarProductosGameLogic : MonoBehaviour
         foreach (string product in productsFromGondolaX)
         {
             GameObject loadedPrefab = Resources.Load<GameObject>(product);
+            NGUISomosUtils.setTildeProductoSeleccionado(loadedPrefab, false);
             this.setProductTarget(loadedPrefab);
             NGUITools.AddChild(grid, loadedPrefab);
         }

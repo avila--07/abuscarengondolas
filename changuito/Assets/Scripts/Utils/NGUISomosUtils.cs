@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public static class NGUISomosUtils
 {
@@ -23,8 +24,16 @@ public static class NGUISomosUtils
         GameObject objectLabel = GameObject.Find(objectText);
         return  int.Parse(objectLabel.GetComponent<UILabel>().text);
     }
-  
 
+    /// <summary>
+    /// Setea el tilde OK a los productos que fueron correctamente seleccionados.
+    /// </summary>
+    /// <param name="gameObject"></param>
+    /// <param name="active"></param>
+    public static void setTildeProductoSeleccionado(GameObject gameObject, Boolean active)
+    {
+        gameObject.transform.GetChild(0).gameObject.SetActive(active);
+    }
 
 }
 

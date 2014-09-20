@@ -17,6 +17,7 @@ public class SuperMarket : MonoBehaviour
         }
         else
         {
+            ListadoSingleton.Instance.clean();
             finalizarJuego();
         }
     }

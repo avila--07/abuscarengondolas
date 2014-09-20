@@ -69,11 +69,8 @@ public class ListadoSingleton
             {
                 int tipoGondola = (int)gondolasSeleccionadas[i];
                 int producto = CommonsSomosUtils.generateRandomValue(0, GondolaFactory.MAX_PRODUCTOS_X_TIPO);
-
                 GameObject productObject = (GameObject)Resources.Load((string)GondolaFactory.getGondola(tipoGondola)[producto]);
-                productObject.GetComponent<ProductProperties>().tipo = tipoGondola;
-            
-
+                this.initializeProduct(productObject, tipoGondola);
                 ListadoProductos.Add(productObject);
                 NGUITools.AddChild(grid, productObject);
             }
@@ -90,10 +87,17 @@ public class ListadoSingleton
         this.showTarget();  
     }
 
+    private void initializeProduct(GameObject productObject, int tipoGondola)
+    {
+        productObject.GetComponent<ProductProperties>().tipo = tipoGondola;
+        NGUISomosUtils.setTildeProductoSeleccionado(productObject, false);
+        productObject.GetComponent<ProductProperties>().target = false;
+    }
+
     private void showTarget()
     {
        GameObject target = (GameObject)this.ListadoProductos[PosicionActual];
-       NGUITools.AddChild(GameObject.Find("SGSeleccionGrid"),target );
+       NGUITools.AddChild(GameObject.Find("SGSeleccionGrid"),target);
        NGUISomosUtils.showTextInScreen("SGSeleccionLabel", target.name);
     }
 
@@ -130,4 +134,16 @@ public class ListadoSingleton
         return GondolaFactory.getTipoGondola((int)getGondolasSeleccionadas()[gondolaPosition]);
     }
 
+
+    internal void clean()
+    {
+        foreach (GameObject gameObject in ListadoProductos)
+        {
+            NGUISomosUtils.setTildeProductoSeleccionado(gameObject, false);
+        }
+        ListadoProductos.Clear();
+        gondolasSeleccionadas.Clear();
+        ListadoSingleton.PosicionActual = 0;
+        Target = null;
+    }
 }
