@@ -11,6 +11,6 @@ public class FakeDrag : MonoBehaviour {
              Application.LoadLevel("PantallaSeleccionProductos");
         }
         else
-            Debug.LogWarning("SEGUI INTENTANDO!!!!!!");
+            NGUISomosUtils.showTextInScreen("SGStatusLabel","Aquí no está.\n ¡Busquemos en otra góndola!");
     }
 }
