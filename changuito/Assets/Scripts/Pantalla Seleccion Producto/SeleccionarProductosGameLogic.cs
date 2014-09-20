@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,9 +21,9 @@ public class SeleccionarProductosGameLogic : MonoBehaviour
         GameObject grid = GameObject.Find("ListadoGrid");
         GameObject targetLabel = GameObject.Find("ProductoLabel");
 
-        targetLabel.GetComponent<UILabel>().text = ListadoSingleton.Target.name;
+        targetLabel.GetComponent<UILabel>().text = ListadoSingleton.ProductTarget.name;
 
-        NGUITools.AddChild(grid, ListadoSingleton.Target);
+        NGUITools.AddChild(grid, ListadoSingleton.ProductTarget);
         }
 
 
@@ -33,7 +33,7 @@ public class SeleccionarProductosGameLogic : MonoBehaviour
        
         //Cada gondola tiene 4 productos, incluido el target.
         //Las gondolas son de un unico tipo de producto (ej Lacteos, verduras, carnes, etc)
-        ArrayList productsFromGondolaX = GondolaFactory.gondolasDictionary[ListadoSingleton.Target.GetComponent<ProductProperties>().tipo];
+        ArrayList productsFromGondolaX = GondolaFactory.gondolasDictionary[ListadoSingleton.ProductTarget.GetComponent<ProductProperties>().tipo];
         
         foreach (string product in productsFromGondolaX)
         {
@@ -48,7 +48,7 @@ public class SeleccionarProductosGameLogic : MonoBehaviour
     
     private void setProductTarget(GameObject product) {
 
-        if (ListadoSingleton.Target.name.Equals(product.name))
+        if (ListadoSingleton.ProductTarget.name.Equals(product.name))
         {
             product.GetComponent<ProductProperties>().setTarget(true);
         }

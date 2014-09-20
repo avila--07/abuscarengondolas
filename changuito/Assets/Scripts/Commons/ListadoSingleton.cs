@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public class ListadoSingleton 
 {
@@ -9,14 +10,14 @@ public class ListadoSingleton
     /// </summary>
     public static int PosicionActual = 0;
 
-    public static GameObject Target;
+    public static GameObject ProductTarget;
 
-    public ArrayList ListadoProductos = new ArrayList(ChanguitoConfiguration.CantidadGondolas);
+	public List<GameObject> ListadoProductos = new List<GameObject>(ChanguitoConfiguration.CantidadGondolas);
     
     /// <summary>
     /// Contiene el tipo de producto a ser seleccionado.
     /// </summary>
-    private ArrayList gondolasSeleccionadas = new ArrayList(ChanguitoConfiguration.CantidadGondolas);
+	private List<int> gondolasSeleccionadas = new List<int>(ChanguitoConfiguration.CantidadGondolas);
        
     //Lock!
     private static volatile ListadoSingleton instance;
@@ -115,11 +116,11 @@ public class ListadoSingleton
         return ((GameObject)this.ListadoProductos[PosicionActual]);
     }
 
-    public ArrayList getGondolasSeleccionadas(){
+    public List<int> getGondolasSeleccionadas(){
         return this.gondolasSeleccionadas;
     }
 
-    public ArrayList getListado()
+	public List<GameObject> getListado()
     {
         return this.ListadoProductos;
     }
@@ -134,7 +135,6 @@ public class ListadoSingleton
         return GondolaFactory.getTipoGondola((int)getGondolasSeleccionadas()[gondolaPosition]);
     }
 
-
     internal void clean()
     {
         foreach (GameObject gameObject in ListadoProductos)
@@ -144,6 +144,6 @@ public class ListadoSingleton
         ListadoProductos.Clear();
         gondolasSeleccionadas.Clear();
         ListadoSingleton.PosicionActual = 0;
-        Target = null;
+        ProductTarget = null;
     }
 }

@@ -3,8 +3,7 @@ using System.Collections;
 
 public static class ColliderUtils
 {
-
-	public static bool Contains (Collider collider, Vector3  position)
+/*	public static bool Contains (UI collider, Vector3  position)
 	{
 		if (collider.bounds.center.z != position.z) {
 			Debug.LogError ("Somos WARNING: The items don't have the same z coordenate.");
@@ -28,14 +27,20 @@ public static class ColliderUtils
 			return false;
 		return true;
 	}
-
-	public static bool IsFullyInside (Collider containerCollider, Collider objectCollider)
+*/
+	public static bool IsFullyInside (UIWidget container, UIWidget targetObject)
 	{
-		return IsFullyInside (objectCollider.bounds, objectCollider.bounds);
+
+		Debug.Log ("Gondola " + container.transform.localPosition + "  Changuito " + targetObject.transform.localPosition);
+
+		return IsFullyInside (GetBounds (container), GetBounds (targetObject));
 	}
 
 	public static bool IsFullyInside (Bounds bounds, Bounds anotherBounds)
 	{
+		//Debug.Log ("Changuito bounds " + bounds);
+		//Debug.Log ("Gondola bounds " + anotherBounds);
+
 		// So the have the same z value and are sited in the same plane
 		bounds.center = new Vector3 (bounds.center.x, bounds.center.y, 0);
 		anotherBounds.center = new Vector3 (anotherBounds.center.x, anotherBounds.center.y, 0);
@@ -47,17 +52,8 @@ public static class ColliderUtils
 			bounds.Contains (anotherBounds.center - new Vector3 (anotherBounds.extents.x, 0));
 	}
 
-	public static void PutInFrontOf (GameObject frontGameObject, GameObject backGameObject)
+	public static Bounds GetBounds (UIWidget NGUIObject)
 	{
-		var position = frontGameObject.transform.position;
-		frontGameObject.transform.position = new Vector3 (position.x, position.y, backGameObject.transform.position.z - 0.1f);
-	}
-		
-	public static Vector3 GetCursorCurrentPosition (Plane plane)
-	{
-		float position;
-		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-		plane.Raycast (ray, out position);
-		return ray.GetPoint (position);
+		return new Bounds (NGUIObject.transform.localPosition, NGUIObject.localSize);
 	}
 }
