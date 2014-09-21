@@ -11,7 +11,7 @@ public class ProductProperties: MonoBehaviour {
     /// </summary>
     public Boolean target;
     public static string productName;
-    public static int precio;
+    public int precio;
 
     // VERDURAS = 0;
     // FRUTAS = 1;
