@@ -5,30 +5,25 @@ using System.Collections.Generic;
 
 public class ServicioPago : MonoBehaviour 
 {
-    int total = 75;
-    //REVIEW: Esta lista debe generarse en posiciones distintas?
-    // Asumimos que por ahora quedan fijas.
     ArrayList moneyInSuperiorScene = new ArrayList(3);
     ArrayList moneyInInferiorScene = new ArrayList(3);
-    // Use this for initialization
-	void Start () {
+    
+    void Start () {
 
-        PagoStatus.monto = this.total;
-        this.calculateAndLoadMoney();
+        PagoStatus.monto = ListadoSingleton.Instance.getTotalListado();
+        this.loadMoney();
         this.initializeScreen();
         this.InitializePizarra();
 	}
 	
     void InitializePizarra()
     {
-        NGUISomosUtils.showTextInScreen("Minuendo", total.ToString());
-        NGUISomosUtils.showTextInScreen("Resto",total.ToString());
-        NGUISomosUtils.showTextInScreen("MontoTotal",total.ToString() + " Pesos");
+        NGUISomosUtils.showTextInScreen("Minuendo", PagoStatus.monto.ToString());
+        NGUISomosUtils.showTextInScreen("Resto", PagoStatus.monto.ToString());
+        NGUISomosUtils.showTextInScreen("MontoTotal", PagoStatus.monto.ToString() + " Pesos");
     }
 
-    //REVIEW: La cantidad de plata por pantalla viene definida por el monto? es dinamico?
-    //En tal caso ,tiene que ir a una fabrica o helper.
-    private void  calculateAndLoadMoney()
+    private void  loadMoney()
     {
         moneyInSuperiorScene.Add("Billete2");
         moneyInSuperiorScene.Add("Billete5");

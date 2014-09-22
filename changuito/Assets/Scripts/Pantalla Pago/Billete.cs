@@ -30,7 +30,11 @@ public class Billete : MonoBehaviour
             System.Threading.Thread.Sleep(250);
             if (ChanguitoConfiguration.ModuloControlVuelto)
                 Application.LoadLevel("PantallaControlVuelto");
-            else Application.LoadLevel("PantallaFinal");
+            else
+            {
+                ListadoSingleton.Instance.clean();
+                Application.LoadLevel("PantallaFinal");
+            }
         }
     }
 }

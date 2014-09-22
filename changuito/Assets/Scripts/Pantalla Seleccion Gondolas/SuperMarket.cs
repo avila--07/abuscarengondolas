@@ -17,7 +17,6 @@ public class SuperMarket : MonoBehaviour
 			setTargetOfChanguito ();
 			setProductTarget ();
 		} else {
-			ListadoSingleton.Instance.clean ();
 			finalizarJuego ();
 		}
 	}
@@ -27,6 +26,7 @@ public class SuperMarket : MonoBehaviour
 		if (ChanguitoConfiguration.ModuloPago) {
 			Application.LoadLevel ("PantallaPago");
 		} else {
+			ListadoSingleton.Instance.clean ();
 			Application.LoadLevel ("PantallaFinal");
 		}
 	}

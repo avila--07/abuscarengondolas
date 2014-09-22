@@ -143,7 +143,22 @@ public class ListadoSingleton
         }
         ListadoProductos.Clear();
         gondolasSeleccionadas.Clear();
+        PagoStatus.monto = 0;
+        PagoStatus.pago = 0;
         ListadoSingleton.PosicionActual = 0;
         ProductTarget = null;
     }
+
+
+
+    public int getTotalListado()
+    {
+        int total=0;
+        foreach(GameObject producto in ListadoProductos){
+            total = total + producto.GetComponent<ProductProperties>().precio;
+        }
+
+        return total;
+    }
+
 }
