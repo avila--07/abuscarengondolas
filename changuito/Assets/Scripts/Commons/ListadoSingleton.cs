@@ -46,7 +46,7 @@ public class ListadoSingleton
     {
         while (ChanguitoConfiguration.CantidadGondolas != this.gondolasSeleccionadas.Count)
         {
-           int tipoGondola = CommonsSomosUtils.generateRandomValue(GondolaFactory.VERDURAS, GondolaFactory.PERFUMERIA);
+           int tipoGondola = CommonsSomosUtils.generateRandomValue(GondolaFactory.VERDURAS, GondolaFactory.PERFUMERIA+1);
            
            if (!gondolasSeleccionadas.Contains(tipoGondola)) { 
                //Agrego la lista con de los productos del mismo tipo
