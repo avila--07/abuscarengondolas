@@ -12,6 +12,7 @@ public class LoginServlet extends HttpServlet {
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws IOException {
 	try {
+		resp.setCharacterEncoding("UTF-8");
 		req.getRequestDispatcher("/home.jsp").forward(req, resp);
 	} catch (ServletException e) {
 		// TODO Auto-generated catch block

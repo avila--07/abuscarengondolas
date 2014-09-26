@@ -13,6 +13,7 @@ public class HomeFeaturesServlet extends HttpServlet {
       throws IOException {
 
 	try {
+	    resp.setCharacterEncoding("UTF-8");
 		req.getRequestDispatcher("/features.html").forward(req, resp);
 	} catch (ServletException e) {
 		// TODO Auto-generated catch block

@@ -13,6 +13,7 @@ public class ConfigurationServlet extends HttpServlet {
       throws IOException {
 
 	try {
+		resp.setCharacterEncoding("UTF-8");
 		req.getRequestDispatcher("/configuration.jsp").forward(req, resp);
 	
 	} catch (ServletException e) {
