@@ -1,0 +1,219 @@
+/* -------- General styles ---------  */
+
+h1, h2, h3, h4{
+	font-family: 'Fjalla One', sans-serif;
+}
+
+h1{
+	color: #47adcb;
+}
+
+.divider{
+	background-image: url('../img/divider-pattern.png');
+	background-repeat: repeat-x;;
+	height: 4px;
+	width: 100%;
+}
+
+/* -------- Top navbar styles ---------  */
+
+.navbar .brand{
+	font-family: 'Merienda', cursive;
+	font-size: 28px; 
+}
+
+/* -------- Carousel styles ---------  */
+
+.carousel-control{
+	border: none;
+	width: 60px;
+	height: 60px;
+	line-height: 50px;
+	font-size: 40px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.carousel-caption{
+	background: none;
+	max-width: 800px;
+	top:150px;
+	padding: 0 200px;
+}
+
+.carousel-caption h1{
+	text-shadow: 0px 2px #222;
+}
+
+.carousel-caption a{
+	margin-top: 20px;
+}
+
+/* -------- Page styles ---------  */
+
+#heading, #screenshots, #features, #download{
+	text-align: center;
+	padding:50px 0;
+}
+
+#about div.row{
+	padding:50px 0;
+}
+
+#screenshots h1{
+	padding-bottom: 30px; 
+}
+
+/* -------- Footer styles ---------  */
+
+footer{
+	background-color: #1b1b1b;
+	color: #999999;
+}
+
+footer .span12{
+	text-align: center;
+}
+
+#social li a{
+	background-image: url(../img/social-media-icons.png);
+	background-repeat: no-repeat;
+	display: block;
+	height: 32px;
+	width: 32px;
+}
+
+#social li a.facebook-icon{
+	background-position: 0px 0px;
+}
+
+#social li a:hover.facebook-icon{
+	background-position: 0px -32px;
+}
+
+#social li a.twitter-icon{
+	background-position: -32px 0px;
+}
+
+#social li a:hover.twitter-icon{
+	background-position: -32px -32px;
+}
+
+#social li a.google-icon{
+	background-position: -64px 0px;
+}
+
+#social li a:hover.google-icon{
+	background-position: -64px -32px;
+}
+
+
+ /* RESPONSIVE CSS
+    -------------------------------------------------- */
+
+    @media (max-width: 979px) {
+
+      .container.navbar-wrapper {
+        margin-bottom: 0;
+        width: auto;
+      }
+
+      .navbar-fixed-top .navbar-inner, .navbar-fixed-bottom .navbar-inner {
+		padding-top: 15px;
+	}
+
+      .navbar-inner {
+        border-radius: 0;
+        margin: -20px 0;
+      }
+
+      .carousel .item {
+        height: 500px;
+      }
+      .carousel img {
+        width: auto;
+        height: 500px;
+      }
+
+      footer {
+      	margin-left: -20px;
+		margin-right: -20px;
+      }
+
+      footer .container{
+      	margin-left: 10px;
+		margin-right: 10px;
+      }
+    
+    }
+
+
+    @media (max-width: 767px) {
+
+    	.navbar .brand{
+			font-family: 'Merienda', cursive;
+			font-size: 24px; 
+		}
+
+    	.carousel {
+			margin-left: -20px;
+			margin-right: -20px;
+		}
+
+      .carousel .item {
+        height: 300px;
+      }
+      .carousel img {
+        height: 300px;
+      }
+      .carousel-caption {
+        width: 65%;
+        padding: 0 100px;
+        top: 50px;
+      }
+      .carousel-caption h1 {
+        font-size: 30px;
+      }
+      .carousel-caption .lead,
+      .carousel-caption .btn {
+        font-size: 16px;
+      }
+
+      #screenshots .span2{
+      	padding-bottom: 10px;
+      }
+
+    }
+
+    @media (max-width: 480px) {
+
+    .carousel .item {
+        height: 300px;
+      }
+      .carousel img {
+        height: 300px;
+      }
+      .carousel-caption {
+        width: 55%;
+        padding: 0 100px;
+        position: absolute;
+        top: 50px;
+      }
+      .carousel-caption h1 {
+        font-size: 20px;
+      }
+      .carousel-caption .lead,
+      .carousel-caption .btn {
+        font-size: 14px;
+      }
+
+
+      .inline li{
+      	padding-bottom: 10px;
+      }
+
+      .form-inline button{
+      	margin-top: 10px;
+      }
+    }
