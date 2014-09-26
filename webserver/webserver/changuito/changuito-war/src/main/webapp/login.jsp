@@ -1,8 +1,8 @@
 <html>
-<head><title>Login</title></head>
+<head><title>Login</title></head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <body>
-    <h3><font size="10"><%="Configuraci�n de administrador" %></font> </h3>
+    <h3><font size="10"><%="Configuración de administrador" %></font> </h3>
     <br>
 
   <form action="/login" method="post">

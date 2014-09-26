@@ -1,10 +1,10 @@
 <html>
 <head>
-<title>Página de estadísticas</title>
+<title>Página de estadísticas</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
   <title>jQuery UI Tabs - Default functionality</title>
   <link rel="stylesheet" href="/stylesheets/themes/smoothness/jquery-ui.css">
-  <link rel="stylesheet" href="/stylesheets/d3/radialProgressStyle.css">
+  <link rel="stylesheet" href="/static/d3/radialProgressStyle.css">
 </head>
 
   <body>
@@ -92,8 +92,7 @@
 	     	
     </form>	
 
-	  <script src="/static/jquery-1.11.1.min.js"></script>
-	  <script src="/static/jquery-ui.min.js"></script>
+	  <script src="/static/jquery-2.1.1.min.js"></script>
 	  <script src="/static/d3/d3.js"></script>
 	  <script src="/static/d3/radialProgress/radialProgress.js"></script>
 	  <script src="/static/statics.js"></script>

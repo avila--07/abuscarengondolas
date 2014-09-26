@@ -1,5 +1,5 @@
 <html>
-<head><title>Home</title></head>
+<head><title>Home</title></head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
 h1 {
     text-align: center;

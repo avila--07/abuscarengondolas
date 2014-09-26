@@ -1,5 +1,5 @@
 <html>
-<head><title>Página de configuración</title></head>
+<head><title>Página de configuración</title></head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <body>
         <font size="10"><%="Página de configuración!" %></font>
     <form action="/home" method="get">

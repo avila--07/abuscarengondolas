@@ -27,6 +27,15 @@
         <servlet-name>statics</servlet-name>
         <url-pattern>/statics</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>homefatures</servlet-name>
+        <servlet-class>HomeFeaturesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>homefatures</servlet-name>
+        <url-pattern>/homefatures</url-pattern>
+    </servlet-mapping>
 	
     <servlet>
         <servlet-name>partidas</servlet-name>
