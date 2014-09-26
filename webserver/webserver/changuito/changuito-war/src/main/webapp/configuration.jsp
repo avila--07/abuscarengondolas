@@ -1,16 +1,16 @@
 <html>
-<head><title>P醙ina de configuraci髇</title></head>
+<head><title>P谩gina de configuraci贸n</title></head>
   <body>
-        <font size="10"><%="P醙ina de configuraci髇!" %></font>
+        <font size="10"><%="P谩gina de configuraci贸n!" %></font>
     <form action="/home" method="get">
 	    <br>
 	    	<label>Cantidad de productos: </label>  <input type="number" name="quantity" min="1" max="5">
 	    <br>
-	    	<label>Habilitar m骴ulo de pagos: </label>  <input type="checkbox" name="modpagos" >
+	    	<label>Habilitar m贸dulo de pagos: </label>  <input type="checkbox" name="modpagos" >
 	    <br>
-	    	<label>Habilitar m骴ulo control de vuelto: </label> <input type="checkbox" name="modvuelto" >
+	    	<label>Habilitar m贸dulo control de vuelto: </label> <input type="checkbox" name="modvuelto" >
 	    <br>
-	    	<label>Habilitar m骴ulo de estad韘ticas: </label>  <input type="checkbox" name="modstadisticas" >
+	    	<label>Habilitar m贸dulo de estad铆sticas: </label>  <input type="checkbox" name="modstadisticas" >
 	    <br>
 	    
 	    <input type="submit" value="Guardar">

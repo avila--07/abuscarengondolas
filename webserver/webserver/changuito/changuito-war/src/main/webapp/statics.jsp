@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>jQuery UI Tabs - Default functionality</title>
   <link rel="stylesheet" href="/stylesheets/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="/stylesheets/d3/radialProgressStyle.css">
 </head>
 
   <body>
@@ -94,6 +95,7 @@
 	  <script src="/static/jquery-1.11.1.min.js"></script>
 	  <script src="/static/jquery-ui.min.js"></script>
 	  <script src="/static/d3/d3.js"></script>
+	  <script src="/static/d3/radialProgress/radialProgress.js"></script>
 	  <script src="/static/statics.js"></script>
   </body>
 </html>

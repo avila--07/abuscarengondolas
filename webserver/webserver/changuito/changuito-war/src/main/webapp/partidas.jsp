@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Partidas históricas</title>
+	<title>Partidas histÃ³ricas</title>
 </head>
   <body>
         <font size="10"><%="Selecciona una partida para verla" %></font>
