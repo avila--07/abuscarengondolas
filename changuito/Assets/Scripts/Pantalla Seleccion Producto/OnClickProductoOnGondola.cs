@@ -5,7 +5,7 @@ using System;
 public class OnClickProductoOnGondola : MonoBehaviour {
 
     public string okMessage = "¡Muy Bien!";
-    public string keepMessage = "¡Seguí intentando!";
+    public string keepMessage = "¡Sigue intentando!";
 
     void OnClick()
     {
