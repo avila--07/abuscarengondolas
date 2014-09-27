@@ -8,3 +8,5 @@ changuito/*.exe
 *.suo
 *.DotSettings*
 *.csproj
+
+webserver/webserver/changuito/changuito-ear/target
