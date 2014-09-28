@@ -74,7 +74,7 @@ public class ServicioControlVuelto : MonoBehaviour {
         {
             //Generamos un numero aleatorio dentro de una cota 
             value = CommonsSomosUtils.generateValue(i, this.vueltoCorrecto);
-            if (!vueltos.Contains(value))
+            if (value >= 0  && !vueltos.Contains(value))
                 vueltos.Add(value);
         }
 
