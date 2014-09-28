@@ -26,13 +26,23 @@ public static class NGUISomosUtils
     }
 
     /// <summary>
-    /// Setea el tilde OK a los productos que fueron correctamente seleccionados.
+    /// Setea el tilde de los productos correctamente seleccionados.
     /// </summary>
     /// <param name="gameObject"></param>
     /// <param name="active"></param>
     public static void setTildeProductoSeleccionado(GameObject gameObject, Boolean active)
     {
         gameObject.transform.GetChild(0).gameObject.SetActive(active);
+    }
+
+    /// <summary>
+    /// Setea el label de los productos en la pantalla de seleccion.
+    /// </summary>
+    /// <param name="gameObject"></param>
+    /// <param name="active"></param>
+    public static void setLabelProductos(GameObject gameObject, Boolean active)
+    {
+        gameObject.transform.GetChild(1).gameObject.SetActive(active);
     }
 
 }

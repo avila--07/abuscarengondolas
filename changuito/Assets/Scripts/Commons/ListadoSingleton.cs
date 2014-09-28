@@ -13,6 +13,8 @@ public class ListadoSingleton
     public static GameObject ProductTarget;
 
 	public List<GameObject> ListadoProductos = new List<GameObject>(ChanguitoConfiguration.CantidadGondolas);
+
+    public List<GameObject> ListadoTipoProductos = new List<GameObject>(GondolaFactory.MAX_PRODUCTOS_X_TIPO);
     
     /// <summary>
     /// Contiene el tipo de producto a ser seleccionado.
@@ -71,6 +73,8 @@ public class ListadoSingleton
                 int tipoGondola = (int)gondolasSeleccionadas[i];
                 int producto = CommonsSomosUtils.generateRandomValue(0, GondolaFactory.MAX_PRODUCTOS_X_TIPO);
                 GameObject productObject = (GameObject)Resources.Load((string)GondolaFactory.getGondola(tipoGondola)[producto]);
+                if (productObject == null)
+                    Debug.LogError("El prefab " + (string)GondolaFactory.getGondola(tipoGondola)[producto] + " no existe" );
                 this.initializeProduct(productObject, tipoGondola);
                 ListadoProductos.Add(productObject);
                 NGUITools.AddChild(grid, productObject);
@@ -80,6 +84,7 @@ public class ListadoSingleton
         {
             foreach(GameObject producto in ListadoProductos)
             {
+                NGUISomosUtils.setLabelProductos(producto, false);
                 NGUITools.AddChild(grid, producto);
             }
         }
@@ -92,6 +97,7 @@ public class ListadoSingleton
     {
         productObject.GetComponent<ProductProperties>().tipo = tipoGondola;
         NGUISomosUtils.setTildeProductoSeleccionado(productObject, false);
+        NGUISomosUtils.setLabelProductos(productObject, false);
         productObject.GetComponent<ProductProperties>().target = false;
     }
 
@@ -149,6 +155,14 @@ public class ListadoSingleton
         ProductTarget = null;
     }
 
+    internal void cleanListadoTipoProductos()
+    {
+        foreach(GameObject producto in ListadoTipoProductos)
+        {
+            NGUISomosUtils.setLabelProductos(producto, false);
+        }
+        ListadoTipoProductos.Clear();
+    }
 
 
     public int getTotalListado()

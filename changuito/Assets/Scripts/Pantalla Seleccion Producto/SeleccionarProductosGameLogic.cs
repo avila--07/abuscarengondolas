@@ -22,8 +22,12 @@ public class SeleccionarProductosGameLogic : MonoBehaviour
         GameObject targetLabel = GameObject.Find("ProductoLabel");
 
         targetLabel.GetComponent<UILabel>().text = ListadoSingleton.ProductTarget.name;
-
-        NGUITools.AddChild(grid, ListadoSingleton.ProductTarget);
+        //Asi evitamos que al hacer click en el producto a seleccionar se dispare el label.
+        GameObject target = ListadoSingleton.Instance.getTarget(); 
+        target.GetComponent<ProductProperties>().target = false;
+        target.tag = "SeleccionarProducto";
+        NGUISomosUtils.setLabelProductos(target, false);
+        NGUITools.AddChild(grid, target);
         }
 
 
@@ -39,6 +43,7 @@ public class SeleccionarProductosGameLogic : MonoBehaviour
         {
             GameObject loadedPrefab = Resources.Load<GameObject>(product);
             NGUISomosUtils.setTildeProductoSeleccionado(loadedPrefab, false);
+            NGUISomosUtils.setLabelProductos(loadedPrefab, true);
             this.setProductTarget(loadedPrefab);
             NGUITools.AddChild(grid, loadedPrefab);
         }
