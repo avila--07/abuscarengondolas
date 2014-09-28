@@ -1,9 +1,8 @@
 fileFormatVersion: 2
-guid: e16baf5a7ef96234f8f47dab775359c2
+guid: c9842c21330d04640bb446c41f34303c
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Billetes50Pesos2
-    21300002: 50 pesos
+    21300000: 50 pesos
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -27,9 +26,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
