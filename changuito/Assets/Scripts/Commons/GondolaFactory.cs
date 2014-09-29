@@ -46,9 +46,9 @@ public class GondolaFactory{
         {BEBIDAS, new ArrayList() { "Agua", "Jugo", "Gaseosa", "Soda" }},
         {GOLOSINAS, new ArrayList() { "Chicle", "Alfajor", "Chupetin", "Caramelo" }},
         {ALMACEN, new ArrayList() { "Fideos", "Aceite", "Pan", "Galletitas" }},
-        {FRESCOS, new ArrayList() { "Huevos", "Flan", "Salchichas", "Jamón" }},
+        {FRESCOS, new ArrayList() { "Huevos", "Flan", "Salchichas", "Jamón" }},
         {LACTEOS, new ArrayList() { "Leche", "Queso", "Yogurt", "Manteca"}},  
-        {PERFUMERIA, new ArrayList() { "Shampoo", "Jabón", "Desodorante", "Dentífrico" }}
+        {PERFUMERIA, new ArrayList() { "Shampoo", "Jabón", "Desodorante", "Dentífrico" }}
     };
 
     /// <summary>
