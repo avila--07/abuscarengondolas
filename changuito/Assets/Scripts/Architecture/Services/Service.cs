@@ -2,7 +2,8 @@
 using System.Collections;
 using System;
 
-public class Service : MonoBehaviour
+public class Service<T> : MonoBehaviour
+	where T:SharedObject
 {
 	private const int MAX_DEFAULT_RETRIES = 3;
 	private const int DEFAULT_TIMEOUT_SECONDS = 10;
@@ -11,7 +12,7 @@ public class Service : MonoBehaviour
 	private int _secondsTimeout = DEFAULT_TIMEOUT_SECONDS;
 	private int _retryIntent;
 	private int _maxRetries = MAX_DEFAULT_RETRIES;
-	private Action<SharedObject, Exception> _action;
+	private Action<T, Exception> _action;
 	private SharedObject _inputData;
 	private WWW _WWW;
 	private long _startTime;
@@ -26,31 +27,31 @@ public class Service : MonoBehaviour
 		DontDestroyOnLoad (this);
 	}
 
-	internal Service WithURL (string URL)
+	internal Service<T> WithURL (string URL)
 	{
 		_URL = URL;
 		return this;
 	}
 
-	public Service WithSecondsTimeout (int secondsTimeout)
+	public Service<T> WithSecondsTimeout (int secondsTimeout)
 	{
 		_secondsTimeout = secondsTimeout;
 		return this;
 	}
 	
-	public Service WithMaxRetries (int maxRetries)
+	public Service<T> WithMaxRetries (int maxRetries)
 	{
 		_maxRetries = maxRetries;
 		return this;
 	}
 
-	public Service WithInputData (SharedObject inputData)
+	public Service<T> WithInputData (SharedObject inputData)
 	{
 		_inputData = inputData;
 		return this;
 	}
 
-	public void Call (Action<SharedObject, Exception> action)
+	public void Call (Action<T, Exception> action)
 	{
 		_startTime = TimeUtils.NowTicks;
 		_action = action;
@@ -86,7 +87,9 @@ public class Service : MonoBehaviour
 		if (_WWW.error != null) {
 			remove = !ThreatError ("Service with URL [" + _URL + "] failed with reason [" + _WWW.error + "]");
 		} else {
-			_action (SharedObject.Deserialize (_WWW.bytes), null);
+			T result = (T) Activator.CreateInstance(typeof(T));
+			result.MergeWith(SharedObject.Deserialize (_WWW.bytes));
+			_action (result, null);
 		}
 
 		if (remove) {

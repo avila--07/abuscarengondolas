@@ -37,6 +37,30 @@
             <version>1.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.objectify</groupId>
+            <artifactId>objectify</artifactId>
+            <version>5.0.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
         <!-- Test Dependencies -->
         <dependency>
             <groupId>com.google.appengine</groupId>
@@ -50,18 +74,7 @@
             <version>${appengine.target.version}</version>
             <scope>test</scope>
         </dependency>
-	    <dependency>
-	      <groupId>com.googlecode.objectify</groupId>
-	      <artifactId>objectify</artifactId>
-	      <version>5.0.3</version>
-	    </dependency>
 
-	    <dependency>
-		    <groupId>com.google.code.gson</groupId>
-		    <artifactId>gson</artifactId>
-		    <version>2.3</version>
-		</dependency>
-	    
     </dependencies>
       
     <build>
@@ -83,6 +96,31 @@
                         </resource>
                     </webResources>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>${appengine.target.version}</version>
+                <configuration>
+                    <appDir>${basedir}/target/${project.artifactId}-${project.version}</appDir>
+                    <jvmFlags>
+                        <jvmFlag>-Ddatastore.backing_store=${project.basedir}\localstore\db.bin</jvmFlag>
+                        <jvmFlag>-Dappengine.generated.dir=${basedir}\localstore</jvmFlag>
+                        <jvmFlag>-Xdebug</jvmFlag>
+                        <jvmFlag>-Xrunjdwp:transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag>
+                        <jvmFlag>-Xmx1024m</jvmFlag>
+                    </jvmFlags>
+                    <address>0.0.0.0</address>
+                    <port>80</port>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.google.appengine</groupId>
+                        <artifactId>appengine-java-sdk</artifactId>
+                        <version>${appengine.target.version}</version>
+                        <type>zip</type>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
