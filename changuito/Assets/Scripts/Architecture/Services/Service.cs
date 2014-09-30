@@ -44,15 +44,15 @@ public class Service<T> : MonoBehaviour
 		_maxRetries = maxRetries;
 		return this;
 	}
-
-	public Service<T> WithInputData (SharedObject inputData)
-	{
-		_inputData = inputData;
-		return this;
-	}
-
+	
 	public void Call (Action<T, Exception> action)
 	{
+		Call (null, action);
+	}
+
+	public void Call (SharedObject inputData, Action<T, Exception> action)
+	{
+		_inputData = inputData;
 		_startTime = TimeUtils.NowTicks;
 		_action = action;
 		StartCoroutine ("CallImpl");

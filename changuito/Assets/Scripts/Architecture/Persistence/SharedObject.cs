@@ -32,28 +32,6 @@ public class SharedObject
 	{
 		return MiniJSON.Json.Serialize (_data);
 	}
-
-	public void MergeWith (SharedObject sharedObject)
-	{ 
-		foreach (var entry in sharedObject._data) {
-			
-			string key = entry.Key;
-			object value = entry.Value;
-			
-			SharedObject valueAsSharedObject = value as SharedObject;
-			if (valueAsSharedObject != null) {
-				SharedObject oldValue = GetSharedObject (key);
-				
-				if (oldValue != null) {
-					oldValue.MergeWith (valueAsSharedObject);
-				} else {
-					Set (key, valueAsSharedObject);
-				}
-			} else {
-				Set (key, value);
-			}
-		}
-	}
 	
 	public double GetDouble (string key)
 	{
@@ -79,6 +57,7 @@ public class SharedObject
 		
 		SharedObject valueAsSharedObject = value as SharedObject;
 		if (valueAsSharedObject == null) {
+			// Preferible dejar el objeto ya deserializado, en vez de deserializarlo siempre
 			valueAsSharedObject = SharedObject.Deserialize ((string)value);
 			Set (key, valueAsSharedObject);
 		}
@@ -89,14 +68,36 @@ public class SharedObject
 	{
 		return (string)_data [key];
 	}
+	
+	public void MergeWith (SharedObject sharedObject)
+	{ 
+		foreach (var entry in sharedObject._data) {
+			
+			string key = entry.Key;
+			object value = entry.Value;
+			
+			SharedObject valueAsSharedObject = value as SharedObject;
+			if (valueAsSharedObject != null) {
+				SharedObject oldValue = GetSharedObject (key);
+				
+				if (oldValue != null) {
+					oldValue.MergeWith (valueAsSharedObject);
+				} else {
+					Set (key, valueAsSharedObject);
+				}
+			} else {
+				Set (key, value);
+			}
+		}
+	}
+		
+	public byte[] Serialize ()
+	{
+		return Encoding.UTF8.GetBytes (ToString ());
+	}
 
 	public void Set<T> (string key, T value)
 	{
 		_data [key] = value;
-	}
-			
-	public byte[] Serialize ()
-	{
-		return Encoding.UTF8.GetBytes (ToString ());
 	}
 }

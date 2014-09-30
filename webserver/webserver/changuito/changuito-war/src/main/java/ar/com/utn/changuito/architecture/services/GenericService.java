@@ -22,7 +22,7 @@ public abstract class GenericService<TIn extends SharedObject> extends AbstractS
             return (TIn) ((Class) ((ParameterizedType) this.getClass().
                     getGenericSuperclass()).getActualTypeArguments()[0]).newInstance();
         } catch (final Exception exception) {
-            throw new RuntimeException("Cannot craete instance of GenericService parameter type.", exception);
+            throw new RuntimeException("Cannot create instance of GenericService parameter type.", exception);
         }
     }
 }
