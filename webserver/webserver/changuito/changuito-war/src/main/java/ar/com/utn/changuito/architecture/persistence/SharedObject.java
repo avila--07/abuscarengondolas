@@ -3,6 +3,7 @@ package ar.com.utn.changuito.architecture.persistence;
 import ar.com.utn.changuito.model.Statistic;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
 import java.nio.charset.Charset;
 import java.util.HashMap;
@@ -71,9 +72,9 @@ public class SharedObject {
         if (value instanceof SharedObject) {
             valueAsSharedObject = (SharedObject) value;
         }
-        if (valueAsSharedObject == null) {
+        else if (valueAsSharedObject == null) {
+            valueAsSharedObject = new SharedObject((Map<String, Object>) ((Map<String, Object>) value).get("data"));
             // Preferible dejar el objeto ya deserializado, en vez de deserializarlo siempre
-            valueAsSharedObject = SharedObject.deserialize((String) value);
             set(key, valueAsSharedObject);
         }
         return valueAsSharedObject;
@@ -104,13 +105,12 @@ public class SharedObject {
     }
 
     public <T> void set(final String key, final T value) {
-        if (value != null) {
-            data.put(key, value);
-        }
+        data.put(key, value);
     }
 
     @Override
     public String toString() {
+        //TODO: tiene que ser otro para deserializar!!!!!!!!!!!!!!!!!
 
         final Gson gson = new GsonBuilder().create();
         return gson.toJson(data);
