@@ -1,11 +1,7 @@
 package ar.com.utn.changuito.architecture.persistence;
 
 import ar.com.utn.changuito.model.Statistic;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,20 +21,14 @@ public class SharedObject {
         this.data = data;
     }
 
-    public static SharedObject deserialize(final byte[] bytes) {
+    public static SharedObject deserialize(final byte[] jsonCodeBytes) {
 
-        final String jsonCode = new String(bytes, getCharset());
-
-        return new SharedObject(new GsonBuilder().create().fromJson(jsonCode, HashMap.class));
+        return new SharedObject(JsonUtils.convertJsonBytesToMap(jsonCodeBytes));
     }
 
-    public static SharedObject deserialize(final String serializedString) {
+    public static SharedObject deserialize(final String jsonCode) {
 
-        return new SharedObject(new GsonBuilder().create().fromJson(serializedString, HashMap.class));
-    }
-
-    private static Charset getCharset() {
-        return Charset.forName("UTF-8");
+        return new SharedObject(JsonUtils.convertJsonStringToMap(jsonCode));
     }
 
     public double getDouble(final String key) {
@@ -71,9 +61,8 @@ public class SharedObject {
         SharedObject valueAsSharedObject = null;
         if (value instanceof SharedObject) {
             valueAsSharedObject = (SharedObject) value;
-        }
-        else if (valueAsSharedObject == null) {
-            valueAsSharedObject = new SharedObject((Map<String, Object>) ((Map<String, Object>) value).get("data"));
+        } else if (valueAsSharedObject == null) {
+            valueAsSharedObject = deserialize((String) value);
             // Preferible dejar el objeto ya deserializado, en vez de deserializarlo siempre
             set(key, valueAsSharedObject);
         }
@@ -101,7 +90,8 @@ public class SharedObject {
     }
 
     public byte[] serialize() {
-        return toString().getBytes(getCharset());
+
+        return JsonUtils.convertMapToJsonBytes(data);
     }
 
     public <T> void set(final String key, final T value) {
@@ -110,32 +100,18 @@ public class SharedObject {
 
     @Override
     public String toString() {
-        //TODO: tiene que ser otro para deserializar!!!!!!!!!!!!!!!!!
 
-        final Gson gson = new GsonBuilder().create();
-        return gson.toJson(data);
+        return JsonUtils.convertMapToJsonString(data);
     }
 
     public static void main(String[] args) {
-/*
-        final SharedObject parent = new SharedObject();
-        parent.set("parent", 1);
-
-        final SharedObject child = new SharedObject();
-        child.set("child", 2);
-        parent.set("child", child);
-
-        byte[] parentSerialize = parent.serialize();
-        SharedObject parentDeserialize = SharedObject.deserialize(parentSerialize);
-        System.err.println(parentDeserialize);*/
 
         testSerialization();
         testMergeWith();
         testModelClassSharedObject();
     }
 
-
-    static void testSerialization() {
+    private static void testSerialization() {
         final SharedObject child = new SharedObject();
         child.set("childName", "mateo");
 
@@ -152,7 +128,7 @@ public class SharedObject {
         System.err.println(childDeserialized.getString("childName"));
     }
 
-    static void testMergeWith() {
+    private static void testMergeWith() {
         SharedObject a = new SharedObject();
         SharedObject b = new SharedObject();
         SharedObject c = new SharedObject();
@@ -185,7 +161,7 @@ public class SharedObject {
         System.err.println("e.MergeWith(b): " + e);
     }
 
-    static void testModelClassSharedObject() {
+    private static void testModelClassSharedObject() {
         Statistic statistic = new Statistic();
         statistic.setId("id");
 

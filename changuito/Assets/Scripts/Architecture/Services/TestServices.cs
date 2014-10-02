@@ -29,12 +29,12 @@ public class TestServices : MonoBehaviour
 
 	void TestServiceCall ()
 	{
-		ServiceLocator.Instance.NewService<SharedObject> ("").Call (ServiceResult);
+		ServiceLocator.Instance.NewService ("").Call<SharedObject> (ServiceResult);
 	}
 
 	void TestServiceInvalidCall ()
 	{
-		ServiceLocator.Instance.NewService<SharedObject> ("").WithURL ("Aasdadsasd//").Call (ServiceResult);
+		ServiceLocator.Instance.NewService ("").WithURL ("Aasdadsasd//").Call<SharedObject> (ServiceResult);
 	}
 
 	void TestSerialization ()

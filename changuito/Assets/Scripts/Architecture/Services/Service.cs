@@ -2,8 +2,7 @@
 using System.Collections;
 using System;
 
-public class Service<T> : MonoBehaviour
-	where T:SharedObject
+public class Service : MonoBehaviour
 {
 	private const int MAX_DEFAULT_RETRIES = 3;
 	private const int DEFAULT_TIMEOUT_SECONDS = 10;
@@ -12,7 +11,7 @@ public class Service<T> : MonoBehaviour
 	private int _secondsTimeout = DEFAULT_TIMEOUT_SECONDS;
 	private int _retryIntent;
 	private int _maxRetries = MAX_DEFAULT_RETRIES;
-	private Action<T, Exception> _action;
+	private Action<SharedObject, Exception> _action;
 	private SharedObject _inputData;
 	private WWW _WWW;
 	private long _startTime;
@@ -27,35 +26,45 @@ public class Service<T> : MonoBehaviour
 		DontDestroyOnLoad (this);
 	}
 
-	internal Service<T> WithURL (string URL)
+	internal Service WithURL (string URL)
 	{
 		_URL = URL;
 		return this;
 	}
 
-	public Service<T> WithSecondsTimeout (int secondsTimeout)
+	public Service WithSecondsTimeout (int secondsTimeout)
 	{
 		_secondsTimeout = secondsTimeout;
 		return this;
 	}
 	
-	public Service<T> WithMaxRetries (int maxRetries)
+	public Service WithMaxRetries (int maxRetries)
 	{
 		_maxRetries = maxRetries;
 		return this;
 	}
 	
-	public void Call (Action<T, Exception> action)
+	public void Call<T> (Action<T, Exception> action)
+		where T: SharedObject
 	{
 		Call (null, action);
 	}
 
-	public void Call (SharedObject inputData, Action<T, Exception> action)
+	public void Call<T> (SharedObject inputData, Action<T, Exception> action)
+		where T: SharedObject
 	{
 		_inputData = inputData;
 		_startTime = TimeUtils.NowTicks;
-		_action = action;
-		StartCoroutine ("CallImpl");
+		_action = delegate(SharedObject sharedObject, Exception exception) {
+	
+			T result = sharedObject as T;
+			if (result == null && exception == null) {
+				result = (T)Activator.CreateInstance (typeof(T));
+				result.MergeWith (sharedObject);
+			}
+			action (result, exception);
+		};
+		StartCoroutine (CallImpl ());
 	}
 
 	// For timeout!
@@ -87,9 +96,7 @@ public class Service<T> : MonoBehaviour
 		if (_WWW.error != null) {
 			remove = !ThreatError ("Service with URL [" + _URL + "] failed with reason [" + _WWW.error + "]");
 		} else {
-			T result = (T) Activator.CreateInstance(typeof(T));
-			result.MergeWith(SharedObject.Deserialize (_WWW.bytes));
-			_action (result, null);
+			_action (SharedObject.Deserialize (_WWW.bytes), null);
 		}
 
 		if (remove) {

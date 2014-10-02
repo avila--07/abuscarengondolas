@@ -11,10 +11,9 @@ public class ServiceLocator
 		_services = new GameObject ();
 	}
 
-	public Service<T> NewService<T> (string serviceId)
-		where T: SharedObject
+	public Service NewService (string serviceId)
 	{
-		Service<T> service = _services.AddComponent<Service<T>> ();
+		Service service = _services.AddComponent<Service> ();
 		service.transform.parent = _services.transform;
 		service.name = service.RequestId + "_" + serviceId;
 		return service.WithURL (ChanguitoConfiguration.ServerURL + "/ChanguitoServices/" + serviceId);
