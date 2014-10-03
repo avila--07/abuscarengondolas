@@ -1,6 +1,6 @@
 package ar.com.utn.changuito.architecture.services;
 
-import ar.com.utn.changuito.services.StatisticsService;
+import ar.com.utn.changuito.services.UploadStatisticsService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +41,7 @@ public final class ServiceLocator {
     private void registerServices() {
 
         // Here you must register all game services
-        registerService(new StatisticsService());
+        registerService(new UploadStatisticsService());
     }
 
     private void registerService(final AbstractService service) {

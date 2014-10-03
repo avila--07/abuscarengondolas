@@ -2,14 +2,13 @@
 using System.Collections;
 using System;
 
-public static class StatisticsService
+public static class UploadStatisticsService
 {
 	public static void Call (Statistic statistic, Action<SharedObject, Exception> originalCallback)
 	{
-		ServiceLocator.Instance.NewService ("stcs").
-				WithMaxRetries (3).
+		ServiceManager.Instance.NewService ("ustcs").
 				WithSecondsTimeout (30).
+				WithMaxRetries (3).
 				Call (statistic, originalCallback);
 	}
-
 }

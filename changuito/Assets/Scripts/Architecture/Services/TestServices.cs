@@ -18,31 +18,31 @@ public class TestServices : MonoBehaviour
 	void TestTrueServerCall ()
 	{
 		Statistic statistic = new Statistic ();
-		statistic.id = "fernando";
-		StatisticsService.Call (statistic, ServiceResult);
+		statistic.Id = "fernando";
+		UploadStatisticsService.Call (statistic, ServiceResult);
 	}
 	
-	void ServiceResult (SharedObject result, Exception exception)
+	private void ServiceResult (SharedObject result, Exception exception)
 	{
 		Debug.Log ("Resultado servicio: " + ((result == null) ? "Fallo con [" + exception + "]" : result.ToString ()));
 	}
 
 	void TestServiceCall ()
 	{
-		ServiceLocator.Instance.NewService ("").Call<SharedObject> (ServiceResult);
+		ServiceManager.Instance.NewService ("").Call<SharedObject> (ServiceResult);
 	}
 
 	void TestServiceInvalidCall ()
 	{
-		ServiceLocator.Instance.NewService ("").WithURL ("Aasdadsasd//").Call<SharedObject> (ServiceResult);
+		ServiceManager.Instance.NewService ("").WithURL ("Aasdadsasd//").Call<SharedObject> (ServiceResult);
 	}
 
 	void TestSerialization ()
 	{
-		var child = new SharedObject ();
+		SharedObject child = new SharedObject ();
 		child.Set ("childName", "mateo");
 
-		var parent = new SharedObject ();
+		SharedObject parent = new SharedObject ();
 		parent.Set ("parentName", "fernando");
 		parent.Set ("child", child);
 
@@ -92,7 +92,7 @@ public class TestServices : MonoBehaviour
 	void TestModelClassSharedObject()
 	{
 		Statistic statistic = new Statistic();
-		statistic.id = "id";
+		statistic.Id = "id";
 
 		Debug.Log("Statistic: " + statistic);
 

@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class ServiceLocator
+public class ServiceManager
 {
-	public static readonly ServiceLocator Instance = new ServiceLocator ();
+	public static readonly ServiceManager Instance = new ServiceManager ();
 	private GameObject _services;
 
-	private ServiceLocator ()
+	private ServiceManager ()
 	{
 		_services = new GameObject ();
 	}
