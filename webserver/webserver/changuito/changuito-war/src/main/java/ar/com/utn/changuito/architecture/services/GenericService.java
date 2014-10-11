@@ -1,6 +1,6 @@
 package ar.com.utn.changuito.architecture.services;
 
-import ar.com.utn.changuito.architecture.persistence.SharedObject;
+import ar.com.utn.changuito.architecture.net.SharedObject;
 
 import java.lang.reflect.ParameterizedType;
 

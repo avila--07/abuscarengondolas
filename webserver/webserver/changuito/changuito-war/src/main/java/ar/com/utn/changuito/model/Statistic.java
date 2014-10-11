@@ -1,6 +1,6 @@
 package ar.com.utn.changuito.model;
 
-import ar.com.utn.changuito.architecture.persistence.SharedObject;
+import ar.com.utn.changuito.architecture.net.SharedObject;
 
 public class Statistic extends SharedObject {
 

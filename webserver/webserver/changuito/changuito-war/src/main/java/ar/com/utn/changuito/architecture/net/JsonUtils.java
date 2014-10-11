@@ -1,4 +1,4 @@
-package ar.com.utn.changuito.architecture.persistence;
+package ar.com.utn.changuito.architecture.net;
 
 import org.apache.commons.io.IOUtils;
 

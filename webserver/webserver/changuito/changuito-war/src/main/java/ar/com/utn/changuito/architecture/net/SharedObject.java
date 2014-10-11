@@ -1,9 +1,11 @@
-package ar.com.utn.changuito.architecture.persistence;
+package ar.com.utn.changuito.architecture.net;
 
 import ar.com.utn.changuito.model.Statistic;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SharedObject {
 
@@ -29,6 +31,18 @@ public class SharedObject {
     public static SharedObject deserialize(final String jsonCode) {
 
         return new SharedObject(JsonUtils.convertJsonStringToMap(jsonCode));
+    }
+
+    public Set<String> getKeys() {
+        return data.keySet();
+    }
+
+    public Object get(final String key) {
+        final Object value = data.get(key);
+        if (value instanceof SharedObject) {
+            return value.toString();
+        }
+        return value;
     }
 
     public double getDouble(final String key) {
