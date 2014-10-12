@@ -1,9 +1,10 @@
 package ar.com.utn.changuito.architecture.services;
 
-import ar.com.utn.changuito.services.UploadStatisticsService;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import ar.com.utn.changuito.services.SeleccionarProductoStatisticsService;
+import ar.com.utn.changuito.services.UploadStatisticsService;
 
 /**
  * Created by fernando on 27/09/2014.
@@ -42,6 +43,7 @@ public final class ServiceLocator {
 
         // Here you must register all game services
         registerService(new UploadStatisticsService());
+        registerService(new SeleccionarProductoStatisticsService());
     }
 
     private void registerService(final AbstractService service) {

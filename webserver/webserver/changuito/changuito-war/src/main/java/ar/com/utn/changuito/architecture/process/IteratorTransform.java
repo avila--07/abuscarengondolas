@@ -13,17 +13,14 @@ public class IteratorTransform<TIn, TOut> implements Iterator<TOut> {
         this.transformer = transformer;
     }
 
-    @Override
     public boolean hasNext() {
         return iterator.hasNext();
     }
 
-    @Override
     public TOut next() {
         return transformer.transform(iterator.next());
     }
 
-    @Override
     public void remove() {
         iterator.remove();
     }

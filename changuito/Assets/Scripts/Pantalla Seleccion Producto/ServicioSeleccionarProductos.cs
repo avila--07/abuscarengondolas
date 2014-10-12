@@ -6,11 +6,17 @@ using System.Collections.Generic;
 /// <summary>
 /// Implementa y ejecuta la logica de la pantalla de seleccion de productos. 
 /// </summary>
-public class SeleccionarProductosGameLogic : MonoBehaviour
+public class ServicioSeleccionarProductos: MonoBehaviour
 {
-    
+    /// <summary>
+    /// Guarda la cantidad de veces que el jugador se ha equivocado antes de seleccionar el correcto. Meramente estadistico.
+    /// </summary>
+    public static int failedProducts ;
+
     void Start()
     {
+        failedProducts = 0;
+
         this.inicializarTarget();
 
         this.inicializarListadoProductos();

@@ -97,7 +97,6 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
 
         return new IteratorTransform<Entity, T>(entitiesIterator.iterator(),
                 new IteratorTransform.Transformer<Entity, T>() {
-                    @Override
                     public T transform(final Entity entity) {
                         return convertGAEEntityToEntityModel(entity);
                     }
