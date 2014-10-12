@@ -21,7 +21,7 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
     private DatastoreService datastoreService;
     private Class<T> classType;
 
-    public DatastoreService getDatastoreService() {
+    private DatastoreService getDatastoreService() {
         if (datastoreService == null)
             datastoreService = DatastoreServiceFactory.getDatastoreService();
         return datastoreService;
@@ -104,7 +104,7 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
                 });
     }
 
-    public void persist(final T domainEntity) throws Exception {
+    public void persist(final T domainEntity) {
 
         validateEntityModel(domainEntity);
 

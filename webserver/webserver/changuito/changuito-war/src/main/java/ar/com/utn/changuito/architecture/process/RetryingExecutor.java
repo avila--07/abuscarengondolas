@@ -5,28 +5,27 @@ import java.util.logging.Logger;
 
 public class RetryingExecutor {
 
-    public static void execute(final int maxRetryingTimes, final int increasingTimeBetween, final Retryable retryable)
-            throws Exception {
+    public static void execute(final int maxRetryingTimes, final int increasingTimeBetween, final Retryable retryable) {
 
         executeImpl(maxRetryingTimes, 0, increasingTimeBetween, retryable);
     }
 
     public static <T> T execute(final int maxRetryingTimes, final int increasingTimeBetween,
-                                final RetryableFuture<T> retryableFuture) throws Exception {
+                                final RetryableFuture<T> retryableFuture) {
 
         executeImpl(maxRetryingTimes, 0, increasingTimeBetween, retryableFuture);
         return retryableFuture.getValue();
     }
 
     private static void executeImpl(final int maxRetryingTimes, int retryingTimes, final int increasingTimeBetween,
-                                    final Retryable runnable) throws Exception {
+                                    final Retryable runnable) {
 
         try {
             runnable.run();
         } catch (final Exception e) {
 
             if (maxRetryingTimes == retryingTimes++) {
-                throw new Exception("No more execution retries! Exception is [" + e.getMessage() + "]");
+                throw new RuntimeException("No more execution retries! Exception is [" + e.getMessage() + "]");
             }
             Logger.getAnonymousLogger().log(Level.WARNING, e + " - " + e.getMessage() + " - " + e.getStackTrace());
             sleep(increasingTimeBetween * retryingTimes);
