@@ -2,10 +2,10 @@
 using System.Collections;
 using System;
 
-public class OnClickProductoOnGondola : MonoBehaviour {
+public class ProductAction : MonoBehaviour {
 
-    public string okMessage = "¡Muy Bien!";
-    public string keepMessage = "¡Sigue intentando!";
+    private string okMessage = "¡Muy Bien!";
+    private string keepMessage = "¡Sigue intentando!";
 
     void OnClick()
     {
@@ -18,13 +18,13 @@ public class OnClickProductoOnGondola : MonoBehaviour {
        {
            //Producto seleccionado correctamente.
            targetMessage.GetComponent<UILabel>().text = this.okMessage;
-           System.Threading.Thread.Sleep(200);
+           //Enviamos la estadistica. 
+           SeleccionarProductoStatistic result = new SeleccionarProductoStatistic(2,DateTime.Now.ToString(),ServicioSeleccionarProductos.failedProducts);
+           SeleccionarProductoStatisticsService.Call(result,ServiceResult);
            NGUISomosUtils.setTildeProductoSeleccionado(ListadoSingleton.Instance.getTarget(),true);
            ListadoSingleton.Instance.cleanListadoTipoProductos();
            ListadoSingleton.PosicionActual++;
-           //Enviamos la estadistica. 
-           SeleccionarProductoStatistic result = new SeleccionarProductoStatistic(2,DateTime.Today.ToString(),ServicioSeleccionarProductos.failedProducts);
-           SeleccionarProductoStatisticsService.Call(result,ServiceResult);
+           System.Threading.Thread.Sleep(200);
            Application.LoadLevel("PantallaSeleccionGondolas");
            Destroy(this.gameObject);
         }

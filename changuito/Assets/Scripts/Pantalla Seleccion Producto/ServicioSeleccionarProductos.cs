@@ -16,10 +16,10 @@ public class ServicioSeleccionarProductos: MonoBehaviour
     void Start()
     {
         failedProducts = 0;
-
-        this.inicializarTarget();
-
+        
         this.inicializarListadoProductos();
+        
+        this.inicializarTarget();
     }
 
     void inicializarTarget(){
@@ -50,6 +50,7 @@ public class ServicioSeleccionarProductos: MonoBehaviour
             GameObject loadedPrefab = Resources.Load<GameObject>(product);
             NGUISomosUtils.setTildeProductoSeleccionado(loadedPrefab, false);
             NGUISomosUtils.setLabelProductos(loadedPrefab, true);
+            loadedPrefab.tag = "GameController";
             this.setProductTarget(loadedPrefab);
             NGUITools.AddChild(grid, loadedPrefab);
         }
