@@ -41,9 +41,12 @@ $(function() {
 				type: 'column'
 			},
 			title: {
-				text: 'Fechas partidas'
+				text: 'Desempeño'
 			},
 			xAxis: {
+				title: {
+					text: 'Fechas partidas'
+				},
 				categories: objectXAxis
 			},
 			yAxis: {
