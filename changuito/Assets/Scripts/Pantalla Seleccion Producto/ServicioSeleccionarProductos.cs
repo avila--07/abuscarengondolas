@@ -6,14 +6,22 @@ using System.Collections.Generic;
 /// <summary>
 /// Implementa y ejecuta la logica de la pantalla de seleccion de productos. 
 /// </summary>
-public class SeleccionarProductosGameLogic : MonoBehaviour
+public class ServicioSeleccionarProductos: MonoBehaviour
 {
-    
+    /// <summary>
+    /// Guarda la cantidad de veces que el jugador se ha equivocado antes de seleccionar el correcto. Meramente estadistico.
+    /// </summary>
+    public static int failedProducts ;
+    public static DateTime gameStart;
+
     void Start()
     {
-        this.inicializarTarget();
+        failedProducts = 0;
+        gameStart = DateTime.Now; 
 
         this.inicializarListadoProductos();
+        
+        this.inicializarTarget();
     }
 
     void inicializarTarget(){
@@ -44,6 +52,7 @@ public class SeleccionarProductosGameLogic : MonoBehaviour
             GameObject loadedPrefab = Resources.Load<GameObject>(product);
             NGUISomosUtils.setTildeProductoSeleccionado(loadedPrefab, false);
             NGUISomosUtils.setLabelProductos(loadedPrefab, true);
+            loadedPrefab.tag = "GameController";
             this.setProductTarget(loadedPrefab);
             NGUITools.AddChild(grid, loadedPrefab);
         }

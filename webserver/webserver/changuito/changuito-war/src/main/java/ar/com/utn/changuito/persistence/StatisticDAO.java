@@ -16,9 +16,14 @@ public class StatisticDAO extends AbstractGAEDAO<Statistic> {
     }
 
     @Override
+    protected long getId(final Statistic domainEntity) {
+        return domainEntity.getId();
+    }
+
+    @Override
     protected void validateEntityModel(final Statistic entityModel) throws ModelValidationException {
 
-        if (entityModel.getId() == null || entityModel.getId().isEmpty())
-            throw new ModelValidationException("Id cannot be null");
+        if (entityModel.getId() == 0)
+            throw new ModelValidationException("Id cannot be zero");
     }
 }

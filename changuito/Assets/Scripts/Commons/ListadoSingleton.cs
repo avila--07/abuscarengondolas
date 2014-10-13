@@ -98,6 +98,7 @@ public class ListadoSingleton
         productObject.GetComponent<ProductProperties>().tipo = tipoGondola;
         NGUISomosUtils.setTildeProductoSeleccionado(productObject, false);
         NGUISomosUtils.setLabelProductos(productObject, false);
+        productObject.tag = "GameController";
         productObject.GetComponent<ProductProperties>().target = false;
     }
 
