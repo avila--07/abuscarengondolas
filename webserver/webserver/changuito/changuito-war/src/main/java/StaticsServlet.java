@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -63,13 +64,23 @@ private StaticsObjectDto crearObjetoDeStadisticas() {
 	StaticsObjectDto statics = new StaticsObjectDto();
 	  statics.setMinutosJugados(90);	
 	  statics.setPartidasJugados(10);
+	  Calendar cal = Calendar.getInstance();
 	  
 	  List<PartidaDto> listaPartidas = new ArrayList<PartidaDto>();
 	  
-	  PartidaDto partida1 = dameUnaPartida(0);
-	  PartidaDto partida2 = dameUnaPartida(1);
-	  PartidaDto partida3 = dameUnaPartida(2);
-	  PartidaDto partida4 = dameUnaPartida(3);
+	  PartidaDto partida1 = dameUnaPartida(0,new Date());
+
+	  cal.setTime(new Date());
+	  cal.add(Calendar.DATE, +1);
+	  PartidaDto partida2 = dameUnaPartida(1,cal.getTime());
+
+	  cal.setTime(new Date());
+	  cal.add(Calendar.DATE, +2);
+	  PartidaDto partida3 = dameUnaPartida(2,cal.getTime());
+
+	  cal.setTime(new Date());
+	  cal.add(Calendar.DATE, +3);
+	  PartidaDto partida4 = dameUnaPartida(3,cal.getTime());
 	  
 	  listaPartidas.add(partida1);	  
 	  listaPartidas.add(partida2);	  
@@ -81,9 +92,9 @@ private StaticsObjectDto crearObjetoDeStadisticas() {
 	return statics;
 }
 
-private PartidaDto dameUnaPartida(Integer partida) {
+private PartidaDto dameUnaPartida(Integer partida, Date fecha) {
 	PartidaDto partida1 = new PartidaDto();
-		  partida1.setFechaPartida(new Date());
+		  partida1.setFechaPartida(fecha);
 		  
 		  List<ModuloDto> listaModulos = new ArrayList<ModuloDto>();
 		  	ModuloControlDeVueltoDto mcdv1 = new ModuloControlDeVueltoDto();
