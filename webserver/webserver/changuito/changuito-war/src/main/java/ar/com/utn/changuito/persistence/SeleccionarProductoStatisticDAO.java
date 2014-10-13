@@ -3,7 +3,6 @@ package ar.com.utn.changuito.persistence;
 import ar.com.utn.changuito.architecture.persistence.AbstractGAEDAO;
 import ar.com.utn.changuito.architecture.persistence.ModelValidationException;
 import ar.com.utn.changuito.model.SeleccionarProductoStatistic;
-import ar.com.utn.changuito.model.Statistic;
 
 public class SeleccionarProductoStatisticDAO extends AbstractGAEDAO<SeleccionarProductoStatistic> {
 

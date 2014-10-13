@@ -13,13 +13,12 @@ public class ProductAction : MonoBehaviour {
        GameObject targetMessage = GameObject.Find("GameMessage");
        Boolean isTarget = gameObject.GetComponent<ProductProperties>().isTarget();
 
-
        if (isTarget)
        {
            //Producto seleccionado correctamente.
            targetMessage.GetComponent<UILabel>().text = this.okMessage;
            //Enviamos la estadistica. 
-           SeleccionarProductoStatistic result = new SeleccionarProductoStatistic(2,DateTime.Now.ToString(),ServicioSeleccionarProductos.failedProducts);
+           SeleccionarProductoStatistic result = new SeleccionarProductoStatistic(ServicioSeleccionarProductos.failedProducts, ServicioSeleccionarProductos.gameStart);
            SeleccionarProductoStatisticsService.Call(result,ServiceResult);
            NGUISomosUtils.setTildeProductoSeleccionado(ListadoSingleton.Instance.getTarget(),true);
            ListadoSingleton.Instance.cleanListadoTipoProductos();

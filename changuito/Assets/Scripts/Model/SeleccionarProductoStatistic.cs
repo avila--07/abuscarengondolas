@@ -2,36 +2,26 @@
 using System;
 
 
-public class SeleccionarProductoStatistic : SharedObject
+public class SeleccionarProductoStatistic : Statistic
 {
-    //ID session.
-    public int Id {
-		get { return GetInt("id"); }
-		set { Set ("id", value); }
-	}
-
-    //Hora y Fecha de juego.
-	public string GameDate {
-		get { return GetString ("gameDate"); }
-		set { Set ("gameDate", value); }
-	}
-    
-    // Hit.
+       
+    // Hits.
     public int FailedProducts
     {
         get { return GetInt("failedProducts"); }
         set { Set("failedProducts", value); }
     }
 
-    public SeleccionarProductoStatistic(int id, string gameDate, int failedProducts)
+    public SeleccionarProductoStatistic(int failedProducts, DateTime gameStart)
+        : base(gameStart)
 	{
-        Id = id;
-        GameDate = gameDate;
+        IdEvento = "fin_producto";
+        IdPantalla = SELECCION_PRODUCTOS;
         FailedProducts = failedProducts;
     }
 
-    public String ToString()
+    public SeleccionarProductoStatistic()
     {
-        return "id: " + this.Id + "- Time: " + this.GameDate + " - Eleccion " + this.FailedProducts;
+
     }
 }

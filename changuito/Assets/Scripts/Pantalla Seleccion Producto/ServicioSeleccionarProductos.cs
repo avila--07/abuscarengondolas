@@ -12,11 +12,13 @@ public class ServicioSeleccionarProductos: MonoBehaviour
     /// Guarda la cantidad de veces que el jugador se ha equivocado antes de seleccionar el correcto. Meramente estadistico.
     /// </summary>
     public static int failedProducts ;
+    public static DateTime gameStart;
 
     void Start()
     {
         failedProducts = 0;
-        
+        gameStart = DateTime.Now; 
+
         this.inicializarListadoProductos();
         
         this.inicializarTarget();
