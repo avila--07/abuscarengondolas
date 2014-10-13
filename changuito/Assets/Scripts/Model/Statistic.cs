@@ -2,8 +2,8 @@ using System;
 
 public class Statistic : SharedObject
 {
-	public string Id {
-		get { return GetString ("id"); }
+	public long Id {
+		get { return GetLong ("id"); }
 		set { Set ("id", value); }
 	}
 

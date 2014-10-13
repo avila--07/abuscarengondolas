@@ -42,6 +42,11 @@ public class SharedObject
 	{
 		return (int)_data [key];
 	}
+
+	public long GetLong (string key)
+	{
+		return (long)_data [key];
+	}
 	
 	public T GetSharedObject<T> (string key)
 		where T: SharedObject

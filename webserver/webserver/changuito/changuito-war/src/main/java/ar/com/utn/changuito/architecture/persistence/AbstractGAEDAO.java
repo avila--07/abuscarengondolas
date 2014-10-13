@@ -1,31 +1,18 @@
 package ar.com.utn.changuito.architecture.persistence;
 
-import java.util.*;
-import java.util.Map.Entry;
-
 import ar.com.utn.changuito.architecture.net.SharedObject;
 import ar.com.utn.changuito.architecture.process.IteratorTransform;
 import ar.com.utn.changuito.architecture.process.Retryable;
 import ar.com.utn.changuito.architecture.process.RetryableFuture;
 import ar.com.utn.changuito.architecture.process.RetryingExecutor;
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.FetchOptions;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.*;
+
+import java.util.*;
 
 public abstract class AbstractGAEDAO<T extends SharedObject> {
 
     private DatastoreService datastoreService;
     private Class<T> classType;
-
-    private DatastoreService getDatastoreService() {
-        if (datastoreService == null)
-            datastoreService = DatastoreServiceFactory.getDatastoreService();
-        return datastoreService;
-    }
 
     protected AbstractGAEDAO(final Class<T> classType) {
         this.classType = classType;
@@ -33,17 +20,23 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
 
     protected abstract String getGAEEntityKind();
 
+    protected abstract long getId(final T domainEntity);
+
     protected abstract void validateEntityModel(final T entityModel) throws ModelValidationException;
 
-    public T getEntityById(final String id) throws Exception {
+    public T getEntityById(final Long id) {
 
         final Key key = KeyFactory.createKey(getGAEEntityKind(), id);
         final Entity entity = RetryingExecutor.execute(4, 150, new RetryableFuture<Entity>() {
 
             private Entity entity;
 
-            public void run() throws Exception {
-                this.entity = getDatastoreService().get(key);
+            public void run() {
+                try {
+                    this.entity = getDatastoreService().get(key);
+                } catch (final EntityNotFoundException e) {
+                    throw new RuntimeException("Entity with kind [" + getGAEEntityKind() + "] and key [" + id + "] does not exists.", e);
+                }
             }
 
             public Entity getValue() {
@@ -54,7 +47,7 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
         return convertGAEEntityToEntityModel(entity);
     }
 
-    public Map<Long, T> getEntities(final List<Long> ids) throws Exception {
+    public Map<Long, T> getEntities(final List<Long> ids) {
 
         // TODO: hacer la lista que devuelve sea un iterator
         final Map<Key, Entity> entities = RetryingExecutor.execute(4, 150, new RetryableFuture<Map<Key, Entity>>() {
@@ -72,12 +65,12 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
 
         final Map<Long, T> domainEntities = new HashMap<Long, T>(entities.size());
 
-        for (final Entry<Key, Entity> entry : entities.entrySet())
+        for (final Map.Entry<Key, Entity> entry : entities.entrySet())
             domainEntities.put(entry.getKey().getId(), convertGAEEntityToEntityModel(entry.getValue()));
         return domainEntities;
     }
 
-    public Iterator<T> getEntities(final Query GAEQuery, final int limit) throws Exception {
+    public Iterator<T> getEntities(final Query GAEQuery, final int limit) {
 
         final String kind = getGAEEntityKind();
         final Iterable<Entity> entitiesIterator = RetryingExecutor.execute(4, 150, new RetryableFuture<Iterable<Entity>>() {
@@ -110,7 +103,6 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
         RetryingExecutor.execute(4, 150, new Retryable() {
 
             public void run() {
-
                 getDatastoreService().put(convertDomainEntityToGAEEntity(domainEntity));
             }
         });
@@ -127,7 +119,7 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
 
     private Entity convertDomainEntityToGAEEntity(final T domainEntity) {
 
-        final Entity entity = new Entity(getGAEEntityKind());
+        final Entity entity = new Entity(getGAEEntityKind(), getId(domainEntity));
 
         for (final String keyName : domainEntity.getKeys()) {
             entity.setProperty(keyName, domainEntity.get(keyName));
@@ -146,10 +138,16 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
 
         final SharedObject sharedObject = new SharedObject();
 
-        for (final Entry<String, Object> entry : entity.getProperties().entrySet()) {
+        for (final Map.Entry<String, Object> entry : entity.getProperties().entrySet()) {
             sharedObject.set(entry.getKey(), entry.getValue());
         }
         return sharedObject;
+    }
+
+    private DatastoreService getDatastoreService() {
+        if (datastoreService == null)
+            datastoreService = DatastoreServiceFactory.getDatastoreService();
+        return datastoreService;
     }
 
     private T getNewentityModelInstance() {

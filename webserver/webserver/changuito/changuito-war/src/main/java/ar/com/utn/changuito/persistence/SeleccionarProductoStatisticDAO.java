@@ -17,6 +17,11 @@ public class SeleccionarProductoStatisticDAO extends AbstractGAEDAO<SeleccionarP
     }
 
     @Override
+    protected long getId(final SeleccionarProductoStatistic domainEntity) {
+        return domainEntity.getId();
+    }
+
+    @Override
     protected void validateEntityModel(final SeleccionarProductoStatistic entityModel) throws ModelValidationException {
     	
     	//TODO: ver el tipo de la propiedad

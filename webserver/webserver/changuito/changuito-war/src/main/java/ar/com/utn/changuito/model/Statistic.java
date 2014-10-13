@@ -4,11 +4,11 @@ import ar.com.utn.changuito.architecture.net.SharedObject;
 
 public class Statistic extends SharedObject {
 
-    public String getId() {
-        return getString("id");
+    public Long getId() {
+        return getLong("id");
     }
 
-    public void setId(final String id) {
+    public void setId(final Long id) {
         set("id", id);
     }
 

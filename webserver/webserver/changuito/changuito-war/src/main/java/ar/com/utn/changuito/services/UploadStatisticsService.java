@@ -18,7 +18,12 @@ public class UploadStatisticsService extends GenericService<Statistic> {
         final SharedObject response = new SharedObject();
         response.set("result", statistic.getId());
 
-        new StatisticDAO().persist(statistic);
+        //pruebas
+//        StatisticDAO statisticDAO = new StatisticDAO();
+//        statisticDAO.persist(statistic);
+//
+//        Statistic entityById = statisticDAO.getEntityById(statistic.getId());
+//
 
         return response;
     }
