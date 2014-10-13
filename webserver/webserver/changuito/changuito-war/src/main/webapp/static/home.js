@@ -5,5 +5,6 @@ $("#configuration").on("click", function(){ $("#featured-wrapper").load("/config
 $("#partidas").on("click", function(){ $("#featured-wrapper").load("/partidas"); });
 $("#login").on("click", function(){ $("#featured-wrapper").load("/login") ;});
 $("#inicio").on("click", function(){ $("#featured-wrapper").load("/homefatures") ;});
+$("#about").on("click", function(){ $("#featured-wrapper").load("/about") ;});
 
 });
