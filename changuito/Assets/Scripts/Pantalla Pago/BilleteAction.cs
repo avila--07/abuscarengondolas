@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-public class Billete : MonoBehaviour
+public class BilleteAction : MonoBehaviour
 {
 
     public int valor;
@@ -22,12 +23,19 @@ public class Billete : MonoBehaviour
             NGUISomosUtils.showTextInScreen("Sustraendo", "-" + PagoStatus.pago.ToString());
             NGUISomosUtils.showTextInScreen("Resto", nuevoResto.ToString());
             NGUISomosUtils.showTextInScreen("GameMessageLabel", "¡Segui pagando tus productos!");
+
+            this.callPagoBillete();
         }
         else
         {
             NGUISomosUtils.showTextInScreen("Resto", "0");
             NGUISomosUtils.showTextInScreen("GameMessageLabel", "¡Muy bien! ¡Has pagado tus productos!");
+            
             System.Threading.Thread.Sleep(250);
+            
+            this.callPagoBillete();
+            this.callFinPago();        
+            
             if (ChanguitoConfiguration.ModuloControlVuelto)
                 Application.LoadLevel("PantallaControlVuelto");
             else
@@ -36,5 +44,21 @@ public class Billete : MonoBehaviour
                 Application.LoadLevel("PantallaFinal");
             }
         }
+    }
+
+    private void callFinPago()
+    {
+        PagoStatistic request = new PagoStatistic(ServicioPago.pagoStart);
+        PagoStatisticsService.Call(request, ServiceResult);
+    }
+
+    private void callPagoBillete(){
+        PagoStatistic requestBillete = new PagoStatistic(ServicioPago.pagoStart, valor);
+        PagoStatisticsService.Call(requestBillete, ServiceResult);
+    }
+
+    private void ServiceResult(PagoStatistic result, Exception exception)
+    {
+        // Debug.Log("Resultado servicio: " + ((result == null) ? "Fallo con [" + exception + "]" : result.ToString()));
     }
 }

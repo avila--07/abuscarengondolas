@@ -1,21 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using System;
 
 public class ServicioPago : MonoBehaviour 
 {
     ArrayList moneyInSuperiorScene = new ArrayList(3);
     ArrayList moneyInInferiorScene = new ArrayList(3);
-    
-    void Start () {
+    public static DateTime pagoStart;
 
+    void Start ()
+    {
+        this.initializeStadistics();
         PagoStatus.monto = ListadoSingleton.Instance.getTotalListado();
         this.loadMoney();
         this.initializeScreen();
         this.InitializePizarra();
 	}
-	
+
+    void initializeStadistics()
+    {
+        pagoStart = DateTime.Now;
+    }
+
     void InitializePizarra()
     {
         NGUISomosUtils.showTextInScreen("Minuendo", PagoStatus.monto.ToString());

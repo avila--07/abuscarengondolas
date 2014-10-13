@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class ServicioControlVuelto : MonoBehaviour {
     
@@ -12,26 +13,33 @@ public class ServicioControlVuelto : MonoBehaviour {
     private ArrayList botonesDesordenados = new ArrayList(4);
     private static int MAX_VUELTOS = 4;
 
+    public static int failedVueltos;
+    public static DateTime cvStart;
+
     void Start () {
+        this.intializeStadistics();
         this.inicitializeVariablesOfPantallaPago();
         this.initializeScreenMessage();
         this.initializeVueltos();
         this.initializeBotones();
 	}
 	
+    private void intializeStadistics(){
+        failedVueltos = 0;
+        cvStart = DateTime.Now;
+    }
+
     private void inicitializeVariablesOfPantallaPago(){
 
         this.monto = PagoStatus.monto;
         this.pago = PagoStatus.pago;
     }
 
-
     private void initializeScreenMessage(){
         
         NGUISomosUtils.showTextInScreen("CVMontoPagoLabel", monto.ToString());
         NGUISomosUtils.showTextInScreen("CVPagoLabel", pago.ToString());
     }
-
 
     private void initializeBotones()
     {
@@ -55,8 +63,8 @@ public class ServicioControlVuelto : MonoBehaviour {
     private void setElCorrecto(GameObject vueltoObject, int vuelto)
     {
         if (this.vueltoCorrecto == vuelto)
-            vueltoObject.GetComponent<Vuelto>().soyElCorrecto = true;
-        else vueltoObject.GetComponent<Vuelto>().soyElCorrecto = false;
+            vueltoObject.GetComponent<VueltoAction>().soyElCorrecto = true;
+        else vueltoObject.GetComponent<VueltoAction>().soyElCorrecto = false;
     }
 
 

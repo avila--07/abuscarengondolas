@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class SuperMarket : MonoBehaviour
+public class ServicioSeleccionarGondolas : MonoBehaviour
 {
 	public static List<UI2DSprite> Gondolas = new List<UI2DSprite> (10);
-
+    public static int failedGondola;
+    public static DateTime gondolaStart;
 	void Start ()
 	{
 		Gondolas.Clear();
+        initializeStatistics();
 
 		if (!seleccionFinalizada ()) {
 			ListadoSingleton.Instance.initializeListado ();
@@ -20,6 +22,12 @@ public class SuperMarket : MonoBehaviour
 			finalizarJuego ();
 		}
 	}
+
+    private void initializeStatistics()
+    {
+        failedGondola = 0;
+        gondolaStart = DateTime.Now;
+    }
 
 	private void finalizarJuego ()
 	{

@@ -17,7 +17,8 @@ public class ChanguitoDragable : MonoBehaviour
 		UI2DSprite changuito = gameObject.GetComponent<UI2DSprite> ();
 		bool findGondola = false;
 
-		foreach (UI2DSprite gondola in SuperMarket.Gondolas) {
+        foreach (UI2DSprite gondola in ServicioSeleccionarGondolas.Gondolas)
+        {
 				
 			if (gondola.GetComponent<GondolaProperties> ().ProductType == ListadoSingleton.Instance.getTargetType () &&
 				ColliderUtils.IsFullyInside (gondola, changuito)) {
@@ -28,11 +29,12 @@ public class ChanguitoDragable : MonoBehaviour
 		}
 
 		if (findGondola) {		
+            this.callFinGondola();
 			NGUISomosUtils.showTextInScreen ("SGStatusLabel", "¡Excelente!");
-
 			Invoke ("GoToNextScene", 1F);
 		} else {
-			NGUISomosUtils.showTextInScreen ("SGStatusLabel", "Aquí no está.\n ¡Busquemos en otra góndola!");
+            ServicioSeleccionarGondolas.failedGondola++;
+            NGUISomosUtils.showTextInScreen ("SGStatusLabel", "Aquí no está.\n ¡Busquemos en otra góndola!");
 		}
 	}
 
@@ -40,4 +42,16 @@ public class ChanguitoDragable : MonoBehaviour
 	{		
 		Application.LoadLevel ("PantallaSeleccionProductos");
 	}
+
+    private void callFinGondola()
+    {
+        SeleccionarGondolaStatistic request = new SeleccionarGondolaStatistic(ServicioSeleccionarGondolas.failedGondola,ServicioSeleccionarGondolas.gondolaStart);
+        SeleccionarGondolaStatisticsService.Call(request, ServiceResult); 
+    }
+
+    private void ServiceResult(SeleccionarGondolaStatistic result, Exception exception)
+    {
+        // Debug.Log("Resultado servicio: " + ((result == null) ? "Fallo con [" + exception + "]" : result.ToString()));
+    }
+
 }
