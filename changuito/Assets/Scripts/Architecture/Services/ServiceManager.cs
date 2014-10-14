@@ -1,25 +1,30 @@
 using UnityEngine;
 using System.Collections;
 
-public class ServiceManager
+public class ServiceManager : MonoBehaviour
 {
-	public static readonly ServiceManager Instance = new ServiceManager ();
-	private GameObject _services;
+	public static readonly ServiceManager Instance = ServiceManager.Build ();
 
 	private ServiceManager ()
 	{
-		_services = new GameObject ();
+		DontDestroyOnLoad (this);
+	}
+
+	private static ServiceManager Build ()
+	{
+		GameObject gameObject = new GameObject ();
+		gameObject.name = "ServiceManager";
+		ServiceManager serviceManager = gameObject.AddComponent<ServiceManager> ();
+		serviceManager.transform.parent = gameObject.transform;
+		return serviceManager;
 	}
 
 	public Service NewService (string serviceId)
 	{
-        //REVIEW: parche temporal por problemas al volver a la pantalla original. Ver de corregir de una mejor manera de ser necesario.
-        if(_services == null)
-            _services = new GameObject();
-
-		Service service = _services.AddComponent<Service> ();
-		service.transform.parent = _services.transform;
-		service.name = service.RequestId + "_" + serviceId;
-		return service.WithURL (ChanguitoConfiguration.ServerURL + "/ChanguitoServices/" + serviceId);
+		GameObject gameObject = new GameObject ();
+		Service service = gameObject.AddComponent<Service> ();
+		service.transform.parent = transform;
+		service.name = serviceId + "_" + service.RequestId;
+		return service.WithURL (ChanguitoConfiguration.ServerURL + "/" + serviceId);
 	}	
 }

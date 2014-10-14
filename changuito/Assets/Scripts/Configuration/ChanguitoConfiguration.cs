@@ -7,8 +7,8 @@ public class ChanguitoConfiguration : MonoBehaviour
 	public static bool ModuloPago = false;
     public static bool ModuloControlVuelto = false;
     public static int CantidadGondolas=2;
-	//public static string ServerURL = "http://acomprarconchanguito.appspot.com";
-	public static string ServerURL = "http://localhost:80";
+	//public static string ServerURL = "http://acomprarconchanguito.appspot.com/ChanguitoServices";
+	public static string ServerURL = "http://localhost:80/ChanguitoServices";
     public static DateTime gameStartDate;
 
     public static int getCantidadModulos()

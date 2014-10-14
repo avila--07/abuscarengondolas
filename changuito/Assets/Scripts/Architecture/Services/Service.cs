@@ -102,6 +102,7 @@ public class Service : MonoBehaviour
 		if (remove) {
 			_WWW.Dispose ();
 			_WWW = null;
+			Destroy (gameObject);
 			Destroy (this);
 		}
 	}
