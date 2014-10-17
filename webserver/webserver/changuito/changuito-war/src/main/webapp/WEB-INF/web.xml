@@ -10,11 +10,6 @@
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
 
-    <servlet-mapping>
-        <servlet-name>home</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
-
 	<servlet>
         <servlet-name>configuration</servlet-name>
         <servlet-class>ConfigurationServlet</servlet-class>
