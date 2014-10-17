@@ -16,6 +16,7 @@ import statics.ModuloSeleccionGondolaDto;
 import statics.ModuloSeleccionProductoDto;
 import statics.PartidaDto;
 import statics.StaticsObjectDto;
+import ar.com.utn.changuito.model.JuegoStatistic;
 
 import com.google.gson.Gson;
 
@@ -47,7 +48,8 @@ public class StaticsServlet extends HttpServlet {
 
   private void dispatchInit(HttpServletRequest req, HttpServletResponse resp) {
 	  Gson gson = new Gson();
-	  StaticsObjectDto statics = crearObjetoDeStadisticas();
+//	  StaticsObjectDto statics = crearObjetoDeStadisticas();
+	  StaticsObjectDto statics = crearVerdaderoObjetoDeStadisticas();
 	  String response = gson.toJson(statics);
 	  
 	  resp.setContentType("application/json");
@@ -59,6 +61,32 @@ public class StaticsServlet extends HttpServlet {
 	  }
 	  
   }
+
+private StaticsObjectDto crearVerdaderoObjetoDeStadisticas() {
+	long IDJUEGO = 1L;
+	long USUARIO = 1L;
+//	JuegoStatistic.java
+//	ControlVueltoStatistic.java
+//	PagoStatistic.java
+//	SeleccionarGondolaStatistic.java
+//	SeleccionarProductoStatistic.java
+	JuegoStatistic juego = getAJuego(IDJUEGO, USUARIO);
+	
+	return null;
+	
+}
+
+private JuegoStatistic getAJuego(long IDJUEGO, long USUARIO) {
+	JuegoStatistic juego = new JuegoStatistic();
+		juego.setId(IDJUEGO);
+		juego.setCantidadModulos(4);
+		juego.setCantidadGondolas(4);
+		juego.setIdUsuario(USUARIO);
+		juego.setIdPartida(IDJUEGO);
+		juego.setPlayTime("17/10/14 21:00");
+		juego.setIdEvento("Inicio");
+	return juego;	
+}
 
 private StaticsObjectDto crearObjetoDeStadisticas() {
 	StaticsObjectDto statics = new StaticsObjectDto();
