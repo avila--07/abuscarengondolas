@@ -61,9 +61,8 @@ public class ServicioSeleccionarGondolas : MonoBehaviour
         
 		int gondolaPosition;
 		for (gondolaPosition = 0; gondolaPosition < ChanguitoConfiguration.CantidadGondolas; gondolaPosition++) {
-			GameObject gondola = (GameObject)Resources.Load ("Gondola");
 			String name = ListadoSingleton.Instance.getLabelOfGondolaType (gondolaPosition);
-			gondola.GetComponent<UILabel> ().text = name;
+			GameObject gondola = (GameObject)Resources.Load (name);
 			gondola.name = name; 
 			gondola.GetComponent<GondolaProperties> ().ProductType = (int)ListadoSingleton.Instance.getGondolasSeleccionadas () [gondolaPosition];
 			Gondolas.Add (NGUITools.AddChild (gondolasOnScene, gondola).GetComponent<UI2DSprite> ());
