@@ -4,31 +4,191 @@ var testObjectXAxis ;
 
 $(function() {
 ////  $( "#tabs" ).tabs();
-//	var createStats = function () { 
-//	    $('#container').highcharts({
-//	        chart: {
-//	            type: 'bar'
-//	        },
-//	        title: {
-//	            text: 'Fruit Consumption'
-//	        },
-//	        xAxis: {
-//	            categories: ['Apples', 'Bananas', 'Oranges']
-//	        },
-//	        yAxis: {
-//	            title: {
-//	                text: 'Fruit eaten'
-//	            }
-//	        },
-//	        series: [{
-//	            name: 'Jane',
-//	            data: [1, 0, 4]
-//	        }, {
-//	            name: 'John',
-//	            data: [5, 7, 3]
-//	        }]
-//	    });
-//	};
+	//containerSelecProducto, containerModPago,containerModVuelto, containerGenerales
+	var createStatsSelecGondolas = function () { 
+	    $('#containerSelecGondolas').highcharts({
+	        chart: {
+	            type: 'column'
+	        },
+	        title: {
+	            text: 'Desempeño en Selección de Góndolas'
+	        },
+	        xAxis: {
+	            categories: ['Partida 1', 'Partida 2', 'Partida 3', 'Partida 4', 'Partida 5']
+	        },
+	        yAxis: {
+	            title: {
+	                text: 'Cantidad'
+	            }
+	        },
+	        series: [{
+	            name: 'Aciertos',
+	            data: [1, 0, 4, 8, 6],
+	            color: 'green'
+	        }, {
+	            name: 'Errores',
+	            data: [5, 7, 3, 3, 5],
+	            color: 'red'
+	        }]
+	    });
+	};
+	
+	var createStatsSelecProducto = function () { 
+		$('#containerSelecProducto').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Desempeño en Selección de Góndolas'
+			},
+			xAxis: {
+				categories: ['Partida 1', 'Partida 2', 'Partida 3', 'Partida 4', 'Partida 5']
+			},
+			yAxis: {
+				title: {
+					text: 'Cantidad'
+				}
+			},
+			series: [{
+				name: 'Aciertos',
+				data: [2, 3, 4, 8, 6],
+				color: 'green'
+			}, {
+				name: 'Errores',
+				data: [5, 4, 3, 3, 2],
+				color: 'red'
+			}]
+		});
+	};
+	
+	var createStatsModVuelto = function () { 
+		$('#containerModVuelto').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Desempeño en Selección de Góndolas'
+			},
+			xAxis: {
+				categories: ['Partida 1', 'Partida 2', 'Partida 3', 'Partida 4', 'Partida 5']
+			},
+			yAxis: {
+				title: {
+					text: 'Cantidad'
+				}
+			},
+			series: [{
+				name: 'Opción 1',
+				data: [2, 1, 4, 8, 6],
+				color:'yellow'
+			}, {
+				name: 'Opción 2',
+				data: [5, 4, 1, 3, 2],
+				color:'blue'
+			}
+			, {
+				name: 'Opción 3',
+				data: [1, 4, 3, 3, 2],
+				color:'orange'
+			}
+			, {
+				name: 'Opción 4',
+				data: [5, 4, 3, 3, 1],
+				color:'brown'
+			}
+			]
+		});
+	};
+	
+	var createStatsSelecProducto2 = function () { 
+		$('#containerSelecProducto2').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Desempeño en Selección de Producto'
+			},
+			xAxis: {
+	            type: 'category'
+			},
+			yAxis: {
+				title: {
+					text: 'Cantidad'
+				}
+			},
+
+	        legend: {
+	            enabled: false
+	        },
+
+	        plotOptions: {
+	            series: {
+	                borderWidth: 0,
+	                dataLabels: {
+	                    enabled: true
+	                }
+	            }
+	        },
+	        
+			series:[ {
+				name:'Partidas',
+	            colorByPoint: true,
+	            data: [
+				{
+					name: 'Partida 1',
+					y: 2,
+					color: 'green',
+				    drilldown: 'aciertos1'
+				
+				},{
+					name: 'Partida 2',
+					y: 3,
+					color: 'green',
+					drilldown: 'aciertos2'
+							
+					},{
+						name: 'Partida 3',
+						y: 5,
+						color: 'green',
+						drilldown: 'aciertos3'
+								
+					}, {
+						name: 'Partida 4',
+						y: 8,
+						color: 'green',
+						drilldown: 'aciertos4'
+									
+					},{
+						name: 'Partida 5',
+						y:4,
+						color: 'green',
+						drilldown: 'aciertos5'
+					}
+				]
+				}
+			],
+			 drilldown: {
+		            series: [{
+		                id: 'aciertos1',
+		                data: [
+		                    ['Manzana', 1],
+		                    ['Chocolate', 1],
+		                    ['Tomate', 1],
+		                    ['Agua', 1],
+		                    ['Jabón', 1]
+		                ]
+		            }, {
+		                id: 'errores',
+		                data: [
+		                    ['Banana', 4],
+		                    ['Galletitas', 1],
+		                    ['Lechuga', 1],
+		                    ['Gaseosa', 3],
+		                ]
+		      }]
+			}
+		});
+	};
 
 	var createChanguitoStats = function (data) { 
 		var objectSeries = getSeries(data);
@@ -60,7 +220,7 @@ $(function() {
 	
   var getGamesDate = function(info){
 	var toReturn = [] ;
-
+	var i;
 	for (i = 0; i < info.listaPartidas; i++) { 
 		
 		 toReturn.push( info.listaPartidas[i].fechaPartida );
@@ -83,7 +243,7 @@ $(function() {
 	var arraySeries = [];
 	console.log("In getSeries: "+ info.listaPartidas );
 	var partidas = info.listaPartidas;  
-	
+	var i;
 	for (i = 0; i < partidas.length; i++) { 
 		
 		arraySeries.push(getMeAGame(partidas[i]));
@@ -100,13 +260,17 @@ $(function() {
 	  data: { axn:"init" }
   }).done(function( msg ) {
     console.log( msg );
-    tiempoJugado = msg;
-    createChanguitoStats(msg);
+    if (msg!= null){
+    	tiempoJugado = msg;
+    	createChanguitoStats(msg);
+    }
   
   });
 
   var init = function(){
-//	  createStats();
+	  createStatsSelecGondolas();
+	  createStatsSelecProducto();
+	  createStatsModVuelto();
   }
   
   init();
