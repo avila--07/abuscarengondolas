@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d26313e3030dd9346b8dba48d3d712e8
+guid: 7d228dea01827444a8281b9a5a5a13fe
 TextureImporter:
   fileIDToRecycleName:
     21300000: dentifrico
@@ -26,9 +26,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
