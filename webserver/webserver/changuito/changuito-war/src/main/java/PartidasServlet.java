@@ -15,8 +15,6 @@ public class PartidasServlet extends HttpServlet {
 
 	try {
 		
-//		UserService userService = UserServiceFactory.getUserService();
-//		if( userService.isUserLoggedIn() ){
 //		if(isLogued(req)){
 			resp.setCharacterEncoding("UTF-8");
 			String gameSelected = req.getParameter("id");
@@ -30,9 +28,6 @@ public class PartidasServlet extends HttpServlet {
 //			req.getRequestDispatcher("/login.jsp").forward(req, resp);
 //		}
 		
-//		}else{
-//			userService.createLoginURL("/");
-//		}
 	
 	} catch (ServletException e) {
 		e.printStackTrace();
