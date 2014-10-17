@@ -26,7 +26,7 @@ public class StaticsServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
       throws IOException {
-
+	  
 	try {
 		
 		String axn = req.getParameter("axn");
