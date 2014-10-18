@@ -18,7 +18,6 @@ public class TestServices : MonoBehaviour
 	void TestTrueServerCall ()
 	{
 		Statistic statistic = new Statistic ();
-		statistic.Id = 123L;
 		UploadStatisticsService.Call (statistic, ServiceResult);
 	}
 	
@@ -92,7 +91,6 @@ public class TestServices : MonoBehaviour
 	void TestModelClassSharedObject()
 	{
 		Statistic statistic = new Statistic();
-		statistic.Id = 123L;
 
 		Debug.Log("Statistic: " + statistic);
 
