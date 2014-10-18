@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CommonsSomosUtils {
+public static class CommonsSomosUtils {
 
 
     public static int COTA_VUELTO_MAX = 15;
@@ -19,6 +19,15 @@ public class CommonsSomosUtils {
     public static int generateRandomValue(int inicial, int final)
     {
         return Random.Range(inicial,final);
+    }
+
+    public static void setActiveRecursively(this GameObject go, bool ac)
+    {
+         foreach (Transform child in go.transform)
+        {
+            child.gameObject.SetActive(ac);
+        }
+
     }
     
 }
