@@ -4,12 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ar.com.utn.changuito.model.SeleccionarGondolaStatistic;
-import ar.com.utn.changuito.services.ControlVueltoStatisticsService;
-import ar.com.utn.changuito.services.JuegoStatisticsService;
-import ar.com.utn.changuito.services.PagoStatisticsService;
-import ar.com.utn.changuito.services.SeleccionarGondolaStatisticsService;
-import ar.com.utn.changuito.services.SeleccionarProductoStatisticsService;
-import ar.com.utn.changuito.services.UploadStatisticsService;
+import ar.com.utn.changuito.services.*;
 
 /**
  * Created by fernando on 27/09/2014.
@@ -53,6 +48,7 @@ public final class ServiceLocator {
         registerService(new PagoStatisticsService());
         registerService(new ControlVueltoStatisticsService());
         registerService(new SeleccionarGondolaStatisticsService());
+        registerService(new GameLoginService());
     }
 
     private void registerService(final AbstractService service) {

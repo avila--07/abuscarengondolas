@@ -1,8 +1,7 @@
 package ar.com.utn.changuito.persistence;
 
 import ar.com.utn.changuito.architecture.persistence.AbstractGAEDAO;
-import ar.com.utn.changuito.architecture.persistence.ModelValidationException;
-import ar.com.utn.changuito.model.JuegoStatistic;
+import ar.com.utn.changuito.architecture.persistence.DomainModelValidationException;
 import ar.com.utn.changuito.model.PagoStatistic;
 
 public class PagoStatisticDAO extends AbstractGAEDAO<PagoStatistic> {
@@ -17,16 +16,11 @@ public class PagoStatisticDAO extends AbstractGAEDAO<PagoStatistic> {
     }
 
     @Override
-    protected long getId(final PagoStatistic domainEntity) {
-        return domainEntity.getId();
-    }
-
-    @Override
-    protected void validateEntityModel(final PagoStatistic entityModel) throws ModelValidationException {
+    protected void validateDomainEntity(final PagoStatistic entityModel) throws DomainModelValidationException {
     	
     	//TODO: ver el tipo de la propiedad
         if (entityModel.getId() < 0)
-            throw new ModelValidationException("Id cannot be negative");
+            throw new DomainModelValidationException("Id cannot be negative");
     }
 
 }

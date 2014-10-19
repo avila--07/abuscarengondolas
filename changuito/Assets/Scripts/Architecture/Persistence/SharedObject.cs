@@ -33,6 +33,14 @@ public class SharedObject
 		return MiniJSON.Json.Serialize (_data);
 	}
 	
+	public bool GetBool (string key)
+	{
+		object value;
+		if (!_data.TryGetValue (key, out value))
+			return false;
+		return Convert.ToBoolean (value);
+	}
+
 	public double GetDouble (string key)
 	{
 		return (double)_data [key];

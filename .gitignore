@@ -3,6 +3,7 @@ changuito/obj
 changuito/*_Data
 changuito/Temp
 changuito/*.exe
+changuito/*.data
 
 *.sln
 *.userprefs
