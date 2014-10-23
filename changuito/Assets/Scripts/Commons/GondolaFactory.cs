@@ -18,6 +18,7 @@ using System.Collections.Generic;
 public class GondolaFactory{
 
     public static int MAX_PRODUCTOS_X_TIPO = 4;
+    public static int MAX_PRODUCTOS = 6;
 
     public static int VERDURAS = 0;
     public static int FRUTAS = 1;

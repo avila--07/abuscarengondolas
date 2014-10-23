@@ -5,7 +5,7 @@ using System;
 
 public class ServicioSeleccionarGondolas : MonoBehaviour
 {
-	public static List<UI2DSprite> Gondolas = new List<UI2DSprite> (10);
+    public static List<UI2DSprite> Gondolas = new List<UI2DSprite>(GondolaFactory.MAX_PRODUCTOS);
     public static int failedGondola;
     public static DateTime gondolaStart;
 	void Start ()

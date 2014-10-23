@@ -10,6 +10,8 @@ public class ListadoSingleton
     /// </summary>
     public static int PosicionActual = 0;
 
+    public static int MAX_LISTADO = 3;
+
     public static GameObject ProductTarget;
 
 	public List<GameObject> ListadoProductos = new List<GameObject>(ChanguitoConfiguration.CantidadGondolas);
@@ -64,6 +66,7 @@ public class ListadoSingleton
     public void initializeListado( )
     {
         GameObject grid = GameObject.Find("SGListadoGrid");
+        //Si no inició el listado (primera vez) lo inicializa.
         if (PosicionActual == 0) { 
            
             this.initializeGondolas();
@@ -77,21 +80,42 @@ public class ListadoSingleton
                     Debug.LogError("El prefab " + (string)GondolaFactory.getGondola(tipoGondola)[producto] + " no existe" );
                 this.initializeProduct(productObject, tipoGondola);
                 ListadoProductos.Add(productObject);
-                NGUITools.AddChild(grid, productObject);
-            }
-        }
-        else
-        {
-            foreach(GameObject producto in ListadoProductos)
-            {
-                NGUISomosUtils.setLabelProductos(producto, false);
-                NGUITools.AddChild(grid, producto);
             }
         }
 
+        this.showListado(grid);
+                
         grid.GetComponent<UIGrid>().Reposition();
         this.showTarget();  
     }
+
+    private void showListado(GameObject grid)
+    {
+        //Corto por la cantidad maxima permitida a mostrar ...
+        if (PosicionActual < MAX_LISTADO)
+        {   //En el caso de que sea menor la cantidad a mostrar ...
+            if (ChanguitoConfiguration.CantidadGondolas < MAX_LISTADO)
+                this.showSomeProductsInListado(grid, 0, ChanguitoConfiguration.CantidadGondolas);
+            else
+                this.showSomeProductsInListado(grid, 0, MAX_LISTADO);
+        }
+        else
+        {
+            this.showSomeProductsInListado(grid, MAX_LISTADO, ChanguitoConfiguration.CantidadGondolas);
+        }
+    }
+
+    private void showSomeProductsInListado(GameObject grid,int ini, int fin)
+    {
+        for (int i = ini; i < fin; i++)
+        {
+            GameObject producto = ListadoProductos[i];
+            NGUISomosUtils.setLabelProductos(producto, false);
+            NGUITools.AddChild(grid, producto);
+        }
+    }
+
+
 
     private void initializeProduct(GameObject productObject, int tipoGondola)
     {
