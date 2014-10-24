@@ -11,6 +11,11 @@ public class ChanguitoConfiguration : MonoBehaviour
 	public static string ServerURL = "http://localhost:80/ChanguitoServices";
     public static DateTime gameStartDate;
 
+    public static String GONDOLAS_PATH = "Prefabs/Gondolas/";
+    public static String PRODUCTOS_PATH = "Prefabs/Productos/";
+    public static String BOTONESVUELTO_PATH = "Prefabs/BotonesVuelto/";
+    public static String BILLETES_PATH = "Prefabs/Billetes/";
+
     public static int getCantidadModulos()
     {
         //REVIEW: No haga esto en su casa :P

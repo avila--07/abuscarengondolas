@@ -75,7 +75,7 @@ public class ListadoSingleton
             {
                 int tipoGondola = (int)gondolasSeleccionadas[i];
                 int producto = CommonsSomosUtils.generateRandomValue(0, GondolaFactory.MAX_PRODUCTOS_X_TIPO);
-                GameObject productObject = (GameObject)Resources.Load((string)GondolaFactory.getGondola(tipoGondola)[producto]);
+                GameObject productObject = (GameObject)Resources.Load(ChanguitoConfiguration.PRODUCTOS_PATH + (string)GondolaFactory.getGondola(tipoGondola)[producto]);
                 if (productObject == null)
                     Debug.LogError("El prefab " + (string)GondolaFactory.getGondola(tipoGondola)[producto] + " no existe" );
                 this.initializeProduct(productObject, tipoGondola);

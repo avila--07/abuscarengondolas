@@ -49,7 +49,7 @@ public class ServicioControlVuelto : MonoBehaviour {
 
         foreach (string boton in this.botonesDesordenados)
         {
-            GameObject loadedPrefab = Resources.Load<GameObject>(boton);
+            GameObject loadedPrefab = Resources.Load<GameObject>(ChanguitoConfiguration.BOTONESVUELTO_PATH + boton);
             int vuelto = (int)vueltosDesordenados[posicionVueltos];
             loadedPrefab.GetComponent<UILabel>().text = vuelto.ToString();
             setElCorrecto(loadedPrefab, vuelto);
