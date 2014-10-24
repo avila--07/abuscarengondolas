@@ -7,7 +7,7 @@ public class Salir : MonoBehaviour {
     void Start()
     {
         JuegoStatistic result = new JuegoStatistic(ChanguitoConfiguration.gameStartDate);
-        JuegoStaticsService.Call(result, ServiceResult);
+		UploadStatisticsService.Call(result, ServiceResult);
     }
 
 
@@ -19,7 +19,7 @@ public class Salir : MonoBehaviour {
         }
 	}
 
-    private void ServiceResult(JuegoStatistic result, Exception exception)
+    private void ServiceResult(SharedObject result, Exception exception)
     {
         // Debug.Log("Resultado servicio: " + ((result == null) ? "Fallo con [" + exception + "]" : result.ToString()));
     }

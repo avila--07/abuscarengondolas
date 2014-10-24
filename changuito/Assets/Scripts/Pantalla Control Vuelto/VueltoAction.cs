@@ -25,10 +25,10 @@ public class VueltoAction : MonoBehaviour {
     private void callFinCV()
     {
         ControlVueltoStatistic request = new ControlVueltoStatistic(ServicioControlVuelto.cvStart, ServicioControlVuelto.failedVueltos);
-        ControlVueltoStatisticsService.Call(request, ServiceResult);
+        UploadStatisticsService.Call(request, ServiceResult);
     }
 
-    private void ServiceResult(ControlVueltoStatistic result, Exception exception)
+    private void ServiceResult(SharedObject result, Exception exception)
     {
         // Debug.Log("Resultado servicio: " + ((result == null) ? "Fallo con [" + exception + "]" : result.ToString()));
     }

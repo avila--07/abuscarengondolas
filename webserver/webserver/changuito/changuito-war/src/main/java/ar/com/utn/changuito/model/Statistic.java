@@ -13,7 +13,7 @@ public class Statistic extends SharedObject {
     public void setId(final Long id) {
         set("id", id);
     }
-    
+
     public void setGameDate(final String gameDate){
 		set("gameDate", gameDate);
 	}
@@ -41,6 +41,7 @@ public class Statistic extends SharedObject {
 	public int getIdPantalla(){
 		return getInt("idPantalla"); 
 	}
+
 	public void setIdPantalla(final int idPantalla){
 		set("idPantalla",idPantalla); 
 	}

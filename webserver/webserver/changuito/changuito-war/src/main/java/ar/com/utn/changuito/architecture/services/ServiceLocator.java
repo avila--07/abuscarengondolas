@@ -43,11 +43,6 @@ public final class ServiceLocator {
 
         // Here you must register all game services
         registerService(new UploadStatisticsService());
-        registerService(new SeleccionarProductoStatisticsService());
-        registerService(new JuegoStatisticsService());
-        registerService(new PagoStatisticsService());
-        registerService(new ControlVueltoStatisticsService());
-        registerService(new SeleccionarGondolaStatisticsService());
         registerService(new GameLoginService());
     }
 

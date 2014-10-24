@@ -49,15 +49,15 @@ public class BilleteAction : MonoBehaviour
     private void callFinPago()
     {
         PagoStatistic request = new PagoStatistic(ServicioPago.pagoStart);
-        PagoStatisticsService.Call(request, ServiceResult);
+		UploadStatisticsService.Call(request, ServiceResult);
     }
 
     private void callPagoBillete(){
         PagoStatistic requestBillete = new PagoStatistic(ServicioPago.pagoStart, valor);
-        PagoStatisticsService.Call(requestBillete, ServiceResult);
+		UploadStatisticsService.Call(requestBillete, ServiceResult);
     }
 
-    private void ServiceResult(PagoStatistic result, Exception exception)
+    private void ServiceResult(SharedObject result, Exception exception)
     {
         // Debug.Log("Resultado servicio: " + ((result == null) ? "Fallo con [" + exception + "]" : result.ToString()));
     }

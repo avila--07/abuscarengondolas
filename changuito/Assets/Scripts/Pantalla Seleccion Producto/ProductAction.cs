@@ -19,7 +19,7 @@ public class ProductAction : MonoBehaviour {
            targetMessage.GetComponent<UILabel>().text = this.okMessage;
            //Enviamos la estadistica. 
            SeleccionarProductoStatistic result = new SeleccionarProductoStatistic(ServicioSeleccionarProductos.failedProducts, ServicioSeleccionarProductos.gameStart);
-           SeleccionarProductoStatisticsService.Call(result,ServiceResult);
+			UploadStatisticsService.Call(result,ServiceResult);
            NGUISomosUtils.setTildeProductoSeleccionado(ListadoSingleton.Instance.getTarget(),true);
            ListadoSingleton.Instance.cleanListadoTipoProductos();
            ListadoSingleton.PosicionActual++;
@@ -38,7 +38,7 @@ public class ProductAction : MonoBehaviour {
     }
 
 
-    private void ServiceResult(SeleccionarProductoStatistic result, Exception exception)
+    private void ServiceResult(SharedObject result, Exception exception)
     {
        // Debug.Log("Resultado servicio: " + ((result == null) ? "Fallo con [" + exception + "]" : result.ToString()));
     }

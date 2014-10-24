@@ -12,7 +12,7 @@ public class Statistic : SharedObject
     public int SELECCION_PRODUCTOS = 2;
     public int PAGO = 3;
     public int CV = 4;
-    
+   
     public long IdPartida {
 		get { return GetLong ("idpartida"); }
 		set { Set ("idPartida", value); }
