@@ -3,15 +3,12 @@ using System.Collections;
 
 public class InitGame : MonoBehaviour {
 
-	public GameObject btnPlay;
-
 	void Start () {
 
-		User user = User.Current();
-		if (user == null)
+        User user = User.Current();
+        if (user == null)
 		{
-			btnPlay.gameObject.SetActive(true);
-			Destroy(gameObject);
+            Application.LoadLevel("PantallaInicial");
 			return;
 		}
 
@@ -21,12 +18,10 @@ public class InitGame : MonoBehaviour {
 				Debug.LogError("Error en el login: "  + exception);
 				return;
 			}
-
 			User.SaveCurrent(updatedUser);
 		});
+
+        Application.LoadLevel("PantallaInicial");
 	}
 	
-	void Update () {
-	
-	}
 }
