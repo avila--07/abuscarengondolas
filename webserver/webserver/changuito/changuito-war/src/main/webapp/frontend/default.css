@@ -56,7 +56,7 @@ a:hover
 .container
 {
 	margin: 0px auto;
-	width: 1200px;
+	width: 900px;
 }
 
 /*********************************************************************************/
@@ -116,7 +116,7 @@ ul.style1 li
 {
 	overflow: hidden;
 	display: block;
-	padding: 2.80em 0em;
+	padding: 1em 0em;
 	border-top: 1px solid #D1CFCE;
 }
 
@@ -366,7 +366,7 @@ ul.contact li a.icon-rss:before
 	#header-wrapper
 	{
 		overflow: hidden;
-		padding: 5em 0em 0em 0em;
+		padding: 1em 0em 0em 0em;
 		background: #FFC000 url(images/overlay.png) repeat;
 	}
 
@@ -389,7 +389,7 @@ ul.contact li a.icon-rss:before
 
 	#logo
 	{
-		padding: 5em 0em;
+		padding: 1em 0em;
 		text-align: center;
 	}
 	
@@ -601,7 +601,7 @@ ul.contact li a.icon-rss:before
 #copyright
 {
 	overflow: hidden;
-	padding: 5em 0em;
+	padding: 1em 0em;
 	border-top: 1px solid rgba(255,255,255,0.08);
 }
 
@@ -642,7 +642,7 @@ ul.contact li a.icon-rss:before
 #featured-wrapper
 {
 	overflow: hidden;
-	padding: 10em 0em;
+	padding: 0em 0em;
 	background: #FFF;
 	text-align: center;
 }
