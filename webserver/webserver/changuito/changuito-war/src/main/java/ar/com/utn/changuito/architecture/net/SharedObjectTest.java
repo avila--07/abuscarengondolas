@@ -1,6 +1,6 @@
 package ar.com.utn.changuito.architecture.net;
 
-import ar.com.utn.changuito.model.Statistic;
+import ar.com.utn.changuito.model.statistics.Statistic;
 
 public class SharedObjectTest {
 

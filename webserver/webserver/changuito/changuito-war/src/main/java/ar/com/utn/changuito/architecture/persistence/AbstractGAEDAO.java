@@ -73,7 +73,7 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
         return domainEntities;
     }
 
-    public Iterator<T> getEntities(final Query.Filter filter, final int limit) {
+    public Iterable<T> getEntities(final Query.Filter filter, final int limit) {
 
         final String kind = getGAEEntityKind();
 
@@ -94,12 +94,17 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
             }
         });
 
-        return new IteratorTransform<Entity, T>(entitiesIterator.iterator(),
-                new IteratorTransform.Transformer<Entity, T>() {
-                    public T transform(final Entity entity) {
-                        return convertGAEEntityToDomainEntity(entity);
-                    }
-                });
+        return new Iterable<T>() {
+            @Override
+            public Iterator<T> iterator() {
+                return new IteratorTransform<Entity, T>(entitiesIterator.iterator(),
+                        new IteratorTransform.Transformer<Entity, T>() {
+                            public T transform(final Entity entity) {
+                                return convertGAEEntityToDomainEntity(entity);
+                            }
+                        });
+            }
+        };
     }
 
     public void persist(final T domainEntity) {

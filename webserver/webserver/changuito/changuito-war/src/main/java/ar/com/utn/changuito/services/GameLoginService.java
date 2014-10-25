@@ -4,10 +4,11 @@ import ar.com.utn.changuito.architecture.net.SharedObject;
 import ar.com.utn.changuito.architecture.services.GenericService;
 import ar.com.utn.changuito.architecture.utils.RandomUtils;
 import ar.com.utn.changuito.architecture.utils.StringUtils;
-import ar.com.utn.changuito.model.User;
+import ar.com.utn.changuito.model.game.User;
 import ar.com.utn.changuito.persistence.UserDAO;
 
-public class GameLoginService extends GenericService<User> {
+public final class GameLoginService extends GenericService<User> {
+    
     @Override
     protected SharedObject typedCall(final User userParamater) {
 

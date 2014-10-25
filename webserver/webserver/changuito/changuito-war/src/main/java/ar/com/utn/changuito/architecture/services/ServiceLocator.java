@@ -3,7 +3,6 @@ package ar.com.utn.changuito.architecture.services;
 import java.util.HashMap;
 import java.util.Map;
 
-import ar.com.utn.changuito.model.SeleccionarGondolaStatistic;
 import ar.com.utn.changuito.services.*;
 
 /**

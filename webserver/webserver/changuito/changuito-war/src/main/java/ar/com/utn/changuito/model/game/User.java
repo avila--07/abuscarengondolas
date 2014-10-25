@@ -1,8 +1,8 @@
-package ar.com.utn.changuito.model;
+package ar.com.utn.changuito.model.game;
 
 import ar.com.utn.changuito.architecture.net.SharedObject;
 
-public class User extends SharedObject {
+public final class User extends SharedObject {
 
     public String getId() {
         return getString("uid");

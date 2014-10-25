@@ -3,12 +3,12 @@ package ar.com.utn.changuito.persistence;
 import ar.com.utn.changuito.architecture.persistence.AbstractGAEDAO;
 import ar.com.utn.changuito.architecture.persistence.DomainModelValidationException;
 import ar.com.utn.changuito.architecture.utils.StringUtils;
-import ar.com.utn.changuito.model.User;
+import ar.com.utn.changuito.model.game.User;
 import com.google.appengine.api.datastore.Query;
 
 import java.util.Iterator;
 
-public class UserDAO extends AbstractGAEDAO<User> {
+public final class UserDAO extends AbstractGAEDAO<User> {
 
     public UserDAO() {
         super(User.class);

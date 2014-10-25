@@ -16,7 +16,7 @@ import statics.ModuloSeleccionGondolaDto;
 import statics.ModuloSeleccionProductoDto;
 import statics.PartidaDto;
 import statics.StaticsObjectDto;
-import ar.com.utn.changuito.model.JuegoStatistic;
+import ar.com.utn.changuito.model.statistics.JuegoStatistic;
 
 import com.google.gson.Gson;
 

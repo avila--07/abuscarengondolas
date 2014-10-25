@@ -26,7 +26,10 @@ public final class GameServicesServlet extends HttpServlet {
 
             final AbstractService service = ServiceLocator.getInstance().getService(serviceId);
 
-            final SharedObject serviceResponse = service.call(serviceParameter);
+            SharedObject serviceResponse = service.call(serviceParameter);
+            if (serviceResponse == null) {
+                serviceResponse = new SharedObject();
+            }
             resp.getOutputStream().write(serviceResponse.serialize());
         } catch (final Exception exception) {
             Logger.getLogger(AbstractService.class.getName()).log(Level.SEVERE, "Exception calling [" + serviceId + "] service the reason is [" + exception.getMessage() + "]");
@@ -41,7 +44,7 @@ public final class GameServicesServlet extends HttpServlet {
 
     private SharedObject getServiceParamaterFromRequest(final HttpServletRequest request) {
         try {
-            return SharedObject.deserialize(request.getReader().readLine().getBytes() );
+            return SharedObject.deserialize(request.getReader().readLine().getBytes());
         } catch (final Exception exception) {
             throw new RuntimeException(exception.getMessage(), exception);
         }
