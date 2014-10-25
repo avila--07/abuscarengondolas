@@ -16,26 +16,34 @@ public class ChanguitoDragable : MonoBehaviour
 	{
 		UI2DSprite changuito = gameObject.GetComponent<UI2DSprite> ();
 		bool findGondola = false;
-
+        bool isGondola = false;
+        
         foreach (UI2DSprite gondola in ServicioSeleccionarGondolas.Gondolas)
         {
-				
-			if (gondola.GetComponent<GondolaProperties> ().ProductType == ListadoSingleton.Instance.getTargetType () &&
-				ColliderUtils.IsFullyInside (gondola, changuito)) {
 
-				findGondola = true;
-				break;
-			}
+            if (gondola.GetComponent<GondolaProperties>().ProductType == ListadoSingleton.Instance.getTargetType() &&
+                ColliderUtils.IsFullyInside(gondola, changuito))
+            {
+                isGondola = true;
+                findGondola = true;
+                break;
+            }
+            else {
+                if (ColliderUtils.IsFullyInside(gondola, changuito))
+                    isGondola = true;
+            }
 		}
 
-		if (findGondola) {		
+		if (findGondola && isGondola) {		
             this.callFinGondola();
 			NGUISomosUtils.showTextInScreen ("SGStatusLabel", "¡Excelente!");
 			Invoke ("GoToNextScene", 1F);
 		} else {
+            if (isGondola) { 
             ServicioSeleccionarGondolas.failedGondola++;
             NGUISomosUtils.showTextInScreen ("SGStatusLabel", "Aquí no está.\n ¡Busquemos en otra góndola!");
-		}
+            }
+       }
 	}
 
 	private void GoToNextScene ()
