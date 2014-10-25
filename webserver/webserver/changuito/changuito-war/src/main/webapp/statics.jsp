@@ -6,17 +6,28 @@
   <link rel="stylesheet" href="/static/d3/radialProgress/radialProgressStyle.css">
 </head>
 
+    <link href="/frontendhome/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/frontendhome/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merienda:700' rel='stylesheet' type='text/css'>
+    <link href="/frontendhome/css/style.css" rel="stylesheet">
+	
   <body>
-        <font size="10"><%="Página de estadísticas!" %></font>
-    <br>
-    <form action="/home" method="get">
+	<div id="wrapper">
+	<div id="featured-wrapper">
+		<div class="container">
+		
+        <h1><%="Página de estadísticas!" %></h1>
+		<br>
+		<form action="/home" method="get">
 
-	    	<label>Estadísticas de usuario: </label>  
-	    <br>
-	    	<label>Tiempo total jugado: </label>  <span id="tiempoJugado">80min</span>
-	    <br>
-	    	<label>Partidas total jugadas: </label>  <span id="partidasJugadas">6min</span>
-	    <br>
+				<label>Estadísticas de usuario:</label>  
+				<br>
+				<p><label>Tiempo total jugado:</label>  <span id="tiempoJugado">80min</span></p>
+				<br>
+				<p><label>Partidas total jugadas:</label>  <span id="partidasJugadas">6min</span></p>
+			
+			<br>
 
 <!-- 		<div id="tabs"> -->
 <!-- 		  <ul> -->
@@ -86,18 +97,22 @@
 
 <!-- 		  </div> -->
 <!-- 		</div> -->
-		<div id="mycontainer" style="width:100%; height:400px; display:none"></div>
+			<div id="mycontainer" style="width:100%; height:400px; display:none"></div>
 
- 		<div id="containerSelecGondolas" style="width:100%; height:400px;"></div>
- 		<div id="containerSelecProducto" style="width:100%; height:400px;"></div>
-<!--  		<div id="containerModPago" style="width:100%; height:400px;"></div> -->
- 		<div id="containerModVuelto" style="width:100%; height:400px;"></div>
-<!--  		<div id="containerGenerales" style="width:100%; height:400px;"></div> -->
+			<div id="containerSelecGondolas" style="width:100%; height:400px;"></div>
+			<div id="containerSelecProducto" style="width:100%; height:400px;"></div>
+	<!--  		<div id="containerModPago" style="width:100%; height:400px;"></div> -->
+			<div id="containerModVuelto" style="width:100%; height:400px;"></div>
+	<!--  		<div id="containerGenerales" style="width:100%; height:400px;"></div> -->
 
-	   	<input type="submit" value="Guardar"> | <input type="button" value="compartir">
+			<input type="submit" value="Guardar"> | <input type="button" value="compartir">
 
-    </form>	
-
+			</form>	
+		
+		</div>
+	</div>
+	</div>
+		
 	  <script src="/static/jquery-2.1.1.min.js"></script>
 	  <script src="/static/d3/d3.js"></script>
 	  <script src="/static/d3/radialProgress/radialProgress.js"></script>

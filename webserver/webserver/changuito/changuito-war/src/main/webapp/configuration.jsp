@@ -1,22 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<html>
-<head><title>Página de configuración</title></head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <body>
-        <font size="10"><%="Página de configuración!" %></font>
-    <form action="/home" method="get">
-	    <br>
-	    	<label>Cantidad de productos: </label>  <input type="number" name="quantity" min="1" max="5">
-	    <br>
-	    	<label>Habilitar módulo de pagos: </label>  <input type="checkbox" name="modpagos" >
-	    <br>
-	    	<label>Habilitar módulo control de vuelto: </label> <input type="checkbox" name="modvuelto" >
-	    <br>
-	    	<label>Habilitar módulo de estadísticas: </label>  <input type="checkbox" name="modstadisticas" >
-	    <br>
-	    
-	    <input type="submit" value="Guardar">
-	    
-    </form>	
 
+<html>
+
+<head><title>Página de configuración</title></head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Le styles -->
+    <link href="/frontendhome/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/frontendhome/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merienda:700' rel='stylesheet' type='text/css'>
+    <link href="/frontendhome/css/style.css" rel="stylesheet">
+	
+  <body>
+
+	<div id="wrapper">
+	<div id="featured-wrapper">
+		<div class="container">
+  
+        <h1><%="Configurá la forma de jugar" %></h1>
+		<br>
+			<form action="/home" method="get">
+			<div class="styleform">
+			<fieldset id="inputs">
+				<p><label for="quantity">Cantidad de productos:</label>						<input name="quantity" 	type="number" min="1" max="5"></p>
+				<br>
+				<p><label for="modpago">Habilitar módulo de pago:</label>  					<input name="modpago" 	type="checkbox"></p>
+				<br>
+				<p><label for="modvuelto">Habilitar módulo control de vuelto:</label>  		<input name="modvuelto" type="checkbox"></p>
+				<br>
+				<p><label for="modstad">Habilitar módulo de estadísticas:</label>    		<input name="modstad" 	type="checkbox"></p>
+			</fieldset>
+			</div>
+				<br>
+				<br>
+				<p><input id="submitButton" type="button" value="Guardar"></p>  <!-- type="submit" , sin id -->
+				<br>
+			
+			</form>
+
+		</div>
+	</div>
+	</div>
+	
   </body>
 </html>

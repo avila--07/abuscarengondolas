@@ -8,6 +8,17 @@ h1{
 	color: #47adcb;
 }
 
+h2{
+	color: #FF4000;
+	text-decoration: none;
+}
+
+h3{
+	color: #151515;
+	text-decoration: none;
+	font-size: 12pt;
+}
+
 .divider{
 	background-image: url('../img/divider-pattern.png');
 	background-repeat: repeat-x;;

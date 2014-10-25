@@ -59,6 +59,76 @@ a:hover
 	width: 900px;
 }
 
+.link
+{
+   color: #FF4000;
+   text-decoration: none; 
+   background-color: none;
+}
+
+input#submitButton {
+border:2px groove #7c93ba;
+cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
+padding: 5px 25px;
+/*give the background a gradient - see cssdemos.tupence.co.uk/gradients.htm for more info*/
+background-color:#6b6dbb; /*required for browsers that don't support gradients*/
+background: -webkit-gradient(linear, left top, left bottom, from(#88add7), to(#6b6dbb));
+background: -webkit-linear-gradient(top, #88add7, #6b6dbb);
+background: -moz-linear-gradient(top, #88add7, #6b6dbb);
+background: -o-linear-gradient(top, #88add7, #6b6dbb);
+background: linear-gradient(top, #88add7, #6b6dbb);
+/*style to the text inside the button*/
+font-family:Andika, Arial, sans-serif; /*Andkia is available at http://www.google.com/webfonts/specimen/Andika*/
+color:#fff;
+font-size:1.1em;
+letter-spacing:.1em;
+font-variant:small-caps;
+/*give the corners a small curve*/
+-webkit-border-radius: 15px 15px 15px 15px;
+-moz-border-radius: 15px 15px 15px 15px;
+border-radius: 15px 15px 15px 15px;
+/*add a drop shadow to the button*/
+-webkit-box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
+-moz-box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
+box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
+}
+/***NOW STYLE THE BUTTON'S HOVER AND FOCUS STATES***/
+input#submitButton:hover, input#submitButton:focus {
+color:#edebda;
+/*reduce the spread of the shadow to give a pushed effect*/
+-webkit-box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+-moz-box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+}
+
+
+
+.styleform label
+{
+    float:left;
+    width: 50%;
+    text-align:right;
+	vertical-align:middle;
+	padding: 0em 1em 0em 0em;
+    }
+.styleform input
+{
+    float:left;
+    width: 50%;
+    }
+
+input[type="number"] {
+   width:20px;
+}
+
+input[type="text"] {
+   width:150px;
+}
+
+input[type="password"] {
+   width:150px;
+}
+	
 /*********************************************************************************/
 /* Image Style                                                                   */
 /*********************************************************************************/
