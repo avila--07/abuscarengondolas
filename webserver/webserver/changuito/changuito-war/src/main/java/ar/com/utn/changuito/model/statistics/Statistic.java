@@ -2,7 +2,7 @@ package ar.com.utn.changuito.model.statistics;
 
 import ar.com.utn.changuito.architecture.net.SharedObject;
 
-public final class Statistic extends SharedObject {
+public class Statistic extends SharedObject {
 
     public Statistic() {
     }

@@ -38,7 +38,7 @@ public final class UserDAO extends AbstractGAEDAO<User> {
     public User getEntityById(final String id) {
 
         final Query.Filter filter = new Query.FilterPredicate("uid", Query.FilterOperator.EQUAL, id);
-        final Iterator<User> entities = getEntities(filter, 1);
+        final Iterator<User> entities = getEntities(filter, 1).iterator();
 
         return entities.hasNext() ? entities.next() : null;
     }
@@ -46,7 +46,7 @@ public final class UserDAO extends AbstractGAEDAO<User> {
     public User getEntityByEmail(final String email) {
 
         final Query.Filter filter = new Query.FilterPredicate("email", Query.FilterOperator.EQUAL, email);
-        final Iterator<User> entities = getEntities(filter, 1);
+        final Iterator<User> entities = getEntities(filter, 1).iterator();
 
         return entities.hasNext() ? entities.next() : null;
     }

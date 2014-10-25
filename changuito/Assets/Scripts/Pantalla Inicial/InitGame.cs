@@ -19,9 +19,8 @@ public class InitGame : MonoBehaviour {
 				return;
 			}
 			User.SaveCurrent(updatedUser);
-		});
 
-        Application.LoadLevel("PantallaInicial");
+			Application.LoadLevel("PantallaInicial");
+		});
 	}
-	
 }
