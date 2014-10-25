@@ -42,6 +42,10 @@ public class SharedObject {
         return value;
     }
 
+    public boolean getBoolean(final String key) {
+        return (Boolean) data.get(key);
+    }
+
     public double getDouble(final String key) {
         return (Double) data.get(key);
     }

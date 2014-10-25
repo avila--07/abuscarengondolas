@@ -36,4 +36,7 @@ public final class User extends SharedObject {
         set("adyext", value);
     }
 
+    public Configuration getConfiguration() {
+        return getSharedObject("conf", Configuration.class);
+    }
 }
