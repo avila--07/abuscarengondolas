@@ -32,8 +32,8 @@ public final class User extends SharedObject {
         set("pwd", null);
     }
 
-    public void setAlreadyExists(final boolean value) {
-        set("adyext", value);
+    public void setAlreadyExists() {
+        set("adyext", true);
     }
 
     public Configuration getConfiguration() {

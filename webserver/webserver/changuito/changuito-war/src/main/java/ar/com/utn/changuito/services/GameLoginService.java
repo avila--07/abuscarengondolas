@@ -8,7 +8,7 @@ import ar.com.utn.changuito.model.game.User;
 import ar.com.utn.changuito.persistence.UserDAO;
 
 public final class GameLoginService extends GenericService<User> {
-    
+
     @Override
     protected SharedObject typedCall(final User userParamater) {
 
@@ -40,28 +40,25 @@ public final class GameLoginService extends GenericService<User> {
 
         // Check user already exists
         final User user = new UserDAO().getEntityByEmail(email);
-        if (user != null) {
+        if (user == null) {
+
+            // Create and save a new user
+            final RandomUtils instance = RandomUtils.getInstance();
+            userParamater.setId(instance.getRandomAlphaNumberString(15));
+            userParamater.setToken(instance.getRandomAlphaNumberString(20));
+            new UserDAO().persist(userParamater);
+        } else {
 
             // Check the password
             if (!user.getPassword().equals(password)) {
 
-                userParamater.setAlreadyExists(true);
+                userParamater.setAlreadyExists();
                 return userParamater;
             }
 
-            // Take existentUser values
+            // Take existentUser values for refreshing client version of user
             userParamater.mergeWith(user);
         }
-
-        final RandomUtils instance = RandomUtils.getInstance();
-
-        // Finally, create id/token or update token
-        if (user == null) {
-            userParamater.setId(instance.getRandomAlphaNumberString(15));
-        }
-        userParamater.setToken(instance.getRandomAlphaNumberString(20));
-
-        new UserDAO().persist(userParamater);
 
         userParamater.blankPassword(); // we dont want to return the password
         return userParamater;
