@@ -21,13 +21,12 @@
 			<form action="/home" method="get">
 			<div class="styleform">
 			<fieldset id="inputs">
-				<p><label for="quantity">Cantidad de productos:</label>						<input name="quantity" 	type="number" min="1" max="5"></p>
+				<p><label for="quantity">Cantidad de productos:</label>						<input name="quantity" 	type="number" min="2" max="6"></p>
 				<br>
 				<p><label for="modpago">Habilitar módulo de pago:</label>  					<input name="modpago" 	type="checkbox"></p>
 				<br>
 				<p><label for="modvuelto">Habilitar módulo control de vuelto:</label>  		<input name="modvuelto" type="checkbox"></p>
 				<br>
-				<p><label for="modstad">Habilitar módulo de estadísticas:</label>    		<input name="modstad" 	type="checkbox"></p>
 			</fieldset>
 			</div>
 				<br>
