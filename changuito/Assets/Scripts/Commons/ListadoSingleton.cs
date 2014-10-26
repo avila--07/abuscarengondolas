@@ -14,14 +14,14 @@ public class ListadoSingleton
 
     public static GameObject ProductTarget;
 
-	public List<GameObject> ListadoProductos = new List<GameObject>(ChanguitoConfiguration.CantidadGondolas);
+	public List<GameObject> ListadoProductos = new List<GameObject>(Configuration.Current.GondolasCount);
 
     public List<GameObject> ListadoTipoProductos = new List<GameObject>(GondolaFactory.MAX_PRODUCTOS_X_TIPO);
     
     /// <summary>
     /// Contiene el tipo de producto a ser seleccionado.
     /// </summary>
-	private List<int> gondolasSeleccionadas = new List<int>(ChanguitoConfiguration.CantidadGondolas);
+	private List<int> gondolasSeleccionadas = new List<int>(Configuration.Current.GondolasCount);
        
     //Lock!
     private static volatile ListadoSingleton instance;
@@ -48,7 +48,7 @@ public class ListadoSingleton
     /// </summary>
     private void initializeGondolas() 
     {
-        while (ChanguitoConfiguration.CantidadGondolas != this.gondolasSeleccionadas.Count)
+        while (Configuration.Current.GondolasCount != this.gondolasSeleccionadas.Count)
         {
            int tipoGondola = CommonsSomosUtils.generateRandomValue(GondolaFactory.VERDURAS, GondolaFactory.PERFUMERIA+1);
            
@@ -71,11 +71,11 @@ public class ListadoSingleton
            
             this.initializeGondolas();
 
-            for (int i = 0; ChanguitoConfiguration.CantidadGondolas != this.ListadoProductos.Count; i++)
+            for (int i = 0; Configuration.Current.GondolasCount != this.ListadoProductos.Count; i++)
             {
                 int tipoGondola = (int)gondolasSeleccionadas[i];
                 int producto = CommonsSomosUtils.generateRandomValue(0, GondolaFactory.MAX_PRODUCTOS_X_TIPO);
-                GameObject productObject = (GameObject)Resources.Load(ChanguitoConfiguration.PRODUCTOS_PATH + (string)GondolaFactory.getGondola(tipoGondola)[producto]);
+                GameObject productObject = (GameObject)Resources.Load(Configuration.PRODUCTOS_PATH + (string)GondolaFactory.getGondola(tipoGondola)[producto]);
                 if (productObject == null)
                     Debug.LogError("El prefab " + (string)GondolaFactory.getGondola(tipoGondola)[producto] + " no existe" );
                 this.initializeProduct(productObject, tipoGondola);
@@ -94,14 +94,14 @@ public class ListadoSingleton
         //Corto por la cantidad maxima permitida a mostrar ...
         if (PosicionActual < MAX_LISTADO)
         {   //En el caso de que sea menor la cantidad a mostrar ...
-            if (ChanguitoConfiguration.CantidadGondolas < MAX_LISTADO)
-                this.showSomeProductsInListado(grid, 0, ChanguitoConfiguration.CantidadGondolas);
+            if (Configuration.Current.GondolasCount < MAX_LISTADO)
+                this.showSomeProductsInListado(grid, 0, Configuration.Current.GondolasCount);
             else
                 this.showSomeProductsInListado(grid, 0, MAX_LISTADO);
         }
         else
         {
-            this.showSomeProductsInListado(grid, MAX_LISTADO, ChanguitoConfiguration.CantidadGondolas);
+            this.showSomeProductsInListado(grid, MAX_LISTADO, Configuration.Current.GondolasCount);
         }
     }
 

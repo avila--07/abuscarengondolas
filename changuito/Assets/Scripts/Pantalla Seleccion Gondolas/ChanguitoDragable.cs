@@ -54,12 +54,6 @@ public class ChanguitoDragable : MonoBehaviour
     private void callFinGondola()
     {
         SeleccionarGondolaStatistic request = new SeleccionarGondolaStatistic(ServicioSeleccionarGondolas.failedGondola,ServicioSeleccionarGondolas.gondolaStart);
-		UploadStatisticsService.Call(request, ServiceResult); 
+		UploadStatisticsService.TryToCall(request); 
     }
-
-    private void ServiceResult(SharedObject result, Exception exception)
-    {
-        // Debug.Log("Resultado servicio: " + ((result == null) ? "Fallo con [" + exception + "]" : result.ToString()));
-    }
-
 }

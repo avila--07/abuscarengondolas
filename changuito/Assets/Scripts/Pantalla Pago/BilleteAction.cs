@@ -36,7 +36,7 @@ public class BilleteAction : MonoBehaviour
             this.callPagoBillete();
             this.callFinPago();        
             
-            if (ChanguitoConfiguration.ModuloControlVuelto)
+            if (Configuration.Current.ChangeControlModule)
                 Application.LoadLevel("PantallaControlVuelto");
             else
             {
@@ -49,16 +49,11 @@ public class BilleteAction : MonoBehaviour
     private void callFinPago()
     {
         PagoStatistic request = new PagoStatistic(ServicioPago.pagoStart);
-		UploadStatisticsService.Call(request, ServiceResult);
+		UploadStatisticsService.TryToCall(request);
     }
 
     private void callPagoBillete(){
         PagoStatistic requestBillete = new PagoStatistic(ServicioPago.pagoStart, valor);
-		UploadStatisticsService.Call(requestBillete, ServiceResult);
-    }
-
-    private void ServiceResult(SharedObject result, Exception exception)
-    {
-        // Debug.Log("Resultado servicio: " + ((result == null) ? "Fallo con [" + exception + "]" : result.ToString()));
+		UploadStatisticsService.TryToCall(requestBillete);
     }
 }

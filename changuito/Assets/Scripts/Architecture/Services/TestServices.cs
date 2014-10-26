@@ -18,7 +18,7 @@ public class TestServices : MonoBehaviour
 	void TestTrueServerCall ()
 	{
 		Statistic statistic = new Statistic ();
-		UploadStatisticsService.Call (statistic, ServiceResult);
+		UploadStatisticsService.TryToCall (statistic);
 	}
 	
 	private void ServiceResult (SharedObject result, Exception exception)

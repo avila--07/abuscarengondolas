@@ -55,7 +55,7 @@ public class ServicioPago : MonoBehaviour
     {
         foreach (string product in money)
         {
-            GameObject loadedPrefab = Resources.Load<GameObject>(ChanguitoConfiguration.BILLETES_PATH + product);
+            GameObject loadedPrefab = Resources.Load<GameObject>(Configuration.BILLETES_PATH + product);
             NGUITools.AddChild(grid, loadedPrefab);
         }
         

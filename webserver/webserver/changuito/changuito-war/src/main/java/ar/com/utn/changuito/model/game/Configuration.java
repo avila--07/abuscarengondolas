@@ -8,11 +8,11 @@ public final class Configuration extends SharedObject {
         return getBoolean("purm");
     }
 
-    public boolean getControlChangeModule() {
-        return getBoolean("cchm");
+    public boolean getChangeControlModule() {
+        return getBoolean("chcom");
     }
 
-    public int getGondolaQuantity() {
-        return getInt("gonqty");
+    public int getGondolasCount() {
+        return getInt("goncou");
     }
 }

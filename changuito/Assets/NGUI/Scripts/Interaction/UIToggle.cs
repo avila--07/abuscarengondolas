@@ -73,7 +73,7 @@ public class UIToggle : UIWidgetContainer
 	/// Deprecated functionality. Use the 'group' option instead.
 	/// </summary>
 
-	[HideInInspector][SerializeField] Transform radioButtonRoot;
+	[HideInInspector][SerializeField] Transform radioButtonRoot = null;
 	[HideInInspector][SerializeField] UISprite checkSprite;
 	[HideInInspector][SerializeField] Animation checkAnimation;
 	[HideInInspector][SerializeField] GameObject eventReceiver;

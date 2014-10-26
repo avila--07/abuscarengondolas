@@ -5,7 +5,7 @@ public class InitGame : MonoBehaviour {
 
 	void Start () {
 
-        User user = User.Current();
+        User user = User.Current;
         if (user == null)
 		{
             Application.LoadLevel("PantallaInicial");
@@ -18,7 +18,8 @@ public class InitGame : MonoBehaviour {
 				Debug.LogError("Error en el login: "  + exception);
 				return;
 			}
-			User.SaveCurrent(updatedUser);
+			updatedUser.SaveAsCurrent();
+			updatedUser.Configuration.SaveAsCurrent();
 
 			Application.LoadLevel("PantallaInicial");
 		});

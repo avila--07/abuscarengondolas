@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UserAssignedState : MonoBehaviour {
+public class UserAssignedState : MonoBehaviour
+{
 	
 	public GameObject frameAssignUser;
 	public UILabel lblUserAssined;
-
 	public static UserAssignedState Instance;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 
 		Instance = this;
 		CheckIfAlreadyAssignedUser ();
@@ -17,13 +18,14 @@ public class UserAssignedState : MonoBehaviour {
 	
 	public void CheckIfAlreadyAssignedUser ()
 	{
-		User user = User.Current();
+		User user = User.Current;
 		bool userAssigned = (user != null);
-		if(userAssigned)
-		{
-			lblUserAssined.text = "El usuario registrado es \"" + user.Email +  "\", ingrese a http://acomprarconchanguito.appspot.com para mas opciones.";
+
+		frameAssignUser.gameObject.SetActive (!userAssigned);
+		lblUserAssined.gameObject.SetActive (userAssigned);
+
+		if (userAssigned) {
+			lblUserAssined.text = "El usuario registrado es \"" + user.Email + "\", ingrese a http://acomprarconchanguito.appspot.com para mas opciones.";
 		}
-		frameAssignUser.gameObject.SetActive(!userAssigned);
-		lblUserAssined.gameObject.SetActive(userAssigned);
 	}
 }

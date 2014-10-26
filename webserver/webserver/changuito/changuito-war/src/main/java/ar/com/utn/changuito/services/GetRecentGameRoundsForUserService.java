@@ -1,11 +1,10 @@
 package ar.com.utn.changuito.services;
 
 import ar.com.utn.changuito.architecture.net.SharedObject;
-import ar.com.utn.changuito.architecture.services.GenericService;
-import ar.com.utn.changuito.model.game.GameRound;
+import ar.com.utn.changuito.model.replay.GameRound;
 import ar.com.utn.changuito.persistence.GameRoundDAO;
 
-public final class GetRecentGameRoundsForUserService extends GenericService<SharedObject> {
+public final class GetRecentGameRoundsForUserService extends SecuredService<SharedObject> {
 
     @Override
     public String getId() {
@@ -13,15 +12,11 @@ public final class GetRecentGameRoundsForUserService extends GenericService<Shar
     }
 
     @Override
-    protected SharedObject typedCall(final SharedObject serviceParameter) {
-
-        final String userId = serviceParameter.getString("uid");
-
-        if (userId == null || userId.trim().length() == 0) {
-            throw new RuntimeException("The user id [" + userId + "] is null or empty.");
-        }
+    protected SharedObject securedTypedCall(SharedObject serviceParameter) {
 
         final GameRoundDAO gameRoundDAO = new GameRoundDAO();
+
+        final String userId = getAuthenticatedServiceUser().getId();
 
         final SharedObject sharedObject = new SharedObject();
         int index = 1;

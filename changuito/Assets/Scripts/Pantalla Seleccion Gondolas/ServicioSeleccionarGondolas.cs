@@ -31,7 +31,7 @@ public class ServicioSeleccionarGondolas : MonoBehaviour
 
 	private void finalizarJuego ()
 	{
-		if (ChanguitoConfiguration.ModuloPago) {
+		if (Configuration.Current.PurchaseModule) {
 			Application.LoadLevel ("PantallaPago");
 		} else {
 			ListadoSingleton.Instance.clean ();
@@ -41,7 +41,7 @@ public class ServicioSeleccionarGondolas : MonoBehaviour
 
 	private bool seleccionFinalizada ()
 	{
-		return ChanguitoConfiguration.CantidadGondolas == ListadoSingleton.PosicionActual;
+		return Configuration.Current.GondolasCount == ListadoSingleton.PosicionActual;
 	}
 
 	private void setProductTarget ()
@@ -60,9 +60,9 @@ public class ServicioSeleccionarGondolas : MonoBehaviour
 		GameObject gondolasOnScene = GameObject.Find ("SGGondolasTable");
         
 		int gondolaPosition;
-		for (gondolaPosition = 0; gondolaPosition < ChanguitoConfiguration.CantidadGondolas; gondolaPosition++) {
+		for (gondolaPosition = 0; gondolaPosition < Configuration.Current.GondolasCount; gondolaPosition++) {
 			String name = ListadoSingleton.Instance.getLabelOfGondolaType (gondolaPosition);
-			GameObject gondola = (GameObject)Resources.Load (ChanguitoConfiguration.GONDOLAS_PATH + name);
+			GameObject gondola = (GameObject)Resources.Load (Configuration.GONDOLAS_PATH + name);
 			gondola.name = name; 
 			gondola.GetComponent<GondolaProperties> ().ProductType = (int)ListadoSingleton.Instance.getGondolasSeleccionadas () [gondolaPosition];
 			Gondolas.Add (NGUITools.AddChild (gondolasOnScene, gondola).GetComponent<UI2DSprite> ());

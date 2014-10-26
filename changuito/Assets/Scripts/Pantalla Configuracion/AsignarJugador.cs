@@ -33,6 +33,7 @@ public class AsignarJugador : MonoBehaviour
 					NGUISomosUtils.showTextInScreen ("WindowsMessage", "Debe completar los datos. Vuelva a intentarlo");
 				} else {
 					User user = new User ();
+					user.Configuration = Configuration.Current;
 					user.Email = email;
 					user.Password = password;
 					GameLoginService.Call (user, delegate(User userResult, Exception exception) {
@@ -46,11 +47,16 @@ public class AsignarJugador : MonoBehaviour
 							return;
 						}
 
-						// if everything ok, we save the user
-						User.SaveCurrent (user);
+						// if everything ok, we save the result user
+						userResult.SaveAsCurrent ();
+						userResult.Configuration.SaveAsCurrent ();
 
-						UserAssignedState.Instance.CheckIfAlreadyAssignedUser();
+						UserAssignedState.Instance.CheckIfAlreadyAssignedUser ();
 						
+						// Refresh the GUI with the user configuration that comes from server
+						// We need to do it with delay because the controls are getting active in next frame 
+						GameObject.Find ("UI Root").GetComponent<LoadConfiguration> ().RefreshWithUserConfigurationDelayed ();
+
 						this.closeWindows ();
 					});
 

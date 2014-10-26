@@ -2,7 +2,7 @@ package ar.com.utn.changuito.persistence;
 
 import ar.com.utn.changuito.architecture.persistence.AbstractGAEDAO;
 import ar.com.utn.changuito.architecture.persistence.DomainModelValidationException;
-import ar.com.utn.changuito.model.game.GameRound;
+import ar.com.utn.changuito.model.replay.GameRound;
 import com.google.appengine.api.datastore.Query;
 
 public final class GameRoundDAO extends AbstractGAEDAO<GameRound> {

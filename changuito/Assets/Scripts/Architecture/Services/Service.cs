@@ -53,6 +53,11 @@ public class Service : MonoBehaviour
 	public void Call<T> (SharedObject inputData, Action<T, Exception> action)
 		where T: SharedObject
 	{
+		if (inputData != null && User.Current != null) {
+			inputData.Set ("uid", User.Current.Id);
+			inputData.Set ("tkn", User.Current.Token);
+		}
+
 		_inputData = inputData;
 		_startTime = TimeUtils.NowTicks;
 		_action = delegate(SharedObject sharedObject, Exception exception) {

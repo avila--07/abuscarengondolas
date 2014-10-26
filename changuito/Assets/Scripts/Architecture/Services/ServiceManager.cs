@@ -25,6 +25,6 @@ public class ServiceManager : MonoBehaviour
 		Service service = gameObject.AddComponent<Service> ();
 		service.transform.parent = transform;
 		service.name = serviceId + "_" + service.RequestId;
-		return service.WithURL (ChanguitoConfiguration.ServerURL + "/" + serviceId);
+		return service.WithURL (Configuration.ServerURL + "/" + serviceId);
 	}	
 }

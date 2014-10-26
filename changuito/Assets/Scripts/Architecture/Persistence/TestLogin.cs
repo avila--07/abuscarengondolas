@@ -25,7 +25,7 @@ public class TestLogin : MonoBehaviour
 		
 		yield return new WaitForSeconds (5);
 
-		LoginUserIdAndToken ("Login existent user in same device", User.Current ().Id, User.Current ().Token);
+		LoginUserIdAndToken ("Login existent user in same device", User.Current.Id, User.Current.Token);
 		
 		yield return new WaitForSeconds (5);
 
@@ -38,11 +38,11 @@ public class TestLogin : MonoBehaviour
 		user.Email = email;
 		user.Password = password;
 		
-		Debug.LogError ("[" + testName + "] - Current user: " + User.Current ());
+		Debug.LogError ("[" + testName + "] - Current user: " + User.Current);
 
 		try {
 			LoginUser (user);
-		} catch (Exception e) {
+		} catch (Exception) {
 		}
 	}
 
@@ -52,11 +52,11 @@ public class TestLogin : MonoBehaviour
 		user.Set ("uid", id);
 		user.Set ("tkn", token);
 
-		Debug.LogError ("[" + testName + "] - Current user: " + User.Current ());
+		Debug.LogError ("[" + testName + "] - Current user: " + User.Current);
 		
 		try {
 			LoginUser (user);
-		} catch (Exception e) {
+		} catch (Exception) {
 		}
 	}
 
@@ -65,7 +65,7 @@ public class TestLogin : MonoBehaviour
 		GameLoginService.Call (user, delegate(User userResult, Exception exception) {
 			Debug.Log ("Result user: " + userResult);
 
-			User.SaveCurrent (userResult);
+			userResult.SaveAsCurrent ();
 		});
 	}
 

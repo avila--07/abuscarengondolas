@@ -49,7 +49,7 @@ public class ServicioSeleccionarProductos: MonoBehaviour
         
         foreach (string product in productsFromGondolaX)
         {
-            GameObject loadedPrefab = Resources.Load<GameObject>(ChanguitoConfiguration.PRODUCTOS_PATH + product);
+            GameObject loadedPrefab = Resources.Load<GameObject>(Configuration.PRODUCTOS_PATH + product);
             NGUISomosUtils.setTildeProductoSeleccionado(loadedPrefab, false);
             NGUISomosUtils.setLabelProductos(loadedPrefab, true);
             loadedPrefab.tag = "GameController";
