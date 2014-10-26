@@ -1,23 +1,22 @@
 <html>
 <head>
 <title>Página de estadísticas</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" href="/stylesheets/themes/smoothness/jquery-ui.css">
-  <link rel="stylesheet" href="/static/d3/radialProgress/radialProgressStyle.css">
-</head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="/stylesheets/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="/static/d3/radialProgress/radialProgressStyle.css">
 
     <link href="/frontendhome/css/bootstrap.min.css" rel="stylesheet">
     <link href="/frontendhome/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Merienda:700' rel='stylesheet' type='text/css'>
     <link href="/frontendhome/css/style.css" rel="stylesheet">
-	
+</head>
   <body>
 	<div id="wrapper">
 	<div id="featured-wrapper">
 		<div class="container">
-		
-        <h1><%="Página de estadísticas!" %></h1>
+		<br>
+        <h1><%="Estadísticas" %></h1>
 		<br>
 		<form action="/home" method="get">
 
