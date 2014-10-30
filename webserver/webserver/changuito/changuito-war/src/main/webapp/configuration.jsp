@@ -22,12 +22,17 @@
 			<form action="/home" method="get">
 			<div class="styleform">
 			<fieldset id="inputs">
-				<p><label>Cantidad de productos:</label>						<input name="quantity" 	type="number" min="2" max="6" title="Cantidad de productos que deberán ser comprados"></p>
+				<p> <label>Cantidad de productos:</label>
+					<input name="quantity" type="number" min="2" max="6" title="Cantidad de productos que deberán ser comprados en el juego"></p>
 				<br>
-				<p><label for="modpago">Habilitar módulo de pago:</label>  					<input name="modpago" 	type="checkbox"></p>
+				<p> <label for="modpago">Habilitar Módulo de pago:</label>
+					<input name="modpago" id="modpago" type="checkbox" onclick="checkmp()" title="Luego de completar la selección de los productos se activará la actividad para pagar la compra"></p>
 				<br>
-				<p><label for="modvuelto">Habilitar módulo control de vuelto:</label>  		<input name="modvuelto" type="checkbox"></p>
+				<p> <label for="modvuelto">Habilitar Módulo de control de vuelto:</label>
+					<input name="modvuelto" id="modvuelto" type="checkbox" onclick="checkmv()" title="Luego de completar el pago, se activará la actividad para verificar el vuelto a recibir"></p>
 				<br>
+				<p> <label for="savepart">Guardar partidas:</label>
+					<input name="savepart" id="savepart" type="checkbox" title="Las partidas serán guardadas para poder ser reproducidas en la web desde la página Partidas"></p>
 			</fieldset>
 			</div>
 				<br>
@@ -41,5 +46,6 @@
 	</div>
 	</div>
 	
+	<script src="/static/checkmodules.js"></script>
   </body>
 </html>
