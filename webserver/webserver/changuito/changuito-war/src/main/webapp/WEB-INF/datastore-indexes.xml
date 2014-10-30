@@ -6,8 +6,8 @@
         <property name="email" direction="asc"/>
     </datastore-index>
 
-    <datastore-index kind="GameRound" ancestor="false">
-        <property name="userId" direction="desc"/>
-    </datastore-index>
+<!--     <datastore-index kind="GameRound" ancestor="false"> -->
+<!--         <property name="userId" direction="desc"/> -->
+<!--     </datastore-index> -->
 
 </datastore-indexes>

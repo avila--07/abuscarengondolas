@@ -54,7 +54,16 @@
         <servlet-name>login</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-
+	
+	<servlet>
+        <servlet-name>administration</servlet-name>
+        <servlet-class>AdministrationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>administration</servlet-name>
+        <url-pattern>/administration</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>about</servlet-name>
         <servlet-class>QuienesSomosServlet</servlet-class>

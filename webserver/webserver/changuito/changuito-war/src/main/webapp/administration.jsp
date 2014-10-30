@@ -39,6 +39,9 @@ h3 {
 				<button type="button"  onClick="location.href='/'" >Visualizar online</button> 
 			</td>
 		  </tr>
+
+	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+	</fb:login-button>
 		 
 	</table>
 </div>

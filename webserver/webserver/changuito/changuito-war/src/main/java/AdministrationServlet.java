@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class HomeServlet extends HttpServlet {
+public class AdministrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 @Override
@@ -14,9 +14,8 @@ public class HomeServlet extends HttpServlet {
 
 	try {
 		resp.setCharacterEncoding("UTF-8");
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/administration.jsp").forward(req, resp);
 	} catch (ServletException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 
