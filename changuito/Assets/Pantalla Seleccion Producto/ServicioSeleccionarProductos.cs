@@ -45,7 +45,7 @@ public class ServicioSeleccionarProductos: MonoBehaviour
        
         //Cada gondola tiene 4 productos, incluido el target.
         //Las gondolas son de un unico tipo de producto (ej Lacteos, verduras, carnes, etc)
-        ArrayList productsFromGondolaX = GondolaFactory.gondolasDictionary[ListadoSingleton.ProductTarget.GetComponent<ProductProperties>().tipo];
+        List<string> productsFromGondolaX = GondolaFactory.gondolasDictionary[ListadoSingleton.ProductTarget.GetComponent<ProductProperties>().tipo];
         
         foreach (string product in productsFromGondolaX)
         {

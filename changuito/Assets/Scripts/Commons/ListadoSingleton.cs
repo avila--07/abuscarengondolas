@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 using System.Collections.Generic;
@@ -75,9 +75,9 @@ public class ListadoSingleton
             {
                 int tipoGondola = (int)gondolasSeleccionadas[i];
                 int producto = CommonsSomosUtils.generateRandomValue(0, GondolaFactory.MAX_PRODUCTOS_X_TIPO);
-                GameObject productObject = (GameObject)Resources.Load(Configuration.PRODUCTOS_PATH + (string)GondolaFactory.getGondola(tipoGondola)[producto]);
+				GameObject productObject = (GameObject)Resources.Load(Configuration.PRODUCTOS_PATH + (string)GondolaFactory.getGondolaProducts(tipoGondola)[producto]);
                 if (productObject == null)
-                    Debug.LogError("El prefab " + (string)GondolaFactory.getGondola(tipoGondola)[producto] + " no existe" );
+                    Debug.LogError("El prefab " + GondolaFactory.getGondolaType(tipoGondola)[producto] + " no existe" );
                 this.initializeProduct(productObject, tipoGondola);
                 ListadoProductos.Add(productObject);
             }
@@ -163,7 +163,7 @@ public class ListadoSingleton
     /// <returns></returns>
     public string getLabelOfGondolaType(int gondolaPosition)
     {
-        return GondolaFactory.getTipoGondola((int)getGondolasSeleccionadas()[gondolaPosition]);
+        return GondolaFactory.getGondolaType((int)getGondolasSeleccionadas()[gondolaPosition]);
     }
 
     internal void clean()

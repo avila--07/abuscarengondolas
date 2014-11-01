@@ -4,21 +4,29 @@ using System.Collections.Generic;
 
 public abstract class Module : SharedObject
 {
-		public int id {
-				get { return GetInt ("id"); }
-				set { Set ("id", value); }
-		}
+		public abstract string Name { get; }
 
 		public List<Step> Steps {
 				get { return GetList<Step> ("steps"); }
 		}
 
-		public IEnumerator Replay ()
+		public Module ()
+		{
+		}
+
+		public abstract void MakeScenario ();
+
+		public void AddStep (Step step)
+		{
+				AddToList ("steps", step);
+		}
+
+		public IEnumerator Play ()
 		{
 				yield return new WaitForEndOfFrame ();
 
 				foreach (Step step in Steps) {
-						MonoBehaviourUtils.ExecuteCoroutine (step.Replay ());
+						yield return step.Play ();
 				}
 		}
 }

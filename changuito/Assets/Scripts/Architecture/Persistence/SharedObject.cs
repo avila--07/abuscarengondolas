@@ -4,7 +4,7 @@ using System.Text;
 using System.Collections.Generic;
 using System;
 
-public class SharedObject
+public class SharedObject 
 {
 		private Dictionary<string, object> _data;
 	
