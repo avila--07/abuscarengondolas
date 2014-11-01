@@ -74,6 +74,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>demo</servlet-name>
+        <servlet-class>DemoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>demo</servlet-name>
+        <url-pattern>/demo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ChanguitoServices</servlet-name>
         <servlet-class>ar.com.utn.changuito.architecture.services.GameServicesServlet</servlet-class>
     </servlet>
