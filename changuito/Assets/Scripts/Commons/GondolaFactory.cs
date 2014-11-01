@@ -17,8 +17,10 @@ using System.Collections.Generic;
 /// 
 public class GondolaFactory{
 
-    public static int MAX_PRODUCTOS_X_TIPO = 4;
+    public static int MAX_PRODUCTOS_X_TIPO_IN_GAME = 4;
     public static int MAX_PRODUCTOS = 6;
+
+    public static int MAX_PRODUCTOS_TIPO = 5;
 
     public static int VERDURAS = 0;
     public static int FRUTAS = 1;
@@ -42,14 +44,14 @@ public class GondolaFactory{
 
    public static  IDictionary<int, ArrayList> gondolasDictionary = new Dictionary<int, ArrayList>()
     {
-        {VERDURAS, new ArrayList() { "Lechuga", "Cebolla", "Tomate", "Zapallo" }},
-        {FRUTAS, new ArrayList() { "Manzana", "Banana", "Pera", "Naranja"}},
-        {BEBIDAS, new ArrayList() { "Agua", "Jugo", "Gaseosa", "Soda" }},
-        {GOLOSINAS, new ArrayList() { "Chicle", "Alfajor", "Chupetin", "Caramelo" }},
-        {ALMACEN, new ArrayList() { "Fideos", "Aceite", "Pan", "Galletitas" }},
-        {FRESCOS, new ArrayList() { "Huevos", "Flan", "Salchichas", "Jamón" }},
-        {LACTEOS, new ArrayList() { "Leche", "Queso", "Yogurt", "Manteca"}},  
-        {PERFUMERIA, new ArrayList() { "Shampoo", "Jabón", "Desodorante", "Dentífrico" }}
+        {VERDURAS, new ArrayList() { "Lechuga", "Cebolla", "Tomate", "Zapallo","Papa" }},
+        {FRUTAS, new ArrayList() { "Manzana", "Banana", "Pera", "Naranja","Sandia"}},
+        {BEBIDAS, new ArrayList() { "Agua", "Jugo", "Gaseosa", "Soda","Papa" }},
+        {GOLOSINAS, new ArrayList() { "Chicle", "Alfajor", "Chupetin", "Caramelo","Papa" }},
+        {ALMACEN, new ArrayList() { "Fideos", "Aceite", "Pan", "Galletitas","Papa" }},
+        {FRESCOS, new ArrayList() { "Huevos", "Flan", "Salchichas", "Jamón","Papa" }},
+        {LACTEOS, new ArrayList() { "Leche", "Queso", "Yogurt", "Manteca","Postrecitos"}},  
+        {PERFUMERIA, new ArrayList() { "Shampoo", "Jabón", "Desodorante", "Dentífrico","Papa" }}
     };
 
     /// <summary>
@@ -77,6 +79,25 @@ public class GondolaFactory{
         tipoGondolasDictionary.TryGetValue(tipo, out label);
         
         return label;
+    }
+
+    public static ArrayList generateRandomProductsWithOutTarget(GameObject target)
+    {
+        ArrayList products = new ArrayList(MAX_PRODUCTOS_X_TIPO_IN_GAME);
+        ArrayList allProducts = GondolaFactory.getGondola(target.GetComponent<ProductProperties>().tipo);
+
+        // Solo 3, ya que target se agrega luego.
+        while (MAX_PRODUCTOS_X_TIPO_IN_GAME -1 != products.Count)
+        {
+            int posicionProducto = CommonsSomosUtils.generateRandomValue(0, MAX_PRODUCTOS_TIPO );
+
+            if (!products.Contains(allProducts[posicionProducto]) && !target.name.Equals(allProducts[posicionProducto]))
+            {
+                //Agrego la lista con de los productos del mismo tipo
+                products.Add(allProducts[posicionProducto]);
+            }
+        }
+        return products;
     }
 
 }

@@ -42,12 +42,13 @@ public class ServicioSeleccionarProductos: MonoBehaviour
     {
         GameObject grid = GameObject.Find("GondolaGrid");
        
-        //Cada gondola tiene 4 productos, incluido el target.
         //Las gondolas son de un unico tipo de producto (ej Lacteos, verduras, carnes, etc)
-        ArrayList productsFromGondolaX = GondolaFactory.gondolasDictionary[ListadoSingleton.ProductTarget.GetComponent<ProductProperties>().tipo];
-       
-      int i = 0;
-        foreach (string product in productsFromGondolaX)
+        //Cada gondola tiene 4 productos que se muestran por pantalla. 
+        ArrayList productsFromGondola = GondolaFactory.generateRandomProductsWithOutTarget(ListadoSingleton.Instance.getTarget());
+        productsFromGondola.Add(ListadoSingleton.ProductTarget.name);
+        
+        int i = 0;
+        foreach (string product in productsFromGondola)
         {
             i++;
             GameObject loadedPrefab = Resources.Load<GameObject>(Configuration.PRODUCTOS_PATH + product);
