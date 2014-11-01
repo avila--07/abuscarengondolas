@@ -23,6 +23,12 @@ public class Configuration : SharedObject
 		get{ return GetInt ("goncou");}
 		set{ Set ("goncou", value);}
 	}
+
+    public bool GuardarPartidas
+    {
+        get { return GetBool("guapar"); }
+        set { Set("guapar", value); }
+    }
 	
 	public int ModulesCount {
 		get { 
@@ -35,6 +41,7 @@ public class Configuration : SharedObject
 	{
 		PurchaseModule = false;
 		ChangeControlModule = false;
+        GuardarPartidas = false;
 		GondolasCount = 2;
 	}
 

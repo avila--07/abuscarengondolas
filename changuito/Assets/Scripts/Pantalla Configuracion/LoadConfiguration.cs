@@ -16,6 +16,7 @@ public class LoadConfiguration : MonoBehaviour
 		this.loadCantidadProductos ();
 		this.loadModuloPago ();
 		this.loadModuloControlVuelto ();
+        this.loadGuardarPartidas();
 	}
 	
 	public void RefreshWithUserConfigurationDelayed ()
@@ -47,5 +48,12 @@ public class LoadConfiguration : MonoBehaviour
 		GameObject popup = GameObject.Find ("CantidadProductosPopupList");
 		popup.GetComponent<UIPopupList> ().value = Configuration.Current.GondolasCount.ToString ();
 	}
+
+    private void loadGuardarPartidas()
+    {
+        GameObject check = GameObject.Find("GuardarPartidasCheckbox");
+        check.GetComponent<UIToggle>().value = Configuration.Current.GuardarPartidas;
+
+    }
 
 }
