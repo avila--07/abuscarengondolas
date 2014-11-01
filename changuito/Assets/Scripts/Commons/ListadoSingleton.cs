@@ -107,10 +107,9 @@ public class ListadoSingleton
 
     private void showSomeProductsInListado(GameObject grid,int ini, int fin)
     {
-        for (int i = ini; i < fin; i++)
+        for (int i = ini ; i < fin; i++)
         {
             GameObject producto = ListadoProductos[i];
-            NGUISomosUtils.setLabelProductos(producto, false);
             NGUITools.AddChild(grid, producto);
         }
     }
@@ -121,7 +120,6 @@ public class ListadoSingleton
     {
         productObject.GetComponent<ProductProperties>().tipo = tipoGondola;
         NGUISomosUtils.setTildeProductoSeleccionado(productObject, false);
-        NGUISomosUtils.setLabelProductos(productObject, false);
         productObject.tag = "GameController";
         productObject.GetComponent<ProductProperties>().target = false;
     }
@@ -179,16 +177,6 @@ public class ListadoSingleton
         ListadoSingleton.PosicionActual = 0;
         ProductTarget = null;
     }
-
-    internal void cleanListadoTipoProductos()
-    {
-        foreach(GameObject producto in ListadoTipoProductos)
-        {
-            NGUISomosUtils.setLabelProductos(producto, false);
-        }
-        ListadoTipoProductos.Clear();
-    }
-
 
     public int getTotalListado()
     {
