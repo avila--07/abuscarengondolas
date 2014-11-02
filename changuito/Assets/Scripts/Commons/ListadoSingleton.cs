@@ -16,7 +16,7 @@ public class ListadoSingleton
 
 	public List<GameObject> ListadoProductos = new List<GameObject>(Configuration.Current.GondolasCount);
 
-    public List<GameObject> ListadoTipoProductos = new List<GameObject>(GondolaFactory.MAX_PRODUCTOS_X_TIPO);
+    public List<GameObject> ListadoTipoProductos = new List<GameObject>(GondolaFactory.MAX_PRODUCTOS_X_TIPO_IN_GAME);
     
     /// <summary>
     /// Contiene el tipo de producto a ser seleccionado.
@@ -74,7 +74,7 @@ public class ListadoSingleton
             for (int i = 0; Configuration.Current.GondolasCount != this.ListadoProductos.Count; i++)
             {
                 int tipoGondola = (int)gondolasSeleccionadas[i];
-                int producto = CommonsSomosUtils.generateRandomValue(0, GondolaFactory.MAX_PRODUCTOS_X_TIPO);
+                int producto = CommonsSomosUtils.generateRandomValue(0, GondolaFactory.MAX_PRODUCTOS_X_TIPO_IN_GAME);
                 GameObject productObject = (GameObject)Resources.Load(Configuration.PRODUCTOS_PATH + (string)GondolaFactory.getGondola(tipoGondola)[producto]);
                 if (productObject == null)
                     Debug.LogError("El prefab " + (string)GondolaFactory.getGondola(tipoGondola)[producto] + " no existe" );
@@ -107,10 +107,9 @@ public class ListadoSingleton
 
     private void showSomeProductsInListado(GameObject grid,int ini, int fin)
     {
-        for (int i = ini; i < fin; i++)
+        for (int i = ini ; i < fin; i++)
         {
             GameObject producto = ListadoProductos[i];
-            NGUISomosUtils.setLabelProductos(producto, false);
             NGUITools.AddChild(grid, producto);
         }
     }
@@ -121,7 +120,6 @@ public class ListadoSingleton
     {
         productObject.GetComponent<ProductProperties>().tipo = tipoGondola;
         NGUISomosUtils.setTildeProductoSeleccionado(productObject, false);
-        NGUISomosUtils.setLabelProductos(productObject, false);
         productObject.tag = "GameController";
         productObject.GetComponent<ProductProperties>().target = false;
     }
@@ -179,16 +177,6 @@ public class ListadoSingleton
         ListadoSingleton.PosicionActual = 0;
         ProductTarget = null;
     }
-
-    internal void cleanListadoTipoProductos()
-    {
-        foreach(GameObject producto in ListadoTipoProductos)
-        {
-            NGUISomosUtils.setLabelProductos(producto, false);
-        }
-        ListadoTipoProductos.Clear();
-    }
-
 
     public int getTotalListado()
     {

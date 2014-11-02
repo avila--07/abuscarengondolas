@@ -15,4 +15,12 @@ public final class Configuration extends SharedObject {
     public int getGondolasCount() {
         return getInt("goncou");
     }
+    
+    public boolean getGuardarPartidas(){
+    	return getBoolean("guapar");
+    }
+    
+    public boolean getEnabledSound(){
+    	return getBoolean("enso");
+    }
 }

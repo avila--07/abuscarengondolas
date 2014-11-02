@@ -35,15 +35,5 @@ public static class NGUISomosUtils
         gameObject.transform.GetChild(0).gameObject.SetActive(active);
     }
 
-    /// <summary>
-    /// Setea el label de los productos en la pantalla de seleccion.
-    /// </summary>
-    /// <param name="gameObject"></param>
-    /// <param name="active"></param>
-    public static void setLabelProductos(GameObject gameObject, Boolean active)
-    {
-        gameObject.transform.GetChild(1).gameObject.SetActive(active);
-    }
-
 }
 

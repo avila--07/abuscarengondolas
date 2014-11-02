@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 1f29d886efb326240b940a39c23c96f2
+guid: 9cfa002c639e5d740921486ed06e37b6
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Gondola
+    21300000: amargo
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -22,14 +22,14 @@ TextureImporter:
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: 5
-  maxTextureSize: 4096
+  textureFormat: -1
+  maxTextureSize: 1024
   textureSettings:
-    filterMode: 2
-    aniso: 4
+    filterMode: -1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
-  nPOTScale: 1
+    wrapMode: -1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
