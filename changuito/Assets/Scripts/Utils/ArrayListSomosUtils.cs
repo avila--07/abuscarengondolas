@@ -25,4 +25,20 @@ public class ArrayListSomosUtils {
         return listaDesordenada;
     }
 
+    public static ArrayList desordenarLista(ArrayList list)
+    {
+        ArrayList listaDesordenada = new ArrayList(list.Count);
+        int value = 0;
+
+        for (int i = 0; list.Count != listaDesordenada.Count; i++)
+        {
+            value = Random.Range(0, list.Count);
+            if (!listaDesordenada.Contains(list[value]))
+                listaDesordenada.Add(list[value]);
+        }
+
+        return listaDesordenada;
+    }
+
+
 }

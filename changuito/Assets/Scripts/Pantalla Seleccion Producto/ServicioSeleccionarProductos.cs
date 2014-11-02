@@ -46,21 +46,26 @@ public class ServicioSeleccionarProductos: MonoBehaviour
         //Cada gondola tiene 4 productos que se muestran por pantalla. 
         ArrayList productsFromGondola = GondolaFactory.generateRandomProductsWithOutTarget(ListadoSingleton.Instance.getTarget());
         productsFromGondola.Add(ListadoSingleton.ProductTarget.name);
+       
+        ArrayList productosDesordenados = ArrayListSomosUtils.desordenarLista(productsFromGondola);
+
+        GameObject labelsGrid= GameObject.Find("LabelsGrid");
         
-        int i = 0;
-        foreach (string product in productsFromGondola)
+        foreach (string product in productosDesordenados)
         {
-            i++;
             GameObject loadedPrefab = Resources.Load<GameObject>(Configuration.PRODUCTOS_PATH + product);
             NGUISomosUtils.setTildeProductoSeleccionado(loadedPrefab, false);
-            
-            NGUISomosUtils.showTextInScreen("P"+i.ToString()+"Label", loadedPrefab.name);
+            GameObject productLabel = Resources.Load<GameObject>("Prefabs/labelProductos");
+            productLabel.name = loadedPrefab.name;
+            productLabel.GetComponent<UILabel>().text = loadedPrefab.name; 
             loadedPrefab.tag = "GameController";
             this.setProductTarget(loadedPrefab);
             NGUITools.AddChild(grid, loadedPrefab);
+            NGUITools.AddChild(labelsGrid, productLabel);
         }
-        grid.GetComponent<UIGrid>().Reposition();
 
+        grid.GetComponent<UIGrid>().Reposition();
+        labelsGrid.GetComponent<UIGrid>().Reposition();
     }
 
     
