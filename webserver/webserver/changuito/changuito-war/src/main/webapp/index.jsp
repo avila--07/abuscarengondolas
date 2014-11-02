@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title>Changuito</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
@@ -30,12 +30,9 @@
 			<li id="inicio" class="current_page_item"><a href="#" accesskey="1" title="">Inicio</a></li>
 			<li id="about"><a href="#" accesskey="6" title="">¿Quiénes somos?</a></li>
 			<li id="login"><a href="#" accesskey="5" title="">Login</a></li>
-			<!-- <li id="stats"><a href="#" accesskey="2" title="">Estadísticas</a></li>
-			<li id="configuration"><a href="#" accesskey="3" title="">Configuración</a></li>
-			<li id="partidas"><a href="#" accesskey="4" title="">Partidas</a></li> -->
 		</ul>
 	</div>
-	
+ 
 	<div id="menu_opt">
 		<ul>
 			<li id="stats"><a href="#" accesskey="2" title="">Estadísticas</a></li>
@@ -67,8 +64,12 @@
 $( document ).ready(function() {
 	
 	if($.cookie('onLoadGoTo')){
-		$("#featured-wrapper").load("/statics");	
+		$("#featured-wrapper").load("/home");	
 		$.removeCookie('onLoadGoTo'); 
+		$("#menu ul").append($("#stats"));
+		$("#menu ul").append($("#configuration"));
+		$("#menu ul").append($("#partidas"));
+
 	}else{
 		$("#featured-wrapper").load("/homefatures");
 	}
