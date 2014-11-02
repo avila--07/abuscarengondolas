@@ -18,6 +18,7 @@ public class GondolaSelectionModule : Module
 
 		public override void MakeScenario ()
 		{
+				// TODO: Fer/Cheppi
 				throw new System.NotImplementedException ();
 		}
 

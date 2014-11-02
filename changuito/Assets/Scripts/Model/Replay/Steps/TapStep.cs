@@ -14,6 +14,7 @@ public class TapStep : Step
 
 		public override void DoAction ()
 		{
+				// TODO: Fer/Cheppi
 				// Aca habria que implementar un click en el punto -> Point		
 				throw new System.NotImplementedException ();
 		}
