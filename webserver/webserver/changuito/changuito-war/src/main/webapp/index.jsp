@@ -11,8 +11,8 @@
 <link href="/frontend/fonts.css" rel="stylesheet" type="text/css" media="all" />
 
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
-
 </head>
+
 <body>
 <div id="header-wrapper">
 	<div id="header" class="container">
@@ -31,6 +31,7 @@
 			<li id="inicio" class="current_page_item"><a href="#" accesskey="1" title="" id="inicioLink">Inicio</a></li>
 			<li id="about"><a href="#" accesskey="6" title="" id="aboutLink">¿Quiénes somos?</a></li>
 			<li id="login"><a href="#" accesskey="5" title="" id="loginLink">Login</a></li>
+			<li id="demo"><a href="#" accesskey="7" title="">Demo</a></li>
 		</ul>
 	</div>
  

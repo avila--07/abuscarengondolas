@@ -4,21 +4,13 @@ using UnityEngine;
 
 public abstract class Step : SharedObject
 {
-		public int order {
-				get { return GetInt ("order"); }
-				set { Set ("order", value); }
-		}
-
-		public Step ()
-		{
-		}
-
 		public abstract void DoAction ();
 
-		public IEnumerator Replay ()
+		public IEnumerator Play ()
 		{
-				yield return new WaitForSeconds (1.5f);
+				yield return new WaitForSeconds (2f); // Esperamos dos segundos 
 
+				//Ejecutar la accion propia del paso
 				DoAction ();
 		}
 }

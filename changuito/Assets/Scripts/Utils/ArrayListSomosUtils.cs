@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ArrayListSomosUtils {
 
@@ -25,9 +26,9 @@ public class ArrayListSomosUtils {
         return listaDesordenada;
     }
 
-    public static ArrayList desordenarLista(ArrayList list)
+	public static List<string> desordenarLista(List<string> list)
     {
-        ArrayList listaDesordenada = new ArrayList(list.Count);
+		List<string> listaDesordenada = new List<string>(list.Count);
         int value = 0;
 
         for (int i = 0; list.Count != listaDesordenada.Count; i++)
