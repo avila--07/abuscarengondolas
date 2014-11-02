@@ -15,68 +15,89 @@ using System.Collections.Generic;
 ///    7 - Perfumería: Shampoo, Jabón, Desodorante, Dentífrico, Cepillo de dientes
 /// </summary>
 /// 
-public class GondolaFactory
-{
+public class GondolaFactory{
 
-		public static int MAX_PRODUCTOS_X_TIPO = 4;
-		public static int MAX_PRODUCTOS = 6;
-		public static int VERDURAS = 0;
-		public static int FRUTAS = 1;
-		public static int BEBIDAS = 2;
-		public static int GOLOSINAS = 3;
-		public static int ALMACEN = 4;
-		public static int FRESCOS = 5;
-		public static int LACTEOS = 6;
-		public static int PERFUMERIA = 7;
+    public static int MAX_PRODUCTOS_X_TIPO_IN_GAME = 4;
+    public static int MAX_PRODUCTOS = 6;
 
-		public static IDictionary<int, string> tipoGondolasDictionary = new Dictionary<int, string> (){
-	        {VERDURAS,"Verduras"},
-	        {FRUTAS,"Frutas"},
-	        {BEBIDAS,"Bebidas"},
-	        {GOLOSINAS,"Golosinas"},
-	        {ALMACEN,"Almacen"},
-	        {FRESCOS,"Frescos"},
-	        {LACTEOS,"Lacteos"},
-	        {PERFUMERIA,"Perfumeria"}
-    	};
+    public static int MAX_PRODUCTOS_TIPO = 6;
 
-		public static  IDictionary<int, List<string>> gondolasDictionary = new Dictionary<int, List<string>> ()
-    	{
-			{VERDURAS, new List<string>() { "Lechuga", "Cebolla", "Tomate", "Zapallo" }},
-			{FRUTAS, new List<string>() { "Manzana", "Banana", "Pera", "Naranja"}},
-			{BEBIDAS, new List<string>() { "Agua", "Jugo", "Gaseosa", "Soda" }},
-			{GOLOSINAS, new List<string>() { "Chicle", "Alfajor", "Chupetin", "Caramelo" }},
-			{ALMACEN, new List<string>() { "Fideos", "Aceite", "Pan", "Galletitas" }},
-			{FRESCOS, new List<string>() { "Huevos", "Flan", "Salchichas", "Jamón" }},
-			{LACTEOS, new List<string>() { "Leche", "Queso", "Yogurt", "Manteca"}},  
-			{PERFUMERIA, new List<string> () { "Shampoo", "Jabón", "Desodorante", "Dentífrico" }}
-	   	};
+    public static int VERDURAS = 0;
+    public static int FRUTAS = 1;
+    public static int BEBIDAS = 2;
+    public static int GOLOSINAS = 3;
+    public static int ALMACEN = 4;
+    public static int FRESCOS = 5;
+    public static int LACTEOS = 6;
+    public static int PERFUMERIA = 7;
 
-		/// <summary>
-		/// Devuelve todos sus productos de un tipo en particular.
-		/// </summary>
-		/// <param name="tipo"></param>
-		/// <returns></returns>
-		public static List<string> getGondolaProducts (int tipo)
-		{
-				List<string> value = new List<string> (4);
-				gondolasDictionary.TryGetValue (tipo, out value);
+    private static IDictionary<int, string> tipoGondolasDictionary = new Dictionary<int, string>(){
+        {VERDURAS,"Verduras"},
+        {FRUTAS,"Frutas"},
+        {BEBIDAS,"Bebidas"},
+        {GOLOSINAS,"Golosinas"},
+        {ALMACEN,"Almacen"},
+        {FRESCOS,"Frescos"},
+        {LACTEOS,"Lacteos"},
+        {PERFUMERIA,"Perfumeria"}
+    };
+
+   public static  IDictionary<int, ArrayList> gondolasDictionary = new Dictionary<int, ArrayList>()
+    {
+        {VERDURAS, new ArrayList() { "Lechuga", "Cebolla", "Tomate", "Zapallo", "Papa", "Choclo" }},
+        {FRUTAS, new ArrayList() { "Manzana", "Banana", "Pera", "Naranja", "Sandia", "Uva" }},
+        {BEBIDAS, new ArrayList() { "Agua", "Jugo", "Gaseosa", "Soda", "Amargo","Energizante" }},
+        {GOLOSINAS, new ArrayList() { "Chicle", "Alfajor", "Chupetin", "Caramelo", "Gomitas", "Chocolate" }},
+        {ALMACEN, new ArrayList() { "Fideos", "Aceite", "Pan", "Galletitas", "Azucar", "Arroz" }},
+        {FRESCOS, new ArrayList() { "Huevos", "Flan", "Salchichas", "Jamón", "Postrecitos","Hamburguesa" }},
+        {LACTEOS, new ArrayList() { "Leche", "Queso", "Yogurt", "Manteca", "DulceDeLeche", "Crema" }},
+        {PERFUMERIA, new ArrayList() { "Shampoo", "Jabón", "Desodorante", "Dentífrico", "CepilloDientes", "Esponja" }}
+    };
+
+    /// <summary>
+    /// Devuelve todos sus productos de un tipo en particular.
+    /// </summary>
+    /// <param name="tipo"></param>
+    /// <returns></returns>
+    public static ArrayList getGondola(int tipo){
+     
+        ArrayList value = new ArrayList(4);
+        gondolasDictionary.TryGetValue(tipo,out value);
         
-				return value;    
-		}
+        return value;    
+    }
 
 
-		/// <summary>
-		/// Matcheo Tipo (int) -> Tipo (String)
-		/// </summary>
-		/// <param name="tipo"></param>
-		/// <returns></returns>
-		public static string getGondolaType (int tipo)
-		{
-				string label;
-				tipoGondolasDictionary.TryGetValue (tipo, out label);
+    /// <summary>
+    /// Matcheo Tipo (int) -> Tipo (String)
+    /// </summary>
+    /// <param name="tipo"></param>
+    /// <returns></returns>
+    public static string getTipoGondola(int tipo)
+    {
+        string label;
+        tipoGondolasDictionary.TryGetValue(tipo, out label);
         
-				return label;
-		}
+        return label;
+    }
+
+    public static ArrayList generateRandomProductsWithOutTarget(GameObject target)
+    {
+        ArrayList products = new ArrayList(MAX_PRODUCTOS_X_TIPO_IN_GAME);
+        ArrayList allProducts = GondolaFactory.getGondola(target.GetComponent<ProductProperties>().tipo);
+
+        // Solo 3, ya que target se agrega luego.
+        while (MAX_PRODUCTOS_X_TIPO_IN_GAME -1 != products.Count)
+        {
+            int posicionProducto = CommonsSomosUtils.generateRandomValue(0, MAX_PRODUCTOS_TIPO );
+
+            if (!products.Contains(allProducts[posicionProducto]) && !target.name.Equals(allProducts[posicionProducto]))
+            {
+                //Agrego la lista con de los productos del mismo tipo
+                products.Add(allProducts[posicionProducto]);
+            }
+        }
+        return products;
+    }
 
 }

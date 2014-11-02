@@ -24,8 +24,8 @@ public class ServicioSeleccionarProductos: MonoBehaviour
         this.inicializarTarget();
     }
 
-    void inicializarTarget(){
-        
+    void inicializarTarget()
+    {
         GameObject grid = GameObject.Find("ListadoGrid");
         GameObject targetLabel = GameObject.Find("ProductoLabel");
 
@@ -34,29 +34,38 @@ public class ServicioSeleccionarProductos: MonoBehaviour
         GameObject target = ListadoSingleton.Instance.getTarget(); 
         target.GetComponent<ProductProperties>().target = false;
         target.tag = "SeleccionarProducto";
-        NGUISomosUtils.setLabelProductos(target, false);
         NGUITools.AddChild(grid, target);
-        }
+    }
 
 
     private void inicializarListadoProductos()
     {
         GameObject grid = GameObject.Find("GondolaGrid");
        
-        //Cada gondola tiene 4 productos, incluido el target.
         //Las gondolas son de un unico tipo de producto (ej Lacteos, verduras, carnes, etc)
+        //Cada gondola tiene 4 productos que se muestran por pantalla. 
         List<string> productsFromGondolaX = GondolaFactory.gondolasDictionary[ListadoSingleton.ProductTarget.GetComponent<ProductProperties>().tipo];
+        productsFromGondola.Add(ListadoSingleton.ProductTarget.name);
+       
+        ArrayList productosDesordenados = ArrayListSomosUtils.desordenarLista(productsFromGondola);
+
+        GameObject labelsGrid= GameObject.Find("LabelsGrid");
         
-        foreach (string product in productsFromGondolaX)
+        foreach (string product in productosDesordenados)
         {
             GameObject loadedPrefab = Resources.Load<GameObject>(Configuration.PRODUCTOS_PATH + product);
             NGUISomosUtils.setTildeProductoSeleccionado(loadedPrefab, false);
-            NGUISomosUtils.setLabelProductos(loadedPrefab, true);
+            GameObject productLabel = Resources.Load<GameObject>("Prefabs/labelProductos");
+            productLabel.name = loadedPrefab.name;
+            productLabel.GetComponent<UILabel>().text = loadedPrefab.name; 
             loadedPrefab.tag = "GameController";
             this.setProductTarget(loadedPrefab);
             NGUITools.AddChild(grid, loadedPrefab);
+            NGUITools.AddChild(labelsGrid, productLabel);
         }
+
         grid.GetComponent<UIGrid>().Reposition();
+        labelsGrid.GetComponent<UIGrid>().Reposition();
     }
 
     

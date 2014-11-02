@@ -10,7 +10,7 @@ public class SaveConfiguration : MonoBehaviour
 		this.saveModuloPago ();
 		this.saveModuloControlVuelto ();
         this.saveGuardarPartidas();
-
+        this.saveEnabledSound();
 		Configuration.Current.SaveAsCurrent ();
 		SaveConfigurationService.TryToCall ();
 	}
@@ -37,5 +37,11 @@ public class SaveConfiguration : MonoBehaviour
     {
         GameObject check = GameObject.Find("GuardarPartidasCheckbox");
         Configuration.Current.GuardarPartidas = check.GetComponent<UIToggle>().value;
+    }
+
+    private void saveEnabledSound()
+    {
+        GameObject check = GameObject.Find("SonidosCheckbox");
+        Configuration.Current.EnabledSound = check.GetComponent<UIToggle>().value;
     }
 }

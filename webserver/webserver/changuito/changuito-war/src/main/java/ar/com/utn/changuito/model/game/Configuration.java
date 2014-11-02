@@ -19,4 +19,8 @@ public final class Configuration extends SharedObject {
     public boolean getGuardarPartidas(){
     	return getBoolean("guapar");
     }
+    
+    public boolean getEnabledSound(){
+    	return getBoolean("enso");
+    }
 }
