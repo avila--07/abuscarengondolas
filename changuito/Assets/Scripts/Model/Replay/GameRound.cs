@@ -34,6 +34,11 @@ public class GameRound : SharedObject
 		{
 				foreach (Module module in Modules) {
 						_currentModule = module;
+						
+						module.MakeScenario ();
+
+						yield return  new WaitForSeconds (1f);
+
 						yield return  module.Play ();
 				}
 		}
