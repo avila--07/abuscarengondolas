@@ -29,7 +29,13 @@ public class Configuration : SharedObject
         get { return GetBool("guapar"); }
         set { Set("guapar", value); }
     }
-	
+
+    public bool EnabledSound
+    {
+        get { return GetBool("enso"); }
+        set { Set("enso", value); }
+    }
+
 	public int ModulesCount {
 		get { 
 			//REVIEW: No haga esto en su casa :P
@@ -42,6 +48,7 @@ public class Configuration : SharedObject
 		PurchaseModule = false;
 		ChangeControlModule = false;
         GuardarPartidas = false;
+        EnabledSound = false;
 		GondolasCount = 2;
 	}
 

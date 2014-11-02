@@ -17,6 +17,7 @@ public class LoadConfiguration : MonoBehaviour
 		this.loadModuloPago ();
 		this.loadModuloControlVuelto ();
         this.loadGuardarPartidas();
+        this.loadEnabledSound();
 	}
 	
 	public void RefreshWithUserConfigurationDelayed ()
@@ -54,6 +55,12 @@ public class LoadConfiguration : MonoBehaviour
         GameObject check = GameObject.Find("GuardarPartidasCheckbox");
         check.GetComponent<UIToggle>().value = Configuration.Current.GuardarPartidas;
 
+    }
+
+    private void loadEnabledSound()
+    {
+        GameObject check = GameObject.Find("SonidosCheckbox");
+        check.GetComponent<UIToggle>().value = Configuration.Current.EnabledSound;
     }
 
 }
