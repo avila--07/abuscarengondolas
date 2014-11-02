@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -10,8 +11,8 @@
 <link href="/frontend/fonts.css" rel="stylesheet" type="text/css" media="all" />
 
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
-
 </head>
+
 <body>
 <div id="header-wrapper">
 	<div id="header" class="container">
@@ -30,6 +31,7 @@
 			<li id="inicio" class="current_page_item"><a href="#" accesskey="1" title="">Inicio</a></li>
 			<li id="about"><a href="#" accesskey="6" title="">¿Quiénes somos?</a></li>
 			<li id="login"><a href="#" accesskey="5" title="">Login</a></li>
+			<li id="demo"><a href="#" accesskey="7" title="">Demo</a></li>
 			<!-- <li id="stats"><a href="#" accesskey="2" title="">Estadísticas</a></li>
 			<li id="configuration"><a href="#" accesskey="3" title="">Configuración</a></li>
 			<li id="partidas"><a href="#" accesskey="4" title="">Partidas</a></li> -->
