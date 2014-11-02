@@ -16,8 +16,8 @@ public class LoginServlet extends HttpServlet {
 //		resp.setCharacterEncoding("UTF-8");
 		System.out.println("Do Get Login");
 		if(isLogued(req)){
-			System.out.println("Logged");
-			req.setAttribute("onLoadGoTo", "administration");
+			System.out.println("Logged");			
+			setAdministrationCookie(req, resp);
 			req.getRequestDispatcher("/").forward(req, resp);
 		}else{
 			System.out.println("Not Logged");
@@ -61,9 +61,7 @@ public void doPost(HttpServletRequest req, HttpServletResponse resp)
 
 		if(nick!=null && !"".equals(nick) && pass!=null && !"".equals(pass)){
 			System.out.println("GoTo barra");
-			req.setAttribute("onLoadGoTo", "administration");
-			Cookie cookie2 = new Cookie("onLoadGoTo", "administration");
-			resp.addCookie(cookie2);
+			setAdministrationCookie(req, resp);
 			req.getRequestDispatcher("/").forward(req, resp);
 		}else{
 			System.out.println("GoTo login");
@@ -75,5 +73,12 @@ public void doPost(HttpServletRequest req, HttpServletResponse resp)
 		e.printStackTrace();
 	}
 	
+}
+
+private void setAdministrationCookie(HttpServletRequest req,
+		HttpServletResponse resp) {
+	req.setAttribute("onLoadGoTo", "administration");
+	Cookie cookie2 = new Cookie("onLoadGoTo", "administration");
+	resp.addCookie(cookie2);
 }
 }

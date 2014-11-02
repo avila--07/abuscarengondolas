@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Changuito</title>
+<link rel="shortcut icon" type="image/png" href="/static/images/favicon.ico"/>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
@@ -27,17 +28,17 @@
 	<!--<div class="row">-->
 	<div id="menu">
 		<ul>
-			<li id="inicio" class="current_page_item"><a href="#" accesskey="1" title="">Inicio</a></li>
-			<li id="about"><a href="#" accesskey="6" title="">¿Quiénes somos?</a></li>
-			<li id="login"><a href="#" accesskey="5" title="">Login</a></li>
+			<li id="inicio" class="current_page_item"><a href="#" accesskey="1" title="" id="inicioLink">Inicio</a></li>
+			<li id="about"><a href="#" accesskey="6" title="" id="aboutLink">¿Quiénes somos?</a></li>
+			<li id="login"><a href="#" accesskey="5" title="" id="loginLink">Login</a></li>
 		</ul>
 	</div>
  
 	<div id="menu_opt">
 		<ul>
-			<li id="stats"><a href="#" accesskey="2" title="">Estadísticas</a></li>
-			<li id="configuration"><a href="#" accesskey="3" title="">Configuración</a></li>
-			<li id="partidas"><a href="#" accesskey="4" title="">Partidas</a></li>		
+			<li id="stats"><a href="#" accesskey="2" title="" id="statsLink">Estadísticas</a></li>
+			<li id="configuration"><a href="#" accesskey="3" title="" id="configLink">Configuración</a></li>
+			<li id="partidas"><a href="#" accesskey="4" title="" id="partidasLink">Partidas</a></li>		
 		</ul>
 	</div>
 	
@@ -64,12 +65,18 @@
 $( document ).ready(function() {
 	
 	if($.cookie('onLoadGoTo')){
-		$("#featured-wrapper").load("/home");	
-		$.removeCookie('onLoadGoTo'); 
-		$("#menu ul").append($("#stats"));
-		$("#menu ul").append($("#configuration"));
-		$("#menu ul").append($("#partidas"));
-
+		
+		if("administration" == $.cookie('onLoadGoTo')){
+			$("#featured-wrapper").load("/administration");	
+			$.removeCookie('onLoadGoTo'); 
+			$("#menu ul").append($("#stats"));
+			$("#menu ul").append($("#configuration"));
+			$("#menu ul").append($("#partidas"));
+			$("#loginLink").text("Administración");
+		}else{
+			$("#featured-wrapper").load("/homefatures");
+			
+		}
 	}else{
 		$("#featured-wrapper").load("/homefatures");
 	}
