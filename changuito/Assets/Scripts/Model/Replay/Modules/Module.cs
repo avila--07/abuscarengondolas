@@ -21,12 +21,17 @@ public abstract class Module : SharedObject
 				AddToList ("steps", step);
 		}
 
-		public IEnumerator Play ()
+		public IEnumerator Play (MonoBehaviour monoBehaviour)
 		{
-				yield return new WaitForEndOfFrame ();
+				Debug.Log (Name + " is waiting 1 second...");
+				yield return new WaitForSeconds (1f);
 
 				foreach (Step step in Steps) {
-						yield return step.Play ();
+			
+						Debug.Log (Name + " start step " + step.ToString () + " ...");
+						yield return monoBehaviour.StartCoroutine (step.Play ());
 				}
+				Debug.Log (Name + " finished all its steps...");
+				yield break;
 		}
 }

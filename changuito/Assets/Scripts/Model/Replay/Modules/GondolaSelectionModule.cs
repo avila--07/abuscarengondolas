@@ -19,7 +19,7 @@ public class GondolaSelectionModule : Module
 		public override void MakeScenario ()
 		{
 				// TODO: Fer/Cheppi
-				throw new System.NotImplementedException ();
+				//throw new System.NotImplementedException ();
 		}
 
 		public void AddGondola (Gondola gondola)

@@ -34,7 +34,6 @@ public class SharedObject
 		}
 
 		public void AddToList<T> (string key, T value)
-		where T: SharedObject
 		{
 				Set (key + (GetList<T> (key).Count + 1), value);
 		}

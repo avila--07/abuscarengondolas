@@ -30,16 +30,21 @@ public class GameRound : SharedObject
 				AddToList<Module> ("mod", value);	
 		}
 
-		public IEnumerator Play ()
+		public IEnumerator Play (MonoBehaviour monoBehaviour)
 		{
 				foreach (Module module in Modules) {
 						_currentModule = module;
 						
 						module.MakeScenario ();
 
+						Debug.Log (module.Name + " is waiting 1 second...");
+
 						yield return  new WaitForSeconds (1f);
 
-						yield return  module.Play ();
+						Debug.Log (module.Name + " is automatically playing...");
+						yield return monoBehaviour.StartCoroutine (module.Play (monoBehaviour));
 				}
+				Debug.LogError ("Finish GameRound Play...");
+				yield break;
 		}
 }

@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 		public void StartAlreadyPlayedGame (GameRound gameRound)
 		{
 				_gameRound = gameRound;
-				StartCoroutine (_gameRound.Play ());
+				StartCoroutine (_gameRound.Play (this));
 		}
 
 		public void StartNewGame ()
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 				if (Configuration.Current.ChangeControlModule) {
 						_gameRound.AddModule (BuildChangeControlModule ());
 				}
-				StartCoroutine (_gameRound.Play ());
+				StartCoroutine (_gameRound.Play (this));
 		}
 
 		public void RecordStep (Step step)
