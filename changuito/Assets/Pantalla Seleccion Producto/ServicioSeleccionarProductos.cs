@@ -45,9 +45,9 @@ public class ServicioSeleccionarProductos: MonoBehaviour
         //Las gondolas son de un unico tipo de producto (ej Lacteos, verduras, carnes, etc)
         //Cada gondola tiene 4 productos que se muestran por pantalla. 
         List<string> productsFromGondolaX = GondolaFactory.gondolasDictionary[ListadoSingleton.ProductTarget.GetComponent<ProductProperties>().tipo];
-        productsFromGondola.Add(ListadoSingleton.ProductTarget.name);
+		productsFromGondolaX.Add(ListadoSingleton.ProductTarget.name);
        
-        ArrayList productosDesordenados = ArrayListSomosUtils.desordenarLista(productsFromGondola);
+		List<string> productosDesordenados = ArrayListSomosUtils.desordenarLista(productsFromGondolaX);
 
         GameObject labelsGrid= GameObject.Find("LabelsGrid");
         

@@ -31,7 +31,7 @@ public class GondolaFactory{
     public static int LACTEOS = 6;
     public static int PERFUMERIA = 7;
 
-    private static IDictionary<int, string> tipoGondolasDictionary = new Dictionary<int, string>(){
+	public static IDictionary<int, string> tipoGondolasDictionary = new Dictionary<int, string>(){
         {VERDURAS,"Verduras"},
         {FRUTAS,"Frutas"},
         {BEBIDAS,"Bebidas"},
@@ -42,16 +42,16 @@ public class GondolaFactory{
         {PERFUMERIA,"Perfumeria"}
     };
 
-   public static  IDictionary<int, ArrayList> gondolasDictionary = new Dictionary<int, ArrayList>()
+	public static  IDictionary<int, List<string>> gondolasDictionary = new Dictionary<int, List<string>>()
     {
-        {VERDURAS, new ArrayList() { "Lechuga", "Cebolla", "Tomate", "Zapallo", "Papa", "Choclo" }},
-        {FRUTAS, new ArrayList() { "Manzana", "Banana", "Pera", "Naranja", "Sandia", "Uva" }},
-        {BEBIDAS, new ArrayList() { "Agua", "Jugo", "Gaseosa", "Soda", "Amargo","Energizante" }},
-        {GOLOSINAS, new ArrayList() { "Chicle", "Alfajor", "Chupetin", "Caramelo", "Gomitas", "Chocolate" }},
-        {ALMACEN, new ArrayList() { "Fideos", "Aceite", "Pan", "Galletitas", "Azucar", "Arroz" }},
-        {FRESCOS, new ArrayList() { "Huevos", "Flan", "Salchichas", "Jamón", "Postrecitos","Hamburguesa" }},
-        {LACTEOS, new ArrayList() { "Leche", "Queso", "Yogurt", "Manteca", "DulceDeLeche", "Crema" }},
-        {PERFUMERIA, new ArrayList() { "Shampoo", "Jabón", "Desodorante", "Dentífrico", "CepilloDientes", "Esponja" }}
+		{VERDURAS, new List<string>() { "Lechuga", "Cebolla", "Tomate", "Zapallo", "Papa", "Choclo" }},
+		{FRUTAS, new List<string>() { "Manzana", "Banana", "Pera", "Naranja", "Sandia", "Uva" }},
+		{BEBIDAS, new List<string>() { "Agua", "Jugo", "Gaseosa", "Soda", "Amargo","Energizante" }},
+		{GOLOSINAS, new List<string>() { "Chicle", "Alfajor", "Chupetin", "Caramelo", "Gomitas", "Chocolate" }},
+		{ALMACEN, new List<string>() { "Fideos", "Aceite", "Pan", "Galletitas", "Azucar", "Arroz" }},
+		{FRESCOS, new List<string>() { "Huevos", "Flan", "Salchichas", "Jamón", "Postrecitos","Hamburguesa" }},
+		{LACTEOS, new List<string>() { "Leche", "Queso", "Yogurt", "Manteca", "DulceDeLeche", "Crema" }},
+		{PERFUMERIA, new List<string>() { "Shampoo", "Jabón", "Desodorante", "Dentífrico", "CepilloDientes", "Esponja" }}
     };
 
     /// <summary>
@@ -59,9 +59,9 @@ public class GondolaFactory{
     /// </summary>
     /// <param name="tipo"></param>
     /// <returns></returns>
-    public static ArrayList getGondola(int tipo){
+	public static List<string> getGondolaProducts(int tipo){
      
-        ArrayList value = new ArrayList(4);
+		List<string> value = new List<string>(4);
         gondolasDictionary.TryGetValue(tipo,out value);
         
         return value;    
@@ -81,10 +81,10 @@ public class GondolaFactory{
         return label;
     }
 
-    public static ArrayList generateRandomProductsWithOutTarget(GameObject target)
+	public static List<string> generateRandomProductsWithOutTarget(GameObject target)
     {
-        ArrayList products = new ArrayList(MAX_PRODUCTOS_X_TIPO_IN_GAME);
-        ArrayList allProducts = GondolaFactory.getGondola(target.GetComponent<ProductProperties>().tipo);
+		List<string> products = new List<string>(MAX_PRODUCTOS_X_TIPO_IN_GAME);
+		List<string> allProducts = GondolaFactory.getGondolaProducts(target.GetComponent<ProductProperties>().tipo);
 
         // Solo 3, ya que target se agrega luego.
         while (MAX_PRODUCTOS_X_TIPO_IN_GAME -1 != products.Count)

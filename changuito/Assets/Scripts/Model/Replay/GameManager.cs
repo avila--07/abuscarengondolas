@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 				List<int> randomGondolaKeys = RandomUtils.GetListWithRandomElementsFrom (GondolaFactory.tipoGondolasDictionary.Keys, Configuration.Current.GondolasCount);
 				foreach (int randomGondolaKey in randomGondolaKeys) {
 
-						string gondolaType = GondolaFactory.getGondolaType (randomGondolaKey);
+						string gondolaType = GondolaFactory.getTipoGondola (randomGondolaKey);
 						gondolaSelectionModule.AddGondola (new Gondola (gondolaType));
 
 						string productName = RandomUtils.GetRandomElementOfList (GondolaFactory.getGondolaProducts (randomGondolaKey));
