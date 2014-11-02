@@ -20,7 +20,7 @@ public class GondolaFactory{
     public static int MAX_PRODUCTOS_X_TIPO_IN_GAME = 4;
     public static int MAX_PRODUCTOS = 6;
 
-    public static int MAX_PRODUCTOS_TIPO = 5;
+    public static int MAX_PRODUCTOS_TIPO = 6;
 
     public static int VERDURAS = 0;
     public static int FRUTAS = 1;
@@ -44,14 +44,14 @@ public class GondolaFactory{
 
    public static  IDictionary<int, ArrayList> gondolasDictionary = new Dictionary<int, ArrayList>()
     {
-        {VERDURAS, new ArrayList() { "Lechuga", "Cebolla", "Tomate", "Zapallo","Papa" }},
-        {FRUTAS, new ArrayList() { "Manzana", "Banana", "Pera", "Naranja","Sandia"}},
-        {BEBIDAS, new ArrayList() { "Agua", "Jugo", "Gaseosa", "Soda","Papa" }},
-        {GOLOSINAS, new ArrayList() { "Chicle", "Alfajor", "Chupetin", "Caramelo","Papa" }},
-        {ALMACEN, new ArrayList() { "Fideos", "Aceite", "Pan", "Galletitas","Papa" }},
-        {FRESCOS, new ArrayList() { "Huevos", "Flan", "Salchichas", "Jamón","Papa" }},
-        {LACTEOS, new ArrayList() { "Leche", "Queso", "Yogurt", "Manteca","Postrecitos"}},  
-        {PERFUMERIA, new ArrayList() { "Shampoo", "Jabón", "Desodorante", "Dentífrico","Papa" }}
+        {VERDURAS, new ArrayList() { "Lechuga", "Cebolla", "Tomate", "Zapallo", "Papa", "Choclo" }},
+        {FRUTAS, new ArrayList() { "Manzana", "Banana", "Pera", "Naranja", "Sandia", "Uva" }},
+        {BEBIDAS, new ArrayList() { "Agua", "Jugo", "Gaseosa", "Soda", "Amargo","Energizante" }},
+        {GOLOSINAS, new ArrayList() { "Chicle", "Alfajor", "Chupetin", "Caramelo", "Gomitas", "Chocolate" }},
+        {ALMACEN, new ArrayList() { "Fideos", "Aceite", "Pan", "Galletitas", "Azucar", "Arroz" }},
+        {FRESCOS, new ArrayList() { "Huevos", "Flan", "Salchichas", "Jamón", "Postrecitos","Hamburguesa" }},
+        {LACTEOS, new ArrayList() { "Leche", "Queso", "Yogurt", "Manteca", "DulceDeLeche", "Crema" }},
+        {PERFUMERIA, new ArrayList() { "Shampoo", "Jabón", "Desodorante", "Dentífrico", "CepilloDientes", "Esponja" }}
     };
 
     /// <summary>
