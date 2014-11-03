@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
 		private static GameManager _instance;
 		private GameRound _gameRound;
+        public GondolaSelectionModule gondolaSelectionModule;
 
 		public static GameManager Instance {
 				get {
@@ -39,10 +40,10 @@ public class GameManager : MonoBehaviour
 		{
 				_gameRound = new GameRound (Configuration.Current);
 
-				GondolaSelectionModule gondolaSelectionModule = BuildGondolaSelectionModule ();
+				gondolaSelectionModule = BuildGondolaSelectionModule ();
 				gondolaSelectionModule.AddStep (new ChangeSceneStep ("PantallaSeleccionGondolas"));
 
-				_gameRound.AddModule (BuildGondolaSelectionModule ());
+                _gameRound.AddModule(gondolaSelectionModule);
 
 				if (Configuration.Current.PurchaseModule) {
 						_gameRound.AddModule (BuildPurchaseModule ());
