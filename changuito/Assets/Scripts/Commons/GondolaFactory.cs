@@ -73,7 +73,7 @@ public class GondolaFactory{
     /// </summary>
     /// <param name="tipo"></param>
     /// <returns></returns>
-    public static string getTipoGondola(int tipo)
+    public static string getGondolaNombre(int tipo)
     {
         string label;
         tipoGondolasDictionary.TryGetValue(tipo, out label);

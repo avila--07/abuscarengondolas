@@ -59,7 +59,7 @@ public class ListadoSingleton
            if (!gondolasSeleccionadas.Contains(tipoGondola)) { 
                //Agrego la lista con de los productos del mismo tipo
                gondolasSeleccionadas.Add(tipoGondola);
-               String name = GondolaFactory.getTipoGondola(tipoGondola);
+               String name = GondolaFactory.getGondolaNombre(tipoGondola);
                GameObject gondola = (GameObject)Resources.Load(Configuration.GONDOLAS_PATH + name);
                gondola.name = name;
                gondola.GetComponent<GondolaProperties>().ProductType = tipoGondola;
@@ -175,7 +175,7 @@ public class ListadoSingleton
     /// <returns></returns>
     public string getLabelOfGondolaType(int gondolaPosition)
     {
-        return GondolaFactory.getTipoGondola((int)getGondolasSeleccionadas()[gondolaPosition]);
+        return GondolaFactory.getGondolaNombre((int)getGondolasSeleccionadas()[gondolaPosition]);
     }
 
     internal void clean()

@@ -35,9 +35,9 @@ public class Play : MonoBehaviour
 
 		private void AddGondolaAndAProduct (GondolaSelectionModule gondolaSelectionModule, int gondolaKey)
 		{
-				string gondolaType = GondolaFactory.getTipoGondola (gondolaKey);
+				string gondolaName = GondolaFactory.getGondolaNombre (gondolaKey);
 
-				gondolaSelectionModule.AddGondola (new Gondola (gondolaType));
-				gondolaSelectionModule.AddProductToBuy (new Product (GondolaFactory.getGondolaProducts (gondolaKey) [0], gondolaType));
+				gondolaSelectionModule.AddGondola (new Gondola (gondolaName, gondolaKey));
+				gondolaSelectionModule.AddProductToBuy (new Product (GondolaFactory.getGondolaProducts (gondolaKey) [0], gondolaName));
 		}
 }

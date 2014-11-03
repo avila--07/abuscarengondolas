@@ -23,6 +23,9 @@ public class GondolaSelectionModule : Module
 		public override void MakeScenario ()
 		{
 				foreach (Gondola gondola in Gondolas) {
+						GameObject gondolaGameObject = (GameObject)Resources.Load (Configuration.GONDOLAS_PATH + gondola.Type);
+						gondolaGameObject.name = gondola.Name;
+						gondolaGameObject.GetComponent<GondolaProperties> ().ProductType = gondola.Type;
 				}
 
 				foreach (Product product in ProductsToBuy) {
