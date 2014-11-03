@@ -65,6 +65,20 @@ a:hover
    background-color: none;
 }
 
+p#title1 {
+color: #CC3300;
+font-family: Calibri;
+font-size : 25px;
+float: left;
+}
+
+p#txtfooter {
+display: inline;
+color: black;
+font-family: Buxton Sketch;
+font-size : 25px;
+}
+
 /*********************************************************************************/
 /* Unity                                                                         */
 /*********************************************************************************/

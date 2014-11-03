@@ -84,9 +84,9 @@ public class ListadoSingleton
             {
                 int tipoGondola = (int)gondolasSeleccionadas[i];
                 int producto = CommonsSomosUtils.generateRandomValue(0, GondolaFactory.MAX_PRODUCTOS_X_TIPO_IN_GAME);
-                GameObject productObject = (GameObject)Resources.Load(Configuration.PRODUCTOS_PATH + (string)GondolaFactory.getGondola(tipoGondola)[producto]);
+                GameObject productObject = (GameObject)Resources.Load(Configuration.PRODUCTOS_PATH + (string)GondolaFactory.getGondolaProducts(tipoGondola)[producto]);
                 if (productObject == null)
-                    Debug.LogError("El prefab " + (string)GondolaFactory.getGondola(tipoGondola)[producto] + " no existe" );
+                    Debug.LogError("El prefab " + (string)GondolaFactory.getGondolaProducts(tipoGondola)[producto] + " no existe" );
                 this.initializeProduct(productObject, tipoGondola);
                 ListadoProductos.Add(productObject);
             }

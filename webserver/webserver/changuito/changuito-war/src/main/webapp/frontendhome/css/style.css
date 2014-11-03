@@ -19,10 +19,16 @@ h3{
 	font-size: 12pt;
 }
 
+h4{
+	color: #CC0033;
+	text-decoration: none;
+	font-size: 10pt;
+}
+
 .divider{
-	background-image: url('../img/divider-pattern.png');
+	background-image: url('../img/dividergris.png');
 	background-repeat: repeat-x;;
-	height: 4px;
+	height: 10px;
 	width: 100%;
 }
 
@@ -69,12 +75,13 @@ h3{
 }
 
 #about div.row{
-	padding:30px 0;
+	padding:30px 30px 0;
 }
 
 #screenshots h1{
 	padding-bottom: 30px; 
 }
+
 
 /* -------- Footer styles ---------  */
 

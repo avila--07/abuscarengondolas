@@ -15,6 +15,7 @@ public class GondolaSelectionModule : Module
 		public List<Product> ProductsToBuy {
 				get { return GetList<Product> ("prods"); }
 		}
+
         
         /// <summary>
         /// Creamos el listado y las gondolas. Damos comienzo a las instancias de juego.
@@ -26,13 +27,22 @@ public class GondolaSelectionModule : Module
             this.addGondolas(ListadoSingleton.Instance.getGondolasSeleccionadas());
         }
 
-		public List<string> GondolaTypes {
-				get { return GetList<string> ("glatyp"); }
+
+		public override void MakeScenario ()
+		{
+				// TODO: Fer/Cheppi
+				//throw new System.NotImplementedException ();
 		}
-	/*
-		public List<Product> Products {
-				get { return GetList<string> ("prods"); }
-		}*/
+
+		public void AddGondola (Gondola gondola)
+		{
+				AddToList ("glatyp", gondola);
+		}
+	
+		public void AddProductToBuy (Product product)
+		{
+				AddToList ("prods", product);
+		}
 }
 
         private void addListado(List<GameObject> products)

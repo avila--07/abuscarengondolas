@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <html>
-<head><title>Home</title></head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head><title>Administración</title></head>
 <style>
 h1 {
     text-align: center;

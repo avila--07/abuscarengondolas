@@ -54,11 +54,17 @@ public class GameManager : MonoBehaviour
 		private static GondolaSelectionModule BuildGondolaSelectionModule ()
 		{
 				GondolaSelectionModule gondolaSelectionModule = new GondolaSelectionModule ();
+<<<<<<< HEAD
                 gondolaSelectionModule.MakeScenario();
 
 				// Add random gondolas and products to buy
 				
                 /*List<int> randomGondolaKeys = RandomUtils.GetListWithRandomElementsFrom (GondolaFactory.tipoGondolasDictionary.Keys, Configuration.Current.GondolasCount);
+=======
+		
+				// Add random gondolas and products to buy
+				List<int> randomGondolaKeys = RandomUtils.GetListWithRandomElementsFrom (GondolaFactory.tipoGondolasDictionary.Keys, Configuration.Current.GondolasCount);
+>>>>>>> 0be3bfcc7a75754afe2c797a5a0e8a6c6102a06a
 				foreach (int randomGondolaKey in randomGondolaKeys) {
 
 						string gondolaType = GondolaFactory.getTipoGondola (randomGondolaKey);
@@ -66,7 +72,11 @@ public class GameManager : MonoBehaviour
 
 						string productName = RandomUtils.GetRandomElementOfList (GondolaFactory.getGondolaProducts (randomGondolaKey));
 						gondolaSelectionModule.AddProductToBuy (new Product (productName, gondolaType));
+<<<<<<< HEAD
 				}*/
+=======
+				}
+>>>>>>> 0be3bfcc7a75754afe2c797a5a0e8a6c6102a06a
 				
 				return gondolaSelectionModule;
 		}

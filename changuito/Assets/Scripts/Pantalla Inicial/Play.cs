@@ -5,9 +5,15 @@ public class Play : MonoBehaviour
 {
 		private void OnClick ()
 		{
+<<<<<<< HEAD
 				//StartNewFakeGame ();
 
 				GameManager.Instance.StartNewGame ();
+=======
+				StartNewFakeGame ();
+
+				//GameManager.Instance.StartNewGame ();
+>>>>>>> 0be3bfcc7a75754afe2c797a5a0e8a6c6102a06a
 		}
 
 		private void StartNewFakeGame ()
@@ -26,6 +32,15 @@ public class Play : MonoBehaviour
 				gondolaSelectionModule.AddStep (new ChangeSceneStep ("PantallaSeleccionGondolas"));
 		                                   
 				GameManager.Instance.StartAlreadyPlayedGame (gameRound);
+<<<<<<< HEAD
+=======
+		                                   
+				//GameManager.Instance.RecordStep (new TapStep (1, 1));
+		                                   
+				//
+				//Destroy (gameObject);
+
+>>>>>>> 0be3bfcc7a75754afe2c797a5a0e8a6c6102a06a
 		}
 
 		private void AddGondolaAndAProduct (GondolaSelectionModule gondolaSelectionModule, int gondolaKey)

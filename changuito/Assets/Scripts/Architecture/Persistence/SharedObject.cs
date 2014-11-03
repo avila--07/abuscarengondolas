@@ -4,7 +4,7 @@ using System.Text;
 using System.Collections.Generic;
 using System;
 
-public class SharedObject
+public class SharedObject 
 {
 		private Dictionary<string, object> _data;
 	
@@ -34,7 +34,6 @@ public class SharedObject
 		}
 
 		public void AddToList<T> (string key, T value)
-		where T: SharedObject
 		{
 				Set (key + (GetList<T> (key).Count + 1), value);
 		}

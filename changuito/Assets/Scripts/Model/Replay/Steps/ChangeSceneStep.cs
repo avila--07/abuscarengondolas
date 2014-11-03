@@ -1,10 +1,16 @@
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class ChangeSceneStep : Step
 {
 		public string Scene {
-				get { return GetString ("scene");}
-				set { Set ("scene", value); }
+				get { return GetString ("scene"); }
+				private set { Set ("scene", value); }
+		}
+
+		public ChangeSceneStep (string scene)
+		{
+				Scene = scene;
 		}
 
 		public override void DoAction ()
@@ -12,4 +18,3 @@ public class ChangeSceneStep : Step
 				Application.LoadLevel (Scene);
 		}
 }
-
