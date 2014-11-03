@@ -27,13 +27,6 @@ public class GondolaSelectionModule : Module
             this.addGondolas(ListadoSingleton.Instance.getGondolasSeleccionadas());
         }
 
-
-		public override void MakeScenario ()
-		{
-				// TODO: Fer/Cheppi
-				//throw new System.NotImplementedException ();
-		}
-
 		public void AddGondola (Gondola gondola)
 		{
 				AddToList ("glatyp", gondola);
@@ -43,7 +36,7 @@ public class GondolaSelectionModule : Module
 		{
 				AddToList ("prods", product);
 		}
-}
+
 
         private void addListado(List<GameObject> products)
         {

@@ -78,11 +78,8 @@ public class ListadoSingleton
         //Si no inició el listado (primera vez) lo inicializa.
         if (PosicionActual == 0) { 
            
-            this.initializeGondolas();
-
             for (int i = 0; Configuration.Current.GondolasCount != this.ListadoProductos.Count; i++)
             {
-                int tipoGondola = (int)gondolasSeleccionadas[i];
                 int producto = CommonsSomosUtils.generateRandomValue(0, GondolaFactory.MAX_PRODUCTOS_X_TIPO_IN_GAME);
                 GameObject productObject = (GameObject)Resources.Load(Configuration.PRODUCTOS_PATH + (string)GondolaFactory.getGondolaProducts(tipoGondola)[producto]);
                 if (productObject == null)
@@ -96,12 +93,6 @@ public class ListadoSingleton
                 
         grid.GetComponent<UIGrid>().Reposition();
         this.showTarget();  
-        int producto = CommonsSomosUtils.generateRandomValue(0, GondolaFactory.MAX_PRODUCTOS_X_TIPO_IN_GAME);
-        GameObject productObject = (GameObject)Resources.Load(Configuration.PRODUCTOS_PATH + (string)GondolaFactory.getGondolaProducts(tipoGondola)[producto]);
-        if (productObject == null)
-            Debug.LogError("El prefab " + (string)GondolaFactory.getGondolaProducts(tipoGondola)[producto] + " no existe" );
-        this.initializeProduct(productObject, tipoGondola);
-        ListadoProductos.Add(productObject);
     }
 
     public void showListado(GameObject grid)
