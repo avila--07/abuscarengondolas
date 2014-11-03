@@ -16,10 +16,20 @@ public class GondolaSelectionModule : Module
 				get { return GetList<Product> ("prods"); }
 		}
 
+        
+		/// <summary>
+		/// Creamos el listado y las gondolas. Damos comienzo a las instancias de juego.
+		/// </summary>
 		public override void MakeScenario ()
 		{
-				// TODO: Fer/Cheppi
-				//throw new System.NotImplementedException ();
+				foreach (Gondola gondola in Gondolas) {
+						GameObject gondolaGameObject = (GameObject)Resources.Load (Configuration.GONDOLAS_PATH + gondola.Type);
+						gondolaGameObject.name = gondola.Name;
+						gondolaGameObject.GetComponent<GondolaProperties> ().ProductType = gondola.Type;
+				}
+
+				foreach (Product product in ProductsToBuy) {
+				}
 		}
 
 		public void AddGondola (Gondola gondola)

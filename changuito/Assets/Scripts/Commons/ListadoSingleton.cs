@@ -16,6 +16,10 @@ public class ListadoSingleton
 
 	public List<GameObject> ListadoProductos = new List<GameObject>(Configuration.Current.GondolasCount);
 
+    public List<GameObject> Gondolas = new List<GameObject>(GondolaFactory.MAX_PRODUCTOS);
+
+    public List<UI2DSprite> GondolasSprite = new List<UI2DSprite>(GondolaFactory.MAX_PRODUCTOS);
+
     public List<GameObject> ListadoTipoProductos = new List<GameObject>(GondolaFactory.MAX_PRODUCTOS_X_TIPO_IN_GAME);
     
     /// <summary>
@@ -46,7 +50,7 @@ public class ListadoSingleton
     /// <summary>
     /// Obtengo los TIPOS de productos que figuran en el listado
     /// </summary>
-    private void initializeGondolas() 
+    public void makeGondolaScene() 
     {
         while (Configuration.Current.GondolasCount != this.gondolasSeleccionadas.Count)
         {
@@ -55,25 +59,27 @@ public class ListadoSingleton
            if (!gondolasSeleccionadas.Contains(tipoGondola)) { 
                //Agrego la lista con de los productos del mismo tipo
                gondolasSeleccionadas.Add(tipoGondola);
+               String name = GondolaFactory.getGondolaNombre(tipoGondola);
+               GameObject gondola = (GameObject)Resources.Load(Configuration.GONDOLAS_PATH + name);
+               gondola.name = name;
+               gondola.GetComponent<GondolaProperties>().ProductType = tipoGondola;
+               Gondolas.Add(gondola);
+               createProductOfGondola(tipoGondola);
            }
         }
     }
 
    /// <summary>
-   /// Se arma la lista de seleccion. Selecciono, de cada tipo de producto, un "representante". 
-   /// Luego se muestra por pantalla.
+   /// Se arma la lista de seleccion. Selecciono, de cada tipo de producto, un "representante".
    /// </summary>
-    public void initializeListado( )
+    public void createProductOfGondola(int tipoGondola)
     {
         GameObject grid = GameObject.Find("SGListadoGrid");
         //Si no inició el listado (primera vez) lo inicializa.
         if (PosicionActual == 0) { 
            
-            this.initializeGondolas();
-
             for (int i = 0; Configuration.Current.GondolasCount != this.ListadoProductos.Count; i++)
             {
-                int tipoGondola = (int)gondolasSeleccionadas[i];
                 int producto = CommonsSomosUtils.generateRandomValue(0, GondolaFactory.MAX_PRODUCTOS_X_TIPO_IN_GAME);
                 GameObject productObject = (GameObject)Resources.Load(Configuration.PRODUCTOS_PATH + (string)GondolaFactory.getGondolaProducts(tipoGondola)[producto]);
                 if (productObject == null)
@@ -89,7 +95,7 @@ public class ListadoSingleton
         this.showTarget();  
     }
 
-    private void showListado(GameObject grid)
+    public void showListado(GameObject grid)
     {
         //Corto por la cantidad maxima permitida a mostrar ...
         if (PosicionActual < MAX_LISTADO)
@@ -103,6 +109,8 @@ public class ListadoSingleton
         {
             this.showSomeProductsInListado(grid, MAX_LISTADO, Configuration.Current.GondolasCount);
         }
+
+        this.showTarget();
     }
 
     private void showSomeProductsInListado(GameObject grid,int ini, int fin)
@@ -113,8 +121,6 @@ public class ListadoSingleton
             NGUITools.AddChild(grid, producto);
         }
     }
-
-
 
     private void initializeProduct(GameObject productObject, int tipoGondola)
     {
@@ -129,6 +135,14 @@ public class ListadoSingleton
        GameObject target = (GameObject)this.ListadoProductos[PosicionActual];
        NGUITools.AddChild(GameObject.Find("SGSeleccionGrid"),target);
        NGUISomosUtils.showTextInScreen("SGSeleccionLabel", target.name);
+    }
+
+    public void showGondolas(GameObject grid)
+    {
+        foreach(GameObject gondola in Gondolas)
+        {
+            GondolasSprite.Add(NGUITools.AddChild(grid, gondola).GetComponent<UI2DSprite>());
+        }
     }
 
     /// <summary>
@@ -161,7 +175,7 @@ public class ListadoSingleton
     /// <returns></returns>
     public string getLabelOfGondolaType(int gondolaPosition)
     {
-        return GondolaFactory.getTipoGondola((int)getGondolasSeleccionadas()[gondolaPosition]);
+        return GondolaFactory.getGondolaNombre((int)getGondolasSeleccionadas()[gondolaPosition]);
     }
 
     internal void clean()

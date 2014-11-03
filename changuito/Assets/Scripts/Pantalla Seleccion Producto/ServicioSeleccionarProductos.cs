@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,21 +6,21 @@ using System.Collections.Generic;
 /// <summary>
 /// Implementa y ejecuta la logica de la pantalla de seleccion de productos. 
 /// </summary>
-public class ServicioSeleccionarProductos: MonoBehaviour
+public class ServicioSeleccionarProductos : MonoBehaviour
 {
     /// <summary>
     /// Guarda la cantidad de veces que el jugador se ha equivocado antes de seleccionar el correcto. Meramente estadistico.
     /// </summary>
-    public static int failedProducts ;
+    public static int failedProducts;
     public static DateTime gameStart;
 
     void Start()
     {
         failedProducts = 0;
-        gameStart = DateTime.Now; 
+        gameStart = DateTime.Now;
 
         this.inicializarListadoProductos();
-        
+
         this.inicializarTarget();
     }
 
@@ -31,7 +31,7 @@ public class ServicioSeleccionarProductos: MonoBehaviour
 
         targetLabel.GetComponent<UILabel>().text = ListadoSingleton.ProductTarget.name;
         //Asi evitamos que al hacer click en el producto a seleccionar se dispare el label.
-        GameObject target = ListadoSingleton.Instance.getTarget(); 
+        GameObject target = ListadoSingleton.Instance.getTarget();
         target.GetComponent<ProductProperties>().target = false;
         target.tag = "SeleccionarProducto";
         NGUITools.AddChild(grid, target);
@@ -41,23 +41,23 @@ public class ServicioSeleccionarProductos: MonoBehaviour
     private void inicializarListadoProductos()
     {
         GameObject grid = GameObject.Find("GondolaGrid");
-       
+
         //Las gondolas son de un unico tipo de producto (ej Lacteos, verduras, carnes, etc)
         //Cada gondola tiene 4 productos que se muestran por pantalla. 
-        List<string> productsFromGondolaX = GondolaFactory.gondolasDictionary[ListadoSingleton.ProductTarget.GetComponent<ProductProperties>().tipo];
-		productsFromGondolaX.Add(ListadoSingleton.ProductTarget.name);
-       
-		List<string> productosDesordenados = ArrayListSomosUtils.desordenarLista(productsFromGondolaX);
+        List<String> productsFromGondola = GondolaFactory.generateRandomProductsWithOutTarget(ListadoSingleton.Instance.getTarget());
+        productsFromGondola.Add(ListadoSingleton.ProductTarget.name);
 
-        GameObject labelsGrid= GameObject.Find("LabelsGrid");
-        
+        List<String> productosDesordenados = ArrayListSomosUtils.desordenarLista(productsFromGondola);
+
+        GameObject labelsGrid = GameObject.Find("LabelsGrid");
+
         foreach (string product in productosDesordenados)
         {
             GameObject loadedPrefab = Resources.Load<GameObject>(Configuration.PRODUCTOS_PATH + product);
             NGUISomosUtils.setTildeProductoSeleccionado(loadedPrefab, false);
             GameObject productLabel = Resources.Load<GameObject>("Prefabs/labelProductos");
             productLabel.name = loadedPrefab.name;
-            productLabel.GetComponent<UILabel>().text = loadedPrefab.name; 
+            productLabel.GetComponent<UILabel>().text = loadedPrefab.name;
             loadedPrefab.tag = "GameController";
             this.setProductTarget(loadedPrefab);
             NGUITools.AddChild(grid, loadedPrefab);
@@ -68,8 +68,9 @@ public class ServicioSeleccionarProductos: MonoBehaviour
         labelsGrid.GetComponent<UIGrid>().Reposition();
     }
 
-    
-    private void setProductTarget(GameObject product) {
+
+    private void setProductTarget(GameObject product)
+    {
 
         if (ListadoSingleton.ProductTarget.name.Equals(product.name))
         {

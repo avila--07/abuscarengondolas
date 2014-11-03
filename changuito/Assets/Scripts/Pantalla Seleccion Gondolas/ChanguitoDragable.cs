@@ -18,7 +18,7 @@ public class ChanguitoDragable : MonoBehaviour
 		bool findGondola = false;
         bool isGondola = false;
         
-        foreach (UI2DSprite gondola in ServicioSeleccionarGondolas.Gondolas)
+        foreach (UI2DSprite gondola in ListadoSingleton.Instance.GondolasSprite)
         {
 
             if (gondola.GetComponent<GondolaProperties>().ProductType == ListadoSingleton.Instance.getTargetType() &&

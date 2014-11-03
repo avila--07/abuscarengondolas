@@ -7,6 +7,10 @@ public class ServicioPago : MonoBehaviour
 {
     ArrayList moneyInSuperiorScene = new ArrayList(3);
     ArrayList moneyInInferiorScene = new ArrayList(3);
+    public GameObject gridSuperior;
+    public GameObject gridInferior;
+ 
+
     public static DateTime pagoStart;
 
     void Start ()
@@ -44,8 +48,6 @@ public class ServicioPago : MonoBehaviour
     {
        
       //Inicializamos en 2 grids distintas, cada una contiene 3 billetes.
-        GameObject gridSuperior = GameObject.Find("PagoBilletesGridSuperior");
-        GameObject gridInferior = GameObject.Find("PagoBilletesGridInferior");
         
         this.initializeGrid(gridSuperior, moneyInSuperiorScene);
         this.initializeGrid(gridInferior, moneyInInferiorScene);    
