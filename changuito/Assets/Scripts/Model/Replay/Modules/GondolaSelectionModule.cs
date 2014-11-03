@@ -17,15 +17,17 @@ public class GondolaSelectionModule : Module
 		}
 
         
-        /// <summary>
-        /// Creamos el listado y las gondolas. Damos comienzo a las instancias de juego.
-        /// </summary>
+		/// <summary>
+		/// Creamos el listado y las gondolas. Damos comienzo a las instancias de juego.
+		/// </summary>
 		public override void MakeScenario ()
 		{
-            ListadoSingleton.Instance.makeGondolaScene();            
-            this.addListado(ListadoSingleton.Instance.getListado());
-            this.addGondolas(ListadoSingleton.Instance.getGondolasSeleccionadas());
-        }
+				foreach (Gondola gondola in Gondolas) {
+				}
+
+				foreach (Product product in ProductsToBuy) {
+				}
+		}
 
 		public void AddGondola (Gondola gondola)
 		{
@@ -36,23 +38,4 @@ public class GondolaSelectionModule : Module
 		{
 				AddToList ("prods", product);
 		}
-
-
-        private void addListado(List<GameObject> products)
-        {
-            foreach(GameObject productOnListado in products)
-            {
-                Product product = new Product(productOnListado.name, GondolaFactory.getTipoGondola(productOnListado.GetComponent<ProductProperties>().tipo));
-                AddProductToBuy(product);
-            }
-        }
-
-        private void addGondolas(List<int> gondolasSeleccionadas) 
-        {
-            foreach(int gondolaSeleccionada in gondolasSeleccionadas)
-            {
-                Gondola gondola = new Gondola(GondolaFactory.getTipoGondola(gondolaSeleccionada));
-                AddGondola(gondola);
-            }
-        }
 }
