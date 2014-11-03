@@ -22,8 +22,15 @@ public class GameManager : MonoBehaviour
 				get { return _gameRound.CurrentModule; }
 		}
 
+		public GameManager ()
+		{
+				DontDestroyOnLoad (this);
+		}
+
 		public void StartAlreadyPlayedGame (GameRound gameRound)
 		{
+				Application.LoadLevel ("PantallaSeleccionGondolas");
+
 				_gameRound = gameRound;
 				StartCoroutine (_gameRound.Play (this));
 		}
@@ -54,22 +61,17 @@ public class GameManager : MonoBehaviour
 		private static GondolaSelectionModule BuildGondolaSelectionModule ()
 		{
 				GondolaSelectionModule gondolaSelectionModule = new GondolaSelectionModule ();
-                gondolaSelectionModule.MakeScenario();
 
 				// Add random gondolas and products to buy
-				
-                /*List<int> randomGondolaKeys = RandomUtils.GetListWithRandomElementsFrom (GondolaFactory.tipoGondolasDictionary.Keys, Configuration.Current.GondolasCount);
-		
-				// Add random gondolas and products to buy
-				List<int> randomGondolaKeys = RandomUtils.GetListWithRandomElementsFrom (GondolaFactory.tipoGondolasDictionary.Keys, Configuration.Current.GondolasCount);
-				foreach (int randomGondolaKey in randomGondolaKeys) {
+				List<int> randomGondolaTypes = RandomUtils.GetListWithRandomElementsFrom (GondolaFactory.tipoGondolasDictionary.Keys, Configuration.Current.GondolasCount);
+				foreach (int randomGondolaType in randomGondolaTypes) {
 
-						string gondolaType = GondolaFactory.getTipoGondola (randomGondolaKey);
-						gondolaSelectionModule.AddGondola (new Gondola (gondolaType));
+						string gondolaName = GondolaFactory.getGondolaNombre (randomGondolaType);
+						gondolaSelectionModule.AddGondola (new Gondola (gondolaName, randomGondolaType));
 
-						string productName = RandomUtils.GetRandomElementOfList (GondolaFactory.getGondolaProducts (randomGondolaKey));
-						gondolaSelectionModule.AddProductToBuy (new Product (productName, gondolaType));
-				}*/
+						string productName = RandomUtils.GetRandomElementOfList (GondolaFactory.getGondolaProducts (randomGondolaType));
+						gondolaSelectionModule.AddProductToBuy (new Product (productName, randomGondolaType));
+				}
 				
 				return gondolaSelectionModule;
 		}

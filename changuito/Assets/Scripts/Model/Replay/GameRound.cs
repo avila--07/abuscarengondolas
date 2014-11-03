@@ -34,7 +34,13 @@ public class GameRound : SharedObject
 		{
 				foreach (Module module in Modules) {
 						_currentModule = module;
-						
+
+						Debug.Log (module.Name + " is waiting 2 second (because I am almost sure that you have changed the scene)...");
+			
+						yield return  new WaitForSeconds (2f);
+
+						Debug.Log (module.Name + " is making its own scenario...");
+
 						module.MakeScenario ();
 
 						Debug.Log (module.Name + " is waiting 1 second...");
