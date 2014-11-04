@@ -5,13 +5,12 @@ public class Play : MonoBehaviour
 {
 		private void OnClick ()
 		{
-				//StartNewFakeGame ();
 				StartNewFakeGame ();
 				//GameManager.Instance.StartNewGame ();
 		}
 
 		private void StartNewFakeGame ()
-		{
+		{				
 				//Prueba
 				GondolaSelectionModule gondolaSelectionModule = new GondolaSelectionModule ();
 				AddGondolaAndAProduct (gondolaSelectionModule, GondolaFactory.ALMACEN);
@@ -21,23 +20,15 @@ public class Play : MonoBehaviour
 		                                   
 				GameRound gameRound = new GameRound (Configuration.Current);
 				gameRound.AddModule (gondolaSelectionModule);
-
-				gondolaSelectionModule.AddStep (new ChangeSceneStep ("PantallaSeleccionGondolas"));
 				                                   
 				GameManager.Instance.StartAlreadyPlayedGame (gameRound);
-		                                   
-				//GameManager.Instance.RecordStep (new TapStep (1, 1));
-		                                   
-				//
-				//Destroy (gameObject);
-
 		}
 
-		private void AddGondolaAndAProduct (GondolaSelectionModule gondolaSelectionModule, int gondolaKey)
+		private void AddGondolaAndAProduct (GondolaSelectionModule gondolaSelectionModule, int gondolaType)
 		{
-				string gondolaName = GondolaFactory.getGondolaNombre (gondolaKey);
+				string gondolaName = GondolaFactory.getGondolaNombre (gondolaType);
 
-				gondolaSelectionModule.AddGondola (new Gondola (gondolaName, gondolaKey));
-				gondolaSelectionModule.AddProductToBuy (new Product (GondolaFactory.getGondolaProducts (gondolaKey) [0], gondolaName));
+				gondolaSelectionModule.AddGondola (new Gondola (gondolaName, gondolaType));
+				gondolaSelectionModule.AddProductToBuy (new Product (GondolaFactory.getGondolaProducts (gondolaType) [0], gondolaType));
 		}
 }

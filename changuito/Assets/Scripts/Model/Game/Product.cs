@@ -8,12 +8,12 @@ public class Product : SharedObject
 				private set { Set ("name", value); }
 		}
 
-		public string GondolaType {
-				get { return GetString ("gontype"); }  
+		public int GondolaType {
+				get { return GetInt ("gontype"); }  
 				private set { Set ("gontype", value); }
 		}
 	
-		public Product (string name, string gondolaType)
+		public Product (string name, int gondolaType)
 		{
 				Name = name;
 				GondolaType = gondolaType;

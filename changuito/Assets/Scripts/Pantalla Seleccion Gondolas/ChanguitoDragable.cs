@@ -8,7 +8,6 @@ public class ChanguitoDragable : MonoBehaviour
 
 	void OnDragStart ()
 	{
-		//Debug.LogError ("OnDragStart");
 		NGUISomosUtils.showTextInScreen ("SGStatusLabel", "");
 	}
 
@@ -18,10 +17,9 @@ public class ChanguitoDragable : MonoBehaviour
 		bool findGondola = false;
         bool isGondola = false;
         
-        foreach (UI2DSprite gondola in ListadoSingleton.Instance.GondolasSprite)
+        foreach (UI2DSprite gondola in GondolaSelectionModule.GondolasSprite)
         {
-
-            if (gondola.GetComponent<GondolaProperties>().ProductType == ListadoSingleton.Instance.getTargetType() &&
+            if (gondola.GetComponent<GondolaProperties>().ProductType == GondolaSelectionModule.target.GetComponent<ProductProperties>().tipo &&
                 ColliderUtils.IsFullyInside(gondola, changuito))
             {
                 isGondola = true;
@@ -34,21 +32,20 @@ public class ChanguitoDragable : MonoBehaviour
             }
 		}
 
-		if (findGondola && isGondola) {		
+		if (findGondola && isGondola) 
+        {		
             this.callFinGondola();
 			NGUISomosUtils.showTextInScreen ("SGStatusLabel", "¡Excelente!");
-			Invoke ("GoToNextScene", 1F);
-		} else {
-            if (isGondola) { 
-            ServicioSeleccionarGondolas.failedGondola++;
-            NGUISomosUtils.showTextInScreen ("SGStatusLabel", "Aquí no está.\n ¡Busquemos en otra góndola!");
+            GameManager.Instance.gondolaSelectionModule.AddStep(new ChangeSceneStep("PantallaSeleccionProductos"));
+        } 
+        else 
+        {
+            if (isGondola)
+            { 
+                ServicioSeleccionarGondolas.failedGondola++;
+                NGUISomosUtils.showTextInScreen ("SGStatusLabel", "Aquí no está.\n ¡Busquemos en otra góndola!");
             }
        }
-	}
-
-	private void GoToNextScene ()
-	{		
-		Application.LoadLevel ("PantallaSeleccionProductos");
 	}
 
     private void callFinGondola()
