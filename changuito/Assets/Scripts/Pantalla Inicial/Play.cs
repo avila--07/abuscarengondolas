@@ -5,8 +5,8 @@ public class Play : MonoBehaviour
 {
 		private void OnClick ()
 		{
-				StartNewFakeGame ();
-				//GameManager.Instance.StartNewGame ();
+			//StartNewFakeGame ();
+			GameManager.Instance.StartNewGame ();
 		}
 
 		private void StartNewFakeGame ()

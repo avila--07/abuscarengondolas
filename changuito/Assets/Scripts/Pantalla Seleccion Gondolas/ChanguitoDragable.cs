@@ -36,10 +36,13 @@ public class ChanguitoDragable : MonoBehaviour
         {		
             this.callFinGondola();
 			NGUISomosUtils.showTextInScreen ("SGStatusLabel", "¡Excelente!");
-            GameManager.Instance.gondolaSelectionModule.AddStep(new ChangeSceneStep("PantallaSeleccionProductos"));
+            
+            Application.LoadLevel("PantallaSeleccionProductos");
+            changeScenario();
         } 
         else 
         {
+            GameManager.Instance.RecordStep(new TapStep(changuito.GetComponent<UIWidget>().transform.position.x,changuito.GetComponent<UIWidget>().transform.position.y));
             if (isGondola)
             { 
                 ServicioSeleccionarGondolas.failedGondola++;
@@ -52,5 +55,15 @@ public class ChanguitoDragable : MonoBehaviour
     {
         SeleccionarGondolaStatistic request = new SeleccionarGondolaStatistic(ServicioSeleccionarGondolas.failedGondola,ServicioSeleccionarGondolas.gondolaStart);
 		UploadStatisticsService.TryToCall(request); 
+    }
+
+
+    private void changeScenario() 
+    {
+        GameManager.Instance.RecordStep(new ChangeSceneStep("PantallaSeleccionProductos"));
+        ProductSelectionModule productSelectionModule = new ProductSelectionModule();
+        GameRound gameRound = new GameRound(Configuration.Current);
+        gameRound.AddModule(productSelectionModule);
+        GameManager.Instance.StartAlreadyPlayedGame(gameRound);
     }
 }

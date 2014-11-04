@@ -9,6 +9,23 @@ public class ProductSelectionModule : Module
 	
 		public override void MakeScenario ()
 		{
-				throw new System.NotImplementedException ();
+                GondolaFactory.generateRandomProductsWithOutTarget(GondolaSelectionModule.target);
+
+            showTarget();
+
 		}
+
+    private void showTarget()
+    {
+        GameObject grid = GameObject.Find("ListadoGrid");
+        GameObject targetLabel = GameObject.Find("ProductoLabel");
+
+        targetLabel.GetComponent<UILabel>().text = GondolaSelectionModule.target.name;
+        //Asi evitamos que al hacer click en el producto a seleccionar se dispare el label.
+        GameObject target = GondolaSelectionModule.target;
+        target.GetComponent<ProductProperties>().target = false;
+        target.tag = "SeleccionarProducto";
+        NGUITools.AddChild(grid, target);
+    }
+
 }
