@@ -1,12 +1,16 @@
 var tiempoJugado;
+var partidasJugadas;
 var testObjectSeries ;
 var testObjectXAxis ;
+var testing ;
 
-$(function() {
+$( function() {
 ////  $( "#tabs" ).tabs();
 	//containerSelecProducto, containerModPago,containerModVuelto, containerGenerales
-	var createStatsSelecGondolas = function () { 
-	    $('#containerSelecGondolas').highcharts({
+	var createStatsSelecGondolas = function (data) { 
+	    var nombresPartidas = getNombresPartidasFromData(data);
+	    
+		$('#containerSelecGondolas').highcharts({
 	        chart: {
 	            type: 'column'
 	        },
@@ -14,7 +18,8 @@ $(function() {
 	            text: 'Desempeño en Selección de Góndolas'
 	        },
 	        xAxis: {
-	            categories: ['Partida 1', 'Partida 2', 'Partida 3', 'Partida 4', 'Partida 5']
+//	            categories: ['Partida 1', 'Partida 2', 'Partida 3', 'Partida 4', 'Partida 5']
+	            categories: nombresPartidas
 	        },
 	        yAxis: {
 	            title: {
@@ -33,7 +38,19 @@ $(function() {
 	    });
 	};
 	
-	var createStatsSelecProducto = function () { 
+	var getNombresPartidasFromData = function(data){
+		var array = [];
+		var nombrePartida;
+		var i;
+		for (i = 0; i < data.partidas.length; i++) { 
+			nombrePartida = data.partidas[i].data.idPartida + " " + data.partidas[i].data.gameDate ;
+			array.push(nombrePartida);
+		}
+		return array;
+
+	};
+	
+	var createStatsSelecProducto = function (data) { 
 		$('#containerSelecProducto').highcharts({
 			chart: {
 				type: 'column'
@@ -61,7 +78,7 @@ $(function() {
 		});
 	};
 	
-	var createStatsModVuelto = function () { 
+	var createStatsModVuelto = function (data) { 
 		$('#containerModVuelto').highcharts({
 			chart: {
 				type: 'column'
@@ -227,7 +244,7 @@ $(function() {
 	}
 		
 	 return toReturn;
-  }
+  };
   
   var getMeAGame = function(partida){
 	  var game = {};
@@ -237,7 +254,7 @@ $(function() {
 	  
 	  console.log("A game: "+ game);
 	  return game;
-  }
+  };
   
   var getSeries = function(info){
 	var arraySeries = [];
@@ -252,26 +269,40 @@ $(function() {
 	console.log("Array series: " + arraySeries);	 
 	
 	return arraySeries;
-  }
+  };
 
-	$.ajax({
-	  type: "GET",
-	  url: "/statics",
-	  data: { axn:"init" }
-  }).done(function( msg ) {
-    console.log( msg );
-    if (msg!= null){
-    	tiempoJugado = msg;
-    	createChanguitoStats(msg);
-    }
-  
-  });
 
   var init = function(){
-	  createStatsSelecGondolas();
-	  createStatsSelecProducto();
-	  createStatsModVuelto();
-  }
+	  console.log("Init");
+
+	  $.ajax({
+		  type: "GET",
+		  url: "/statics",
+		  data: { axn:"init" }
+	  }).done(function( msg ) {
+	    console.log( msg );
+	    if (msg!= null){
+	    	var data = msg.data;
+	    	testing = data; 
+	    		
+	    	tiempoJugado = data.playTime;
+	    	partidasJugadas = data.partidas.length;
+	    	
+	    	$("#tiempoJugado").text(tiempoJugado+" min");
+	    	$("#partidasJugadas").text(partidasJugadas);
+	    	
+	    	//createChanguitoStats(msg);
+	    	createStatsSelecGondolas(data);
+	    	createStatsSelecProducto(data);
+	    	createStatsModVuelto(data);
+	    	
+	    }else{
+	    	console.log("Errores en la carga de la página");
+	    };
+	  
+	  });
+
+  };
   
   init();
   

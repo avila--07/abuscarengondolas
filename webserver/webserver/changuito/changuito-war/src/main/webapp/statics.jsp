@@ -1,4 +1,3 @@
-<html>
 <head>
 <title>Página de estadísticas</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -96,13 +95,15 @@
 
 <!-- 		  </div> -->
 <!-- 		</div> -->
+
 			<div id="mycontainer" style="width:100%; height:400px; display:none"></div>
 
 			<div id="containerSelecGondolas" style="width:100%; height:400px;"></div>
 			<div id="containerSelecProducto" style="width:100%; height:400px;"></div>
-	<!--  		<div id="containerModPago" style="width:100%; height:400px;"></div> -->
 			<div id="containerModVuelto" style="width:100%; height:400px;"></div>
-	<!--  		<div id="containerGenerales" style="width:100%; height:400px;"></div> -->
+
+	 		<div id="containerModPago" style="width:100%; height:400px;"></div>
+	 		<div id="containerGenerales" style="width:100%; height:400px;"></div>
 
 			<input type="submit" value="Guardar"> | <input type="button" value="compartir">
 
@@ -111,12 +112,11 @@
 		</div>
 	</div>
 	</div>
-		
-	  <script src="/static/jquery-2.1.1.min.js"></script>
-	  <script src="/static/d3/d3.js"></script>
-	  <script src="/static/d3/radialProgress/radialProgress.js"></script>
-	  <script src="/static/highcharts/highcharts.js"></script>
-	  <script src="/static/statics.js"></script>
-	  <script src="http://code.highcharts.com/modules/drilldown.js"></script>
-  </body>
-</html>
+
+ <script src="/static/highcharts/highcharts.js"></script>
+ <script src="/static/highcharts/drilldown.js"></script>
+<!--  <script src="http://code.highcharts.com/modules/drilldown.js"></script> -->
+ <script src="/static/d3/d3.js"></script>
+ <script src="/static/d3/radialProgress/radialProgress.js"></script>
+ <script src="/static/statics.js"></script>
+</body>
