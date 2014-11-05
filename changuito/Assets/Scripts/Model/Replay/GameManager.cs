@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
 		public void StartAlreadyPlayedGame (GameRound gameRound)
 		{
-				Application.LoadLevel ("PantallaSeleccionGondolas");
+				//Application.LoadLevel ("PantallaSeleccionGondolas");
 
 				_gameRound = gameRound;
 				StartCoroutine (_gameRound.Play (this));
@@ -41,7 +41,9 @@ public class GameManager : MonoBehaviour
 				_gameRound = new GameRound (Configuration.Current);
 
 				gondolaSelectionModule = BuildGondolaSelectionModule ();
-				gondolaSelectionModule.AddStep (new ChangeSceneStep ("PantallaSeleccionGondolas"));
+                // REVIEW: No puedo crear el escenario sin primero estar en el.
+                // gondolaSelectionModule.AddStep(new ChangeSceneStep("PantallaSeleccionGondolas"));
+                Application.LoadLevel("PantallaSeleccionGondolas");
 
                 _gameRound.AddModule(gondolaSelectionModule);
 
@@ -76,6 +78,13 @@ public class GameManager : MonoBehaviour
 				
 				return gondolaSelectionModule;
 		}
+
+        private static ProductSelectionModule BuildProductSeleccionModule()
+        {
+            ProductSelectionModule  productSelectionModule  = new ProductSelectionModule ();
+            
+            return productSelectionModule;
+        } 
 
 		private static PurchaseModule BuildPurchaseModule ()
 		{
