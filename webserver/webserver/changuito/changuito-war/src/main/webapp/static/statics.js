@@ -7,10 +7,10 @@ var testing ;
 $( function() {
 ////  $( "#tabs" ).tabs();
 	//containerSelecProducto, containerModPago,containerModVuelto, containerGenerales
-	var createStatsSelecGondolas = function (data) { 
+	var createGlobalStats = function (data) { 
 	    var nombresPartidas = getNombresPartidasFromData(data);
 	    
-		$('#containerSelecGondolas').highcharts({
+		$('#containerGenerales').highcharts({
 	        chart: {
 	            type: 'column'
 	        },
@@ -18,7 +18,6 @@ $( function() {
 	            text: 'Desempeño en Selección de Góndolas'
 	        },
 	        xAxis: {
-//	            categories: ['Partida 1', 'Partida 2', 'Partida 3', 'Partida 4', 'Partida 5']
 	            categories: nombresPartidas
 	        },
 	        yAxis: {
@@ -28,11 +27,11 @@ $( function() {
 	        },
 	        series: [{
 	            name: 'Aciertos',
-	            data: [1, 0, 4, 8, 6],
+	            data: getEventosPartidasFromData(data,"Aciertos"),
 	            color: 'green'
 	        }, {
 	            name: 'Errores',
-	            data: [5, 7, 3, 3, 5],
+	            data: getEventosPartidasFromData(data,"Errores"),
 	            color: 'red'
 	        }]
 	    });
@@ -43,26 +42,95 @@ $( function() {
 		var nombrePartida;
 		var i;
 		for (i = 0; i < data.partidas.length; i++) { 
-			nombrePartida = data.partidas[i].data.idPartida + " " + data.partidas[i].data.gameDate ;
+			nombrePartida = "id " + data.partidas[i].data.idPartida + " - " + data.partidas[i].data.gameDate ;
 			array.push(nombrePartida);
 		}
 		return array;
 
 	};
 
-	var getAciertosPartidasFromData = function(data){
+	var getEventosPartidasFromData = function(data,dataKey){
 		var array = [];
-		var nombrePartida;
+		var valores;
 		var i;
 		for (i = 0; i < data.partidas.length; i++) { 
-			nombrePartida = data.partidas[i].data.idPartida + " " + data.partidas[i].data.gameDate ;
-			array.push(nombrePartida);
+			valores = data.partidas[i].data[dataKey];
+			array.push(valores);
 		}
 		return array;
 		
 	};
-	
+
+	var getAciertosModuleFromData = function(data,dataKey){
+		var array = [];
+		var valores;
+		var i;
+		for (i = 0; i < data.partidas.length; i++) { 
+			valores = data.partidas[i].data[dataKey];
+			array.push(valores);
+		}
+		return array;
+		
+	};
+
+	var createStatsSelecGondolas = function (data) { 
+		$('#containerSelecProducto').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Desempeño en Selección de Góndolas'
+			},
+			xAxis: {
+				categories: getNombresPartidasFromData(data)
+			},
+			yAxis: {
+				title: {
+					text: 'Cantidad'
+				}
+			},
+			series: [{
+				name: 'Aciertos',
+				data: getAciertosModuleFromData(data,module,dataKey),
+				color: 'green'
+			}, {
+				name: 'Errores',
+				data: [5, 4, 3, 3, 2],
+				color: 'red'
+			}]
+		});
+	};
+	 
 	var createStatsSelecProducto = function (data) { 
+		$('#containerSelecProducto').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Desempeño en Selección de Productos'
+			},
+			xAxis: {
+				categories: getNombresPartidasFromData(data)
+			},
+			yAxis: {
+				title: {
+					text: 'Cantidad'
+				}
+			},
+			series: [{
+				name: 'Aciertos',
+				data: [2, 3, 4, 8, 6],
+				color: 'green'
+			}, {
+				name: 'Errores',
+				data: [5, 4, 3, 3, 2],
+				color: 'red'
+			}]
+		});
+	};
+	
+	//From this part there are only mocks
+	var createStatsSelecProductoMock = function (data) { 
 		$('#containerSelecProducto').highcharts({
 			chart: {
 				type: 'column'
@@ -90,7 +158,7 @@ $( function() {
 		});
 	};
 	
-	var createStatsModVuelto = function (data) { 
+	var createStatsModVueltoMock = function (data) { 
 		$('#containerModVuelto').highcharts({
 			chart: {
 				type: 'column'
@@ -282,7 +350,8 @@ $( function() {
 	
 	return arraySeries;
   };
-
+  
+  //End of the mocks
 
   var init = function(){
 	  console.log("Init");
@@ -304,8 +373,11 @@ $( function() {
 	    	$("#partidasJugadas").text(partidasJugadas);
 	    	
 	    	//createChanguitoStats(msg);
+	    	createGlobalStats(data);
+
 	    	createStatsSelecGondolas(data);
 	    	createStatsSelecProducto(data);
+	    	
 	    	createStatsModVuelto(data);
 	    	
 	    }else{

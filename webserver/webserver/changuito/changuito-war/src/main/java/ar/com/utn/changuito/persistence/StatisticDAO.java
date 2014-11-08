@@ -92,7 +92,7 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
 	private Integer getValoresIntermedios(Statistic statistic, String lookup,String lookupEscena,Integer sumarizado) {
 		Integer intermedio = 0;
 		
-		Statistic escena = (Statistic) statistic.get(lookupEscena);
+		Statistic escena = (Statistic) statistic.getSharedObject(lookupEscena);
     	if (escena != null){
     		intermedio = (Integer) escena.get(lookup);
     		if(intermedio != null){
