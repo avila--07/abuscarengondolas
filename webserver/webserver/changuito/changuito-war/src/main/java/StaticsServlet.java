@@ -53,7 +53,7 @@ public class StaticsServlet extends HttpServlet {
   private void dispatchInit(HttpServletRequest req, HttpServletResponse resp) {
 	  Gson gson = new Gson();
 //	  StaticsObjectDto statics = crearObjetoDeStadisticas();
-	  Statistic statics = crearVerdaderoObjetoDeStadisticas();
+	  Statistic statics = getAllGames(1L);
 	  String response = gson.toJson(statics);
 	  
 	  resp.setContentType("application/json");
@@ -66,58 +66,14 @@ public class StaticsServlet extends HttpServlet {
 	  
   }
 
-private Statistic crearVerdaderoObjetoDeStadisticas() {
-	long IDJUEGO = 1L;
-	long USUARIO = 1L;
-	Statistic juego = getARealGame(IDJUEGO, USUARIO);
-	Statistic juego2 = getARealGame(IDJUEGO + 1, USUARIO);
+private Statistic getAllGames(long uSUARIO) {
+	StatisticDAO dao = new StatisticDAO();	
 	
-	Statistic estadisticas = new Statistic( );
-	
-	JSONArray partidas = new JSONArray();
-	partidas.add(juego);
-	partidas.add(juego2);
-	
-	estadisticas.set("partidas",partidas);
-	
-	estadisticas.setPlayTime("56:23");
-	
-	return estadisticas;
-	
-}
-
-private Statistic getARealGame(long iDJUEGO, long uSUARIO) {
-	StatisticDAO dao = new StatisticDAO();
-//	dao.getEntityById(iDJUEGO);
-	
-	Statistic statistics = populateFakeStatics();
+	Statistic statistics = dao.getEntityById(uSUARIO);
 
 	return statistics;
 }
 
-private Statistic populateFakeStatics() {
-	Statistic statistics = new Statistic();
-	statistics.setId(12L);
-	statistics.setGameDate(new Date().toString());
-	statistics.setIdPartida(1L);
-	statistics.setIdEvento("Evento1");
-	statistics.setIdUsuario(11L);
-	statistics.setPlayTime("10:30");
-	statistics.set("ModuloPago", getAFakeModuloPago());
-	return statistics;
-}
-
-private Object getAFakeModuloPago() {
-	Statistic moduloPago = new Statistic();
-	moduloPago.setId(10L);
-	moduloPago.setGameDate(new Date().toString());
-	moduloPago.setIdPartida(1L);
-	moduloPago.setIdEvento("Acierto");
-	moduloPago.setIdUsuario(11L);
-	moduloPago.setPlayTime("08:30");
-
-	return moduloPago;
-}
 
 //private JuegoStatistic getAJuego(long IDJUEGO, long USUARIO) {
 //	JuegoStatistic juego = new JuegoStatistic();

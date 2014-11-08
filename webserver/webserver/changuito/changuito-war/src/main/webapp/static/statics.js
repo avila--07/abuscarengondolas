@@ -49,6 +49,18 @@ $( function() {
 		return array;
 
 	};
+
+	var getAciertosPartidasFromData = function(data){
+		var array = [];
+		var nombrePartida;
+		var i;
+		for (i = 0; i < data.partidas.length; i++) { 
+			nombrePartida = data.partidas[i].data.idPartida + " " + data.partidas[i].data.gameDate ;
+			array.push(nombrePartida);
+		}
+		return array;
+		
+	};
 	
 	var createStatsSelecProducto = function (data) { 
 		$('#containerSelecProducto').highcharts({
