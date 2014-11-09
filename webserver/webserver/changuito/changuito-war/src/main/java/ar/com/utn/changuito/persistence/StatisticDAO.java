@@ -67,7 +67,7 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
     	statistics.setGameDate(new Date().toString());
     	statistics.setPlayTime("10:30");
     	
-    	statistics.set("ModuloSelecGondolas", getAFakeSelecGondolas(iDJUEGO,uSUARIO));
+    	statistics.set("ModuloSeleccionGondolas", getAFakeSelecGondolas(iDJUEGO,uSUARIO));
     	statistics.set("ModuloSeleccionProducto", getAFakeSeleccionProducto(iDJUEGO,uSUARIO));
     	statistics.set("ModuloPago", getAFakeModuloPago(iDJUEGO,uSUARIO));
     	statistics.set("ModuloVuelto", getAFakeModVuelto(iDJUEGO,uSUARIO));
@@ -81,7 +81,7 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
     private Integer getEventosSumarizados(Statistic statistic, String lookup) {
     	Integer sumarizado = 0;
     	
-    	sumarizado += getValoresIntermedios(statistic, lookup,"ModuloSelecGondolas", sumarizado);
+    	sumarizado += getValoresIntermedios(statistic, lookup,"ModuloSeleccionGondolas", sumarizado);
     	sumarizado += getValoresIntermedios(statistic, lookup,"ModuloSeleccionProducto", sumarizado);
     	sumarizado += getValoresIntermedios(statistic, lookup,"ModuloPago", sumarizado);
     	sumarizado += getValoresIntermedios(statistic, lookup,"ModuloVuelto", sumarizado);
