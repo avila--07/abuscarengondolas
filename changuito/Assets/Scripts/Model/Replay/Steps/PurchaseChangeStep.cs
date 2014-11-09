@@ -35,13 +35,16 @@ public class PurchaseChangeStep : Step<PurchaseChangeModule>
 
             if (!automatically)
             {
+                callStatistic();
                 GameManager.Instance.AddNewStep(new EndGameRoundStep());
             }
         } else
         {
             NGUISomosUtils.showTextInScreen("CVMessageStatus", "Segui intentando!");
+
             if (!automatically)
             {
+                PurchaseChangeModule.faileds++;
                 GameManager.Instance.AddNewStep(new PurchaseChangeStep());
             }
         }
@@ -51,5 +54,11 @@ public class PurchaseChangeStep : Step<PurchaseChangeModule>
     {
         Set("ready", true);
         PurchaseChangeSelected = purchaseChangeSelected;
+    }
+
+    private void callStatistic()
+    {
+        ControlVueltoStatistic request = new ControlVueltoStatistic(PurchaseChangeModule.moduleStart, PurchaseChangeModule.faileds);
+        UploadStatisticsService.TryToCall(request); 
     }
 }

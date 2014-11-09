@@ -7,7 +7,8 @@ public class PurchaseChangeModule : Module
 {
     private const int CHANGES_COUNT = 4;
     private Dictionary<int, UI2DSprite> _purchaseChangesGameObject = new Dictionary<int, UI2DSprite>(CHANGES_COUNT);
-
+    public static DateTime moduleStart;
+    public static int faileds;
     public override string Name
     {
         get { return "PurchaseChangeModule"; }
@@ -48,6 +49,7 @@ public class PurchaseChangeModule : Module
 
     public override void PrepareScenario()
     {
+        initializeStatistic();
         List<string> buttons = new List<string>() { "BotonVueltoAmarillo", "BotonVueltoNaranja", "BotonVueltoAzul", "BotonVueltoVerde" };
         buttons = RandomUtils.GetListWithRandomElementsFrom(buttons, buttons.Count);
         buttons.ForEach(button => AddToList("buttons", button));
@@ -57,6 +59,7 @@ public class PurchaseChangeModule : Module
 
     public override void MakeScenario()
     {
+        initializeStatistic();
         GameObject changesGrid = GameObject.Find("CVBotonesGrid");
 
         List<int> purchaseChanges = PurchaseChanges;
@@ -112,5 +115,11 @@ public class PurchaseChangeModule : Module
         }
 
         return randomPurchaseChanges;
+    }
+
+    private void initializeStatistic()
+    {
+        moduleStart = DateTime.Now;
+        faileds = 0;
     }
 }

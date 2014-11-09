@@ -44,13 +44,13 @@ public class PurchasePaymentStep : Step<PurchasePaymentModule>
         if ((purchaseChangeModule.Payment >= totalCost))
         {
             NGUISomosUtils.showTextInScreen("GameMessageLabel", "¡Muy bien! ¡Has pagado tus productos!");
-            
             yield return new WaitForSeconds(2f);
             
             purchaseChangeModule.PurchaseChange = Math.Abs(purchaseChange);
 
             if (!automatically)
             {
+                callPurchaseStadistic();
                 if (GameManager.Instance.GameRound.Configuration.ChangeControlModule)
                 {
                     GameManager.Instance.AddNewStep(new PurchaseChangeStep());
@@ -69,5 +69,11 @@ public class PurchasePaymentStep : Step<PurchasePaymentModule>
     public void AddTicketValue(string ticketValue)
     {
         TicketValue = ticketValue;
+    }
+
+    private void callPurchaseStadistic()
+    {
+        PagoStatistic request = new PagoStatistic(PurchasePaymentModule.moduleStart);
+        UploadStatisticsService.TryToCall(request); 
     }
 }

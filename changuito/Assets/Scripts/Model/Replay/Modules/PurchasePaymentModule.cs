@@ -7,6 +7,7 @@ public class PurchasePaymentModule : Module
 {
     private const int TICKETS_COUNT = 6;
     private Dictionary<string, UI2DSprite> _ticketsGameObject = new Dictionary<string, UI2DSprite>(TICKETS_COUNT);
+    public static DateTime moduleStart;
 
     public override string Name
     {
@@ -25,6 +26,8 @@ public class PurchasePaymentModule : Module
 
     public override void MakeScenario()
     {
+        initializeStatistic();
+
         var superiorTicketList = GameObject.Find("PagoBilletesGridSuperior");
         var inferiorTicketList = GameObject.Find("PagoBilletesGridInferior");
 
@@ -61,5 +64,10 @@ public class PurchasePaymentModule : Module
         _ticketsGameObject.TryGetValue(ticket, out ticketGameObject);
 
         return ticketGameObject;
+    }
+
+    private void initializeStatistic()
+    {
+        moduleStart = DateTime.Now;
     }
 }

@@ -27,9 +27,10 @@ public class ProductSelectionStep : Step<ProductSelectionModule>
         {
             color = Color.green;
             NGUISomosUtils.showTextInScreen("GameMessage", "¡Muy Bien!");
-            
+
             if (!automatically)
             {
+                callProductStadistic();
                 if (gondolaSelectionModule.NextProductToBuy != null)
                     GameManager.Instance.AddNewStep(new GondolaSelectionStep());
                 else if (GameManager.Instance.GameRound.Configuration.PurchaseModule)
@@ -40,10 +41,10 @@ public class ProductSelectionStep : Step<ProductSelectionModule>
         } else
         {
             color = Color.red;
-
             NGUISomosUtils.showTextInScreen("GameMessage", "¡Sigue intentando!");
             
             if (!automatically)
+                ProductSelectionModule.faileds++;
                 GameManager.Instance.AddNewStep(new ProductSelectionStep());
         }
 
@@ -61,5 +62,11 @@ public class ProductSelectionStep : Step<ProductSelectionModule>
     public void SetCurrentSelectedProduct(Product product)
     {
         SelectedProduct = product;
+    }
+
+    private void callProductStadistic()
+    {
+        SeleccionarProductoStatistic request = new SeleccionarProductoStatistic(ProductSelectionModule.faileds, ProductSelectionModule.moduleStart);
+        UploadStatisticsService.TryToCall(request); 
     }
 }

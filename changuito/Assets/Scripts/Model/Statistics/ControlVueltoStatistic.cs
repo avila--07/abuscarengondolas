@@ -25,7 +25,7 @@ public class ControlVueltoStatistic : Statistic {
      public ControlVueltoStatistic(DateTime gameStart, int failedVuelto)
         : base(gameStart)
     {
-        IdEvento = "Fin_CV";
+        IdEvento = "fin_CV";
         IdPantalla = CV;
         FailedVuelto = failedVuelto;
         Pago = PagoStatus.pago;

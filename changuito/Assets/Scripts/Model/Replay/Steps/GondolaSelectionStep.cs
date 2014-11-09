@@ -16,19 +16,19 @@ public class GondolaSelectionStep : Step<GondolaSelectionModule>
 
     protected override IEnumerator DoAction(bool automatically)
     {
-        Debug.LogError("Estas comprando " + Module.CurrentProductToBuy.Name + " en " + Module.CurrentProductToBuy.GondolaType);
-
         if (Module.CurrentProductToBuy.GondolaType == SelectedGondola.Type)
         {
             NGUISomosUtils.showTextInScreen("SGStatusLabel", "¡Excelente!");
-
+            
             if (!automatically)
+                callFinGondolaStadistic();
                 GameManager.Instance.AddNewStep(new ProductSelectionStep());
         } else
         {
             NGUISomosUtils.showTextInScreen("SGStatusLabel", "Aquí no está.\n ¡Busquemos en otra góndola!");
 
             if (!automatically)
+                GondolaSelectionModule.faileds++;
                 GameManager.Instance.AddNewStep(new GondolaSelectionStep());
         }
 
@@ -52,5 +52,11 @@ public class GondolaSelectionStep : Step<GondolaSelectionModule>
             }
         }
         return null;
+    }
+
+    private void callFinGondolaStadistic()
+    {
+        SeleccionarGondolaStatistic request = new SeleccionarGondolaStatistic(GondolaSelectionModule.faileds, GondolaSelectionModule.moduloStart);
+        UploadStatisticsService.TryToCall(request); 
     }
 }

@@ -7,9 +7,9 @@ public class GondolaSelectionModule : Module
 {
     private const int PRODUCTS_LIST_CAPACITY = 3;
     private int _productToBuyIndex = -1;
-    private  int failedGondola;
-    private  GameObject target;
-    
+    public static int faileds;
+    public static DateTime moduloStart; 
+
     public override string Name
     {
         get { return "GondolaSelectionModule"; }
@@ -49,6 +49,8 @@ public class GondolaSelectionModule : Module
     public override void PrepareScenario()
     {       
         // Add random gondolas and products to buy
+        initializeStatistics();
+
         List<int> randomGondolaTypes = RandomUtils.GetListWithRandomElementsFrom(GondolaFactory.tipoGondolasDictionary.Keys, Configuration.Current.GondolasCount);
         foreach (int randomGondolaType in randomGondolaTypes)
         {
@@ -65,6 +67,7 @@ public class GondolaSelectionModule : Module
     /// </summary>
     public override void MakeScenario()
     {
+        initializeStatistics();
         _productToBuyIndex++;
         ShowGondolas();
         ShowProductsList();
@@ -142,5 +145,11 @@ public class GondolaSelectionModule : Module
         }
         
         productsList.GetComponent<UIGrid>().Reposition();
+    }
+
+    private void initializeStatistics()
+    {
+        moduloStart = DateTime.Now;
+        faileds = 0;
     }
 }

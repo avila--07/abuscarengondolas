@@ -26,20 +26,10 @@ public class PagoStatistic : Statistic {
         : base(gameStart)
     {
         Billete = 0;
-        IdEvento = "Fin_Pago";
+        IdEvento = "fin_pago";
         IdPantalla = PAGO;
-        Monto = PagoStatus.monto;
-        Pago = PagoStatus.pago;
-    }
-
-    public PagoStatistic(DateTime gameStart, int billete)
-        : base(gameStart)
-    {
-        Billete = billete;
-        IdEvento = "Billete_Pago";
-        IdPantalla = PAGO;
-        Monto = PagoStatus.monto;
-        Pago = PagoStatus.pago;
+        Monto = GameManager.Instance.GetModule<GondolaSelectionModule>().GetTotalCost();
+        Pago = GameManager.Instance.GetModule<PurchaseChangeModule>().Payment;
     }
 
     public PagoStatistic()

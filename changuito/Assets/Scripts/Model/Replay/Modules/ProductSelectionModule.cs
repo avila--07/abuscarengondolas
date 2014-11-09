@@ -7,6 +7,12 @@ public class ProductSelectionModule : Module
 {
     private const int PRODUCTS_QUANTITY = 4;
 
+    /// <summary>
+    /// Guarda la cantidad de veces que el jugador se ha equivocado antes de seleccionar el correcto. Meramente estadistico.
+    /// </summary>
+    public static int faileds;
+    public static DateTime moduleStart;
+
     public override string Name
     {
         get { return "ProductSelectionModule"; }
@@ -19,6 +25,8 @@ public class ProductSelectionModule : Module
     
     public override void PrepareScenario()
     {
+        initializeStatistic();
+
         foreach (Product productToBuy in GameManager.Instance.GetModule<GondolaSelectionModule>().ProductsToBuy)
         {
             List<string> randomProductIds = RandomUtils.GetListWithRandomElementsFrom(GondolaFactory.getGondolaProducts(productToBuy.GondolaType), PRODUCTS_QUANTITY);
@@ -43,8 +51,10 @@ public class ProductSelectionModule : Module
 
     public override void MakeScenario()
     {
-        Product productToBuy = GameManager.Instance.GetModule<GondolaSelectionModule>().CurrentProductToBuy;
+        initializeStatistic();
 
+        Product productToBuy = GameManager.Instance.GetModule<GondolaSelectionModule>().CurrentProductToBuy;
+       
         List<Product> otherProducts = GetOtherProducts(productToBuy);
         
         GameObject productsGrid = GameObject.Find("GondolaGrid");
@@ -56,7 +66,6 @@ public class ProductSelectionModule : Module
             productGameObject.name = product.Name;
             productGameObject = NGUITools.AddChild(productsGrid, productGameObject);
             product.Widget = productGameObject.GetComponent<UI2DSprite>();
-            ;
 
             ProductClick productClick = productGameObject.AddComponent<ProductClick>();
             productClick.Product = product;
@@ -95,5 +104,11 @@ public class ProductSelectionModule : Module
     private List<Product> GetOtherProducts(Product product)
     {
         return GetSharedObjectList<Product>("prod" + product.GondolaType);
+    }
+
+    private void initializeStatistic()
+    {
+        moduleStart = DateTime.Now;
+        faileds = 0;
     }
 }
