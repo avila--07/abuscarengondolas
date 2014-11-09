@@ -29,12 +29,12 @@ public class ServicioSeleccionarProductos : MonoBehaviour
         GameObject grid = GameObject.Find("ListadoGrid");
         GameObject targetLabel = GameObject.Find("ProductoLabel");
 
-        targetLabel.GetComponent<UILabel>().text = ListadoSingleton.ProductTarget.name;
+        //targetLabel.GetComponent<UILabel>().text = ListadoSingleton.ProductTarget.name;
         //Asi evitamos que al hacer click en el producto a seleccionar se dispare el label.
-        GameObject target = ListadoSingleton.Instance.getTarget();
-        target.GetComponent<ProductProperties>().target = false;
-        target.tag = "SeleccionarProducto";
-        NGUITools.AddChild(grid, target);
+        //GameObject target = ListadoSingleton.Instance.getTarget();
+        //target.GetComponent<ProductProperties>().target = false;
+        //target.tag = "SeleccionarProducto";
+        //NGUITools.AddChild(grid, target);
     }
 
 
@@ -44,11 +44,11 @@ public class ServicioSeleccionarProductos : MonoBehaviour
 
         //Las gondolas son de un unico tipo de producto (ej Lacteos, verduras, carnes, etc)
         //Cada gondola tiene 4 productos que se muestran por pantalla. 
-        List<String> productsFromGondola = GondolaFactory.generateRandomProductsWithOutTarget(ListadoSingleton.Instance.getTarget());
-        productsFromGondola.Add(ListadoSingleton.ProductTarget.name);
+        //List<String> productsFromGondola = GondolaFactory.generateRandomProductsWithOutTarget(ListadoSingleton.Instance.getTarget());
+        //productsFromGondola.Add(ListadoSingleton.ProductTarget.name);
 
-        List<String> productosDesordenados = ArrayListSomosUtils.desordenarLista(productsFromGondola);
-
+        //List<String> productosDesordenados = ArrayListSomosUtils.desordenarLista(productsFromGondola);
+		/*
         GameObject labelsGrid = GameObject.Find("LabelsGrid");
 
         foreach (string product in productosDesordenados)
@@ -65,13 +65,13 @@ public class ServicioSeleccionarProductos : MonoBehaviour
         }
 
         grid.GetComponent<UIGrid>().Reposition();
-        labelsGrid.GetComponent<UIGrid>().Reposition();
+        labelsGrid.GetComponent<UIGrid>().Reposition();*/
     }
 
 
     private void setProductTarget(GameObject product)
     {
-
+		/*
         if (ListadoSingleton.ProductTarget.name.Equals(product.name))
         {
             product.GetComponent<ProductProperties>().setTarget(true);
@@ -79,7 +79,7 @@ public class ServicioSeleccionarProductos : MonoBehaviour
         else
         {
             product.GetComponent<ProductProperties>().setTarget(false);
-        }
+        }*/
     }
 
 }

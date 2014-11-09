@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
-
+/*
 public class ServicioPago : MonoBehaviour 
 {
     ArrayList moneyInSuperiorScene = new ArrayList(3);
@@ -16,7 +16,7 @@ public class ServicioPago : MonoBehaviour
     void Start ()
     {
         this.initializeStadistics();
-        PagoStatus.monto = ListadoSingleton.Instance.getTotalListado();
+        //PagoStatus.monto = ListadoSingleton.Instance.getTotalListado();
         this.loadMoney();
         this.initializeScreen();
         this.InitializePizarra();
@@ -65,3 +65,4 @@ public class ServicioPago : MonoBehaviour
     }
 
 }
+*/

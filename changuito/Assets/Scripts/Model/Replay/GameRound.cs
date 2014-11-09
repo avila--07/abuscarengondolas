@@ -1,56 +1,110 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class GameRound : SharedObject
 {
-		private Module _currentModule;
+    public List<Module> Modules
+    {
+        get { return GetSharedObjectList<Module>("mod", CastModuleToRealModuleType); }
+    }
 
-		public List<Module> Modules {
-				get { return GetList<Module> ("mod"); }
-		}
-	
-		public Configuration Configuration {
-		
-				get { return GetSharedObject<Configuration> ("conf"); }
-				protected set { Set ("conf", value); }
-		}
-	
-		public Module CurrentModule {
-				get { return _currentModule; }
-		}
+    public List<Step> Steps
+    {
+        get { return GetSharedObjectList<Step>("steps", CastStepToRealStepType); }
+    }
+    
+    public Configuration Configuration
+    {
+        
+        get { return GetSharedObject<Configuration>("conf"); }
+        protected set { Set("conf", value); }
+    }
 
-		public GameRound (Configuration configuration)
-		{
-				Configuration = configuration;
-		}
+    public Step CurrentStep
+    {
+        get;
+        private set;
+    }
 
-		public void AddModule (Module value)
-		{
-				AddToList<Module> ("mod", value);	
-		}
+    public GameRound()
+    {
+    }
 
-		public IEnumerator Play (MonoBehaviour monoBehaviour)
-		{
-				foreach (Module module in Modules) {
-						_currentModule = module;
+    public GameRound(Configuration configuration)
+    {
+        Configuration = configuration;
+    }
 
-						Debug.Log (module.Name + " is waiting 2 second (because I am almost sure that you have changed the scene)...");
-			
-						yield return  new WaitForSeconds (2f);
+    public void AddModule(Module value)
+    {
+        AddToList<Module>("mod", value);    
+    }
+    
+    public void AddStep(Step step)
+    {
+        AddToList("steps", step);
+    }
 
-						Debug.Log (module.Name + " is making its own scenario...");
+    public IEnumerator Play(MonoBehaviour monoBehaviour, bool automatically)
+    {
+        // Use a while because more steps can be added Playing a step
+        int stepIndex = 0;
+        while (stepIndex < Steps.Count)
+        {
+            CurrentStep = Steps [stepIndex++];
 
-						module.MakeScenario ();
+            Debug.Log(CurrentStep.Name + " is automatically playing...");
 
-						Debug.Log (module.Name + " is waiting 1 second...");
+            yield return monoBehaviour.StartCoroutine(CurrentStep.Play(monoBehaviour, automatically));
+        }
 
-						yield return  new WaitForSeconds (1f);
+        Debug.LogError("Finish GameRound Play...");
+    }
+    
+    public T GetModule<T>()
+            where T : Module
+    {
+        foreach (var module in Modules)
+        {
+            if (typeof(T).IsInstanceOfType(module))
+            {
+                return (T)module;
+            }
+        }
+        throw new Exception("Module of type " + typeof(T).Name + " does NOT exists.");
+    }
 
-						Debug.Log (module.Name + " is automatically playing...");
-						yield return monoBehaviour.StartCoroutine (module.Play (monoBehaviour));
-				}
-				Debug.LogError ("Finish GameRound Play...");
-				yield break;
-		}
+    private Module CastModuleToRealModuleType(string key, SharedObject sharedObject)
+    {
+        string moduleName = sharedObject.GetString("name");
+        if (moduleName == "GondolaSelectionModule")
+            return SharedObject.CastSharedObject<GondolaSelectionModule>(this, key, sharedObject);
+        if (moduleName == "ProductSelectionModule")
+            return SharedObject.CastSharedObject<ProductSelectionModule>(this, key, sharedObject);
+        if (moduleName == "PurchasePaymentModule")
+            return SharedObject.CastSharedObject<PurchasePaymentModule>(this, key, sharedObject);
+        if (moduleName == "PurchaseChangeModule")
+            return SharedObject.CastSharedObject<PurchaseChangeModule>(this, key, sharedObject);
+        
+        throw new Exception("Doesnt found a module with name [" + moduleName + "]");
+    }
+
+    private Step CastStepToRealStepType(string key, SharedObject sharedObject)
+    {
+        string stepType = sharedObject.GetString("type");
+        if (stepType == "GondolaSelectionStep")
+            return SharedObject.CastSharedObject<GondolaSelectionStep>(this, key, sharedObject);
+        if (stepType == "ProductSelectionStep")
+            return SharedObject.CastSharedObject<ProductSelectionStep>(this, key, sharedObject);
+        if (stepType == "PurchasePaymentStep")
+            return SharedObject.CastSharedObject<PurchasePaymentStep>(this, key, sharedObject);
+        if (stepType == "PurchaseChangeStep")
+            return SharedObject.CastSharedObject<PurchaseChangeStep>(this, key, sharedObject);
+        if (stepType == "EndGameRoundStep")
+            return SharedObject.CastSharedObject<EndGameRoundStep>(this, key, sharedObject);
+
+        throw new Exception("Doesnt found a step with type [" + stepType + "]");
+    }
 }

@@ -4,97 +4,81 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-		private static GameManager _instance;
-		private GameRound _gameRound;
-        public GondolaSelectionModule gondolaSelectionModule;
+    private static GameManager _instance;
+    private GameRound _gameRound;
 
-		public static GameManager Instance {
-				get {
-						if (_instance == null) {
-								GameObject gameObject = new GameObject ();
-								gameObject.name = "GameManager";
-								_instance = gameObject.AddComponent<GameManager> ();
-						}
-						return _instance;
-				}
-		}
-
-		public Module CurrentModule {
-				get { return _gameRound.CurrentModule; }
-		}
-
-		public GameManager ()
-		{
-				DontDestroyOnLoad (this);
-		}
-
-		public void StartAlreadyPlayedGame (GameRound gameRound)
-		{
-				//Application.LoadLevel ("PantallaSeleccionGondolas");
-
-				_gameRound = gameRound;
-				StartCoroutine (_gameRound.Play (this));
-		}
-
-		public void StartNewGame ()
-		{
-				_gameRound = new GameRound (Configuration.Current);
-
-				gondolaSelectionModule = BuildGondolaSelectionModule ();
-                // REVIEW: No puedo crear el escenario sin primero estar en el.
-                // gondolaSelectionModule.AddStep(new ChangeSceneStep("PantallaSeleccionGondolas"));
-                Application.LoadLevel("PantallaSeleccionGondolas");
-
-                _gameRound.AddModule(gondolaSelectionModule);
-
-				if (Configuration.Current.PurchaseModule) {
-						_gameRound.AddModule (BuildPurchaseModule ());
-				}
-				if (Configuration.Current.ChangeControlModule) {
-						_gameRound.AddModule (BuildChangeControlModule ());
-				}
-				StartCoroutine (_gameRound.Play (this));
-		}
-
-		public void RecordStep (Step step)
-		{
-				CurrentModule.AddStep (step);
-		}
-
-		private static GondolaSelectionModule BuildGondolaSelectionModule ()
-		{
-				GondolaSelectionModule gondolaSelectionModule = new GondolaSelectionModule ();
-
-				// Add random gondolas and products to buy
-				List<int> randomGondolaTypes = RandomUtils.GetListWithRandomElementsFrom (GondolaFactory.tipoGondolasDictionary.Keys, Configuration.Current.GondolasCount);
-				foreach (int randomGondolaType in randomGondolaTypes) {
-
-						string gondolaName = GondolaFactory.getGondolaNombre (randomGondolaType);
-						gondolaSelectionModule.AddGondola (new Gondola (gondolaName, randomGondolaType));
-
-						string productName = RandomUtils.GetRandomElementOfList (GondolaFactory.getGondolaProducts (randomGondolaType));
-						gondolaSelectionModule.AddProductToBuy (new Product (productName, randomGondolaType));
-				}
-				
-				return gondolaSelectionModule;
-		}
-
-        private static ProductSelectionModule BuildProductSeleccionModule()
+    public static GameManager Instance
+    {
+        get
         {
-            ProductSelectionModule  productSelectionModule  = new ProductSelectionModule ();
-            
-            return productSelectionModule;
-        } 
+            if (_instance == null)
+            {
+                GameObject gameObject = new GameObject();
+                gameObject.name = "GameManager";
+                _instance = gameObject.AddComponent<GameManager>();
+            }
+            return _instance;
+        }
+    }
+    
+    public GameRound GameRound
+    {
+        get { return _gameRound; }
+    }
 
-		private static PurchaseModule BuildPurchaseModule ()
-		{
-				//TODO: implementar	
-				return new PurchaseModule ();
-		}
-	
-		private static ChangeControlModule BuildChangeControlModule ()
-		{
-				//TODO: implementar
-				return new ChangeControlModule ();
-		}
+    public GameManager()
+    {
+        DontDestroyOnLoad(this);
+    }
+
+    public T GetCurrentStep<T>()
+            where T: Step
+    {
+        return (T)_gameRound.CurrentStep;
+    }
+
+    public T GetModule<T>()
+            where T : Module
+    {
+        return _gameRound.GetModule<T>();
+    }
+
+    public void StartAlreadyPlayedGame(GameRound gameRound)
+    {
+        _gameRound = gameRound;
+        StartCoroutine(_gameRound.Play(this, true));
+    }
+
+    public void StartNewGame()
+    {
+        _gameRound = GetNewGameRound();
+        
+        //Prepare modules scenarios
+        foreach (Module module in _gameRound.Modules)
+        {
+            Debug.Log("Preparing scenario of " + module.Name + " module...");
+            module.PrepareScenario();
+        }
+
+        _gameRound.AddStep(new GondolaSelectionStep());
+        StartCoroutine(_gameRound.Play(this, false));
+    }
+
+    public void AddNewStep(Step step)
+    {
+        _gameRound.AddStep(step);
+    }
+
+    private static GameRound GetNewGameRound()
+    {
+        GameRound gameRound = new GameRound(Configuration.Current);
+
+        //Add modules
+        gameRound.AddModule(new GondolaSelectionModule());
+        gameRound.AddModule(new ProductSelectionModule());
+        gameRound.AddModule(new PurchasePaymentModule());
+        gameRound.AddModule(new PurchaseChangeModule());
+
+        return gameRound;
+    }
 }

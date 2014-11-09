@@ -5,163 +5,142 @@ using System;
 
 public class GondolaSelectionModule : Module
 {
-    public static int MAX_LISTADO = 3;
-    public int PosicionActual = 0;
-    public static List<UI2DSprite> GondolasSprite = new List<UI2DSprite>(6);
-    public static int failedGondola;
-    public static DateTime gondolaStart;
-    public static GameObject target;
-
-	/// <summary>
-	/// Creamos el listado y las gondolas. Damos comienzo a las instancias de juego.
-	/// </summary>
-	public override void MakeScenario ()
-	{
-        initializeStatistics();
-
-      	if (!seleccionFinalizada ()) 
-        {
-            this.showGondolas();
-            this.showListado();
-            this.showTarget();
-        }
-        else
-        {
-            finalizarJuego();
-        }
-    }
-
-    private void showTarget()
-    {
-        GameObject targetGrid = GameObject.Find("SGSeleccionGrid");
-
-        Product productTarget = ProductsToBuy.ToArray()[PosicionActual];
-        GameObject productGameObjectTarget = (GameObject)Resources.Load(Configuration.PRODUCTOS_PATH + productTarget.Name);
-        productGameObjectTarget.GetComponent<ProductProperties>().tipo = productTarget.GondolaType;
-        NGUITools.AddChild(targetGrid, productGameObjectTarget);
-        NGUISomosUtils.showTextInScreen("SGSeleccionLabel", productGameObjectTarget.name);
-        target = productGameObjectTarget;
-    }
-
-    private void showListado()
-    {
-        GameObject listgadoGrid = GameObject.Find("SGListadoGrid");
-        //Corto por la cantidad maxima permitida a mostrar ...
-        if (PosicionActual < MAX_LISTADO)
-        {   //En el caso de que sea menor la cantidad a mostrar ...
-            if (Configuration.Current.GondolasCount < MAX_LISTADO)
-                this.showSomeProductsInListado(listgadoGrid, 0, Configuration.Current.GondolasCount);
-            else
-                this.showSomeProductsInListado(listgadoGrid, 0, MAX_LISTADO);
-        }
-        else
-        {
-            this.showSomeProductsInListado(listgadoGrid, MAX_LISTADO, Configuration.Current.GondolasCount);
-        }
-    }
-
-    private void showGondolas()
-    {
-        GameObject gondolasGrid = GameObject.Find("SGGondolasTable");
-        
-        foreach (Gondola gondola in Gondolas) 
-        {
-		    GameObject gondolaGameObject = (GameObject)Resources.Load (Configuration.GONDOLAS_PATH + gondola.Name);
-		    gondolaGameObject.name = gondola.Name;
-		    gondolaGameObject.GetComponent<GondolaProperties> ().ProductType = gondola.Type;
-            GondolasSprite.Add(NGUITools.AddChild(gondolasGrid, gondolaGameObject).GetComponent<UI2DSprite>());
-        }
-        gondolasGrid.GetComponent<UITable>().Reposition();
-    }
-
-    private void showSomeProductsInListado(GameObject grid, int ini, int fin)
-    {
-		GameObject listgadoGrid = GameObject.Find ("SGListadoGrid");
-        for (int i = ini; i < fin; i++)
-        {
-            Product product = ProductsToBuy.ToArray()[i];
-		    GameObject productGameObject = (GameObject)Resources.Load (Configuration.PRODUCTOS_PATH + product.Name);
-		    productGameObject.name = product.Name;
-		    if (productGameObject == null) {
-			    Debug.LogError ("El prefab " + product.Name + " no existe");
-		    }
-				
-            initializeProduct(productGameObject, product);
-            NGUITools.AddChild(listgadoGrid, productGameObject);
-	    }
-        
-        listgadoGrid.GetComponent<UIGrid>().Reposition();
-    }
-
-    private void initializeProduct(GameObject productGameObject, Product product)
-    {
-        productGameObject.GetComponent<ProductProperties> ().tipo = product.GondolaType;
-		NGUISomosUtils.setTildeProductoSeleccionado (productGameObject, false);
-		productGameObject.tag = "GameController";
-		productGameObject.GetComponent<ProductProperties> ().target = false;
-
-    }
-
-    private void initializeStatistics()
-    {
-        failedGondola = 0;
-        gondolaStart = DateTime.Now;
-    }
-
-    private void finalizarJuego()
-    {
-        if (Configuration.Current.PurchaseModule)
-        {
-            this.AddStep(new ChangeSceneStep("PantallaPago"));
-        }
-        else
-        {
-            this.AddStep(new ChangeSceneStep("PantallaFinal"));
-            this.clean();
-        }
-    }
-
-    private bool seleccionFinalizada()
-    {
-        return Configuration.Current.GondolasCount == ListadoSingleton.PosicionActual;
-    }
-
-    internal void clean()
-    {
-        /*foreach (GameObject gameObject in ProductsToBuy)
-        {
-            NGUISomosUtils.setTildeProductoSeleccionado(gameObject, false);
-        }
-        ListadoProductos.Clear();
-        gondolasSeleccionadas.Clear();
-        PagoStatus.monto = 0;
-        PagoStatus.pago = 0;
-        ListadoSingleton.PosicionActual = 0;
-        ProductTarget = null;*/
-    }
-
-    public void AddGondola (Gondola gondola)
-	{
-		AddToList ("glatyp", gondola);
-	}
-	
-	public void AddProductToBuy (Product product)
-	{
-			AddToList ("prods", product);
-	}
-
+    private const int PRODUCTS_LIST_CAPACITY = 3;
+    private int _productToBuyIndex = -1;
+    private  int failedGondola;
+    private  GameObject target;
+    
     public override string Name
     {
-        get { return "GondolaSelection"; }
+        get { return "GondolaSelectionModule"; }
+    }
+    
+    public override string Scene
+    {
+        get { return "PantallaSeleccionGondolas"; }
     }
 
     public List<Gondola> Gondolas
     {
-        get { return GetList<Gondola>("glatyp"); }
+        get { return GetSharedObjectList<Gondola>("glatyp"); }
     }
-
+    
     public List<Product> ProductsToBuy
     {
-        get { return GetList<Product>("prods"); }
+        get { return GetSharedObjectList<Product>("prods"); }
+    }
+
+    public Product CurrentProductToBuy
+    {
+        get { return (ProductsToBuy.Count > _productToBuyIndex) ? ProductsToBuy [_productToBuyIndex] : null; }
+    }
+    
+    public Product NextProductToBuy
+    {
+        get { return (ProductsToBuy.Count > _productToBuyIndex + 1) ? ProductsToBuy [_productToBuyIndex + 1] : null; }
+    }
+
+    public ChanguitoDragable Changuito
+    {
+        get;
+        private set;
+    }
+    
+    public override void PrepareScenario()
+    {       
+        // Add random gondolas and products to buy
+        List<int> randomGondolaTypes = RandomUtils.GetListWithRandomElementsFrom(GondolaFactory.tipoGondolasDictionary.Keys, Configuration.Current.GondolasCount);
+        foreach (int randomGondolaType in randomGondolaTypes)
+        {
+            string gondolaName = GondolaFactory.getGondolaNombre(randomGondolaType);
+            AddGondola(new Gondola(gondolaName, randomGondolaType));
+            
+            string productName = RandomUtils.GetRandomElementOfList(GondolaFactory.getGondolaProducts(randomGondolaType));
+            AddProductToBuy(new Product(productName, randomGondolaType));
+        }
+    }
+
+    /// <summary>
+    /// Creamos el listado y las gondolas. Damos comienzo a las instancias de juego.
+    /// </summary>
+    public override void MakeScenario()
+    {
+        _productToBuyIndex++;
+        ShowGondolas();
+        ShowProductsList();
+        Changuito = GameObject.Find("Changuito").GetComponent<ChanguitoDragable>();
+    }
+
+    public Vector3 GetSelectedGondolaPosition(Gondola aGondola)
+    {
+        foreach (Gondola gondola in Gondolas)
+        {
+            if (gondola.Name == aGondola.Name)
+            {
+                return gondola.Widget.transform.position;
+            }
+        }
+        throw new Exception("Gondola of type [" + aGondola.Name + "] not found");
+    }
+
+    public int GetTotalCost()
+    {
+        int totalCost = 0;
+        foreach(Product product in ProductsToBuy)
+        {
+            totalCost += product.Cost;
+        }
+        return totalCost;
+    }
+
+    private void AddGondola(Gondola gondola)
+    {
+        AddToList("glatyp", gondola);
+    }
+    
+    private void AddProductToBuy(Product product)
+    {
+        AddToList("prods", product);
+    }
+
+    private void ShowGondolas()
+    {
+        GameObject gondolasGrid = GameObject.Find("SGGondolasTable");
+        
+        foreach (Gondola gondola in Gondolas)
+        {
+            GameObject gondolaGameObject = (GameObject)Resources.Load(Configuration.GONDOLAS_PATH + gondola.Name);
+            gondolaGameObject.name = gondola.Name;
+            gondolaGameObject = NGUITools.AddChild(gondolasGrid, gondolaGameObject);
+            gondola.Widget = gondolaGameObject.GetComponent<UIWidget>();
+        }
+        gondolasGrid.GetComponent<UITable>().Reposition();
+    }
+    
+    private void ShowProductsList()
+    {
+        GameObject productsList = GameObject.Find("SGListadoGrid");
+        GameObject productToBuyGrid = GameObject.Find("SGSeleccionGrid");
+
+        int index = 0;
+        while (index < PRODUCTS_LIST_CAPACITY && index + _productToBuyIndex < ProductsToBuy.Count)
+        {
+            Debug.LogError("ProductsToBuy " + ProductsToBuy.Count + " index " + index);
+            Product product = ProductsToBuy [index + _productToBuyIndex];
+
+            GameObject productGameObject = (GameObject)Resources.Load(Configuration.PRODUCTOS_PATH + product.Name);
+            productGameObject.name = product.Name;
+            productGameObject = NGUITools.AddChild(productsList, productGameObject);
+            NGUISomosUtils.setTildeProductoSeleccionado(productGameObject, false);
+
+            if (index == 0)
+            {
+                NGUITools.AddChild(productToBuyGrid, productGameObject);
+                NGUISomosUtils.showTextInScreen("SGSeleccionLabel", product.Name);
+            }
+            index++;
+        }
+        
+        productsList.GetComponent<UIGrid>().Reposition();
     }
 }

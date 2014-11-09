@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+/*
 public class ServicioControlVuelto : MonoBehaviour {
     
     public int monto;
@@ -90,3 +90,4 @@ public class ServicioControlVuelto : MonoBehaviour {
     }
 
 }
+*/

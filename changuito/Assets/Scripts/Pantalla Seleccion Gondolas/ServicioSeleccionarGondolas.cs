@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
-
+/*
 public class ServicioSeleccionarGondolas : MonoBehaviour
 {
     public static int failedGondola;
@@ -15,7 +15,7 @@ public class ServicioSeleccionarGondolas : MonoBehaviour
         initializeStatistics();
 
 		if (!seleccionFinalizada ()) {
-            ListadoSingleton.Instance.makeGondolaScene();
+            //ListadoSingleton.Instance.makeGondolaScene();
 			showScene();
             setTargetOfChanguito ();
 			setProductTarget ();
@@ -62,4 +62,4 @@ public class ServicioSeleccionarGondolas : MonoBehaviour
         ListadoSingleton.Instance.showGondolas(gondolasGrid);
     }
 
-}
+}*/

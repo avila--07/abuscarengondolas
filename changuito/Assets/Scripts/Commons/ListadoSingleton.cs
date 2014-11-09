@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
-
+/*
 public class ListadoSingleton 
 {
     /// <summary>
@@ -202,4 +202,4 @@ public class ListadoSingleton
         return total;
     }
 
-}
+}*/
