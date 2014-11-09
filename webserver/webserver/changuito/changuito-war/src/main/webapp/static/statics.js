@@ -7,10 +7,10 @@ var testing ;
 $( function() {
 ////  $( "#tabs" ).tabs();
 	//containerSelecProducto, containerModPago,containerModVuelto, containerGenerales
-	var createStatsSelecGondolas = function (data) { 
+	var createGlobalStats = function (data) { 
 	    var nombresPartidas = getNombresPartidasFromData(data);
 	    
-		$('#containerSelecGondolas').highcharts({
+		$('#containerGenerales').highcharts({
 	        chart: {
 	            type: 'column'
 	        },
@@ -18,7 +18,6 @@ $( function() {
 	            text: 'Desempeño en Selección de Góndolas'
 	        },
 	        xAxis: {
-//	            categories: ['Partida 1', 'Partida 2', 'Partida 3', 'Partida 4', 'Partida 5']
 	            categories: nombresPartidas
 	        },
 	        yAxis: {
@@ -28,11 +27,11 @@ $( function() {
 	        },
 	        series: [{
 	            name: 'Aciertos',
-	            data: [1, 0, 4, 8, 6],
+	            data: getEventosPartidasFromData(data,"Aciertos"),
 	            color: 'green'
 	        }, {
 	            name: 'Errores',
-	            data: [5, 7, 3, 3, 5],
+	            data: getEventosPartidasFromData(data,"Errores"),
 	            color: 'red'
 	        }]
 	    });
@@ -43,14 +42,153 @@ $( function() {
 		var nombrePartida;
 		var i;
 		for (i = 0; i < data.partidas.length; i++) { 
-			nombrePartida = data.partidas[i].data.idPartida + " " + data.partidas[i].data.gameDate ;
+			nombrePartida = "id " + data.partidas[i].data.idPartida + " - " + data.partidas[i].data.gameDate ;
 			array.push(nombrePartida);
 		}
 		return array;
 
 	};
-	
+
+	var getEventosPartidasFromData = function(data,dataKey){
+		var array = [];
+		var valores;
+		var i;
+		for (i = 0; i < data.partidas.length; i++) { 
+			valores = data.partidas[i].data[dataKey];
+			array.push(valores);
+		}
+		return array;
+		
+	};
+
+	var getEventosModuleFromData = function(data,module,dataKey){
+		var array = [];
+		var valores;
+		var i;
+		for (i = 0; i < data.partidas.length; i++) { 
+			valores = data.partidas[i].data[module].data[dataKey];
+			array.push(valores);
+		}
+		return array;
+		
+	};
+
+	var createStatsSelecGondolas = function (data) { 
+		$('#containerSelecGondolas').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Desempeño en Selección de Góndolas'
+			},
+			xAxis: {
+				categories: getNombresPartidasFromData(data)
+			},
+			yAxis: {
+				title: {
+					text: 'Cantidad'
+				}
+			},
+			series: [{
+				name: 'Aciertos',
+				data: getEventosModuleFromData(data,"ModuloSeleccionGondolas","aciertos"),
+				color: 'green'
+			}, {
+				name: 'Errores',
+				data: getEventosModuleFromData(data,"ModuloSeleccionGondolas","errores"),
+				color: 'red'
+			}]
+		});
+	};
+	 
 	var createStatsSelecProducto = function (data) { 
+		$('#containerSelecProducto').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Desempeño en Selección de Productos'
+			},
+			xAxis: {
+				categories: getNombresPartidasFromData(data)
+			},
+			yAxis: {
+				title: {
+					text: 'Cantidad'
+				}
+			},
+			series: [{
+				name: 'Aciertos',
+				data: getEventosModuleFromData(data,"ModuloSeleccionProducto","aciertos"),
+				color: 'green'
+			}, {
+				name: 'Errores',
+				data: getEventosModuleFromData(data,"ModuloSeleccionProducto","errores"),
+				color: 'red'
+			}]
+		});
+	};
+
+	var createStatsModVuelto = function (data) { 
+		$('#containerModVuelto').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Desempeño en Módulo control de vuelto'
+			},
+			xAxis: {
+				categories: getNombresPartidasFromData(data)
+			},
+			yAxis: {
+				title: {
+					text: 'Cantidad'
+				}
+			},
+			series: [{
+				name: 'Aciertos',
+				data: getEventosModuleFromData(data,"ModuloVuelto","aciertos"),
+				color: 'green'
+			}, {
+				name: 'Errores',
+				data: getEventosModuleFromData(data,"ModuloVuelto","errores"),
+				color: 'red'
+			}]
+		});
+	};
+
+	var createStatsModPago = function (data) { 
+		$('#containerModPago').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Desempeño en Módulo de Pago'
+			},
+			xAxis: {
+				categories: getNombresPartidasFromData(data)
+			},
+			yAxis: {
+				title: {
+					text: 'Cantidad'
+				}
+			},
+			series: [{
+				name: 'Aciertos',
+				data: getEventosModuleFromData(data,"ModuloPago","aciertos"),
+				color: 'green'
+			}, {
+				name: 'Errores',
+				data: getEventosModuleFromData(data,"ModuloPago","errores"),
+				color: 'red'
+			}]
+		});
+	};
+
+	
+	
+	//From this part there are only mocks
+	var createStatsSelecProductoMock = function (data) { 
 		$('#containerSelecProducto').highcharts({
 			chart: {
 				type: 'column'
@@ -78,7 +216,7 @@ $( function() {
 		});
 	};
 	
-	var createStatsModVuelto = function (data) { 
+	var createStatsModVueltoMock = function (data) { 
 		$('#containerModVuelto').highcharts({
 			chart: {
 				type: 'column'
@@ -270,7 +408,8 @@ $( function() {
 	
 	return arraySeries;
   };
-
+  
+  //End of the mocks
 
   var init = function(){
 	  console.log("Init");
@@ -292,9 +431,12 @@ $( function() {
 	    	$("#partidasJugadas").text(partidasJugadas);
 	    	
 	    	//createChanguitoStats(msg);
+	    	createGlobalStats(data);
+
 	    	createStatsSelecGondolas(data);
 	    	createStatsSelecProducto(data);
 	    	createStatsModVuelto(data);
+	    	createStatsModPago(data);
 	    	
 	    }else{
 	    	console.log("Errores en la carga de la página");
