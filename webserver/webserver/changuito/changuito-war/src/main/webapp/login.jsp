@@ -19,9 +19,6 @@
 					<br>
 					<p> <label for="password">Contraseña:</label>
 						<input type="password" required name="password" id="password" placeholder="Ingrese su contraseña"></p>
-					<br>
-					<p> <label for="secondpassword">Confirmar Contraseña:</label>
-						<input type="password" required name="secondpassword" id="secondpassword" placeholder="Repita su contraseña"></p>
 				</fieldset>
 				</div>
 			<br>

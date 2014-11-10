@@ -11,4 +11,8 @@ $( document ).ready(function() {
 	    }
 	);
 
+	$("#ver_st").on("click", function(){ $("#featured-wrapper").load("/statics") ;});
+	$("#ver_conf").on("click", function(){ $("#featured-wrapper").load("/configuration") ;});
+	$("#ver_part").on("click", function(){ $("#featured-wrapper").load("/partidas") ;});
+	
 });

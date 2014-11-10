@@ -30,8 +30,8 @@
 		<ul>
 			<li id="inicio" class="current_page_item"><a href="#" accesskey="1" title="" id="inicioLink">Inicio</a></li>
 			<li id="about"><a href="#" accesskey="6" title="" id="aboutLink">¿Quiénes somos?</a></li>
-			<li id="login"><a href="#" accesskey="5" title="" id="loginLink">Login</a></li>
 			<li id="demo"><a href="#" accesskey="7" title="">Demo</a></li>
+			<li id="login"><a href="#" accesskey="5" title="" id="loginLink">Login</a></li>
 		</ul>
 	</div>
  
