@@ -91,4 +91,14 @@
         <url-pattern>/ChanguitoServices/*</url-pattern>
     </servlet-mapping>
 
+	  <servlet>
+	    <servlet-name>StoreImage</servlet-name>
+	    <servlet-class>ImageStoreServlet</servlet-class>
+	  </servlet>
+
+	  <servlet-mapping>
+	    <servlet-name>StoreImage</servlet-name>
+	    <url-pattern>/addStatic</url-pattern>
+	  </servlet-mapping>
+
 </web-app>

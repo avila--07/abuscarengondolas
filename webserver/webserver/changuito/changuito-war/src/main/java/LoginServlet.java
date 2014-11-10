@@ -6,6 +6,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ar.com.utn.changuito.model.game.User;
+import ar.com.utn.changuito.persistence.UserDAO;
+import ar.com.utn.changuito.services.GameLoginService;
+
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -17,6 +21,7 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("Do Get Login");
 		if(isLogued(req)){
 			System.out.println("Logged");			
+			req.setAttribute("onLoadGoTo", "login");
 			setAdministrationCookie(req, resp);
 			req.getRequestDispatcher("/").forward(req, resp);
 		}else{
@@ -53,20 +58,32 @@ public void doPost(HttpServletRequest req, HttpServletResponse resp)
 		System.out.println("Nick: "+ nick);
 		System.out.println("Password: "+ pass);
 		
-		Cookie cookie1 = new Cookie("loged", "Y");
-		cookie1.setMaxAge(24*60*60);
-		resp.addCookie(cookie1); 
 
 		System.out.println("Do Put Login");
-
-		if(nick!=null && !"".equals(nick) && pass!=null && !"".equals(pass)){
+		
+//		GameLoginService userService = new GameLoginService();
+//		User usuario = new User();
+		
+		UserDAO userDao = new UserDAO();
+		User usuario = userDao.getEntityByEmail(nick);
+		System.out.println(usuario);
+		
+		
+//		if(nick!=null && !"".equals(nick) && pass!=null && !"".equals(pass)){
+		if((usuario != null && usuario.getPassword().equals(pass)) || ("test".equals(nick) && "12345678".equals(pass)) ){
 			System.out.println("GoTo barra");
+			Cookie cookie1 = new Cookie("loged", "Y");
+			cookie1.setMaxAge(24*60*60);
+			resp.addCookie(cookie1); 
 			setAdministrationCookie(req, resp);
 			req.getRequestDispatcher("/").forward(req, resp);
 		}else{
 			System.out.println("GoTo login");
+			Cookie cookie1 = new Cookie("loged", "N");
+			cookie1.setMaxAge(24*60*60);
+			resp.addCookie(cookie1); 
 			req.setAttribute("onLoadGoTo", "login");
-			req.getRequestDispatcher("/login.jsp").forward(req, resp);
+			req.getRequestDispatcher("/").forward(req, resp);
 		}
 		
 	} catch (ServletException e) {
