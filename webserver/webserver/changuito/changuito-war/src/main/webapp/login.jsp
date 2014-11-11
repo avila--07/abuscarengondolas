@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="/frontendhome/css/bootstrap.min.css" rel="stylesheet">
 <link href="/frontendhome/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
