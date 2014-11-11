@@ -57,12 +57,8 @@ public void doPost(HttpServletRequest req, HttpServletResponse resp)
 		
 		System.out.println("Nick: "+ nick);
 		System.out.println("Password: "+ pass);
-		
 
 		System.out.println("Do Put Login");
-		
-//		GameLoginService userService = new GameLoginService();
-//		User usuario = new User();
 		
 		UserDAO userDao = new UserDAO();
 		User usuario = userDao.getEntityByEmail(nick);
@@ -75,6 +71,17 @@ public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			Cookie cookie1 = new Cookie("loged", "Y");
 			cookie1.setMaxAge(24*60*60);
 			resp.addCookie(cookie1); 
+
+			if(!"test".equals(nick)){
+				Cookie cookie2 = new Cookie("usuario", usuario.toString());
+				cookie2.setMaxAge(24*60*60);
+				resp.addCookie(cookie2); 
+			}
+
+			Cookie cookie3 = new Cookie("onLoadGoTo", "login");
+			cookie3.setMaxAge(24*60*60);
+			resp.addCookie(cookie3); 
+
 			setAdministrationCookie(req, resp);
 			req.getRequestDispatcher("/").forward(req, resp);
 		}else{
@@ -82,7 +89,11 @@ public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			Cookie cookie1 = new Cookie("loged", "N");
 			cookie1.setMaxAge(24*60*60);
 			resp.addCookie(cookie1); 
-			req.setAttribute("onLoadGoTo", "login");
+			
+			Cookie cookie3 = new Cookie("onLoadGoTo", "login");
+			cookie3.setMaxAge(24*60*60);
+			resp.addCookie(cookie3); 
+
 			req.getRequestDispatcher("/").forward(req, resp);
 		}
 		

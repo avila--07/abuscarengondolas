@@ -74,9 +74,13 @@ $( document ).ready(function() {
 			$("#menu ul").append($("#configuration"));
 			$("#menu ul").append($("#partidas"));
 			$("#loginLink").text("Administración");
+		}
+
+		if("login" == $.cookie('onLoadGoTo')){
+			$("#featured-wrapper").load("/login");	
+			$.removeCookie('onLoadGoTo'); 
 		}else{
 			$("#featured-wrapper").load("/homefatures");
-			
 		}
 	}else{
 		$("#featured-wrapper").load("/homefatures");
