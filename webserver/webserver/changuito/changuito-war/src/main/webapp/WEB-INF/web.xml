@@ -83,6 +83,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>policy</servlet-name>
+        <servlet-class>PolicyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>policy</servlet-name>
+        <url-pattern>/policy</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ChanguitoServices</servlet-name>
         <servlet-class>ar.com.utn.changuito.architecture.services.GameServicesServlet</servlet-class>
     </servlet>
