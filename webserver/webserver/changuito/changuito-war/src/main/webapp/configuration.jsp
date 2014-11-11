@@ -23,7 +23,7 @@
 			<div class="styleform">
 			<fieldset id="inputs">
 				<p> <label>Cantidad de productos:</label>
-					<input name="quantity" type="number" min="2" max="6" title="Cantidad de productos que deberán ser comprados en el juego"></p>
+					<input name="quantity" type="number" min="2" max="6" value="2" title="Cantidad de productos que deberán ser comprados en el juego"></p>
 				<br>
 				<p> <label for="modpago">Habilitar Módulo de pago:</label>
 					<input name="modpago" id="modpago" type="checkbox" onclick="checkmp()" title="Luego de completar la selección de los productos se activará la actividad para pagar la compra"></p>

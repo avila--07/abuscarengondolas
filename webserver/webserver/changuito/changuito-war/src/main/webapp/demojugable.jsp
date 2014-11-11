@@ -21,6 +21,8 @@
 			<br>
 			<h1><%="Probá cómo es el juego"%></h1>
 			<br>
+			<p>Podés usar el juego, con una configuración simple. ¡Que lo disfrutes!</p>
+			<br>
 				<div class="content">
 					<div id="unityPlayer">
 						<div class="missing">
@@ -39,7 +41,7 @@
 			</div>
 		</div>
 		</div>
-
+		<br><br>
 <script src="/static/jquery-2.1.1.min.js"></script>
 </body>
 </html>
