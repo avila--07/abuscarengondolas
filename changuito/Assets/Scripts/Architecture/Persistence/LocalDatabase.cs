@@ -56,14 +56,22 @@ public static class LocalDatabase
 	
 	private static string GetRootPath ()
 	{
-		if (Application.platform == RuntimePlatform.Android || 
-			Application.platform == RuntimePlatform.WindowsPlayer) {
+		if (Application.platform == RuntimePlatform.Android ||
+            Application.platform == RuntimePlatform.WindowsPlayer)
+        {
 			return Application.persistentDataPath;
 		}
-		if (Application.platform == RuntimePlatform.WindowsEditor) {
+        if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsWebPlayer)
+        {
 			return "./";
 		}
-		
+
+        if (Application.platform == RuntimePlatform.WindowsWebPlayer)
+        {
+            return "src/main/webapp/game/";
+		}
+        
+		 
 		throw new NotImplementedException ("No Root Path for this platform");
 	}
 }

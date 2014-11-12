@@ -1,7 +1,7 @@
 public class Configuration : SharedObject
 {
-	//public static string ServerURL = "http://acomprarconchanguito.appspot.com/ChanguitoServices";
-    public static string ServerURL = "http://localhost:8001/ChanguitoServices";
+    //public static string ServerURL = "http://acomprarconchanguito.appspot.com/ChanguitoServices";
+    public static string ServerURL = "http://localhost:8002/ChanguitoServices";
 	public static string GONDOLAS_PATH = "Prefabs/Gondolas/";
 	public static string PRODUCTOS_PATH = "Prefabs/Productos/";
 	public static string BOTONESVUELTO_PATH = "Prefabs/BotonesVuelto/";

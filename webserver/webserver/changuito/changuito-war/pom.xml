@@ -136,12 +136,12 @@
                         <jvmFlag>-Ddatastore.backing_store=${project.basedir}\localstore\db.bin</jvmFlag>
                         <jvmFlag>-Dappengine.generated.dir=${basedir}\localstore</jvmFlag>
                         <jvmFlag>-Xdebug</jvmFlag>
-                        <jvmFlag>-Xrunjdwp:transport=dt_socket,address=8001,server=y,suspend=n</jvmFlag>
+                        <jvmFlag>-Xrunjdwp:transport=dt_socket,address=8010,server=y,suspend=n</jvmFlag>
                         <jvmFlag>-Xmx1024m</jvmFlag>
                     </jvmFlags>
                     <address>0.0.0.0</address>
 <!--                     <port>80</port> -->
-                    <port>8001</port>
+                    <port>8002</port>
                 </configuration>
                 <dependencies>
                     <dependency>
