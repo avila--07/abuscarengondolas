@@ -110,4 +110,14 @@
 	    <url-pattern>/addStatic</url-pattern>
 	  </servlet-mapping>
 
+	 <servlet>
+	    <servlet-name>crossdomain</servlet-name>
+	    <servlet-class>CrossdomainServlet</servlet-class>
+	  </servlet>
+
+	  <servlet-mapping>
+	    <servlet-name>crossdomain</servlet-name>
+	    <url-pattern>/crossdomain.xml</url-pattern>
+	  </servlet-mapping>
+
 </web-app>

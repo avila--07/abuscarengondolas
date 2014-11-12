@@ -21,7 +21,6 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("Do Get Login");
 		if(isLogued(req)){
 			System.out.println("Logged");			
-			req.setAttribute("onLoadGoTo", "login");
 			setAdministrationCookie(req, resp);
 			req.getRequestDispatcher("/").forward(req, resp);
 		}else{
@@ -77,10 +76,6 @@ public void doPost(HttpServletRequest req, HttpServletResponse resp)
 				cookie2.setMaxAge(24*60*60);
 				resp.addCookie(cookie2); 
 			}
-
-			Cookie cookie3 = new Cookie("onLoadGoTo", "login");
-			cookie3.setMaxAge(24*60*60);
-			resp.addCookie(cookie3); 
 
 			setAdministrationCookie(req, resp);
 			req.getRequestDispatcher("/").forward(req, resp);
