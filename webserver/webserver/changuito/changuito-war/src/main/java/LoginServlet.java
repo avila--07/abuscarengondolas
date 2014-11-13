@@ -76,7 +76,7 @@ public void doPost(HttpServletRequest req, HttpServletResponse resp)
 				cookie2.setMaxAge(24*60*60);
 				resp.addCookie(cookie2); 
 				
-				Cookie cookie3 = new Cookie("uid", usuario.getId());
+				Cookie cookie3 = new Cookie("uid", nick);
 				cookie3.setMaxAge(24*60*60);
 				resp.addCookie(cookie3); 
 			}

@@ -23,6 +23,9 @@
 				</div>
 			</div>
 		</div>
+		<div>
+			
+		</div>
 	    <div id='resultado'></div>
 	<script src="/static/jquery-2.1.1.min.js"></script>
 </body>
