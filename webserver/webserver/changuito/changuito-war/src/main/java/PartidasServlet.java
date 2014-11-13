@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,7 +31,9 @@ public final class PartidasServlet extends HttpServlet {
         Cookie userCookie = this.getCookieByName(req, "uid");
         //TODO: con estos objetos armo la tabla ...
         SharedObject objects = callGameRoundsForUserService(userCookie.getValue().toString());
-		
+        
+        req.setAttribute("listData", getAllGameRounds(objects));
+
         req.getRequestDispatcher("/partidas.jsp").forward(req, resp);
   }
   
@@ -40,11 +45,8 @@ public final class PartidasServlet extends HttpServlet {
 	  try {
 		  UserDAO userDao = new UserDAO();
    		  User usuario = userDao.getEntityByEmail(user);
-		  
 		  final GetRecentGameRoundsForUserService service = (GetRecentGameRoundsForUserService) ServiceLocator.getInstance().getService(serviceId);
-	
 	      serviceResponse = service.call(usuario);
-	      
 	      if (serviceResponse == null) {
 	          serviceResponse = new SharedObject();
 	      }
@@ -66,6 +68,8 @@ public final class PartidasServlet extends HttpServlet {
     return false;
 }
 
+
+  
   
   private Cookie getCookieByName(final HttpServletRequest request, String cookieName){
 	  
@@ -81,5 +85,17 @@ public final class PartidasServlet extends HttpServlet {
 	  
 	  throw new RuntimeException("No se encuentra la cookie");
   }
+  
+  
+  private List<Object> getAllGameRounds(SharedObject sharedObject){
+	  List<Object> listGameRound = new ArrayList<Object>();
+
+	  for (String key: sharedObject.getKeys()) {
+		listGameRound.add((Object) sharedObject.get(key));
+	  }
+	  
+	  return listGameRound;
+  }
+  
 }
 
