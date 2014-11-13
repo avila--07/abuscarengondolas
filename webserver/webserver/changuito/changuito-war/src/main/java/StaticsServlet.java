@@ -68,8 +68,9 @@ public class StaticsServlet extends HttpServlet {
 
 private Statistic getAllGames(long uSUARIO) {
 	StatisticDAO dao = new StatisticDAO();	
-	
+	System.out.println("Get All Games");
 	Statistic statistics = dao.getEntityById(uSUARIO);
+	System.out.println("Got All Games");
 
 	return statistics;
 }

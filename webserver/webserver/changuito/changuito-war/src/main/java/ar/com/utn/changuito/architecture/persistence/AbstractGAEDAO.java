@@ -106,6 +106,41 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
             }
         };
     }
+    
+    //TODO: este método es una copia del de arriba, se puede mejorar para llamar uno solo (Nice to have)
+    public Iterable<T> getEntitiesAndIterate(final Query.Filter filter, final int limit, final int offset) {
+    	
+    	final String kind = getGAEEntityKind();
+    	
+    	final Query GAEQuery = new Query(kind);
+    	GAEQuery.setFilter(filter);
+    	final FetchOptions options = FetchOptions.Builder.withLimit(limit).offset(offset);
+    	
+    	final Iterable<Entity> entitiesIterator = RetryingExecutor.execute(4, 150, new RetryableFuture<Iterable<Entity>>() {
+    		
+    		private Iterable<Entity> entities;
+    		
+    		public void run() throws Exception {
+    			this.entities = getDatastoreService().prepare(GAEQuery).asIterable(options);
+    		}
+    		
+    		public Iterable<Entity> getValue() {
+    			return this.entities;
+    		}
+    	});
+    	
+    	return new Iterable<T>() {
+    		@Override
+    		public Iterator<T> iterator() {
+    			return new IteratorTransform<Entity, T>(entitiesIterator.iterator(),
+    					new IteratorTransform.Transformer<Entity, T>() {
+    				public T transform(final Entity entity) {
+    					return convertGAEEntityToDomainEntity(entity);
+    				}
+    			});
+    		}
+    	};
+    }
 
     public void persist(final T domainEntity) {
 

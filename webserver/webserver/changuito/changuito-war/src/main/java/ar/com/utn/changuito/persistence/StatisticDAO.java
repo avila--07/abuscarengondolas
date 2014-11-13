@@ -1,14 +1,20 @@
 package ar.com.utn.changuito.persistence;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import org.json.simple.JSONArray;
-
-import com.google.appengine.api.datastore.Query.Filter;
 
 import ar.com.utn.changuito.architecture.persistence.AbstractGAEDAO;
 import ar.com.utn.changuito.architecture.persistence.DomainModelValidationException;
 import ar.com.utn.changuito.model.statistics.Statistic;
+
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 
 public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
 
@@ -28,10 +34,71 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
     
     @Override
     public Statistic getEntityById(Long id) {
-    	return crearVerdaderoObjetoDeStadisticas();
+    	
+//    	return crearUnFalsoObjetoDeStadisticas();
+    	System.out.println("Get Games for 81IQL5EEV5QZ30G");
+    	return crearUnFalsoObjetoDeStadisticas("81IQL5EEV5QZ30G");
     }
     
-    private Statistic crearVerdaderoObjetoDeStadisticas() {
+    private Statistic crearUnFalsoObjetoDeStadisticas(String usuario) {
+    	long IDJUEGO = 1L;
+    	long USUARIO = 1L;
+    	
+    	System.out.println("Get filter for 81IQL5EEV5QZ30G");
+    	Filter sameUserFilter =
+    			  new FilterPredicate("uid",
+    			                      FilterOperator.EQUAL,
+    			                      usuario);
+    	
+    	Iterable<Statistic> entities = getEntitiesAndIterate(sameUserFilter,10,0);
+    	
+    	System.out.println("Entyties for 81IQL5EEV5QZ30G "+ entities);
+    	int offset = 0;
+    	Iterator<Statistic> it = entities.iterator();
+    	boolean seguir = it.hasNext();
+    	List<Agrupacion> eventosPorPartida = new ArrayList<Agrupacion>();
+    	
+    	while (seguir){
+			while (it.hasNext()) {
+				agregarUnEvento(eventosPorPartida,it.next());
+			}
+			
+			offset += 10;
+			entities = getEntitiesAndIterate(sameUserFilter,10,offset);
+			it = entities.iterator();
+			seguir = it.hasNext();
+    	}
+    	
+    	//Lugar para traer todos los juegos
+    	Statistic juego = getAGameById(IDJUEGO, USUARIO);
+    	Statistic juego2 = getAGameById(IDJUEGO + 1, USUARIO);
+    	Statistic juego3 = getAGameById(IDJUEGO + 2, USUARIO);
+    	
+    	Statistic estadisticas = new Statistic();
+    	
+    	JSONArray partidas = new JSONArray();
+    	partidas.add(juego);
+    	partidas.add(juego2);
+    	partidas.add(juego3);
+    	
+    	estadisticas.set("partidas",partidas);
+    	
+    	estadisticas.setPlayTime("56:23");
+    	
+    	return estadisticas;
+    	
+    }
+
+    private void agregarUnEvento(List<Agrupacion> eventosPorPartida,Statistic evento) {
+    	for (Agrupacion agrupacion : eventosPorPartida) {
+			if(agrupacion.getNumeroPartida() == evento.getIdPartida() ){
+				agrupacion.agregarEvento(evento);
+				
+			}
+		}
+	}
+
+	private Statistic crearUnFalsoObjetoDeStadisticas() {
     	long IDJUEGO = 1L;
     	long USUARIO = 1L;
     	//Lugar para traer todos los juegos
