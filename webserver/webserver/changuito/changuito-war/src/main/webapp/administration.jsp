@@ -45,8 +45,8 @@
 						
 				<div class="span4 offset1">
 					<img class="img-polaroid" src="/static/images/headbyw.png" width="200" height="50" alt="usuario desconocido">
-					<br>
-					<p> <input type="button" id="logout" value="logout" onclick="logout()"> </p>
+					<br><br><br>
+					<input type="button" id="logout" value="Salir" onclick="logout()">
 					<br>
 					<!--<div <!--style="float: left; width: 45%;">-->
 						<table style="width:100%">
