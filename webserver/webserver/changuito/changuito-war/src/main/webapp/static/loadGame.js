@@ -8,7 +8,7 @@ function load(gameRound) {
 
     $("#resultado").load("static/unityPlayer/unityPlayerLoader.jsp");
 
-    setTimeout("startUnity()", 3000);
+    setTimeout("startUnity()", 9000);
 }
 
 function startUnity(){
