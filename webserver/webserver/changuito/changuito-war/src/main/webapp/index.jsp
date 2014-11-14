@@ -85,6 +85,15 @@ $( document ).ready(function() {
 	}else{
 		$("#featured-wrapper").load("/homefatures");
 	}
+	
+	//Experimental
+	if($.cookie('loged') == "Y"  && !("administration" == $.cookie('onLoadGoTo'))){
+		$("#menu ul").append($("#stats"));
+		$("#menu ul").append($("#configuration"));
+		$("#menu ul").append($("#partidas"));
+		$("#loginLink").text("Administración");
+	}
+
 });
 </script>
 
