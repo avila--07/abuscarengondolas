@@ -20,15 +20,16 @@ public final class UploadStatisticsService extends SecuredService<Statistic> {
 
         long lastIdPartida = authenticatedServiceUser.getLastIdPartida();
 
-        // si es la primera estadistica
-        if ("fin_gondolas".equals(statistic.getIdEvento())) {
+        statistic.setIdPartida(lastIdPartida);
+        new StatisticDAO().persist(statistic);
+
+        // si es la última estadistica del juego, actualizo el numereador de estadísticas
+        if ("fin_juego".equals(statistic.getIdEvento())) {
             lastIdPartida++;
             authenticatedServiceUser.setLastidPartidad(lastIdPartida);
             new UserDAO().persist(authenticatedServiceUser);
         }
 
-        statistic.setIdPartida(lastIdPartida);
-        new StatisticDAO().persist(statistic);
         return null;
     }
 }

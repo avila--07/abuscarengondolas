@@ -17,7 +17,7 @@ public final class PartidasServlet extends HttpServlet {
     protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setCharacterEncoding("UTF-8");
-        Cookie userCookie = this.getCookieByName(req, "uid");
+        Cookie userCookie = this.getCookieByName(req, "uidValue");
 
         final String userId = userCookie.getValue().toString();
         final GameRoundDAO gameRoundDAO = new GameRoundDAO();
