@@ -20,7 +20,7 @@ public class EndGameRoundStep : Step
             UploadGameRoundService.TryToCall(GameManager.Instance.GameRound);
 
             //ELIMINAR ESTA LINEA, ES SOLO PARA PROBAR
-            LocalDatabase.SaveFile("partida.data", GameManager.Instance.GameRound);
+            //LocalDatabase.SaveFile("partida.data", GameManager.Instance.GameRound);
         }
         yield break;
     }
