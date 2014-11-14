@@ -1,7 +1,8 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<head><title>Administración</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Administración</title>
     <!-- Le styles -->
     <link href="/frontendhome/css/bootstrap.min.css" rel="stylesheet">
     <link href="/frontendhome/css/bootstrap-responsive.min.css" rel="stylesheet">
@@ -16,17 +17,14 @@
     <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
     <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/assets/ico/favicon.png">
 </head>
+
 <body>
 	<div id="wrapper">
 		<div id="featured-wrapper">
 			<div class="container">
 			<br>
 			<h1><%="Panel de control" %></h1>
-			<br>
-        
-<!--<div style="float: right; width: 45%;">
-	<img src="/static/images/mystery-man.jpg"  width="160" height="160" alt="usuario desconocido">
-</div> -->
+			<br>        
 
 			<div class="row">
 				<div class="span6 offset13">
@@ -48,6 +46,8 @@
 				<div class="span4 offset1">
 					<img class="img-polaroid" src="/static/images/headbyw.png" width="200" height="50" alt="usuario desconocido">
 					<br>
+					<p> <input type="button" id="logout" value="logout" onclick="logout()"> </p>
+					<br>
 					<!--<div <!--style="float: left; width: 45%;">-->
 						<table style="width:100%">
 						<tr>
@@ -68,6 +68,8 @@
 	</div>
 	<br><br><br><br>
 
+</body>
 <script src="/static/home.js"></script>
 <script src="/static/administration.js"></script>
-</body>
+
+</html>

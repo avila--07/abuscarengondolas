@@ -16,3 +16,17 @@ $( document ).ready(function() {
 	$("#ver_part").on("click", function(){ $("#featured-wrapper").load("/partidas") ;});
 	
 });
+
+var logout = function(){
+	console.log("is time bye bye");
+	$.cookie("loged","N");
+	$.cookie("onLoadGoTo", "login");
+
+	$("#stats").remove();
+	$("#configuration").remove();
+	$("#partidas").remove();
+	
+	$("#loginLink").text("Login");
+
+	$("#featured-wrapper").load("/login");
+} 

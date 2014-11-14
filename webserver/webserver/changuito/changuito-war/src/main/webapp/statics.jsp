@@ -32,27 +32,28 @@
 			
 			<div id="containerGenerales" style="width:100%; height:400px;">
 	 		</div>
-	 			<input type="button" id="containerGenerales-share" class="fb-share-button">
+<!-- 	 			<input type="button" id="containerGenerales-share" class="fb-share-button"> -->
 			
 			<div id="containerSelecGondolas" style="width:100%; height:400px;">
 			</div>
-	 			<input type="button" id="containerSelecGondolas-share" class="fb-share-button">
+<!-- 	 			<input type="button" id="containerSelecGondolas-share" class="fb-share-button"> -->
 			
 			<div id="containerSelecProducto" style="width:100%; height:400px;">
 			</div>
-	 			<input type="button" id="containerSelecProducto-share" class="fb-share-button">
+<!-- 	 			<input type="button" id="containerSelecProducto-share" class="fb-share-button"> -->
 			
-			<div id="containerModVuelto" style="width:100%; height:400px;">
-			</div>
-	 			<input type="button" id="containerModVuelto-share" class="fb-share-button">
 	 		
 	 		<div id="containerModPago" style="width:100%; height:400px;">
 	 		</div>
-	 			<input type="button" id="containerModPago-share" class="fb-share-button">
+<!-- 	 			<input type="button" id="containerModPago-share" class="fb-share-button"> -->
 
+			<div id="containerModVuelto" style="width:100%; height:400px;">
+			</div>
+<!-- 	 			<input type="button" id="containerModVuelto-share" class="fb-share-button"> -->
+			
 			<input type="submit" value="Guardar"> | <input type="button" value="compartir">
 
-			<input type="button" id="compartir2" value="compartir2">
+<!-- 			<input type="button" id="compartir2" value="compartir2"> -->
 
 			</form>	
 		
@@ -66,7 +67,7 @@
  <script src="/static/d3/d3.js"></script>
  <script src="/static/d3/radialProgress/radialProgress.js"></script>
  
-<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<!-- <script src="http://code.highcharts.com/modules/exporting.js"></script> -->
 <script src="/static/statics.js"></script>
 
 </body>

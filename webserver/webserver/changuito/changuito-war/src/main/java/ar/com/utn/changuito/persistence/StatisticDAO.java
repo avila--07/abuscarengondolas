@@ -83,8 +83,8 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
     	Statistic estadisticas = new Statistic();
     	estadisticas.set("partidas",partidas);
 
-//		System.out.println("Aciertos: "+ estadisticas.get("Aciertos") +" Errores: "+ estadisticas.get("Errores"));
-//    	estadisticas.setPlayTime(getEventosSumarizados());
+//    	estadisticas.setPlayTime(getEventosSumarizados(estadisticas));
+    	estadisticas.setPlayTime("56:45");
     	
     	return estadisticas;
     }
