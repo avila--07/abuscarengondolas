@@ -69,35 +69,162 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
 			seguir = it.hasNext();
     	}
     	
-    	//Lugar para traer todos los juegos
-    	Statistic juego = getAGameById(IDJUEGO, USUARIO);
-    	Statistic juego2 = getAGameById(IDJUEGO + 1, USUARIO);
-    	Statistic juego3 = getAGameById(IDJUEGO + 2, USUARIO);
-    	
-    	Statistic estadisticas = new Statistic();
+    	System.out.println("eventosPorPartida: "+ eventosPorPartida.size());
     	
     	JSONArray partidas = new JSONArray();
-    	partidas.add(juego);
-    	partidas.add(juego2);
-    	partidas.add(juego3);
+    	for (Agrupacion agrupacion : eventosPorPartida) {
+    		System.out.println("Partida: "+ agrupacion.getNumeroPartida() +" eventos: "+ agrupacion.getEventos().size());
+    		Statistic juego = getAGameFromEvents(agrupacion);
+    		partidas.add(juego);
+		}
     	
+    	Statistic estadisticas = new Statistic();
     	estadisticas.set("partidas",partidas);
     	
-    	estadisticas.setPlayTime("56:23");
+    	estadisticas.set("Aciertos", getSuma(estadisticas, "aciertos"));
+		estadisticas.set("Errores", getSuma(estadisticas, "errores"));
+
+		System.out.println("Aciertos: "+ estadisticas.get("Aciertos") +" Errores: "+ estadisticas.get("Errores"));
+//    	estadisticas.setPlayTime(getEventosSumarizados());
     	
     	return estadisticas;
-    	
     }
 
-    private void agregarUnEvento(List<Agrupacion> eventosPorPartida,Statistic evento) {
+    private Statistic getAGameFromEvents(Agrupacion agrupacion) {
+    	List<Statistic> listaEventos = agrupacion.getEventos();
+    	Statistic statistics = new Statistic();
+
+    	if(listaEventos != null && listaEventos.size() > 0){
+    		statistics.setId(listaEventos.get(0).getIdPartida());
+    		statistics.setIdUsuario(listaEventos.get(0).getIdUsuario());
+    		statistics.setIdPartida(listaEventos.get(0).getIdPartida());
+    		statistics.setGameDate(listaEventos.get(0).getGameDate());
+    		
+    		for (Statistic evento : listaEventos) {
+    			System.out.println("Id evento: "+evento.getIdEvento());
+    			if("fin_gondolas".equals(evento.getIdEvento())){
+    				statistics.set("ModuloSeleccionGondolas", getSelectGondolas(evento));
+    			}
+    			
+    			if("fin_producto".equals(evento.getIdEvento())){
+    				statistics.set("ModuloSeleccionProducto", getSeleccionProducto(evento));
+    			}
+
+    			if("fin_CV".equals(evento.getIdEvento())){
+    				statistics.set("ModuloVuelto", getModVuelto(evento));
+    			}
+
+
+    			if("fin_pago".equals(evento.getIdEvento())){
+    				statistics.set("ModuloPago", getModuloPago(evento));
+    			}
+    			
+    			if("fin_juego".equals(evento.getIdEvento())){
+    				//statistics
+    			}
+    		}
+    		    		
+    	}else{
+    		System.out.println("No hay estadísticas para mostrar");
+    	}
+    	
+    	return statistics;
+	}
+
+    private Object getModuloPago(Statistic evento) {
+    	Statistic moduloPago = setCommond(evento);
+    	
+    	moduloPago.set("monto", evento.getLong("monto"));
+    	moduloPago.set("pago", evento.getLong("pago"));
+    	
+    	return moduloPago;
+	}
+
+	private Object getSelectGondolas(Statistic evento) {
+    	Statistic selectGondolas = setCommond(evento);
+    	
+    	selectGondolas.set("aciertos", 1);
+    	selectGondolas.set("errores", evento.getLong("failedGondolas"));
+    	
+    	return selectGondolas;
+	}
+
+	private Object getSeleccionProducto(Statistic evento) {
+    	Statistic seleccionProducto = setCommond(evento);
+    	
+    	seleccionProducto.set("aciertos", 1);
+    	seleccionProducto.set("errores", evento.getLong("failedProducts"));
+    	
+    	return seleccionProducto;
+    }
+    
+    private Object getModVuelto(Statistic evento) {
+    	Statistic modVuelto = setCommond(evento);
+    	
+    	modVuelto.set("aciertos", 1);
+    	modVuelto.set("errores", evento.getLong("failedVuelto"));
+    	
+    	return modVuelto;
+    }
+
+	private Statistic setCommond(Statistic evento) {	
+		Statistic seleccionProducto = new Statistic();
+    	seleccionProducto.setIdUsuario(evento.getIdUsuario());
+    	seleccionProducto.setIdPartida(evento.getIdPartida());
+    	seleccionProducto.setGameDate(evento.getGameDate());
+    	seleccionProducto.setPlayTime(evento.getPlayTime());
+		return seleccionProducto;
+	}
+
+
+	private void agregarUnEvento(List<Agrupacion> eventosPorPartida,Statistic evento) {
+    	boolean createNew = true;
+    	
     	for (Agrupacion agrupacion : eventosPorPartida) {
 			if(agrupacion.getNumeroPartida() == evento.getIdPartida() ){
 				agrupacion.agregarEvento(evento);
-				
+				createNew = false;
+				break;
 			}
 		}
+
+    	if(createNew){
+    		Agrupacion nuevoElemento = new Agrupacion(evento.getIdPartida());
+    		nuevoElemento.agregarEvento(evento);
+    		eventosPorPartida.add(nuevoElemento);
+    	}
 	}
 
+	private Long getSuma(Statistic statistic, String lookup) {
+		Long sumarizado = new Long(0L);
+		List<Statistic> partidas = (List<Statistic>) statistic.get("partidas");
+		
+		for (Statistic evento : partidas) {
+			sumarizado += getSumasIntermedias(evento, lookup,"ModuloSeleccionGondolas", sumarizado);
+			sumarizado += getSumasIntermedias(evento, lookup,"ModuloSeleccionProducto", sumarizado);
+			sumarizado += getSumasIntermedias(evento, lookup,"ModuloVuelto", sumarizado);
+		}
+		
+		System.out.println("lookup: " + lookup +" sumarizado: "+sumarizado);
+		return sumarizado;
+	}
+	
+	private Long getSumasIntermedias(Statistic statistic, String lookup,String lookupEscena,Long sumarizado) {
+		Long intermedio = new Long(0L);
+		
+		Statistic escena = (Statistic) statistic.getSharedObject(lookupEscena);
+		if (escena != null){
+			System.out.println("lookup: " + lookup +" value: "+escena.getLong(lookup));
+			intermedio = escena.getLong(lookup);
+			if(intermedio != null){
+				sumarizado += intermedio;
+			}
+		}
+		return sumarizado;
+	}
+	
+	
+	//De acá para abajo son datos harcodeados
 	private Statistic crearUnFalsoObjetoDeStadisticas() {
     	long IDJUEGO = 1L;
     	long USUARIO = 1L;
@@ -150,8 +277,8 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
     	
     	sumarizado += getValoresIntermedios(statistic, lookup,"ModuloSeleccionGondolas", sumarizado);
     	sumarizado += getValoresIntermedios(statistic, lookup,"ModuloSeleccionProducto", sumarizado);
-    	sumarizado += getValoresIntermedios(statistic, lookup,"ModuloPago", sumarizado);
     	sumarizado += getValoresIntermedios(statistic, lookup,"ModuloVuelto", sumarizado);
+//    	sumarizado += getValoresIntermedios(statistic, lookup,"ModuloPago", sumarizado);
     	
     	return sumarizado;
 	}

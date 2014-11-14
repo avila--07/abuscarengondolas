@@ -174,12 +174,12 @@ $( function() {
 				}
 			},
 			series: [{
-				name: 'Aciertos',
-				data: getEventosModuleFromData(data,"ModuloPago","aciertos"),
+				name: 'Monto a pagar',
+				data: getEventosModuleFromData(data,"ModuloPago","monto"),
 				color: 'green'
 			}, {
-				name: 'Errores',
-				data: getEventosModuleFromData(data,"ModuloPago","errores"),
+				name: 'Pago realizado',
+				data: getEventosModuleFromData(data,"ModuloPago","pago"),
 				color: 'red'
 			}]
 		});
@@ -499,8 +499,8 @@ $( function() {
 	    	//createChanguitoStats(msg);
 	    	createGlobalStats(data);
 
-	    	createStatsSelecGondolas(data);
 	    	createStatsSelecProducto(data);
+	    	createStatsSelecGondolas(data);
 	    	createStatsModVuelto(data);
 	    	createStatsModPago(data);
 	    	
