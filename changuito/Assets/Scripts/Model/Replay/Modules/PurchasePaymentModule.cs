@@ -27,6 +27,7 @@ public class PurchasePaymentModule : Module
     public override void MakeScenario()
     {
         initializeStatistic();
+        Debug.Log("[SAC - PPM] prepareScenario");
 
         var superiorTicketList = GameObject.Find("PagoBilletesGridSuperior");
         var inferiorTicketList = GameObject.Find("PagoBilletesGridInferior");

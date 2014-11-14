@@ -49,6 +49,8 @@ public class PurchaseChangeModule : Module
 
     public override void PrepareScenario()
     {
+        Debug.Log("[SAC - PCM] prepareScenario");
+
         initializeStatistic();
         List<string> buttons = new List<string>() { "BotonVueltoAmarillo", "BotonVueltoNaranja", "BotonVueltoAzul", "BotonVueltoVerde" };
         buttons = RandomUtils.GetListWithRandomElementsFrom(buttons, buttons.Count);
@@ -101,20 +103,12 @@ public class PurchaseChangeModule : Module
 
     private List<int> GetRandomPurchaseChanges()
     {
-        List<int> randomPurchaseChanges = new List<int>(CHANGES_COUNT);
-        
-        int randomSuperiorLimit = UnityEngine.Random.Range(0, CHANGES_COUNT * 5);
-
-        UserPurchaseChangePosition = UnityEngine.Random.Range(0, CHANGES_COUNT);
-
-        while (randomPurchaseChanges.Count < CHANGES_COUNT)
+        List<int> randomPurchaseChanges = new List<int>(CHANGES_COUNT * 5);
+        for(int i = 0 ; i < CHANGES_COUNT * 5; i++)
         {
-            int randomPurchaseChange = UnityEngine.Random.Range(0, randomSuperiorLimit);
-            if (!randomPurchaseChanges.Contains(randomPurchaseChange))
-                randomPurchaseChanges.Add(randomPurchaseChange);
+            randomPurchaseChanges.Add(i);
         }
-
-        return randomPurchaseChanges;
+        return RandomUtils.GetListWithRandomElementsFrom(randomPurchaseChanges, CHANGES_COUNT);
     }
 
     private void initializeStatistic()
