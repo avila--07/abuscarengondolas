@@ -81,23 +81,9 @@ public class ConfigurationServlet extends HttpServlet {
 	Cookie cookieUser = CookiesSomosUtils.getCookieByName(req,"uid");
 	UserDAO userDao = new UserDAO(); 
 	User user = userDao.getEntityByEmail(cookieUser.getValue());
-	user.set("conf", config);
-	//config.set("uid",user.get("uid"));
-	//config.set("tkn",user.get("tkn"));
+	user.setConfiguration(config);
 	
-	String serviceId = new SaveConfigurationService().getId();
-	SharedObject serviceResponse = null;
-	
-	try {
-		  final SaveConfigurationService service = (SaveConfigurationService) ServiceLocator.getInstance().getService(serviceId);
-		  serviceResponse = service.call(user);
-	      if (serviceResponse == null) {
-	          serviceResponse = new SharedObject();
-	      }
-	  } catch (final Exception exception) {
-		  Logger.getLogger(AbstractService.class.getName()).log(Level.SEVERE, "Exception calling [" + serviceId + "] service the reason is [" + exception.getMessage() + "]");
-		  }  
-	  }
-  
+	userDao.persist(user);
+  }
     
 } 

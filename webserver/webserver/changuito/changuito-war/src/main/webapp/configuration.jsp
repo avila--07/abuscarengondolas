@@ -13,6 +13,20 @@
 function submitMyForm(){
  document.forms["submitButton"].submit();
 }
+function updateStatus()
+{
+	var form = $('#configForm');
+
+	$.ajax({
+		  type: "POST",
+		  url: "/configuration",
+		  data:form.serialize(),
+		  success: function(){
+				alert("la configuración se ha guardado satisfactoriamente");
+		  }
+	});
+}
+
 </script>
 
 
@@ -48,7 +62,6 @@ function submitMyForm(){
 				<br>
 				<p><input id="submitButton" type="button" value="Guardar" onClick="updateStatus()"></p>  <!-- type="submit" , sin id -->
 				<br>
-				<script type="text/javascript">document.refresh()</script>
 			</form>
 		</div>
 	</div>
@@ -56,6 +69,8 @@ function submitMyForm(){
 	
 <script>
 	$( document ).ready(function() {
+		console.log("lala");
+
 		var checkboxMp = document.getElementById("modpago");
 		var checkboxMv = document.getElementById("modvuelto");
 		var checkboxsp = document.getElementById("savepart");
@@ -68,21 +83,6 @@ function submitMyForm(){
 	});
 	</script>
 	
-	<script>
-	function updateStatus(Status)
-	 {
-		var form = $('#configForm');
-
-		$.ajax({
-			  type: "POST",
-			  url: "/configuration",
-			  data:form.serialize(),
-			  success: function(){
-					alert("la configuración se ha guardado satisfactoriamente");
-			  }
-		});
-	}
-	</script>
 	
 	<script src="/static/checkmodules.js"></script>
   </body>
