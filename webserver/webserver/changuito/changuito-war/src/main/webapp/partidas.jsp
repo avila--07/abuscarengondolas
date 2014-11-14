@@ -42,8 +42,9 @@
                     <th>Fecha</th>
                     <c:forEach var="gameRound" items="${gameRounds}">
                 <tr>
-                    <td><a href="http://www.google.com">${gameRound.date}</a></td>
-                </tr>
+                    <td>
+                        <a href='javascript: load(${gameRound});'>${gameRound.date}</a></td>
+                       </tr>
                 </c:forEach>
                 </tr>
                 </thead>
@@ -54,7 +55,6 @@
                 </tr>
                 </tbody>
             </table>
-            <p><input id="submitButton" type="submit" value="Aceptar" onclick="load()"></p>
             <!-- type="submit" , sin id -->
         </div>
     </div>
