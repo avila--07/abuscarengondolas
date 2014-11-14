@@ -39,13 +39,10 @@
             <table id="example" class="display">
                 <thead>
                 <tr>
-                    <th>Partida</th>
                     <th>Fecha</th>
                     <c:forEach var="gameRound" items="${gameRounds}">
                 <tr>
-                    <a href="http://www.google.com">
-                        <td>${gameRound.date}</td>
-                    </a>
+                    <td><a href="http://www.google.com">${gameRound.date}</a></td>
                 </tr>
                 </c:forEach>
                 </tr>
