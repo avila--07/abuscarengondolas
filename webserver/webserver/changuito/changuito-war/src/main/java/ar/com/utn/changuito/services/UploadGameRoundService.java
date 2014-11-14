@@ -14,6 +14,8 @@ public final class UploadGameRoundService extends SecuredService<GameRound> {
     @Override
     protected SharedObject securedTypedCall(final GameRound serviceParameter) {
 
+        serviceParameter.setDate();
+
         new GameRoundDAO().persist(serviceParameter);
         return null;
     }

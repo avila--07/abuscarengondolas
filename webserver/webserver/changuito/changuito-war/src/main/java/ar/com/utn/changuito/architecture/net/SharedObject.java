@@ -119,6 +119,10 @@ public class SharedObject {
         return JsonUtils.convertMapToJsonBytes(data);
     }
 
+    public void set(final String key, final boolean value) {
+        data.put(key, value);
+    }
+
     public <T> void set(final String key, final T value) {
         if (value == null) {
             data.remove(key);
