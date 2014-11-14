@@ -33,6 +33,6 @@
 	</div>
 	
 	<script src="/static/jquery-2.1.1.min.js"></script>
-<!-- 	<script src="/static/jquery.cookie.js"></script> -->
+	<script src="/static/jquery.cookie.js"></script>
 	<script src="/static/login.js"></script>
 </body>

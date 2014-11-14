@@ -1,5 +1,6 @@
 $( document ).ready(function() {
 
+
 	FB.api(
 	    "/me/picture",
 	    function (response) {
@@ -17,16 +18,17 @@ $( document ).ready(function() {
 	
 });
 
+
 var logout = function(){
-	console.log("is time bye bye");
+	console.log("is time, bye bye");
 	$.cookie("loged","N");
 	$.cookie("onLoadGoTo", "login");
-
+	
 	$("#stats").remove();
 	$("#configuration").remove();
 	$("#partidas").remove();
 	
 	$("#loginLink").text("Login");
-
+	
 	$("#featured-wrapper").load("/login");
-} 
+}; 
