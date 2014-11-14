@@ -20,6 +20,7 @@ import ar.com.utn.changuito.model.game.User;
 import ar.com.utn.changuito.model.replay.GameRound;
 import ar.com.utn.changuito.persistence.UserDAO;
 import ar.com.utn.changuito.services.GetRecentGameRoundsForUserService;
+import ar.com.utn.utn.changuito.utils.CookiesSomosUtils;
 
 public final class PartidasServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,7 +29,7 @@ public final class PartidasServlet extends HttpServlet {
   protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
 
         resp.setCharacterEncoding("UTF-8");
-        Cookie userCookie = this.getCookieByName(req, "uid");
+        Cookie userCookie = CookiesSomosUtils.getCookieByName(req, "uid");
         //TODO: con estos objetos armo la tabla ...
         SharedObject objects = callGameRoundsForUserService(userCookie.getValue().toString());
         
@@ -71,21 +72,7 @@ public final class PartidasServlet extends HttpServlet {
 
   
   
-  private Cookie getCookieByName(final HttpServletRequest request, String cookieName){
-	  
-    Cookie[] cookies = request.getCookies();
-	
-	  if (cookies != null) {
-	   for (Cookie cookie : cookies) {
-	     if (cookie.getName().equals(cookieName)) {
-	    	 return cookie;
-	     }
-	    }
-	  }
-	  
-	  throw new RuntimeException("No se encuentra la cookie");
-  }
-  
+
   
   private List<Object> getAllGameRounds(SharedObject sharedObject){
 	  List<Object> listGameRound = new ArrayList<Object>();
