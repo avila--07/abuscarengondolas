@@ -15,7 +15,7 @@ $( function() {
 	            type: 'column'
 	        },
 	        title: {
-	            text: 'Desempeño en Selección de Góndolas'
+	            text: 'Desempeño general'
 	        },
 	        xAxis: {
 	            categories: nombresPartidas
@@ -53,6 +53,7 @@ $( function() {
 		var array = [];
 		var valores;
 		var i;
+		
 		for (i = 0; i < data.partidas.length; i++) { 
 			valores = data.partidas[i].data[dataKey];
 			array.push(valores);

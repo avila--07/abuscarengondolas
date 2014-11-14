@@ -81,10 +81,8 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
     	Statistic estadisticas = new Statistic();
     	estadisticas.set("partidas",partidas);
     	
-    	estadisticas.set("Aciertos", getSuma(estadisticas, "aciertos"));
-		estadisticas.set("Errores", getSuma(estadisticas, "errores"));
 
-		System.out.println("Aciertos: "+ estadisticas.get("Aciertos") +" Errores: "+ estadisticas.get("Errores"));
+//		System.out.println("Aciertos: "+ estadisticas.get("Aciertos") +" Errores: "+ estadisticas.get("Errores"));
 //    	estadisticas.setPlayTime(getEventosSumarizados());
     	
     	return estadisticas;
@@ -128,6 +126,9 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
     		System.out.println("No hay estadísticas para mostrar");
     	}
     	
+    	statistics.set("Aciertos", getSuma(statistics, "aciertos"));
+    	statistics.set("Errores", getSuma(statistics, "errores"));
+
     	return statistics;
 	}
 
@@ -197,13 +198,10 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
 
 	private Long getSuma(Statistic statistic, String lookup) {
 		Long sumarizado = new Long(0L);
-		List<Statistic> partidas = (List<Statistic>) statistic.get("partidas");
 		
-		for (Statistic evento : partidas) {
-			sumarizado += getSumasIntermedias(evento, lookup,"ModuloSeleccionGondolas", sumarizado);
-			sumarizado += getSumasIntermedias(evento, lookup,"ModuloSeleccionProducto", sumarizado);
-			sumarizado += getSumasIntermedias(evento, lookup,"ModuloVuelto", sumarizado);
-		}
+		sumarizado += getSumasIntermedias(statistic, lookup,"ModuloSeleccionGondolas", sumarizado);
+		sumarizado += getSumasIntermedias(statistic, lookup,"ModuloSeleccionProducto", sumarizado);
+		sumarizado += getSumasIntermedias(statistic, lookup,"ModuloVuelto", sumarizado);
 		
 		System.out.println("lookup: " + lookup +" sumarizado: "+sumarizado);
 		return sumarizado;
@@ -217,10 +215,10 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
 			System.out.println("lookup: " + lookup +" value: "+escena.getLong(lookup));
 			intermedio = escena.getLong(lookup);
 			if(intermedio != null){
-				sumarizado += intermedio;
+				intermedio = sumarizado + intermedio;
 			}
 		}
-		return sumarizado;
+		return intermedio;
 	}
 	
 	
