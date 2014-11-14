@@ -23,7 +23,7 @@ public class SharedObject
         return Deserialize(Encoding.UTF8.GetString(bytes));
     }
 
-    private static SharedObject Deserialize(string json)
+    public static SharedObject Deserialize(string json)
     {
         return new SharedObject((Dictionary<string,object>)MiniJSON.Json.Deserialize(json));
     }

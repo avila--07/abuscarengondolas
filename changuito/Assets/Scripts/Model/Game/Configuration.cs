@@ -1,7 +1,7 @@
 public class Configuration : SharedObject
 {
     //public static string ServerURL = "http://acomprarconchanguito.appspot.com/ChanguitoServices";
-    public static string ServerURL = "http://localhost/ChanguitoServices";
+    public static string ServerURL = "http://localhost:8002/ChanguitoServices";
 	public static string GONDOLAS_PATH = "Prefabs/Gondolas/";
 	public static string PRODUCTOS_PATH = "Prefabs/Productos/";
 	public static string BOTONESVUELTO_PATH = "Prefabs/BotonesVuelto/";
@@ -55,8 +55,11 @@ public class Configuration : SharedObject
 	public static Configuration Current {
 		get {
 			if (_current == null) {
-				_current = LocalDatabase.LoadFile<Configuration> (CONFIGURATION_FILE);
-				if (_current == null) {
+            #if !UNITY_WEBPLAYER
+                _current = LocalDatabase.LoadFile<Configuration> (CONFIGURATION_FILE);
+            #endif
+
+                                      if (_current == null) {
 					_current = new Configuration ();
 				}
 			}
@@ -71,6 +74,9 @@ public class Configuration : SharedObject
 		}
 
 		_current = this;
-		LocalDatabase.SaveFile (CONFIGURATION_FILE, this);
-	}
+        #if !UNITY_WEBPLAYER
+        LocalDatabase.SaveFile (CONFIGURATION_FILE, this);
+        #endif
+    
+    }
 }
