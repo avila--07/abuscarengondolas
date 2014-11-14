@@ -66,9 +66,15 @@ $( document ).ready( function() {
 		var array = [];
 		var valores;
 		var i;
-		for (i = 0; i < data.partidas.length; i++) { 
-			valores = data.partidas[i].data[module].data[dataKey];
-			array.push(valores);
+		for (i = 0; i < data.partidas.length; i++) {
+			//Veamos que existe el modulo antes de llenarlo 
+			if (data.partidas[i].data[module] != undefined ){
+				valores = data.partidas[i].data[module].data[dataKey];
+				array.push(valores);
+			} else{
+				valores = 0;
+				array.push(valores);
+			}
 		}
 		return array;
 		
