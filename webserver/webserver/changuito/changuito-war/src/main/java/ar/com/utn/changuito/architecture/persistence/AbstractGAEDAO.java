@@ -199,7 +199,12 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
         final SharedObject sharedObject = new SharedObject();
 
         for (final Map.Entry<String, Object> entry : entity.getProperties().entrySet()) {
-            sharedObject.set(entry.getKey(), entry.getValue());
+            Object value = entry.getValue();
+            if (value instanceof Text) {
+                value = ((Text) value).getValue();
+            }
+
+            sharedObject.set(entry.getKey(), value);
         }
         return sharedObject;
     }

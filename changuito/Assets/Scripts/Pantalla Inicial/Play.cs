@@ -13,7 +13,7 @@ public class Play : MonoBehaviour
 
         _clicked = true;
         
-        GameManager.Instance.StartNewGame();
-        //GameManager.Instance.StartAlreadyPlayedGame(LocalDatabase.LoadFile<GameRound>("partida.data"));
+        //GameManager.Instance.StartNewGame();
+        GameManager.Instance.StartAlreadyPlayedGame(LocalDatabase.LoadFile<GameRound>("partida.data"));
     }
 }
