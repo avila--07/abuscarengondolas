@@ -83,6 +83,11 @@ public class GameRound : SharedObject
 
     private Module CastModuleToRealModuleType(string key, SharedObject sharedObject)
     {
+        if(sharedObject == null)
+        {
+            Debug.LogError("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            Debug.Break();
+        }
         string moduleName = sharedObject.GetString("name");
         if (moduleName == "GondolaSelectionModule")
             return SharedObject.CastSharedObject<GondolaSelectionModule>(this, key, sharedObject);

@@ -169,6 +169,10 @@ public class SharedObject
     private T GetValueOrDefault<T>(string key)
     {
         object value = null;
+        if(_data == null)
+        {
+            Debug.LogError("DATA " + _data);
+        }
         if (!_data.TryGetValue(key, out value))
             return default(T);
         if (value is T)

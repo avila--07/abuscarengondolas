@@ -21,9 +21,9 @@
 
 				<label>Estadísticas de usuario:</label>  
 				<br>
-				<p><label>Tiempo total jugado:</label>  <span id="tiempoJugado">80min</span></p>
-				<br>
 				<p><label>Partidas total jugadas:</label>  <span id="partidasJugadas">6min</span></p>
+				<br>
+				<div style="display:none"> <p><label>Tiempo total jugado:</label>  <span id="tiempoJugado">80min</span></p> </div>
 			
 			<br>
 
@@ -51,7 +51,7 @@
 			</div>
 <!-- 	 			<input type="button" id="containerModVuelto-share" class="fb-share-button"> -->
 			
-			<input type="submit" value="Guardar"> | <input type="button" value="compartir">
+			<input type="submit" value="Guardar"/> | <input type="button" value="compartir"/>
 
 <!-- 			<input type="button" id="compartir2" value="compartir2"> -->
 
@@ -65,7 +65,6 @@
 <script src="/static/highcharts/highcharts.js"></script>
 <script src="/static/highcharts/drilldown.js"></script>
 <script src="/static/highcharts/exporting.js"></script>
-<!-- <script src="http://code.highcharts.com/modules/exporting.js"></script> -->
 <script src="/static/d3/d3.js"></script>
 <script src="/static/d3/radialProgress/radialProgress.js"></script>
 <script src="/static/jquery.cookie.js"></script>
