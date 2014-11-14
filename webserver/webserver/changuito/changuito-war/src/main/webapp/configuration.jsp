@@ -14,6 +14,8 @@ function submitMyForm(){
  document.forms["submitButton"].submit();
 }
 </script>
+
+
 </head>
 
   <body>
@@ -27,29 +29,44 @@ function submitMyForm(){
 			<div class="styleform">
 			<fieldset id="inputs">
 				<p> <label>Cantidad de productos:</label>
-					<input name="quantity" type="number" min="2" max="6" value="quantity" title="Cantidad de productos que deberán ser comprados en el juego"></p>
+					<input name="quantity" id="quantity" type="number" min="2" max="6" value="${quantity}" title="Cantidad de productos que deberán ser comprados en el juego"></p>
 				<br>
 				<p> <label for="modpago">Habilitar Módulo de pago:</label>
-					<input name="modpago" id="modpago" type="checkbox" value="modpago" onclick="checkmp()" title="Luego de completar la selección de los productos se activará la actividad para pagar la compra"></p>
+					<input name="modpago" id="modpago" type="checkbox" onclick="checkmp()" value="${modpago}" title="Luego de completar la selección de los productos se activará la actividad para pagar la compra"></p>
 				<br>
 				<p> <label for="modvuelto">Habilitar Módulo de control de vuelto:</label>
-					<input name="modvuelto" id="modvuelto" type="checkbox" value="modvuelto" onclick="checkmv()" title="Luego de completar el pago, se activará la actividad para verificar el vuelto a recibir"></p>
+					<input name="modvuelto" id="modvuelto"  type="checkbox"  onclick="checkmv()" value="${modvuelto}" title="Luego de completar el pago, se activará la actividad para verificar el vuelto a recibir"></p>
 				<br>
 				<p> <label for="savepart">Guardar partidas:</label>
-					<input name="savepart" id="savepart" type="checkbox" value="savepart" title="Las partidas serán guardadas para poder ser reproducidas en la web desde la página Partidas"></p>
+					<input name="savepart" id="savepart" type="checkbox" value="${savepart}" title="Las partidas serán guardadas para poder ser reproducidas en la web desde la página Partidas"></p>
 				<br>
 				<p> <label for="sounds">Habilitar sonidos:</label>
-					<input name="sounds" id="sounds" type="checkbox" value="" title="Podemos habilitar los sonidos del juego"></p>
+					<input name="sounds" id="sounds" type="checkbox" value="${sounds}" title="Podemos habilitar los sonidos del juego"></p>
 			</fieldset>
 			</div>
 				<br>
 				<br>
 				<p><input id="submitButton" type="button" value="Guardar" onClick="updateStatus()"></p>  <!-- type="submit" , sin id -->
 				<br>
+				<script type="text/javascript">document.refresh()</script>
 			</form>
 		</div>
 	</div>
 	</div>
+	
+<script>
+	$( document ).ready(function() {
+		var checkboxMp = document.getElementById("modpago");
+		var checkboxMv = document.getElementById("modvuelto");
+		var checkboxsp = document.getElementById("savepart");
+		var checkboxso = document.getElementById("sounds");
+
+		checkboxMp.checked = new Boolean(checkboxMp.value);
+		checkboxMv.checked = new Boolean(checkboxMv.value);
+		checkboxsp.checked = new Boolean(checkboxsp.value);
+		checkboxso.checked = new Boolean(checkboxso.value);
+	});
+	</script>
 	
 	<script>
 	function updateStatus(Status)

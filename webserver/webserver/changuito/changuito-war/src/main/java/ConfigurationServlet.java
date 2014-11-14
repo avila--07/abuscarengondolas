@@ -81,15 +81,16 @@ public class ConfigurationServlet extends HttpServlet {
 	Cookie cookieUser = CookiesSomosUtils.getCookieByName(req,"uid");
 	UserDAO userDao = new UserDAO(); 
 	User user = userDao.getEntityByEmail(cookieUser.getValue());
-	config.set("uid",user.get("uid"));
-	config.set("tkn",user.get("tkn"));
+	user.set("conf", config);
+	//config.set("uid",user.get("uid"));
+	//config.set("tkn",user.get("tkn"));
 	
 	String serviceId = new SaveConfigurationService().getId();
 	SharedObject serviceResponse = null;
 	
 	try {
 		  final SaveConfigurationService service = (SaveConfigurationService) ServiceLocator.getInstance().getService(serviceId);
-		  serviceResponse = service.call(config);
+		  serviceResponse = service.call(user);
 	      if (serviceResponse == null) {
 	          serviceResponse = new SharedObject();
 	      }
