@@ -83,13 +83,18 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
     	Statistic estadisticas = new Statistic();
     	estadisticas.set("partidas",partidas);
 
-//    	estadisticas.setPlayTime(getEventosSumarizados(estadisticas));
     	estadisticas.setPlayTime("56:45");
+//    	estadisticas.setPlayTime(getTiempoJugadoSumarizados(estadisticas));
     	
     	return estadisticas;
     }
 
-    private Statistic getAGameFromEvents(Agrupacion agrupacion) {
+    private String getTiempoJugadoSumarizados(Statistic estadisticas) {
+		
+    	return null;
+	}
+
+	private Statistic getAGameFromEvents(Agrupacion agrupacion) {
     	List<Statistic> listaEventos = agrupacion.getEventos();
     	Statistic statistics = new Statistic();
 
