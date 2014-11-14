@@ -43,7 +43,6 @@
                     <c:forEach var="gameRound" items="${gameRounds}">
                         <a href="http://www.google.com">
                             <tr>
-                                <td>${gameRound.id}</td>
                                 <td>${gameRound.date}</td>
                             </tr>
                         </a>
