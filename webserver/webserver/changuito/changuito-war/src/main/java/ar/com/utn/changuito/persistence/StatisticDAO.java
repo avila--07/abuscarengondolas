@@ -200,9 +200,9 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
 	private Long getSuma(Statistic statistic, String lookup) {
 		Long sumarizado = new Long(0L);
 		if(statistic != null){
-			sumarizado += getSumasIntermedias(statistic, lookup,"ModuloSeleccionGondolas", sumarizado);
-			sumarizado += getSumasIntermedias(statistic, lookup,"ModuloSeleccionProducto", sumarizado);
-			sumarizado += getSumasIntermedias(statistic, lookup,"ModuloVuelto", sumarizado);
+			sumarizado += newGetSumasIntermedias(statistic, lookup,"ModuloSeleccionGondolas");
+			sumarizado += newGetSumasIntermedias(statistic, lookup,"ModuloSeleccionProducto");
+			sumarizado += newGetSumasIntermedias(statistic, lookup,"ModuloVuelto");
 			System.out.println("lookup: " + lookup +" sumarizado: "+sumarizado);
 			
 		}else{
@@ -210,6 +210,27 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
 		}
 		
 		return sumarizado;
+	}
+	
+	private Long newGetSumasIntermedias(Statistic statistic, String lookup,String lookupEscena) {
+		Long intermedio = new Long(0L);
+		try {
+			System.out.println("lookupEscena: "+ lookupEscena);
+			Statistic escena = (Statistic) statistic.getSharedObject(lookupEscena);
+			if (escena != null){
+				System.out.println("lookup: " + lookup +" value: "+escena.getLong(lookup));
+				intermedio = escena.getLong(lookup);
+				if(intermedio != null){
+					return intermedio;
+				}else{
+					return 0L;
+				}
+			}			
+		} catch (NullPointerException e) {
+			//You are far far away from home if this code doesnt like you I really sorry
+			System.out.println("Este módulo no existe para esta partida "+ lookupEscena);
+		}	
+		return intermedio;
 	}
 	
 	private Long getSumasIntermedias(Statistic statistic, String lookup,String lookupEscena,Long sumarizado) {
