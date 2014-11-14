@@ -51,6 +51,7 @@ public class GondolaSelectionModule : Module
         // Add random gondolas and products to buy
         initializeStatistics();
 
+        Debug.Log("[SAC - GSM] prepareScenario");
         List<int> randomGondolaTypes = RandomUtils.GetListWithRandomElementsFrom(GondolaFactory.tipoGondolasDictionary.Keys, Configuration.Current.GondolasCount);
         foreach (int randomGondolaType in randomGondolaTypes)
         {
@@ -67,6 +68,8 @@ public class GondolaSelectionModule : Module
     /// </summary>
     public override void MakeScenario()
     {
+        Debug.Log("[SAC - GSM] makeScenario ");
+
         initializeStatistics();
         _productToBuyIndex++;
         ShowGondolas();

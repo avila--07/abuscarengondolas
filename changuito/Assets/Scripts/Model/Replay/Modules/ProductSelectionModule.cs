@@ -27,6 +27,7 @@ public class ProductSelectionModule : Module
     {
         initializeStatistic();
 
+        Debug.Log("[SAC - PSM] prepareScenario");
         foreach (Product productToBuy in GameManager.Instance.GetModule<GondolaSelectionModule>().ProductsToBuy)
         {
             List<string> randomProductIds = RandomUtils.GetListWithRandomElementsFrom(GondolaFactory.getGondolaProducts(productToBuy.GondolaType), PRODUCTS_QUANTITY);
@@ -53,6 +54,7 @@ public class ProductSelectionModule : Module
     {
         initializeStatistic();
 
+        Debug.Log("[SAC - PSM] prepareScenario Make");
         Product productToBuy = GameManager.Instance.GetModule<GondolaSelectionModule>().CurrentProductToBuy;
        
         List<Product> otherProducts = GetOtherProducts(productToBuy);

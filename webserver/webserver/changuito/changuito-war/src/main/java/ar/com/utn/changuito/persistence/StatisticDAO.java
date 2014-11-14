@@ -90,8 +90,26 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
     }
 
     private String getTiempoJugadoSumarizados(Statistic estadisticas) {
-		
-    	return null;
+    	Long sumaTotal = 0L;
+    	List<Statistic> partidas = (List<Statistic>) estadisticas.get("partidas");
+    	for (Statistic object : partidas) {
+    		try {
+    			System.out.println(object.getPlayTime());
+    			
+    			Long parcial = getSumaPorModulos(object);
+       			if(parcial != null){
+    				sumaTotal += parcial;
+    			}
+			} catch (NumberFormatException e) {
+				// TODO: handle exception
+			}
+			
+		}
+    	return sumaTotal.toString();
+	}
+
+	private Long getSumaPorModulos(Statistic object) {
+		return getSuma(object,"playTime");
 	}
 
 	private Statistic getAGameFromEvents(Agrupacion agrupacion) {
