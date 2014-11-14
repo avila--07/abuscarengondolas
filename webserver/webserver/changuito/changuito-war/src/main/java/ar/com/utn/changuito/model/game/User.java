@@ -47,5 +47,9 @@ public final class User extends SharedObject {
     public Configuration getConfiguration() {
         return getSharedObject("conf", Configuration.class);
     }
+    
+    public void setConfiguration(final Configuration conf){
+    	set("conf",conf);
+    }
 
 }
