@@ -36,7 +36,16 @@ public final class User extends SharedObject {
         set("adyext", true);
     }
 
+    public long getLastIdPartida() {
+        return getLong("lastIdPartida");
+    }
+
+    public void setLastidPartidad(final long value) {
+        set("lastIdPartida", value);
+    }
+
     public Configuration getConfiguration() {
         return getSharedObject("conf", Configuration.class);
     }
+
 }

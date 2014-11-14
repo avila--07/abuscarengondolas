@@ -56,6 +56,8 @@ public class SharedObject {
 
     public long getLong(final String key) {
         final Object value = data.get(key);
+        if (value == null)
+            return 0l;
         if (value instanceof Integer) {
             return (long) (Integer) value;
         }
