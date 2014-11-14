@@ -45,7 +45,6 @@ public class Statistic : SharedObject
 
     public Statistic(DateTime gameStart)
 	{
-        //TODO volar esto cuando hagamos el tema del login.
         IdPartida = UNA_PARTIDA;
         IdUsuario = UN_USUARIO;
         PlayTime = DateTime.Now.Subtract(gameStart).ToString();
