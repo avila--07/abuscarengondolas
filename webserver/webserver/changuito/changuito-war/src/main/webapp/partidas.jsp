@@ -2,7 +2,7 @@
 <head>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-	<title>Partidas históricas</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Partidas histÃ³ricas</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script type='text/javascript' src='/static/loadGame.js'></script>
     <link href="/frontendhome/css/bootstrap.min.css" rel="stylesheet">
@@ -32,8 +32,8 @@
 		<div id="featured-wrapper">
 			<div class="container">
 				<br>
-				<h1><%="Seleccioná una partida para verla"%></h1>
-					<table id="example" class="display" >
+				<h1><%="SeleccionÃ¡ una partida para verla"%></h1>
+					<table id="partidas" style="width:100%">
 					    <thead>
 					        <tr>
 					            <th>Partida</th>

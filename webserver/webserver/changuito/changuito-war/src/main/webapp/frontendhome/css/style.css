@@ -1,4 +1,16 @@
 /* -------- General styles ---------  */
+table#partidas { 
+   display: table;
+   border-collapse: separate;
+   border-spacing: 2px;
+}
+
+table#partidas td {
+    text-align: center;
+   color: blue;
+   font-family: 'Fjalla One', sans-serif;
+   font-size: 17pt;
+}
 
 h1, h2, h3, h4{
 	font-family: 'Fjalla One', sans-serif;
