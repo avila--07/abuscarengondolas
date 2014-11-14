@@ -2,10 +2,9 @@
 <head>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-    <title>Partidas hist�ricas</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script type='text/javascript' src='/static/loadGame.js'></script>
+	<title>Partidas históricas</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type='text/javascript' src='/static/loadGame.js'></script>
     <link href="/frontendhome/css/bootstrap.min.css" rel="stylesheet">
     <link href="/frontendhome/css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
@@ -36,10 +35,8 @@
 
             <h1><%="Seleccione una partida para verla"%>
             </h1>
-            <table id="example" class="display">
-                <thead>
+            <table id="partidas" style="width:100%">
                 <tr>
-                    <th>Fecha</th>
                     <c:forEach var="gameRound" items="${gameRounds}">
                 <tr>
                     <td>
@@ -47,7 +44,6 @@
                        </tr>
                 </c:forEach>
                 </tr>
-                </thead>
                 <tbody>
                 <tr>
                     <td></td>
