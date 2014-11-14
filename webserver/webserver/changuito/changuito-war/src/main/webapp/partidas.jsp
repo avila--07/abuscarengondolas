@@ -36,19 +36,13 @@
             <h1><%="Seleccione una partida para verla"%>
             </h1>
             <table id="partidas" style="width:100%">
-                <thead>
                 <tr>
                     <c:forEach var="gameRound" items="${gameRounds}">
-	                <tr>
-	                    	<td> 
-	                    	<a href="http://www.google.com">
-	                        	${gameRound.date}
-	        				</a>
-	                    	</td>
-	                </tr>
+                <tr>
+                    <td><a href="http://www.google.com">${gameRound.date}</a></td>
+                </tr>
                 </c:forEach>
                 </tr>
-                </thead>
                 <tbody>
                 <tr>
                     <td></td>
