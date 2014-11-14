@@ -35,16 +35,18 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
     @Override
     public Statistic getEntityById(Long id) {
     	
-//    	return crearUnFalsoObjetoDeStadisticas();
     	System.out.println("Get Games for 81IQL5EEV5QZ30G");
     	return crearUnFalsoObjetoDeStadisticas("81IQL5EEV5QZ30G");
     }
     
-    private Statistic crearUnFalsoObjetoDeStadisticas(String usuario) {
-    	long IDJUEGO = 1L;
-    	long USUARIO = 1L;
+    public Statistic getEntityById(String idUser) {
     	
-    	System.out.println("Get filter for 81IQL5EEV5QZ30G");
+    	System.out.println("Get Games for "+idUser);
+    	return crearUnFalsoObjetoDeStadisticas(idUser);
+    }
+    
+    private Statistic crearUnFalsoObjetoDeStadisticas(String usuario) {
+    	System.out.println("Get filter for "+usuario);
     	Filter sameUserFilter =
     			  new FilterPredicate("uid",
     			                      FilterOperator.EQUAL,
@@ -52,7 +54,7 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
     	
     	Iterable<Statistic> entities = getEntitiesAndIterate(sameUserFilter,10,0);
     	
-    	System.out.println("Entyties for 81IQL5EEV5QZ30G "+ entities);
+    	System.out.println("Entyties for "+ usuario + entities);
     	int offset = 0;
     	Iterator<Statistic> it = entities.iterator();
     	boolean seguir = it.hasNext();
@@ -80,7 +82,6 @@ public final class StatisticDAO extends AbstractGAEDAO<Statistic> {
     	
     	Statistic estadisticas = new Statistic();
     	estadisticas.set("partidas",partidas);
-    	
 
 //		System.out.println("Aciertos: "+ estadisticas.get("Aciertos") +" Errores: "+ estadisticas.get("Errores"));
 //    	estadisticas.setPlayTime(getEventosSumarizados());

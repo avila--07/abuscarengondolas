@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,8 +53,8 @@ public class StaticsServlet extends HttpServlet {
 
   private void dispatchInit(HttpServletRequest req, HttpServletResponse resp) {
 	  Gson gson = new Gson();
-//	  StaticsObjectDto statics = crearObjetoDeStadisticas();
-	  Statistic statics = getAllGames(1L);
+	  
+	  Statistic statics = getAllGames(getUserId(req.getCookies()));
 	  String response = gson.toJson(statics);
 	  
 	  resp.setContentType("application/json");
@@ -66,7 +67,18 @@ public class StaticsServlet extends HttpServlet {
 	  
   }
 
-private Statistic getAllGames(long uSUARIO) {
+private String getUserId(Cookie[] cookies) {
+	for (Cookie cookie : cookies) {
+		if("uidValue".equals(cookie.getName())){
+			System.out.println("Encontré la cookie: "+cookie.getValue());
+			return cookie.getValue();
+		}
+	};
+	
+	return "";
+}
+
+private Statistic getAllGames(String uSUARIO) {
 	StatisticDAO dao = new StatisticDAO();	
 	System.out.println("Get All Games");
 	Statistic statistics = dao.getEntityById(uSUARIO);
