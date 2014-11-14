@@ -10,7 +10,6 @@
 <link href="/frontend/default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/frontend/fonts.css" rel="stylesheet" type="text/css" media="all" />
 
-<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
 </head>
 
 <body>
@@ -81,10 +80,20 @@ $( document ).ready(function() {
 			$.removeCookie('onLoadGoTo'); 
 		}else{
 			$("#featured-wrapper").load("/homefatures");
+			$.removeCookie('onLoadGoTo'); 
 		}
 	}else{
 		$("#featured-wrapper").load("/homefatures");
 	}
+	
+	//Experimental
+	if($.cookie('loged') == "Y"  && !("administration" == $.cookie('onLoadGoTo'))){
+		$("#menu ul").append($("#stats"));
+		$("#menu ul").append($("#configuration"));
+		$("#menu ul").append($("#partidas"));
+		$("#loginLink").text("Administración");
+	}
+
 });
 </script>
 

@@ -61,13 +61,14 @@
 	</div>
 	</div>
 
- <script src="/static/highcharts/highcharts.js"></script>
- <script src="/static/highcharts/drilldown.js"></script>
-<!--  <script src="http://code.highcharts.com/modules/drilldown.js"></script> -->
- <script src="/static/d3/d3.js"></script>
- <script src="/static/d3/radialProgress/radialProgress.js"></script>
- 
+<script src="/static/jquery-2.1.1.min.js"></script>
+<script src="/static/highcharts/highcharts.js"></script>
+<script src="/static/highcharts/drilldown.js"></script>
+<script src="/static/highcharts/exporting.js"></script>
 <!-- <script src="http://code.highcharts.com/modules/exporting.js"></script> -->
+<script src="/static/d3/d3.js"></script>
+<script src="/static/d3/radialProgress/radialProgress.js"></script>
+<script src="/static/jquery.cookie.js"></script>
 <script src="/static/statics.js"></script>
 
 </body>

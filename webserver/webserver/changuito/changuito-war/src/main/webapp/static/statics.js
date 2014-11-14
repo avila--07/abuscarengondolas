@@ -4,7 +4,7 @@ var testObjectSeries ;
 var testObjectXAxis ;
 var testing ;
 
-$( function() {
+$( document ).ready( function() {
 ////  $( "#tabs" ).tabs();
 	//containerSelecProducto, containerModPago,containerModVuelto, containerGenerales
 	var createGlobalStats = function (data) { 
@@ -66,9 +66,15 @@ $( function() {
 		var array = [];
 		var valores;
 		var i;
-		for (i = 0; i < data.partidas.length; i++) { 
-			valores = data.partidas[i].data[module].data[dataKey];
-			array.push(valores);
+		for (i = 0; i < data.partidas.length; i++) {
+			//Veamos que existe el modulo antes de llenarlo 
+			if (data.partidas[i].data[module] != undefined ){
+				valores = data.partidas[i].data[module].data[dataKey];
+				array.push(valores);
+			} else{
+				valores = 0;
+				array.push(valores);
+			}
 		}
 		return array;
 		
@@ -187,68 +193,26 @@ $( function() {
 	};
 
 	//Facebook 
-	var shareOnFb = function(){
-		var msg = "Hola";
-		  FB.api('/me/feed', 'post', { message: msg }, function(response) {
-			    if (!response || response.error) {
-			       console.log('Error occured');
-			    } else {
-			       console.log('Post ID: ' + response.id);
-			    }
-			  });
-	}
-	
-	$("#containerGenerales-share").on('click',function(){
-		var msg = "Hola";
-		  FB.api('/me/feed', 'post', { message: msg }, function(response) {
-			    if (!response || response.error) {
-			       console.log('Error occured');
-			       console.log(response.error);
-			    } else {
-			       console.log('Post ID: ' + response.id);
-			    }
-			  });
-
-	});
-	
-	
-	
-	$("#containerSelecGondolas-share").on('click',function(){
-		FB.ui(
-				  {
-				    method: 'share',
-				    href: 'https://developers.facebook.com/docs/',
-				  },
-				  function(response) {
-				    if (response && !response.error_code) {
-				    	console.log('Posting completed.');
-				    	console.log(response.error_code);
-				    } else {
-				    	console.log('Error while posting.');
-				    }
-				  }
-				);
-	});
 
 	
-	$("#compartir2").on('click', function(){
-		var canvas = document.getElementById("containerGenerales");
-
-		canvas.exportChart({type: 'image/jpg', filename: 'my-png'}, {subtitle: {text:''}});
-		
-		$.ajax({
-			type: "POST",
-			url: "/addStatic",
-			contentType: "image/jpg", 
-			data: { 
-				title:"imagenprueba", 
-				url:"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRfG6BrvEJgkFEUDtff8rRs-n3DCmjGDWo2-FVYlHq8WvKkZEwxSLmeVrE"
-			}
-		}).done(function( msg ) {
-			console.log( msg );			
-		});
-		
-		});
+//	$("#compartir2").on('click', function(){
+//		var canvas = document.getElementById("containerGenerales");
+//
+//		canvas.exportChart({type: 'image/jpg', filename: 'my-png'}, {subtitle: {text:''}});
+//		
+//		$.ajax({
+//			type: "POST",
+//			url: "/addStatic",
+//			contentType: "image/jpg", 
+//			data: { 
+//				title:"imagenprueba", 
+//				url:"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRfG6BrvEJgkFEUDtff8rRs-n3DCmjGDWo2-FVYlHq8WvKkZEwxSLmeVrE"
+//			}
+//		}).done(function( msg ) {
+//			console.log( msg );			
+//		});
+//		
+//		});
 	
 	//Facebook 
 

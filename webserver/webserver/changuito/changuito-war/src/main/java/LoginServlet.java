@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
 		if(isLogued(req)){
 			System.out.println("Logged");			
 			setAdministrationCookie(req, resp);
-			req.getRequestDispatcher("/").forward(req, resp);
+			req.getRequestDispatcher("/administration.jsp").forward(req, resp);
 		}else{
 			System.out.println("Not Logged");
 			req.setAttribute("onLoadGoTo", "login");
