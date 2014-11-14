@@ -49,6 +49,9 @@ public class GameRound : SharedObject
 
     public IEnumerator Play(MonoBehaviour monoBehaviour, bool automatically)
     {
+        // Wait a second to let the game start
+        yield return new WaitForSeconds(1f);
+
         // Use a while because more steps can be added Playing a step
         int stepIndex = 0;
         while (stepIndex < Steps.Count)
