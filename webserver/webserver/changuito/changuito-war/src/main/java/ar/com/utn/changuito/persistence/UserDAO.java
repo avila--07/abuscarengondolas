@@ -50,4 +50,5 @@ public final class UserDAO extends AbstractGAEDAO<User> {
 
         return entities.hasNext() ? entities.next() : null;
     }
+    
 }
