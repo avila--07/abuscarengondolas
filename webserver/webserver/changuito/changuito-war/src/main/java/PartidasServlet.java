@@ -22,11 +22,12 @@ public final class PartidasServlet extends HttpServlet {
         final String userId = userCookie.getValue().toString();
         final GameRoundDAO gameRoundDAO = new GameRoundDAO();
 
-        final List<String> listData = new ArrayList<>(10);
+        final List<String> gameRounds = new ArrayList<>(10);
+
         for (final GameRound gameRound : gameRoundDAO.getRecentGameRoundsForUser(userId)) {
-            listData.add(gameRound.getDate() + " - " + gameRound.getId());
+            gameRounds.add(gameRound.toString());
         }
-        req.setAttribute("listData", listData);
+        req.setAttribute("gameRounds", gameRounds);
 
         req.getRequestDispatcher("/partidas.jsp").forward(req, resp);
     }

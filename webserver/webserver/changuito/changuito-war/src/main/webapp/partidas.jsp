@@ -38,7 +38,7 @@
 					        <tr>
 					            <th>Partida</th>
 					            <th>Fecha</th>
-					             <c:forEach var="element" items="${listData}">
+					             <c:forEach var="element" items="${gameRounds}">
       							  <tr>
 						            <td>${element}</td> 
 						            <td>${element}</td> 
