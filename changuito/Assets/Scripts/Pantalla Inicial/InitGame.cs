@@ -7,7 +7,7 @@ public class InitGame : MonoBehaviour {
 
         User user = User.Current;
         if (user == null)
-		{
+        {
             Application.LoadLevel("PantallaInicial");
 			return;
 		}
@@ -20,8 +20,8 @@ public class InitGame : MonoBehaviour {
 			}
 			updatedUser.SaveAsCurrent();
 			updatedUser.Configuration.SaveAsCurrent();
-
-			Application.LoadLevel("PantallaInicial");
+            
+            Application.LoadLevel("PantallaInicial");
 		});
 	}
 }

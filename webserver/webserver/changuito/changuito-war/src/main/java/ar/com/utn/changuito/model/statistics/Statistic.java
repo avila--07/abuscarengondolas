@@ -39,8 +39,8 @@ public class Statistic extends SharedObject {
         set("idUsuario", idUsuario);
     }
 
-    public int getIdPantalla() {
-        return getInt("idPantalla");
+    public long getIdPantalla() {
+        return getLong("idPantalla");
     }
 
     public void setIdPantalla(final int idPantalla) {

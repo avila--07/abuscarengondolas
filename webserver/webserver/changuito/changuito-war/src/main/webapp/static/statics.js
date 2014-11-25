@@ -1,20 +1,24 @@
 var tiempoJugado;
+var partidasJugadas;
 var testObjectSeries ;
 var testObjectXAxis ;
+var testing ;
 
-$(function() {
+$( document ).ready( function() {
 ////  $( "#tabs" ).tabs();
 	//containerSelecProducto, containerModPago,containerModVuelto, containerGenerales
-	var createStatsSelecGondolas = function () { 
-	    $('#containerSelecGondolas').highcharts({
+	var createGlobalStats = function (data) { 
+	    var nombresPartidas = getNombresPartidasFromData(data);
+	    
+		$('#containerGenerales').highcharts({
 	        chart: {
 	            type: 'column'
 	        },
 	        title: {
-	            text: 'Desempeño en Selección de Góndolas'
+	            text: 'Desempeño general'
 	        },
 	        xAxis: {
-	            categories: ['Partida 1', 'Partida 2', 'Partida 3', 'Partida 4', 'Partida 5']
+	            categories: nombresPartidas
 	        },
 	        yAxis: {
 	            title: {
@@ -23,17 +27,199 @@ $(function() {
 	        },
 	        series: [{
 	            name: 'Aciertos',
-	            data: [1, 0, 4, 8, 6],
+	            data: getEventosPartidasFromData(data,"Aciertos"),
 	            color: 'green'
 	        }, {
 	            name: 'Errores',
-	            data: [5, 7, 3, 3, 5],
+	            data: getEventosPartidasFromData(data,"Errores"),
 	            color: 'red'
 	        }]
 	    });
 	};
 	
-	var createStatsSelecProducto = function () { 
+	var getNombresPartidasFromData = function(data){
+		var array = [];
+		var nombrePartida;
+		var i;
+		for (i = 0; i < data.partidas.length; i++) { 
+			nombrePartida = "id " + data.partidas[i].data.idPartida + " - " + data.partidas[i].data.gameDate ;
+			array.push(nombrePartida);
+		}
+		return array;
+
+	};
+
+	var getEventosPartidasFromData = function(data,dataKey){
+		var array = [];
+		var valores;
+		var i;
+		
+		for (i = 0; i < data.partidas.length; i++) { 
+			valores = data.partidas[i].data[dataKey];
+			array.push(valores);
+		}
+		return array;
+		
+	};
+
+	var getEventosModuleFromData = function(data,module,dataKey){
+		var array = [];
+		var valores;
+		var i;
+		for (i = 0; i < data.partidas.length; i++) {
+			//Veamos que existe el modulo antes de llenarlo 
+			if (data.partidas[i].data[module] != undefined ){
+				valores = data.partidas[i].data[module].data[dataKey];
+				array.push(valores);
+			} else{
+				valores = 0;
+				array.push(valores);
+			}
+		}
+		return array;
+		
+	};
+
+	var createStatsSelecGondolas = function (data) { 
+		$('#containerSelecGondolas').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Desempeño en Selección de Góndolas'
+			},
+			xAxis: {
+				categories: getNombresPartidasFromData(data)
+			},
+			yAxis: {
+				title: {
+					text: 'Cantidad'
+				}
+			},
+			series: [{
+				name: 'Aciertos',
+				data: getEventosModuleFromData(data,"ModuloSeleccionGondolas","aciertos"),
+				color: 'green'
+			}, {
+				name: 'Errores',
+				data: getEventosModuleFromData(data,"ModuloSeleccionGondolas","errores"),
+				color: 'red'
+			}]
+		});
+	};
+	 
+	var createStatsSelecProducto = function (data) { 
+		$('#containerSelecProducto').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Desempeño en Selección de Productos'
+			},
+			xAxis: {
+				categories: getNombresPartidasFromData(data)
+			},
+			yAxis: {
+				title: {
+					text: 'Cantidad'
+				}
+			},
+			series: [{
+				name: 'Aciertos',
+				data: getEventosModuleFromData(data,"ModuloSeleccionProducto","aciertos"),
+				color: 'green'
+			}, {
+				name: 'Errores',
+				data: getEventosModuleFromData(data,"ModuloSeleccionProducto","errores"),
+				color: 'red'
+			}]
+		});
+	};
+
+	var createStatsModVuelto = function (data) { 
+		$('#containerModVuelto').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Desempeño en Módulo control de vuelto'
+			},
+			xAxis: {
+				categories: getNombresPartidasFromData(data)
+			},
+			yAxis: {
+				title: {
+					text: 'Cantidad'
+				}
+			},
+			series: [{
+				name: 'Aciertos',
+				data: getEventosModuleFromData(data,"ModuloVuelto","aciertos"),
+				color: 'green'
+			}, {
+				name: 'Errores',
+				data: getEventosModuleFromData(data,"ModuloVuelto","errores"),
+				color: 'red'
+			}]
+		});
+	};
+
+	var createStatsModPago = function (data) { 
+		$('#containerModPago').highcharts({
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Desempeño en Módulo de Pago'
+			},
+			xAxis: {
+				categories: getNombresPartidasFromData(data)
+			},
+			yAxis: {
+				title: {
+					text: 'Cantidad'
+				}
+			},
+			series: [{
+				name: 'Monto a pagar',
+				data: getEventosModuleFromData(data,"ModuloPago","monto"),
+				color: 'green'
+			}, {
+				name: 'Pago realizado',
+				data: getEventosModuleFromData(data,"ModuloPago","pago"),
+				color: 'red'
+			}]
+		});
+	};
+
+	//Facebook 
+
+	
+//	$("#compartir2").on('click', function(){
+//		var canvas = document.getElementById("containerGenerales");
+//
+//		canvas.exportChart({type: 'image/jpg', filename: 'my-png'}, {subtitle: {text:''}});
+//		
+//		$.ajax({
+//			type: "POST",
+//			url: "/addStatic",
+//			contentType: "image/jpg", 
+//			data: { 
+//				title:"imagenprueba", 
+//				url:"https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRfG6BrvEJgkFEUDtff8rRs-n3DCmjGDWo2-FVYlHq8WvKkZEwxSLmeVrE"
+//			}
+//		}).done(function( msg ) {
+//			console.log( msg );			
+//		});
+//		
+//		});
+	
+	//Facebook 
+
+	
+	
+	//From this part there are only mocks
+	var createStatsSelecProductoMock = function (data) { 
 		$('#containerSelecProducto').highcharts({
 			chart: {
 				type: 'column'
@@ -61,7 +247,7 @@ $(function() {
 		});
 	};
 	
-	var createStatsModVuelto = function () { 
+	var createStatsModVueltoMock = function (data) { 
 		$('#containerModVuelto').highcharts({
 			chart: {
 				type: 'column'
@@ -227,7 +413,7 @@ $(function() {
 	}
 		
 	 return toReturn;
-  }
+  };
   
   var getMeAGame = function(partida){
 	  var game = {};
@@ -237,7 +423,7 @@ $(function() {
 	  
 	  console.log("A game: "+ game);
 	  return game;
-  }
+  };
   
   var getSeries = function(info){
 	var arraySeries = [];
@@ -252,27 +438,46 @@ $(function() {
 	console.log("Array series: " + arraySeries);	 
 	
 	return arraySeries;
-  }
-
-	$.ajax({
-	  type: "GET",
-	  url: "/statics",
-	  data: { axn:"init" }
-  }).done(function( msg ) {
-    console.log( msg );
-    if (msg!= null){
-    	tiempoJugado = msg;
-    	createChanguitoStats(msg);
-    }
+  };
   
-  });
+  //End of the mocks
 
   var init = function(){
-	  createStatsSelecGondolas();
-	  createStatsSelecProducto();
-	  createStatsModVuelto();
-  }
+	  console.log("Init");
+
+	  $.ajax({
+		  type: "GET",
+		  url: "/statics",
+		  data: { axn:"init" }
+	  }).done(function( msg ) {
+	    console.log( msg );
+	    if (msg!= null){
+	    	var data = msg.data;
+	    	testing = data; 
+	    		
+	    	tiempoJugado = data.playTime;
+	    	partidasJugadas = data.partidas.length;
+	    	
+	    	$("#tiempoJugado").text(tiempoJugado+" min");
+	    	$("#partidasJugadas").text(partidasJugadas);
+	    	
+	    	//createChanguitoStats(msg);
+	    	createGlobalStats(data);
+
+	    	createStatsSelecProducto(data);
+	    	createStatsSelecGondolas(data);
+	    	createStatsModVuelto(data);
+	    	createStatsModPago(data);
+	    	
+	    }else{
+	    	console.log("Errores en la carga de la página");
+	    };
+	  
+	  });
+
+  };
   
   init();
   
+
 });

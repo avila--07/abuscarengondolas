@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+/*
 public class VueltoAction : MonoBehaviour {
 
     public Boolean soyElCorrecto;
@@ -12,7 +12,7 @@ public class VueltoAction : MonoBehaviour {
         {
             callFinCV();
             NGUISomosUtils.showTextInScreen("CVMessageStatus","¡Muy Bien! es el vuelto Correcto!");
-            ListadoSingleton.Instance.clean();
+            //ListadoSingleton.Instance.clean();
             Application.LoadLevel("PantallaFinal");
         }
         else
@@ -27,4 +27,4 @@ public class VueltoAction : MonoBehaviour {
         ControlVueltoStatistic request = new ControlVueltoStatistic(ServicioControlVuelto.cvStart, ServicioControlVuelto.failedVueltos);
         UploadStatisticsService.TryToCall(request);
     }
-}
+}*/

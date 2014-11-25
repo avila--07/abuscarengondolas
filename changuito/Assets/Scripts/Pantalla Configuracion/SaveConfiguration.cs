@@ -9,7 +9,8 @@ public class SaveConfiguration : MonoBehaviour
 		this.saveCantidadProductos ();
 		this.saveModuloPago ();
 		this.saveModuloControlVuelto ();
-
+        this.saveGuardarPartidas();
+        this.saveEnabledSound();
 		Configuration.Current.SaveAsCurrent ();
 		SaveConfigurationService.TryToCall ();
 	}
@@ -31,4 +32,16 @@ public class SaveConfiguration : MonoBehaviour
 		GameObject popup = GameObject.Find ("CantidadProductosPopupList");
 		Configuration.Current.GondolasCount = Int32.Parse (popup.GetComponent<UIPopupList> ().value);
 	}
+
+    private void saveGuardarPartidas()
+    {
+        GameObject check = GameObject.Find("GuardarPartidasCheckbox");
+        Configuration.Current.GuardarPartidas = check.GetComponent<UIToggle>().value;
+    }
+
+    private void saveEnabledSound()
+    {
+        GameObject check = GameObject.Find("SonidosCheckbox");
+        Configuration.Current.EnabledSound = check.GetComponent<UIToggle>().value;
+    }
 }

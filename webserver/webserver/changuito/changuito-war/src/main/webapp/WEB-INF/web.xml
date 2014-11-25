@@ -74,6 +74,24 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>demo</servlet-name>
+        <servlet-class>DemoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>demo</servlet-name>
+        <url-pattern>/demo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>policy</servlet-name>
+        <servlet-class>PolicyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>policy</servlet-name>
+        <url-pattern>/policy</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ChanguitoServices</servlet-name>
         <servlet-class>ar.com.utn.changuito.architecture.services.GameServicesServlet</servlet-class>
     </servlet>
@@ -81,5 +99,25 @@
         <servlet-name>ChanguitoServices</servlet-name>
         <url-pattern>/ChanguitoServices/*</url-pattern>
     </servlet-mapping>
+
+	  <servlet>
+	    <servlet-name>StoreImage</servlet-name>
+	    <servlet-class>ImageStoreServlet</servlet-class>
+	  </servlet>
+
+	  <servlet-mapping>
+	    <servlet-name>StoreImage</servlet-name>
+	    <url-pattern>/addStatic</url-pattern>
+	  </servlet-mapping>
+
+	 <servlet>
+	    <servlet-name>crossdomain</servlet-name>
+	    <servlet-class>CrossdomainServlet</servlet-class>
+	  </servlet>
+
+	  <servlet-mapping>
+	    <servlet-name>crossdomain</servlet-name>
+	    <url-pattern>/crossdomain.xml</url-pattern>
+	  </servlet-mapping>
 
 </web-app>

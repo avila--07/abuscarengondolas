@@ -25,12 +25,14 @@
           <unpackTypes>war</unpackTypes>
         </configuration>
       </plugin>
+      
       <plugin>
         <groupId>com.google.appengine</groupId>
         <artifactId>appengine-maven-plugin</artifactId>
         <version>${appengine.target.version}</version>
       </plugin>
-    </plugins>
+      
+      </plugins>
   </build>
 
   <dependencies>
@@ -41,4 +43,5 @@
       <type>war</type>
     </dependency>
   </dependencies>
+
 </project>

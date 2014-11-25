@@ -107,6 +107,41 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
         };
     }
 
+    //TODO: este método es una copia del de arriba, se puede mejorar para llamar uno solo (Nice to have)
+    public Iterable<T> getEntitiesAndIterate(final Query.Filter filter, final int limit, final int offset) {
+
+        final String kind = getGAEEntityKind();
+
+        final Query GAEQuery = new Query(kind);
+        GAEQuery.setFilter(filter);
+        final FetchOptions options = FetchOptions.Builder.withLimit(limit).offset(offset);
+
+        final Iterable<Entity> entitiesIterator = RetryingExecutor.execute(4, 150, new RetryableFuture<Iterable<Entity>>() {
+
+            private Iterable<Entity> entities;
+
+            public void run() throws Exception {
+                this.entities = getDatastoreService().prepare(GAEQuery).asIterable(options);
+            }
+
+            public Iterable<Entity> getValue() {
+                return this.entities;
+            }
+        });
+
+        return new Iterable<T>() {
+            @Override
+            public Iterator<T> iterator() {
+                return new IteratorTransform<Entity, T>(entitiesIterator.iterator(),
+                        new IteratorTransform.Transformer<Entity, T>() {
+                            public T transform(final Entity entity) {
+                                return convertGAEEntityToDomainEntity(entity);
+                            }
+                        });
+            }
+        };
+    }
+
     public void persist(final T domainEntity) {
 
         validateDomainEntity(domainEntity);
@@ -139,7 +174,15 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
             entity = new Entity(getGAEEntityKind(), id);
 
         for (final String keyName : domainEntity.getKeys()) {
-            entity.setProperty(keyName, domainEntity.get(keyName));
+
+            Object value = domainEntity.get(keyName);
+            if (value != null && value instanceof String) {
+                final String valueAsString = (String) value;
+                if (valueAsString.length() > 400) {
+                    value = new Text(valueAsString);
+                }
+            }
+            entity.setProperty(keyName, value);
         }
         return entity;
     }
@@ -156,7 +199,12 @@ public abstract class AbstractGAEDAO<T extends SharedObject> {
         final SharedObject sharedObject = new SharedObject();
 
         for (final Map.Entry<String, Object> entry : entity.getProperties().entrySet()) {
-            sharedObject.set(entry.getKey(), entry.getValue());
+            Object value = entry.getValue();
+            if (value instanceof Text) {
+                value = ((Text) value).getValue();
+            }
+
+            sharedObject.set(entry.getKey(), value);
         }
         return sharedObject;
     }

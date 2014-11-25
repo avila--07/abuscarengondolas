@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+/*
 public class ProductAction : MonoBehaviour
 {
 
@@ -20,10 +20,9 @@ public class ProductAction : MonoBehaviour
 			//Enviamos la estadistica. 
 			SeleccionarProductoStatistic result = new SeleccionarProductoStatistic (ServicioSeleccionarProductos.failedProducts, ServicioSeleccionarProductos.gameStart);
 			UploadStatisticsService.TryToCall (result);
-			NGUISomosUtils.setTildeProductoSeleccionado (ListadoSingleton.Instance.getTarget (), true);
-			ListadoSingleton.Instance.cleanListadoTipoProductos ();
-			ListadoSingleton.PosicionActual++;
-			System.Threading.Thread.Sleep (200);
+			//NGUISomosUtils.setTildeProductoSeleccionado (ListadoSingleton.Instance.getTarget (), true);
+            //ListadoSingleton.Instance.ListadoTipoProductos.Clear();
+			//ListadoSingleton.PosicionActual++;
 			Application.LoadLevel ("PantallaSeleccionGondolas");
 			Destroy (this.gameObject);
 		} else {   //Si el producto no es el que esta siendo exibido como target ...
@@ -33,4 +32,4 @@ public class ProductAction : MonoBehaviour
 			}
 		}
 	}
-}
+}*/

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+/*
 public class ServicioControlVuelto : MonoBehaviour {
     
     public int monto;
@@ -12,6 +12,7 @@ public class ServicioControlVuelto : MonoBehaviour {
     private ArrayList botonesVueltos = new ArrayList() { "BotonVueltoAmarillo", "BotonVueltoNaranja", "BotonVueltoAzul", "BotonVueltoVerde" };
     private ArrayList botonesDesordenados = new ArrayList(4);
     private static int MAX_VUELTOS = 4;
+    public GameObject grid;
 
     public static int failedVueltos;
     public static DateTime cvStart;
@@ -43,7 +44,6 @@ public class ServicioControlVuelto : MonoBehaviour {
 
     private void initializeBotones()
     {
-        GameObject grid = GameObject.Find("CVBotonesGrid");
         botonesDesordenados = ArrayListSomosUtils.desordenarLista(botonesVueltos, 0, MAX_VUELTOS);
         int posicionVueltos=0;
 
@@ -90,3 +90,4 @@ public class ServicioControlVuelto : MonoBehaviour {
     }
 
 }
+*/

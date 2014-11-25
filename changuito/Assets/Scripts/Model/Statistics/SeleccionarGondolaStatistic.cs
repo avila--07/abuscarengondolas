@@ -25,7 +25,7 @@ public class SeleccionarGondolaStatistic : Statistic{
     public SeleccionarGondolaStatistic(int failedGondola, DateTime gameDate)
         : base(gameDate)
     {
-        IdEvento = "Fin_Gondolas";
+        IdEvento = "fin_gondolas";
         CantidadGondolas = Configuration.Current.GondolasCount;
         IdPantalla = SELECCION_GONDOLAS;
         FailedGondolas = failedGondola;

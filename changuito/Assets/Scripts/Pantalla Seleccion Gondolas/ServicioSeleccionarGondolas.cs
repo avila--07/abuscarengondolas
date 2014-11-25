@@ -2,21 +2,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
-
+/*
 public class ServicioSeleccionarGondolas : MonoBehaviour
 {
-    public static List<UI2DSprite> Gondolas = new List<UI2DSprite>(GondolaFactory.MAX_PRODUCTOS);
     public static int failedGondola;
     public static DateTime gondolaStart;
+    public GameObject listadoGrid;
+    public GameObject gondolasGrid;
+
 	void Start ()
 	{
-		Gondolas.Clear();
         initializeStatistics();
 
 		if (!seleccionFinalizada ()) {
-			ListadoSingleton.Instance.initializeListado ();
-			createGondolas ();
-			setTargetOfChanguito ();
+            //ListadoSingleton.Instance.makeGondolaScene();
+			showScene();
+            setTargetOfChanguito ();
 			setProductTarget ();
 		} else {
 			finalizarJuego ();
@@ -55,19 +56,10 @@ public class ServicioSeleccionarGondolas : MonoBehaviour
 		changuito.GetComponent<ChanguitoDragable> ().GondolaTarget = ListadoSingleton.Instance.getTargetType ();
 	}
 
-	private void createGondolas ()
-	{		
-		GameObject gondolasOnScene = GameObject.Find ("SGGondolasTable");
-        
-		int gondolaPosition;
-		for (gondolaPosition = 0; gondolaPosition < Configuration.Current.GondolasCount; gondolaPosition++) {
-			String name = ListadoSingleton.Instance.getLabelOfGondolaType (gondolaPosition);
-			GameObject gondola = (GameObject)Resources.Load (Configuration.GONDOLAS_PATH + name);
-			gondola.name = name; 
-			gondola.GetComponent<GondolaProperties> ().ProductType = (int)ListadoSingleton.Instance.getGondolasSeleccionadas () [gondolaPosition];
-			Gondolas.Add (NGUITools.AddChild (gondolasOnScene, gondola).GetComponent<UI2DSprite> ());
-		}
-		gondolasOnScene.GetComponent<UITable> ().Reposition ();
-	}
+    private void showScene()
+    {
+        ListadoSingleton.Instance.showListado(listadoGrid);
+        ListadoSingleton.Instance.showGondolas(gondolasGrid);
+    }
 
-}
+}*/

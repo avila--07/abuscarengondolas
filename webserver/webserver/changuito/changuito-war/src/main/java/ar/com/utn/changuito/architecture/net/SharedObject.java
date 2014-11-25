@@ -56,6 +56,8 @@ public class SharedObject {
 
     public long getLong(final String key) {
         final Object value = data.get(key);
+        if (value == null)
+            return 0l;
         if (value instanceof Integer) {
             return (long) (Integer) value;
         }
@@ -115,6 +117,10 @@ public class SharedObject {
     public byte[] serialize() {
 
         return JsonUtils.convertMapToJsonBytes(data);
+    }
+
+    public void set(final String key, final boolean value) {
+        data.put(key, value);
     }
 
     public <T> void set(final String key, final T value) {

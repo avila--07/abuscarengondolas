@@ -6,5 +6,5 @@ public abstract class AbstractService {
 
     public abstract String getId();
 
-    protected abstract SharedObject call(final SharedObject serviceParameter);
+    public abstract SharedObject call(final SharedObject serviceParameter);
 }

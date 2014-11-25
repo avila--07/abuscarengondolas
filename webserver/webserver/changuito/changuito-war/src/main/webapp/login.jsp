@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="/frontendhome/css/bootstrap.min.css" rel="stylesheet">
 <link href="/frontendhome/css/bootstrap-responsive.min.css" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
@@ -19,14 +20,10 @@
 					<br>
 					<p> <label for="password">Contraseña:</label>
 						<input type="password" required name="password" id="password" placeholder="Ingrese su contraseña"></p>
-					<br>
-					<p> <label for="secondpassword">Confirmar Contraseña:</label>
-						<input type="password" required name="secondpassword" id="secondpassword" placeholder="Repita su contraseña"></p>
 				</fieldset>
 				</div>
 			<br>
 			<br>
-<!-- 				<p><input id="submitButton" type="button" value="Aceptar" onclick="show()"></p> type="submit" , sin id -->
 				<p><input id="submitButton" type="submit" value="Aceptar" ></p> <!-- type="submit" , sin id -->
 			<br>
 			</form>

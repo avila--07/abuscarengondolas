@@ -12,6 +12,7 @@ public class AsignarJugador : MonoBehaviour
 	public static Boolean isWindowsActive;
 	private UIInput _emailInput;
 	private UIInput _passwordInput;
+    private UIInput _secondPasswordInput;
 
 	public void OnClick ()
 	{
@@ -25,14 +26,26 @@ public class AsignarJugador : MonoBehaviour
 				
 				_emailInput = GameObject.Find ("WindowsPanelUser").GetComponent<UIInput> ();
 				_passwordInput = GameObject.Find ("WindowsPanelPass").GetComponent<UIInput> ();
+                _secondPasswordInput = GameObject.Find("WindowsPanelConfirmPass").GetComponent<UIInput>();
 
 				Debug.Log ("Usuario que intenta loguearse");
 				String email = _emailInput.value;
 				String password = _passwordInput.value;
-				if (email.Equals ("") || password.Equals ("")) {
-					NGUISomosUtils.showTextInScreen ("WindowsMessage", "Debe completar los datos. Vuelva a intentarlo");
-				} else {
-					User user = new User ();
+                String secondPassword = _secondPasswordInput.value;
+
+                if (email.Equals("") || password.Equals("") || secondPassword.Equals(""))
+                {
+                        NGUISomosUtils.showTextInScreen ("WindowsMessage", "Debe completar los datos. Vuelva a intentarlo.");
+				}
+                else
+                {
+                    if (!password.Equals(secondPassword))
+                    {
+                        NGUISomosUtils.showTextInScreen("WindowsMessage", "La contraseñas no coinciden. Vuelta a intentarlo.");
+                        return;
+                    }
+				
+                    User user = new User ();
 					user.Configuration = Configuration.Current;
 					user.Email = email;
 					user.Password = password;

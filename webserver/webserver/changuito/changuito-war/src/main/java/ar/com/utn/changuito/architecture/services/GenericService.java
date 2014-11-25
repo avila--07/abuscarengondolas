@@ -9,7 +9,7 @@ public abstract class GenericService<TIn extends SharedObject> extends AbstractS
     protected abstract SharedObject typedCall(final TIn serviceParameter);
 
     @Override
-    protected SharedObject call(final SharedObject serviceParameter) {
+	public SharedObject call(final SharedObject serviceParameter) {
 
         final TIn specificServiceParameter = NewInstanceOfSpecificParameter();
         specificServiceParameter.mergeWith(serviceParameter);

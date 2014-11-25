@@ -38,17 +38,16 @@ public class Statistic : SharedObject
          set{ Set("idEvento",value); }
     }
 
-    public string PlayTime{
-        get { return GetString("playTime"); }
+    public long PlayTime{
+        get { return GetLong("playTime"); }
         set { Set("playTime", value); } 
     }
 
     public Statistic(DateTime gameStart)
 	{
-        //TODO volar esto cuando hagamos el tema del login.
         IdPartida = UNA_PARTIDA;
         IdUsuario = UN_USUARIO;
-        PlayTime = DateTime.Now.Subtract(gameStart).ToString();
+        PlayTime = (long) DateTime.Now.Subtract(gameStart).TotalMilliseconds;
         GameDate = DateTime.Now.ToString();
   	}
 

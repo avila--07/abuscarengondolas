@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+/*
 public class BilleteAction : MonoBehaviour
 {
 
@@ -40,7 +40,7 @@ public class BilleteAction : MonoBehaviour
                 Application.LoadLevel("PantallaControlVuelto");
             else
             {
-                ListadoSingleton.Instance.clean();
+                //ListadoSingleton.Instance.clean();
                 Application.LoadLevel("PantallaFinal");
             }
         }
@@ -57,3 +57,4 @@ public class BilleteAction : MonoBehaviour
 		UploadStatisticsService.TryToCall(requestBillete);
     }
 }
+*/

@@ -6,8 +6,11 @@ public class Salir : MonoBehaviour {
 
     void Start()
     {
+		#if !UNITY_WEBPLAYER
         JuegoStatistic result = new JuegoStatistic(DateTime.Now);
-		UploadStatisticsService.TryToCall(result);
+        UploadStatisticsService.TryToCall(result);
+        #endif
+
     }
 
 
